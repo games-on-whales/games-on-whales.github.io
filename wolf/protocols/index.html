@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Moonlight Protocols :: Games On Whales</title>
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Games On Whales</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Wolf</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="pairing.html">Pairing</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">wolf</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li><a href="index.html">Moonlight Protocols</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/index.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Moonlight Protocols</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_overview">Overview</a></li>
+<li><a href="#_where_to_go_next">Where to go next</a></li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are 6 main protocols involved in the current GameStream protocol:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP (TCP 47989)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>unencrypted 🔓</p>
+</li>
+<li>
+<p>used to exchanged public information needed to start <a href="pairing">pairing clients</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>HTTPS (TCP 47984)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>encrypted 🔐</p>
+</li>
+<li>
+<p>only available to paired clients</p>
+</li>
+<li>
+<p>used to exchange available apps and trigger the start</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>RTSP (TCP 48010)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>unencrypted 🔓</p>
+</li>
+<li>
+<p>Used to exchange ports and settings for the next 3 streams</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Control over ENet (UDP 47999)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>encrypted 🔐 (using AES GCM 128 bit)</p>
+</li>
+<li>
+<p>Used to exchange user input data and extra stream information</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Video over RTP (UDP 47998)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>unencrypted 🔓 (needs checking)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Audio over RTP (UDP 48000)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>could be encrypted 🔒 (needs checking)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_to_go_next"><a class="anchor" href="#_where_to_go_next"></a>Where to go next</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>See how <a href="pairing">pairing works</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
