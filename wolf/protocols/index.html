@@ -13,6 +13,11 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="../..">Games On Whales</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -62,6 +67,19 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="pairing.html">Pairing</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -91,7 +109,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li><a href="index.html">Moonlight Protocols</a></li>
+    <li><a href="index.html">Protocols</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/index.adoc">Edit this Page</a></div>
@@ -218,5 +236,8 @@
 </footer>
 <script src="../../_/js/site.js"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
   </body>
 </html>
