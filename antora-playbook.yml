@@ -1,0 +1,24 @@
+site:
+  title: Games On Whales
+  start_page: wolf::index.adoc
+content:
+  sources:
+    - url: git@github.com:games-on-whales/wolf.git
+      branches: gstreamer
+      start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files:
+    - path: ui.yml
+      contents: |
+        static_files:
+        - .nojekyll
+    - path: .nojekyll
+asciidoc:
+  extensions:
+    - asciidoctor-kroki
+antora:
+  extensions:
+    - '@antora/lunr-extension'
