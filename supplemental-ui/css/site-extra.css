@@ -1,0 +1,20 @@
+.navbar {
+    background: #22272e;
+}
+
+.fancy-stripe {
+    height: 5px;
+    background-image: linear-gradient(139deg, rgb(23, 69, 251), rgb(23, 129, 251), rgb(23, 224, 251), rgb(42, 255, 102));
+    position: fixed;
+    top: 3.5rem;
+    width: 100%;
+    z-index: 3;
+}
+
+.nav-panel-explore {
+    background: #22272e;
+}
+
+.nav-panel-explore .context {
+    color: white;
+}

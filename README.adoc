@@ -1,0 +1,13 @@
+= Games on Whales docs portal
+
+== Quickstart
+
+[bash]
+....
+npm i
+....
+
+[bash]
+....
+npx antora --fetch antora-playbook.yml
+....

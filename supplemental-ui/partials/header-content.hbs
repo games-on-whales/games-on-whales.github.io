@@ -1,0 +1,39 @@
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{{or site.url siteRootPath}}}">{{site.title}}</a>
+            {{#if env.SITE_SEARCH_PROVIDER}}
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}}
+                               autofocus{{/if}}>
+                    </div>
+                </div>
+            {{/if}}
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gow">Games on Whales</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/wolf">Wolf</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
