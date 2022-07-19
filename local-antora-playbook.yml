@@ -3,11 +3,11 @@ site:
   start_page: gow::index.adoc
 content:
   sources:
-    - url: git@github.com:games-on-whales/wolf.git
-      branches: gstreamer
+    - url: ./workspace/gow
+      branches: HEAD
       start_path: docs
-    - url: git@github.com:games-on-whales/gow.git
-      branches: master
+    - url: ./workspace/wolf
+      branches: HEAD
       start_path: docs
 ui:
   bundle:
