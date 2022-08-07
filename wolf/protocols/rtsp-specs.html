@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Moonlight Protocols :: Games On Whales</title>
+    <title>RTSP specifications :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -62,7 +62,7 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -73,7 +73,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="rtsp.html">RTSP</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="rtsp-specs.html">RTSP specs</a>
   </li>
 </ul>
@@ -120,119 +120,171 @@
   <ul>
     <li><a href="../index.html">wolf</a></li>
     <li><a href="index.html">Protocols</a></li>
+    <li><a href="rtsp.html">RTSP</a></li>
+    <li><a href="rtsp-specs.html">RTSP specs</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/rtsp-specs.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Moonlight Protocols</h1>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_overview">Overview</a></li>
-<li><a href="#_where_to_go_next">Where to go next</a></li>
-</ul>
-</div>
+<h1 class="page">RTSP specifications</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 6 main protocols involved in the current GameStream protocol:</p>
+<p>RTSP messages are plaintext packets of variable size over TCP.</p>
+</div>
+<div class="paragraph">
+<p>There are two types of message: <em>request</em> and <em>response</em></p>
+</div>
+<div class="paragraph">
+<p>Unless otherwise specified all names used here follows the Moonlight specification at <a href="https://github.com/moonlight-stream/moonlight-common-c/blob/bf22101c7d11cd1fe36409fe5c12b38cbfa8dd06/src/Rtsp.h#L35">moonlight-common-c/Rtsp.h</a></p>
+</div>
+<div class="sect2">
+<h3 id="_request_message"><a class="anchor" href="#_request_message"></a>Request message</h3>
+<div class="paragraph">
+<p>All messages have the following structure:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>HTTP (TCP 47989)</p>
+<p><strong>message</strong>: required</p>
+</li>
+<li>
+<p><strong>options</strong>: optional, zero or more key value options separated by newline</p>
+</li>
+<li>
+<p><strong>payload</strong>: optional, extra unstructured data that needs to be passed.</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="title">An example request message</div>
+<div class="content">
+<pre>OPTIONS rtsp://192.168.1.100:48010 RTSP/1.0 <i class="conum" data-value="1"></i><b>(1)</b>
+CSeq:  1 <i class="conum" data-value="2"></i><b>(2)</b>
+X-GS-ClientVersion: 14 <i class="conum" data-value="3"></i><b>(3)</b>
+<i class="conum" data-value="4"></i><b>(4)</b>
+a=fmtp:97 surround-params=21101 <i class="conum" data-value="5"></i><b>(5)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>message:</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>option 1</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>option 2</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>empty new line (end of options)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>payload</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_message"><a class="anchor" href="#_message"></a>Message</h4>
+<div class="paragraph">
+<p>The message part is the first line, it&#8217;s delimited by the newline character (<code>\r\n</code>) , and it&#8217;s composed by:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>unencrypted 🔓</p>
+<p><strong>command</strong>: the first string, delimited by <code>&lt;space&gt;</code>, the command to be executed on the backend; one of: <code>[OPTIONS, DESCRIBE, SETUP, ANNOUNCE, PLAY]</code></p>
 </li>
 <li>
-<p>used to exchanged public information needed to start <a href="pairing">pairing clients</a></p>
+<p><strong>target</strong>: the second string, delimited by <code>&lt;space&gt;</code>, specifies the ip address and port that is the target of the session.</p>
+</li>
+<li>
+<p><strong>protocol</strong>: last string, delimited by <code>&lt;space&gt;</code>, the RTSP protocol in use.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>HTTPS (TCP 47984)</p>
+</div>
+<div class="sect3">
+<h4 id="_options"><a class="anchor" href="#_options"></a>Options</h4>
+<div class="paragraph">
+<p>Optional additional key values to be passed, delimited by the newline character (<code>\r\n</code>).
+The end of the options section is marked by an extra newline character (<code>\r\n</code>).</p>
+</div>
+<div class="paragraph">
+<p>Honorable mention goes to <code>CSeq</code> which is always present and represent the sequence number.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_payload"><a class="anchor" href="#_payload"></a>Payload</h4>
+<div class="paragraph">
+<p>Any extra unstructured text that it&#8217;s added after the end of the options before the end of the message will be parsed as the payload.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_response_message"><a class="anchor" href="#_response_message"></a>Response message</h3>
+<div class="paragraph">
+<p>Like requests, responses have a message, zero or more options and an optional payload.
+The main difference is in the format of the message.</p>
+</div>
+<div class="paragraph">
+<p>You can easily identify a response package by looking at the command part which is always <code>RTSP</code>.</p>
+</div>
+<div class="literalblock">
+<div class="title">An example response message</div>
+<div class="content">
+<pre>RTSP/1.0 200 OK <i class="conum" data-value="1"></i><b>(1)</b>
+CSeq: 1 <i class="conum" data-value="2"></i><b>(2)</b>
+
+a=fmtp:97 surround-params=21101 <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>message</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>option</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>payload</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_message_2"><a class="anchor" href="#_message_2"></a>Message</h4>
+<div class="paragraph">
+<p>Unlike requests a message in a response is composed by different parts:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>encrypted 🔐</p>
+<p>protocol: it&#8217;s always <code>RTSP/*</code> and it&#8217;s the easiest way to discriminate between request and response messages.</p>
 </li>
 <li>
-<p>only available to paired clients</p>
+<p>status code: follows the HTTP status codes specification</p>
 </li>
 <li>
-<p>used to exchange available apps and trigger the start</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>RTSP (TCP 48010)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unencrypted 🔓</p>
-</li>
-<li>
-<p>Used to exchange ports and settings for the next 3 streams</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Control over ENet (UDP 47999)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>encrypted 🔐 (using AES GCM 128 bit)</p>
-</li>
-<li>
-<p>Used to exchange user input data and extra stream information</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Video over RTP (UDP 47998)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unencrypted 🔓 (needs checking)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Audio over RTP (UDP 48000)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>could be encrypted 🔒 (needs checking)</p>
-</li>
-</ul>
-</div>
+<p>status string: follows the HTTP status codes specification</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_where_to_go_next"><a class="anchor" href="#_where_to_go_next"></a>Where to go next</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>See how <a href="pairing">pairing works</a>.</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
