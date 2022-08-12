@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Moonlight Protocols :: Games On Whales</title>
+    <title>Control specifications :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -62,7 +62,7 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -82,7 +82,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Control (via ENET)</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="control-specs.html">Control specs</a>
   </li>
 </ul>
@@ -129,117 +129,141 @@
   <ul>
     <li><a href="../index.html">wolf</a></li>
     <li><a href="index.html">Protocols</a></li>
+    <li>Control (via ENET)</li>
+    <li><a href="control-specs.html">Control specs</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/control-specs.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Moonlight Protocols</h1>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_overview">Overview</a></li>
-<li><a href="#_where_to_go_next">Where to go next</a></li>
-</ul>
-</div>
+<h1 class="page">Control specifications</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 6 main protocols involved in the current GameStream protocol:</p>
+<p>The control stream runs over UDP via a <a href="https://github.com/cgutman/enet/tree/4cde9cc3dcc5c30775a80da1de87f39f98672a31">custom fork</a> of <a href="https://github.com/lsalzman/enet">ENET</a> that supports IPV4 and IPV6.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>HTTP (TCP 47989)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unencrypted 🔓</p>
-</li>
-<li>
-<p>used to exchanged public information needed to start <a href="pairing">pairing clients</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>HTTPS (TCP 47984)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>encrypted 🔐</p>
-</li>
-<li>
-<p>only available to paired clients</p>
-</li>
-<li>
-<p>used to exchange available apps and trigger the start</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>RTSP (TCP 48010)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unencrypted 🔓</p>
-</li>
-<li>
-<p>Used to exchange ports and settings for the next 3 streams</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Control over ENet (UDP 47999)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>encrypted 🔐 (using AES GCM 128 bit)</p>
-</li>
-<li>
-<p>Used to exchange user input data and extra stream information</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Video over RTP (UDP 47998)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unencrypted 🔓 (needs checking)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Audio over RTP (UDP 48000)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>could be encrypted 🔒 (needs checking)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p>All the exchanged messages are encrypted using AES GCM 128 bit.<br>
+In order to decrypt you&#8217;ll have to use the keys that are exchanged during the <code>HTTP launch</code> phase.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_where_to_go_next"><a class="anchor" href="#_where_to_go_next"></a>Where to go next</h2>
+<h2 id="_encrypted_packet_format"><a class="anchor" href="#_encrypted_packet_format"></a>Encrypted packet format</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES GCM</a> not only provides confidentiality by encrypting the message but, by using the GCM TAG, it also guarantees that no one has tampered the original payload.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkhlQSqQbaRrbKXgk5oHZJromlspBKcWApkWukZAYUfXYAV3Z1-FEEd3kEoTXWOgvtS85KLKgpLUFIWCxMqc_MQUrloA5mokog==" alt="The format of encrypted packets in bytes">
+</div>
+<div class="title">Figure 1. The format of encrypted packets in bytes</div>
+</div>
+<table class="tableblock frame-all grid-all fit-content stretch">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Size in bytes</th>
+<th class="tableblock halign-left valign-top">C++ type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned short int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of message, fixed at <code>0x0001</code> for this type of packet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Len</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned short int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the rest of the message in bytes (Seq + TAG + Payload)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Monotonically increasing sequence number (used as IV for AES-GCM)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GCM TAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AES GCM TAG</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Payload</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">until Len</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AES encrypted payload</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+All data is <a href="https://en.wikipedia.org/wiki/Endianness">little-endian</a> encoded
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decrypted_payload"><a class="anchor" href="#_decrypted_payload"></a>Decrypted payload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first two bytes of the decrypted payload represent the <strong>type</strong> of the message; the following types are encoded:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>See how <a href="pairing">pairing works</a>.</p>
+<p>START_A (<code>0x0305</code>)</p>
+</li>
+<li>
+<p>START_B (<code>0x0307</code>)</p>
+</li>
+<li>
+<p>INVALIDATE_REF_FRAMES (<code>0x0301</code>)</p>
+</li>
+<li>
+<p>LOSS_STATS (<code>0x0201</code>)</p>
+</li>
+<li>
+<p>FRAME_STATS (<code>0x0204</code>)</p>
+</li>
+<li>
+<p>INPUT_DATA (<code>0x0206</code>)</p>
+</li>
+<li>
+<p>RUMBLE_DATA (<code>0x010b</code>)</p>
+</li>
+<li>
+<p>TERMINATION (<code>0x0100</code>)</p>
+</li>
+<li>
+<p>PERIODIC_PING (<code>0x0200</code>)</p>
+</li>
+<li>
+<p>IDR_FRAME (<code>0x0302</code>)</p>
 </li>
 </ul>
 </div>
