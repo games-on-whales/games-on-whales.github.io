@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RTSP :: Games On Whales</title>
+    <title>GStreamer :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -64,17 +64,17 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Protocols</a>
+    <a class="nav-link" href="../protocols/index.html">Protocols</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="pairing.html">HTTP/S pairing</a>
+    <a class="nav-link" href="../protocols/pairing.html">HTTP/S pairing</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="rtsp.html">RTSP</a>
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="rtsp-specs.html">RTSP specs</a>
+    <a class="nav-link" href="../protocols/rtsp-specs.html">RTSP specs</a>
   </li>
 </ul>
   </li>
@@ -83,7 +83,7 @@
     <span class="nav-text">Control (via ENET)</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="control-specs.html">Control specs</a>
+    <a class="nav-link" href="../protocols/control-specs.html">Control specs</a>
   </li>
 </ul>
   </li>
@@ -94,7 +94,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../code/structure.html">Structure</a>
+    <a class="nav-link" href="structure.html">Structure</a>
   </li>
 </ul>
   </li>
@@ -135,28 +135,93 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li><a href="index.html">Protocols</a></li>
-    <li><a href="rtsp.html">RTSP</a></li>
+    <li><a href="gstreamer.html">GStreamer</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/rtsp.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/code/pages/gstreamer.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">RTSP</h1>
+<h1 class="page">GStreamer</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+GStreamer is a library for constructing graphs of media-handling components.
+The applications it supports range from simple Ogg/Vorbis playback, audio/video streaming to complex audio (mixing) and video (non-linear editing) processing.
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://gstreamer.freedesktop.org/">gstreamer.freedesktop.org</a>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The RTSP protocol starts when a Moonlight user launch an app, and it&#8217;s used to exchange information about the next streams (video, audio, control).</p>
+<p>We implemented a custom plugin that turns a stream of bytes into valid Moonlight RTP packets.
+This way users will be able to compose Gstreamer pipelines in any form or shape and, near the end, plug our plugin so that it can be streamed to Moonlight.<br>
+Here are a few simple examples that will be available out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Grab the screen</p>
+<div class="ulist">
+<ul>
+<li>
+<p>pipe the same video to a file if you wish to save it locally too.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Grab a video from a local file (or the network)</p>
+</li>
+<li>
+<p>Grab a webcam stream from the local network and send it via Moonlight</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_plugin"><a class="anchor" href="#_the_plugin"></a>The plugin</h2>
+<div class="sectionbody">
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/mermaid/svg/eNpLy8kvT85ILCpR8AniUlAIi3bNS85PSU1RKMtMSc2PVdDVVSjOzMsG0nYKAdFBIQEKufn5eTmZ6RklCgWJlTn5iSmpRRBlRclgVaHRoS4BYE2xAKDSHkY=" alt="Our plugin sits between the encoded video bitestream and a downstream UDP sink that will send the RTP packets to Moonlight">
+</div>
+<div class="title">Figure 1. Our plugin sits between the encoded video bitestream and a downstream UDP sink that will send the RTP packets to Moonlight</div>
+</div>
+<div class="paragraph">
+<p>Given that this is a direct transformation from one input buffer to another output buffer we decided to use <a href="https://gstreamer.freedesktop.org/documentation/base/gstbasetransform.html?gi-language=c">GstBaseTransform</a> as the base class.
+This will implement a lot of boilerplate code for us so that we can focus on the main <a href="https://gstreamer.freedesktop.org/documentation/base/gstbasetransform.html?gi-language=c#GstBaseTransformClass::transform"><code>_transform</code></a> virtual method implementation.</p>
+</div>
+<div class="paragraph">
+<p>Following the nomenclature used in the <a href="https://gstreamer.freedesktop.org/documentation/rtp/index.html?gi-language=c">official GStreamer RTP plugins</a> we called it <code>rtpmoonlightpay</code> as in RTP Moonlight Payloader.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqFkE1rwzAMhu_-FbqXsXtgha7LobB80KSEHd3YTQSOZWx5v39J1pZk65hPL7KeR0KMbHQCx7oqwXliaskIGZlsHM7aC-GkZ2zRScuQEVmDXc8gA2Srr4bMZao2QojOU3RQlPWhyCsB48uets0cvObordBW3dre0mp_PLymj_oSkFEhPX-i0gRSKWQkKw2Mk-UQlpoqrU_l3bHZJBDYazmgepkdv63XBnDk-TE4j12B34v8C7Zk2Y93XKLX2gpe7L_L8-KU79O10OkWL9hO8AW7APJMcTy-uWnCH0ct33cfd1MClrhH2wFa1l4HnnI_ph_0FzK_p3I=" alt="Diagram">
+<img src="https://kroki.io/mermaid/svg/eNpLy8kvT85ILCpR8AniUnCMLstMSc0vSS0uKS5KjlXQ1bVTcIKIFScn5qRCRJwhIsn5eWWpRSUQMZfoCiMzk9Q8qCbX6KKSgtz8_LyczPSMkoLESoiwW3RpSkFxZl52LACwtyjf" alt="A full example pipeline for video encoding and streaming">
 </div>
+<div class="title">Figure 2. A full example pipeline for video encoding and streaming</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code"><a class="anchor" href="#_code"></a>Code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GStreamer uses GObjects: a mechanism to retrofit Objects into C.
+I suggest you to get a bit familiar with it before diving into the code; <a href="http://sgros.blogspot.com/2016/01/few-tips-about-gobject-for-oo.html">here&#8217;s a great and simple tutorial</a>.</p>
+</div>
+<div class="paragraph">
+<p>Following the official docs at <a href="https://gstreamer.freedesktop.org/documentation/plugin-development/basics/boiler.html?gi-language=c">Plugin Write&#8217;s Guide</a> we started off with the <a href="https://github.com/GStreamer/gst-plugins-bad/blob/ca8068c6d793d7aaa6f2e2cc6324fdedfe2f33fa/tools/gst-element-maker">official bash script</a> that creates the boilerplate code from the selected base class.</p>
 </div>
 </div>
 </div>

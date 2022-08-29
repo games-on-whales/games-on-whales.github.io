@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RTSP :: Games On Whales</title>
+    <title>Code Structure :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -64,17 +64,17 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Protocols</a>
+    <a class="nav-link" href="../protocols/index.html">Protocols</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="pairing.html">HTTP/S pairing</a>
+    <a class="nav-link" href="../protocols/pairing.html">HTTP/S pairing</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="rtsp.html">RTSP</a>
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="rtsp-specs.html">RTSP specs</a>
+    <a class="nav-link" href="../protocols/rtsp-specs.html">RTSP specs</a>
   </li>
 </ul>
   </li>
@@ -83,7 +83,7 @@
     <span class="nav-text">Control (via ENET)</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="control-specs.html">Control specs</a>
+    <a class="nav-link" href="../protocols/control-specs.html">Control specs</a>
   </li>
 </ul>
   </li>
@@ -93,8 +93,8 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../code/structure.html">Structure</a>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="structure.html">Structure</a>
   </li>
 </ul>
   </li>
@@ -135,28 +135,70 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li><a href="index.html">Protocols</a></li>
-    <li><a href="rtsp.html">RTSP</a></li>
+    <li><a href="structure.html">Structure</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/rtsp.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/code/pages/structure.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">RTSP</h1>
-<div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h1 class="page">Code Structure</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The RTSP protocol starts when a Moonlight user launch an app, and it&#8217;s used to exchange information about the next streams (video, audio, control).</p>
+<p>The code is written in order to be as readable as possible <strong>with no side effects</strong> and <strong>no global objects/variables</strong>.</p>
 </div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqFkE1rwzAMhu_-FbqXsXtgha7LobB80KSEHd3YTQSOZWx5v39J1pZk65hPL7KeR0KMbHQCx7oqwXliaskIGZlsHM7aC-GkZ2zRScuQEVmDXc8gA2Srr4bMZao2QojOU3RQlPWhyCsB48uets0cvObordBW3dre0mp_PLymj_oSkFEhPX-i0gRSKWQkKw2Mk-UQlpoqrU_l3bHZJBDYazmgepkdv63XBnDk-TE4j12B34v8C7Zk2Y93XKLX2gpe7L_L8-KU79O10OkWL9hO8AW7APJMcTy-uWnCH0ct33cfd1MClrhH2wFa1l4HnnI_ph_0FzK_p3I=" alt="Diagram">
+<div class="paragraph">
+<p>We (try to) follow a functional approach where all the methods take immutable inputs and returns new outputs.<br>
+This way the core of the protocol is fully decoupled from the underlying platform/HTTP server of choice and can be re-used by other projects, also, it enables us to <strong>easily</strong> test most of the methods in isolation.</p>
 </div>
+<div class="paragraph">
+<p>We are trying to isolate the Moonlight protocol from the actual implementation so that we can create a portable C++ library of stateless methods, where possible, the code has been separated in logical modules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_srccrypto"><a class="anchor" href="#_srccrypto"></a>src/crypto</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The crypto module depends on OpenSSL and provides an interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/crypto/crypto/crypto.hpp">crypto.hpp</a>) to all the crypto related methods that are used by the other modules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_srcmoonlight"><a class="anchor" href="#_srcmoonlight"></a>src/moonlight</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here we define the moonlight protocol interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight/protocol.hpp">protocol.hpp</a>) and the implementation (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight.cpp">moonlight.cpp</a>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_srcstreaming"><a class="anchor" href="#_srcstreaming"></a>src/streaming</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module implements a <a href="https://gstreamer.freedesktop.org/">gstreamer</a> plugin in order to encode video/audio streams into the Moonlight RDP format.<br>
+You can read more about our implementation in the <a href="gstreamer.html" class="xref page">gstreamer page</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_srcwolf"><a class="anchor" href="#_srcwolf"></a>src/wolf</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The wolf module defines the glue code in order to make the moonlight protocols to work over TCP/UDP.<br>
+Here will also live all the platform dependent code and the result will be an executable binary: <code>wolf</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tests"><a class="anchor" href="#_tests"></a>tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unit tests will live under <code>tests/</code>, we are implementing unit tests for most of the methods and, where possible, also mocking packets/requests like on a real Moonlight session.</p>
 </div>
 </div>
 </div>

@@ -91,6 +91,13 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="code/structure.html">Structure</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -139,8 +146,55 @@
 </aside>
 <article class="doc">
 <h1 class="page">Wolf</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>WIP documentation for Wolf and Moonlight.</p>
+<p><span class="image"><img src="https://github.com/games-on-whales/wolf/actions/workflows/linux-build-test.yml/badge.svg" alt="Build badge"></span>
+<span class="image"><img src="https://img.shields.io/discord/856434175455133727.svg?label=&amp;logo=discord&amp;logoColor=ffffff&amp;color=7389D8&amp;labelColor=6A7EC2" alt="Discord link"></span>
+<span class="image"><img src="https://img.shields.io/github/license/games-on-whales/wolf" alt="License MIT"></span></p>
+</div>
+<div class="quoteblock">
+<blockquote>
+An intelligent wolf is better than a foolish lion.
+</blockquote>
+<div class="attribution">
+&#8212; Matshona Dhliwayo.
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rationale"><a class="anchor" href="#_rationale"></a>Rationale</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The goal is to create an open source backend for <a href="https://moonlight-stream.org/">Moonlight</a> based on <a href="https://gstreamer.freedesktop.org/">GStreamer</a>.</p>
+</div>
+<div class="paragraph">
+<p>In the process we would like to create a <strong>platform-agnostic</strong> C++ library that clearly defines the protocol and that can be used in other projects.
+While doing so, we are working on documenting and testing the protocol.</p>
+</div>
+<div class="paragraph">
+<p>At the beginning it&#8217;ll be focused on running in Docker so that we can replace <a href="https://github.com/LizardByte/Sunshine">Sunshine</a> in <a href="https://github.com/games-on-whales/gow">GOW</a> but the code is already structured in order to support multiple platforms.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgements"><a class="anchor" href="#_acknowledgements"></a>Acknowledgements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/loki-47-6F-64">@loki-47-6F-64</a> for creating and sharing <a href="https://github.com/loki-47-6F-64/sunshine">Sunshine</a></p>
+</li>
+<li>
+<p>All the guys at the <a href="https://moonlight-stream.org/">Moonlight</a> Discord channel, for the tireless help they provide to anyone</p>
+</li>
+<li>
+<p><a href="https://github.com/ReenigneArcher">@ReenigneArcher</a> for beying the first stargazer of the project and taking care of keeping <a href="https://github.com/SunshineStream/Sunshine">Sunshine alive</a></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </article>
   </div>
