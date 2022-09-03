@@ -207,44 +207,24 @@ following:</p>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/games-on-whales/gow.git
 cd gow
 mkdir local_state
-sudo docker-compose pull
-sudo docker-compose up</code></pre>
+run-gow [--headless] --app retroarch up -d</code></pre>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_can_i_use_it_for_something_else"><a class="anchor" href="#_can_i_use_it_for_something_else"></a>Can I use it for something else?</h3>
 <div class="paragraph">
 <p>You should be able to run any Graphical Application on top of the basic
-combination of <code>Xorg</code> + <code>PulseAudio</code> + <code>Sunshine</code>. For example: if you
-replace <code>RetroArch</code> with the following in the <code>docker-compose.yml</code> file
-you should be able to navigate the web using Firefox!</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">firefox:
-depends_on:
-    - xorg
-    - pulse
-    - sunshine
-image: andrewmackrodt/firefox-x11
-volumes:
-    - xorg:/tmp/.X11-unix
-    # This image needs these folders,
-    # we can easily pass a local folder instead.
-    # just make sure to chomd -R ${id}:${id} ./local_state
-    - ${local_state}/ffox:/run/user/1000
-    - ${local_state}/.config/pulse:/home/ubuntu/.config/pulse:ro
-environment:
-    DISPLAY: ":0"
-    LOG_LEVEL: info
-    PULSE_SERVER: pulse # The name of the pulse container is the hostname in the virtual network</code></pre>
-</div>
+combination of <code>Xorg</code> + <code>PulseAudio</code> + <code>Sunshine</code>.  We supply compose files for
+<code>steam</code>, <code>retroarch</code>, and <code>firefox</code> by default, but you can use them as
+templates to create your own.  Then, you can use <code>--app [your app]</code> as an
+argument to <code>run-gow</code> to launch your app.</p>
 </div>
 <div class="paragraph">
-<p>A few things to note: - This is an image that we didn’t built:
-<a href="https://github.com/andrewmackrodt/dockerfiles/tree/master/firefox-x11"><code>andrewmackrodt/firefox-x11</code></a>
-it’s an open source Dockerfile and image. It’s a great example of
-running a container which wasn’t built with GOW in mind.</p>
+<p>A few things to note:
+- This is an image that we didn’t built:
+  <a href="https://github.com/andrewmackrodt/dockerfiles/tree/master/firefox-x11"><code>andrewmackrodt/firefox-x11</code></a>
+  it’s an open source Dockerfile and image. It’s a great example of running a
+  container which wasn’t built with GOW in mind.</p>
 </div>
 <div class="ulist">
 <ul>

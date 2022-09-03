@@ -195,17 +195,15 @@
 </aside>
 <article class="doc">
 <div class="sect1">
-<h2 id="_unraid"><a class="anchor" href="#_unraid"></a>Unraid</h2>
+<h2 id="_unraid"><a class="anchor" href="#_unraid"></a>unRAID</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Unraid is missing the required <code>uinput</code> kernel module out of the box. We
-have created <a href="https://github.com/games-on-whales/unraid-plugin">a plugin</a>
-that adds that and we automated the builds using Github Actions.</p>
+<p>unRAID before version 6.11.0-rc3 is missing the required <code>uinput</code> kernel module
+out of the box. If you are using an older version, we recommend installing the
+<a href="https://github.com/ich777/unraid-uinput">uinput plugin</a></p>
 </div>
 <div class="paragraph">
-<p>We are working to add more support so that you can run GOW easily via
-the plugin, for now, you’ll have to manually run the
-<code>docker-compose.yml</code>.</p>
+<p>We are working to build our own unRAID plugin to enable easily starting, stopping, and installing new containers, but for now you&#8217;ll need to use the <code>run-gow</code> script.</p>
 </div>
 <div class="sect2">
 <h3 id="_pre_requisites"><a class="anchor" href="#_pre_requisites"></a>Pre-requisites</h3>
@@ -226,6 +224,12 @@ In order for Sunshine to stream your desktop you have to <strong>have a monitor 
 encoding) it’s highly recommended.</p>
 </div>
 <div class="sect3">
+<h4 id="_docker_compose"><a class="anchor" href="#_docker_compose"></a>docker-compose</h4>
+<div class="paragraph">
+<p>unRAID doesn&#8217;t come with <code>docker-compose</code>, but you can easily install it by installing the <a href="https://forums.unraid.net/topic/114415-plugin-docker-compose-manager/">docker-compose manager</a> plugin.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_nvidia"><a class="anchor" href="#_nvidia"></a>Nvidia</h4>
 <div class="paragraph">
 <p>If you have a Nvidia GPU you’ll have to also install the
@@ -244,9 +248,7 @@ without having to install any additional driver.</p>
 <div class="sect2">
 <h3 id="_installing_gow"><a class="anchor" href="#_installing_gow"></a>Installing GOW</h3>
 <div class="paragraph">
-<p>Now that <code>uinput</code> is installed via the plugin, it’s time to run GOW via
-Docker.<br>
-Let’s start by cloning the project locally:</p>
+<p>Let’s start by cloning the project locally:</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -267,30 +269,34 @@ cd gow
 mkdir local_state</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Since GOW it’s a composition of multiple docker containers we use
-<a href="https://docs.docker.com/compose/"><code>docker-compose</code></a> in order to manage
-and spin them up, let’s install it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64 --output /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If all went well you should be able to run: <code>docker-compose --version</code>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+On unRAID, the <code>local_state</code> folder you just created will be owned by
+<code>root</code>, and it may not be writable from the containers launched by GoW, which
+mostly do <em>not</em> run as <code>root</code>. Until GoW has support for changing the UID
+inside the containers, you may need to <code>chmod 777 local_state</code> to make sure
+anyone can write to it.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Now it’s time to download the containers prebuilt images:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose pull</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --headless --app [appname] pull</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And start it!</p>
+<p>Currently supported applications include <code>steam</code>, <code>retroarch</code>, and <code>firefox</code>,
+but you can add any others that you like. Use the existing ones as examples to
+create your own YAML file.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -299,20 +305,21 @@ chmod +x /usr/local/bin/docker-compose</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Nvidia users: before running it you should modify <code>DOCKER_RUNTIME=</code> to <code>DOCKER_RUNTIME=nvidia</code> option in the <code>.env</code> file
+Nvidia users: be sure to add <code>--gpu nvidia</code> to your <code>run-gow</code> command.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose up -d # start the containers in background</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --headless --app [application] up -d # start the containers in background</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will take a some time to start, you can check the status using:
-<code>docker-compose ps</code> in case one or more containers are stopped you can
-check the logs using: <code>docker-compose logs --follow</code>.</p>
+<p>This will take some time to start; you can check the status using:
+<code>run-gow --headless --app [application] ps</code>. If one or more containers are
+stopped, you can
+check the logs using: <code>run-gow --headless --app [application] logs -f</code>.</p>
 </div>
 </div>
 <div class="sect2">

@@ -197,7 +197,76 @@
 <h2 id="_nvidia_hw_acceleration"><a class="anchor" href="#_nvidia_hw_acceleration"></a>Nvidia HW acceleration</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="_nvidia_gpus_with_proprietary_drivers"><a class="anchor" href="#_nvidia_gpus_with_proprietary_drivers"></a>Nvidia GPUs with proprietary drivers</h3>
+<div class="paragraph">
+<p>You can see if your host is using the proprietary driver using <code>lshw</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ lshw -class video | grep -i driver
+       configuration: driver=nvidia latency=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to make use of your GPU inside a docker container, you’ll need
+to set up the <a href="https://github.com/NVIDIA/nvidia-docker">NVIDIA Container
+Toolkit</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you have more than one nvidia GPU, you may want to set the <code>GPU_UUID</code>
+variable in <code>env/nvidia.env</code> to indicate which card to use.</p>
+</div>
+<div class="paragraph">
+<p>To get the correct UUID for your GPU, use the <code>nvidia-container-cli</code>
+command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ sudo nvidia-container-cli --load-kmods info
+NVRM version:   [version]
+CUDA version:   11.3
+
+Device Index:   0
+Device Minor:   0
+Model:          NVIDIA GeForce [model]
+Brand:          GeForce
+GPU UUID:       GPU-[uuid]
+Bus Location:   00000000:0a:00.0
+Architecture:   7.5</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_older_nvidia_gpus"><a class="anchor" href="#_older_nvidia_gpus"></a>Older Nvidia GPUs</h4>
+<div class="paragraph">
+<p>Older Nvidia GPUs data might not appear in <code>nvidia-smi</code>. There is a patch that
+exists that will fix the issue. For more information, see <a href="https://github.com/CFSworks/nvml_fix" class="bare">https://github.com/CFSworks/nvml_fix</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_xorg_drivers"><a class="anchor" href="#_xorg_drivers"></a>Xorg drivers</h4>
+<div class="paragraph">
+<p>Although the NVIDIA Container Toolkit automatically provides most of the
+drivers needed to use the GPU inside a container, Xorg is <em>not</em>
+officially supported. This means that the runtime will not automatically
+map in the specific drivers needed by Xorg.</p>
+</div>
+<div class="paragraph">
+<p>There are two libraries needed by Xorg: <code>nvidia_drv.so</code> and
+<code>libglxserver_nvidia.so.[version]</code>. It is preferred to map these into
+the container as a bind volume from the host, because this guarantees
+that the version will exactly match between the container and the host.
+Locate the two modules and add a section like this to the <code>xorg</code> service
+in your <code>docker-compose.yml</code>:
+IMPORTANT: You will also need to pass the <code>--gpu nvidia</code> flag any time you run
+a <code>run-gow</code> command.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_nvidia_gpus_with_nouveau_drivers"><a class="anchor" href="#_nvidia_gpus_with_nouveau_drivers"></a>Nvidia GPUs with <code>nouveau</code> drivers</h3>
+<div class="paragraph">
+<p>It should be possible to use the <code>nouveau</code> driver, but be aware that this path is significantly less well-tested than using the proprietary driver.</p>
+</div>
 <div class="paragraph">
 <p>Make sure that the host doesn’t use proprietary drivers but that it’s
 using the open source <code>nouveau</code> drivers.</p>
@@ -222,107 +291,17 @@ crw-rw----  1 root video  226,   0 Jun 20 09:47 card0
 crw-rw----  1 root render 226, 128 Jun 20 09:47 renderD128</code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_nvidia_gpus_with_proprietary_drivers"><a class="anchor" href="#_nvidia_gpus_with_proprietary_drivers"></a>Nvidia GPUs with proprietary drivers</h3>
-<div class="paragraph">
-<p>You can see if your host is using the proprietary driver using <code>lshw</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ lshw -class video | grep -i driver
-       configuration: driver=nvidia latency=0</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In order to make use of your GPU inside a docker container, you’ll need
-to set up the <a href="https://github.com/NVIDIA/nvidia-docker">NVIDIA Container
-Toolkit</a>.</p>
-</div>
-<div class="paragraph">
-<p>Once that’s done, you can run the container. You should add the
-following ENV variables to the docker-compose file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">environment:
-    NVIDIA_VISIBLE_DEVICES: GPU-[uuid] # Replace [uuid] (see the instructions)
-    NVIDIA_DRIVER_CAPABILITIES: utility,graphics,video,display</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To get the correct UUID for your GPU, use the <code>nvidia-container-cli</code>
-command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ sudo nvidia-container-cli --load-kmods info
-NVRM version:   [version]
-CUDA version:   11.3
-
-Device Index:   0
-Device Minor:   0
-Model:          NVIDIA GeForce [model]
-Brand:          GeForce
-GPU UUID:       GPU-[uuid]
-Bus Location:   00000000:0a:00.0
-Architecture:   7.5</code></pre>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_xorg_drivers"><a class="anchor" href="#_xorg_drivers"></a>Xorg drivers</h4>
-<div class="paragraph">
-<p>Although the NVIDIA Container Toolkit automatically provides most of the
-drivers needed to use the GPU inside a container, Xorg is <em>not</em>
-officially supported. This means that the runtime will not automatically
-map in the specific drivers needed by Xorg.</p>
-</div>
-<div class="paragraph">
-<p>There are two libraries needed by Xorg: <code>nvidia_drv.so</code> and
-<code>libglxserver_nvidia.so.[version]</code>. It is preferred to map these into
-the container as a bind volume from the host, because this guarantees
-that the version will exactly match between the container and the host.
-Locate the two modules and add a section like this to the <code>xorg</code> service
-in your <code>docker-compose.yml</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">volumes:
-  - /path/to/nvidia_drv.so:/nvidia/xorg/nvidia_drv.so:ro
-  - /path/to/libglxserver_nvidia.so.[version]:/nvidia/xorg/libglxserver_nvidia.so:ro</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Be sure to replace <code>[version]</code> with the correct version number from the
-<code>nvidia-container-cli</code> command above.</p>
-</div>
-<div class="paragraph">
-<p>Some common locations for <code>nvidia_drv.so</code> include: *
-<code>/usr/lib64/xorg/modules/drivers/</code> (Unraid) *
-<code>/usr/lib/x86_64-linux-gnu/nvidia/xorg/</code> (Ubuntu 20.04)</p>
-</div>
-<div class="paragraph">
-<p>Some common locations for <code>libglxserver_nvidia.so.[version]</code> include: *
-<code>/usr/lib64/xorg/modules/extensions/</code> (Unraid) *
-<code>/usr/lib/x86_64-linux-gnu/nvidia/xorg/</code> (Ubuntu 20.04)</p>
-</div>
-<div class="paragraph">
-<p>If you don’t want to do this, or if you can’t find the driver on your
-host for some reason, the container will attempt to install the correct
-version for you automatically. However, there is no guarantee that it
-will be able to find a version that exactly matches the driver version
-on your host.</p>
-</div>
-<div class="paragraph">
-<p>If for some reason you want to skip the entire process and just assume
-the driver is already installed, you can do that too:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">environment:
-    SKIP_NVIDIA_DRIVER_CHECK: 1</code></pre>
-</div>
-</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Because the <code>nouveau</code> driver implements standard APIs, you will <em>not</em> need to pass <code>--gpu nvidia</code> when using <code>run-gow</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

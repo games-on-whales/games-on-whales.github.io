@@ -252,8 +252,11 @@ environment. In order to build it locally run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 run-gow [options] build</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You should call <code>run-gow</code> with the same options you plan to run apps with; specifically, be sure to use the right combination of <code>--gpu</code>, <code>--headless</code>, and <code>--app</code>.</p>
 </div>
 </div>
 </div>
