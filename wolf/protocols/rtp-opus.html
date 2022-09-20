@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HTTP/S Pairing :: Games On Whales</title>
+    <title>Audio stream via RTP :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -59,7 +59,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Moonlight Protocols</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="pairing.html">HTTP/S Pairing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -83,7 +83,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="rtp-h264.html">Video stream via RTP</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="rtp-opus.html">Audio stream via RTP</a>
   </li>
 </ul>
@@ -144,171 +144,120 @@
   <ul>
     <li><a href="../index.html">wolf</a></li>
     <li><a href="index.html">Moonlight Protocols</a></li>
-    <li><a href="pairing.html">HTTP/S Pairing</a></li>
+    <li><a href="rtp-opus.html">Audio stream via RTP</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/pairing.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/rtp-opus.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">HTTP/S Pairing</h1>
+<h1 class="page">Audio stream via RTP</h1>
 <div class="sect1">
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Here we start with a question:</p>
+<p>Audio is encoded using <a href="https://en.wikipedia.org/wiki/Opus_(audio_format)">Opus</a>, encrypted using AES CBC 128 bit and sent via RTP.</p>
 </div>
-<div class="admonitionblock note think">
+<div class="paragraph">
+<p>Every 4 RTP packets with audio content will be followed by 2 extra RTP packets with FEC parity information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ping"><a class="anchor" href="#_ping"></a>PING</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="⁇"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>How can we securely authenticate an untrusted client over an insecure network?</p>
+<p>The port exchanged during the RTSP phase it&#8217;s not where the actual audio stream will take place!</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This involves quite a bit of cryptography and a few steps between the client (Moonlight) and the server (Wolf).</p>
+<p>Moonlight will send a <code>PING</code> package to the exchanged port, this will tell us which random port the connecting client was able to open in order to communicate with Wolf.
+The client port from where Wolf receives the <code>PING</code> will also be the one where the actual RTP stream will be sent to.</p>
 </div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/svg/eNptksFKxDAURff5irdUiosZHRcFhS4GFK0MVCguY_omDWaS8JIK_oUL9_6in2A6Yqdpm2Xvve-evCaooDGH0lqjlWwD7LgiZSQ4ssEKqxnvgjXd4RWJMccpKKEcN2EU4R7KRKqt3vdfa8aYJNs52LXcI6wYxFNe3NaQZbnnOkAGQiuMGYEUjnId5RwkRpT7J9iTPUDnY_lJK7YVPGxf4Aaqu2K9uT6risfnOCn6z482wtCRySHG3pH-RqNpUph1AjNgtFxrNBLh5_vrc1TaoKAPF2a-hNkg8YBDb-KZQqVFM7zLFG-WIvTOGj_inBT4CIz9gr2ShkcJ5yVXiztYSJ4uKVoUb4MzMfwDgItvCJv4f1bzyk1a2VuX9zSZ8gvlF9h7" alt="Diagram">
-</div>
+<div class="paragraph">
+<p>This is necessary because usually clients will be behind <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_phase_1"><a class="anchor" href="#_phase_1"></a>Phase 1</h2>
+<h2 id="_rtp_packets"><a class="anchor" href="#_rtp_packets"></a>RTP packets</h2>
 <div class="sectionbody">
-<div class="imageblock kroki">
+<div class="paragraph">
+<p>The first 12 bytes of each packet are defined as follows:</p>
+</div>
+<div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNpVjDELwjAUBvf8im9USgcFHQIKHQqKVgoVgmMor20gJuXl1d9vFBfXu-PEiSeN1jp2YUSJdrKJsFFqtiyud7MNgibG4N04CWxC86dM9MOHGqVUUx4NikIn6wUFeu8oFz2xKJOVxkiC9nzDwPGJJRH_eFV3uNQPHNCdqu1uv-qq6z0fcrtWTLJw0Mj5i_i7ewPxjjj8" alt="Diagram">
+<img src="https://kroki.io/packetdiag/svg/eNo1zEEOwiAQBdA9p5ilLkhoUVQSV97AHsAgnQhRoJZpTDXe3YlJl__l__8RAL48XrGnAEfQLedcerwEjLdATEYttJRaJZiU3FkI6HocOe1ls7UwOH9HApoHZGuM1I2Fis8Js0fIU7r-y7qVRlugmLCSSwOT2cgDH9Q5-zCWHN-OYslQyzTyctV159NafH8TXTOD" alt="RTP header format in bits">
 </div>
-</div>
-<div class="paragraph">
-<p>Moonlight will send a salt and client certificate, users will see a prompt asking to insert the password on the remote server.
-On the backend, we&#8217;ll need the PIN to be inserted by the user.</p>
+<div class="title">Figure 1. RTP header format in bits</div>
 </div>
 <div class="paragraph">
-<p>PIN and SALT will be used to derive a shared AES key that needs to be stored in order to be used to decrypt in the next phases.</p>
+<p>FEC packets will also add the followings 12 bytes after the RTP header and before the FEC actual information:</p>
 </div>
-<div class="paragraph">
-<p>At this stage we only have to send back our public certificate (<code>plaincert</code>).</p>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/packetdiag/svg/eNo1zEEOgjAQBdA9p5ilLpoA1aokrLyBHMCUdrRNYIptiaLx7s5Clv_9mf8pAEwYnt5mBy3ImjMFi1eH_u4ykypXWo_qsmAqxaGBG5rO6WjBk8UX61FU-wYmvQxBW8jLhIyVErJqoNcJIeFjRjIINI89Rm5lLZT8t9mPmLIeJ3a1EyfeSgsZFwP5t84-EKQwR37fdN3lvC2-P3c0Olo=" alt="FEC additional header format in bits">
+</div>
+<div class="title">Figure 2. FEC additional header format in bits</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_phase_2"><a class="anchor" href="#_phase_2"></a>Phase 2</h2>
+<h2 id="_opus_encoder"><a class="anchor" href="#_opus_encoder"></a>Opus encoder</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>All parameters for properly encoding using Opus are exchanged via the RTSP phase.</p>
+</div>
+<div class="paragraph">
+<p>In order to debug what&#8217;s exchanged it might be useful to checkout the <a href="https://datatracker.ietf.org/doc/html/rfc6716#section-3.1">RFC 6716 #section-3.1</a> which defines the Opus packet formats; from the specs:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>A well-formed Opus packet MUST contain at least one byte [R1].
+This byte forms a table-of-contents (TOC) header that signals which of the various modes and configurations a given packet uses.
+It is composed of a configuration number, "config", a stereo flag, "s", and a frame count code, "c"</p>
+</div>
+</blockquote>
+</div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNplzDEOwjAMheE9p_BedWHMwA0idctsBZNYipzIMUjcgoGdK_YIFMQA6vq-p9_YKnlYkJUlwwxLwUFwcK6jGifuKAahNamciwEOCH8UWz2_1-icC_MxwjR5SJVps1SwVpJMsD4fdxc39nCipLduu8-XMwkpGsEgvZL-uJJdVPwOPvEX3K9HBw==" alt="Diagram">
+<img src="https://kroki.io/wavedrom/svg/eNpljcEKwjAQRO_9imHPe1HQQ35FPNSyqYGaSLL1YMi_NyLIFm_D7Hs7FVlmh8sAVNComsmBphR9mIlBt6ClN6ce4_gQc2y8d4pKlmScg3HKHz6lNaqhj3bhQ18Z3yWH6lPUEt7Sn54ZL7-Ep9O8CuP-y21oG1kTPFs=" alt="The first byte of any Opus packet">
 </div>
-</div>
-<div class="paragraph">
-<p>Using the AES key that we generated in the phase 1 we have to decrypt the client challenge,</p>
-</div>
-<div class="paragraph">
-<p>We generate a SHA256 hash with the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Decrypted challenge</p>
-</li>
-<li>
-<p>Server certificate signature</p>
-</li>
-<li>
-<p>Server secret: a randomly generated secret</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The hash + server_challenge will then be AES encrypted and sent as the <code>challengeresponse</code></p>
+<div class="title">Figure 3. The first byte of any Opus packet</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_phase_3"><a class="anchor" href="#_phase_3"></a>Phase 3</h2>
+<h2 id="_aes_encryption"><a class="anchor" href="#_aes_encryption"></a>AES encryption</h2>
 <div class="sectionbody">
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/svg/eNpVjDEOQiEQBXtO8XryK7tfeAOS31FvyAqbkIUs6Dks7L2iR5DfmNjOTGbKrLzjIDHRjA1HocG4ONfJpiTppBOhNa2SywQNhD8VW72dNDoXtmuE9zsG24MNqVCtrJlhPHrT9f28X09nPO-mv2xwWgQeQ7LSUvwFCZ801g==" alt="Diagram">
-</div>
-</div>
 <div class="paragraph">
-<p>Moonlight will send back a <code>serverchallengeresp</code>: an AES encrypted client hash, we have to send back the <code>pairingsecret</code>:
-using our private key we have to sign the certificate_signature + server_secret (generated in phase 2)</p>
+<p>Encoded audio packets will be AES encrypted before being sent over the wire, key and IV are exchanged via HTTPS when calling the <code>launch</code> endpoint.
+These are the same key and IV used to also encrypt the Control stream.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_phase_4"><a class="anchor" href="#_phase_4"></a>Phase 4</h2>
+<h2 id="_forward_error_correction_fec"><a class="anchor" href="#_forward_error_correction_fec"></a>Forward Error Correction (FEC)</h2>
 <div class="sectionbody">
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/svg/eNpVzrEKAyEQhOF-n2L644pAKiF5A-E668VsdImo6N77xzQHaef7izG1Ig4H69CasOPIPAV3os7DNGrnavCt1aIpG3jC_1Fo5f1bAxH5_RmwbQ6xqCybEocYNkxNle0cQmEly7PEz1VduOJzVAf0dUdeeOD2BdTANVw=" alt="Diagram">
-</div>
+<div class="paragraph">
+<p>Uses <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed Solomon</a> to encode the payload so that it can be checked on the receiving end for transmission errors (and possibly fix them).</p>
 </div>
 <div class="paragraph">
-<p>We now have to use everything we exchanged before in order to verify and finally pair the clients.</p>
-</div>
-<div class="paragraph">
-<p>We&#8217;ll check the client_hash obtained at phase 3, it should contain the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The original server_challenge</p>
-</li>
-<li>
-<p>The signature of the X509 client_cert</p>
-</li>
-<li>
-<p>The unencrypted <code>client_pairing_secret</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>We&#8217;ll check that <code>SHA256(server_challenge + client_public_cert_signature + client_secret) == client_hash</code></p>
-</div>
-<div class="paragraph">
-<p>Then using the client certificate public key we should be able to verify that the client secret has been signed by Moonlight</p>
-</div>
-<div class="paragraph">
-<p>The response will contain:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>paired = 1, if all checks are fine</p>
-</li>
-<li>
-<p>paired = 0, otherwise</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_phase_5_https"><a class="anchor" href="#_phase_5_https"></a>Phase 5 (HTTPS)</h2>
-<div class="sectionbody">
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/svg/eNpVzLsKwzAMRuFdT_HvIUOGLIb2DQzZPItUtQVCNo76_r1sXb8DJzRMEg7WqV6x4mh8CXaiwTP01MEeyL27aW0BvpD_Uun2_Gohyuu9YFkSxud2NjYTr0JT4jU94cfywA3bG0bnJzQ=" alt="Diagram">
-</div>
-</div>
-<div class="paragraph">
-<p>This extra step will run over HTTPS in order to make sure that Moonlight can reach Wolf over a secure connection.</p>
+<p>This operation will create extra parity blocks that will be sent in separate RTP packets.</p>
 </div>
 </div>
 </div>
