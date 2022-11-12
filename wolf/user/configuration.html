@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Audio stream via RTP :: Games On Whales</title>
+    <title>Configuration :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -60,13 +60,13 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/configuration.html">Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
   </li>
 </ul>
   </li>
@@ -82,28 +82,28 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="rtsp.html">RTSP</a>
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">RTP</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
   </li>
 </ul>
   </li>
@@ -148,123 +148,142 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li>Developer guide</li>
-    <li><a href="index.html">Moonlight Protocols</a></li>
-    <li>RTP</li>
-    <li><a href="rtp-opus.html">Audio (Opus)</a></li>
+    <li>User guide</li>
+    <li><a href="configuration.html">Configuration</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/rtp-opus.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/user/pages/configuration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Audio stream via RTP</h1>
-<div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h1 class="page">Configuration</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Audio is encoded using <a href="https://en.wikipedia.org/wiki/Opus_(audio_format)">Opus</a>, encrypted using AES CBC 128 bit and sent via RTP.</p>
-</div>
-<div class="paragraph">
-<p>Every 4 RTP packets with audio content will be followed by 2 extra RTP packets with FEC parity information.</p>
+<p>Wolf is configured via a TOML config file and some additional optional ENV variables</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ping"><a class="anchor" href="#_ping"></a>PING</h2>
+<h2 id="_env_variables"><a class="anchor" href="#_env_variables"></a>ENV variables</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>LOG_LEVEL</strong>: controls the log level, defaults to <code>INFO</code></p>
+</li>
+<li>
+<p><strong>CFG_FILE</strong>: path to the TOML config file, defaults to <code>config.toml</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_toml_file"><a class="anchor" href="#_toml_file"></a>TOML file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The TOML configuration file is read only once at startup (or created if not present) and it&#8217;ll be modified by Wolf when a new user is successfully paired.</p>
+</div>
+<div class="listingblock">
+<div class="title">Default TOML configuration file</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">paired_clients = [] <i class="conum" data-value="1"></i><b>(1)</b>
+hostname = "wolf"   <i class="conum" data-value="2"></i><b>(2)</b>
+uuid = "0f75f4d1-e28e-410a-b318-c0579f18f8d1" <i class="conum" data-value="3"></i><b>(3)</b>
+
+
+[[apps]] <i class="conum" data-value="4"></i><b>(4)</b>
+title = "Desktop"
+support_hdr = true
+id = "1"
+
+[gstreamer] <i class="conum" data-value="5"></i><b>(5)</b>
+
+[gstreamer.audio]
+default_source = "audiotestsrc wave=ticks is-live=true"
+default_audio_params = """
+audioconvert ! audiorate ! audioresample ! audio/x-raw, \
+channels={channels}\
+"""
+default_opus_encoder = """
+opusenc bitrate={bitrate} bitrate-type=cbr frame-size={p\
+acket_duration} bandwidth=fullband audio-type=generic ma\
+x-payload-size=1400\
+"""
+default_sink = """
+rtpmoonlightpay_audio name=moonlight_pay packet_duration={packet_duration} encrypt={encrypt} aes_key="{aes_key}" aes_iv="{aes_iv}"  ! udpsink host={client_ip} port={client_port}\
+"""
+
+[gstreamer.video]
+default_source = "videotestsrc pattern=ball is-live=true"
+default_video_params = """
+videoscale ! videoconvert ! videorate ! video/x-raw, wid\
+th={width}, height={height}, framerate={fps}/1,format=I4\
+20, chroma-site={color_range}, colorimetry={color_space}\
+"""
+default_hevc_encoder = """
+x265enc tune=zerolatency speed-preset=superfast bitrate={bitrate} option-string="info=0:keyint=-1:qp=28:repeat-headers=1:slices={slices_per_frame}:frame-threads={slices_per_frame}:aud=0:annexb=1:log-level=3:open-gop=0:bframes=0:intra-refresh=0" ! video/x-h265, profile=main, stream-format=byte-stream\
+"""
+default_h264_encoder = """
+x264enc pass=qual tune=zerolatency speed-preset=superfast b-adapt=false bframes=0 ref=1 bitrate={bitrate} aud=false sliced-threads=true threads={slices_per_frame} option-string="slices={slices_per_frame}:keyint=infinite:open-gop=0" ! video/x-h264, profile=high, stream-format=byte-stream\
+"""
+default_sink = """
+rtpmoonlightpay_video name=moonlight_pay payload_size={payload_s\
+ize} fec_percentage={fec_percentage} min_required_fec_packets={m\
+in_required_fec_packets} ! udpsink host={client_ip} port={client\
+_port}\
+"""</code></pre>
+</div>
+</div>
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The port exchanged during the RTSP phase it&#8217;s not where the actual audio stream will take place!</p>
-</div>
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>paired_clients</strong>: a list of all the Moonlight clients that have succesfully completed the pairing process; it&#8217;ll be populated by Wolf and saved to this file.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>hostname</strong>: this is the name that will be displayed in the list of hosts in the Moonlight UI</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>uuid</strong>: a randomly generated UUID, it&#8217;s used by Moonlight to know if the current host has already been paired</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>apps</strong>: the list of apps that will be seen in Moonlight</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>gstreamer</strong>: here are all the default parts that compose the two video and audio pipelines.</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Moonlight will send a <code>PING</code> package to the exchanged port, this will tell us which random port the connecting client was able to open in order to communicate with Wolf.
-The client port from where Wolf receives the <code>PING</code> will also be the one where the actual RTP stream will be sent to.</p>
-</div>
-<div class="paragraph">
-<p>This is necessary because usually clients will be behind <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rtp_packets"><a class="anchor" href="#_rtp_packets"></a>RTP packets</h2>
+<h2 id="_defining_apps"><a class="anchor" href="#_defining_apps"></a>Defining apps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The first 12 bytes of each packet are defined as follows:</p>
+<p>Apps defined here will be shown in Moonlight after successfully pairing with Wolf.<br>
+You can re-define parts of the Gstreamer pipeline easily, ex:</p>
 </div>
-<div class="imageblock text-center kroki">
+<div class="listingblock">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNo1zEEOwiAQBdA9p5ilLkhoUVQSV97AHsAgnQhRoJZpTDXe3YlJl__l__8RAL48XrGnAEfQLedcerwEjLdATEYttJRaJZiU3FkI6HocOe1ls7UwOH9HApoHZGuM1I2Fis8Js0fIU7r-y7qVRlugmLCSSwOT2cgDH9Q5-zCWHN-OYslQyzTyctV159NafH8TXTOD" alt="RTP header format in bits">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "SMPTE"
+support_hdr = true
+id = "2"
+[apps.video]
+source = "videotestsrc pattern=smpte is-live=true"</code></pre>
 </div>
-<div class="title">Figure 1. RTP header format in bits</div>
 </div>
 <div class="paragraph">
-<p>FEC packets will also add the followings 12 bytes after the RTP header and before the FEC actual information:</p>
-</div>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNo1zEEOgjAQBdA9p5ilLpoA1aokrLyBHMCUdrRNYIptiaLx7s5Clv_9mf8pAEwYnt5mBy3ImjMFi1eH_u4ykypXWo_qsmAqxaGBG5rO6WjBk8UX61FU-wYmvQxBW8jLhIyVErJqoNcJIeFjRjIINI89Rm5lLZT8t9mPmLIeJ3a1EyfeSgsZFwP5t84-EKQwR37fdN3lvC2-P3c0Olo=" alt="FEC additional header format in bits">
-</div>
-<div class="title">Figure 2. FEC additional header format in bits</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_opus_encoder"><a class="anchor" href="#_opus_encoder"></a>Opus encoder</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>All parameters for properly encoding using Opus are exchanged via the RTSP phase.</p>
-</div>
-<div class="paragraph">
-<p>In order to debug what&#8217;s exchanged it might be useful to checkout the <a href="https://datatracker.ietf.org/doc/html/rfc6716#section-3.1">RFC 6716 #section-3.1</a> which defines the Opus packet formats; from the specs:</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>A well-formed Opus packet MUST contain at least one byte [R1].
-This byte forms a table-of-contents (TOC) header that signals which of the various modes and configurations a given packet uses.
-It is composed of a configuration number, "config", a stereo flag, "s", and a frame count code, "c"</p>
-</div>
-</blockquote>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/wavedrom/svg/eNpljcEKwjAQRO_9imHPe1HQQ35FPNSyqYGaSLL1YMi_NyLIFm_D7Hs7FVlmh8sAVNComsmBphR9mIlBt6ClN6ce4_gQc2y8d4pKlmScg3HKHz6lNaqhj3bhQ18Z3yWH6lPUEt7Sn54ZL7-Ep9O8CuP-y21oG1kTPFs=" alt="The first byte of any Opus packet">
-</div>
-<div class="title">Figure 3. The first byte of any Opus packet</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_aes_encryption"><a class="anchor" href="#_aes_encryption"></a>AES encryption</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Encoded audio packets will be AES encrypted before being sent over the wire, key and IV are exchanged via HTTPS when calling the <code>launch</code> endpoint.
-These are the same key and IV used to also encrypt the Control stream.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_forward_error_correction_fec"><a class="anchor" href="#_forward_error_correction_fec"></a>Forward Error Correction (FEC)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Uses <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed Solomon</a> to encode the payload so that it can be checked on the receiving end for transmission errors (and possibly fix them).</p>
-</div>
-<div class="paragraph">
-<p>This operation will create extra parity blocks that will be sent in separate RTP packets.</p>
+<p>See more examples in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
 </div>
 </div>
 </div>

@@ -57,50 +57,55 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+    <span class="nav-text">User guide</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="pairing.html">HTTP/S Pairing</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="rtsp.html">RTSP</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="rtsp-specs.html">RTSP specifications</a>
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Control (via ENET)</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="control-specs.html">Control specifications</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rtp-h264.html">Video stream via RTP</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rtp-opus.html">Audio stream via RTP</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Code</span>
+    <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../code/structure.html">Structure</a>
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../code/gstreamer.html">GStreamer</a>
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -143,11 +148,12 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
     <li><a href="index.html">Moonlight Protocols</a></li>
-    <li><a href="pairing.html">HTTP/S Pairing</a></li>
+    <li><a href="http-pairing.html">HTTP/S Pairing</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/pairing.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/protocols/pages/http-pairing.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -308,7 +314,8 @@ using our private key we have to sign the certificate_signature + server_secret 
 </div>
 </div>
 <div class="paragraph">
-<p>This extra step will run over HTTPS in order to make sure that Moonlight can reach Wolf over a secure connection.</p>
+<p>This extra step will run over HTTPS in order to make sure that Moonlight can reach Wolf over a secure connection.<br>
+On the backend every HTTPS request will be checked for a valid client certificate; only clients that have been successfully paired will be allowed to call the APIs</p>
 </div>
 </div>
 </div>

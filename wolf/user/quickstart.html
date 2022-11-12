@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GStreamer :: Games On Whales</title>
+    <title>Quickstart :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -57,50 +57,55 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+    <span class="nav-text">User guide</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/pairing.html">HTTP/S Pairing</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/rtsp-specs.html">RTSP specifications</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Control (via ENET)</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/control-specs.html">Control specifications</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/rtp-h264.html">Video stream via RTP</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/rtp-opus.html">Audio stream via RTP</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Code</span>
+    <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="structure.html">Structure</a>
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="gstreamer.html">GStreamer</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -143,94 +148,90 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li>Code</li>
-    <li><a href="gstreamer.html">GStreamer</a></li>
+    <li>User guide</li>
+    <li><a href="quickstart.html">Quickstart</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/code/pages/gstreamer.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">GStreamer</h1>
+<h1 class="page">Quickstart</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="quoteblock">
-<blockquote>
-GStreamer is a library for constructing graphs of media-handling components.
-The applications it supports range from simple Ogg/Vorbis playback, audio/video streaming to complex audio (mixing) and video (non-linear editing) processing.
-</blockquote>
-<div class="attribution">
-&#8212; <a href="https://gstreamer.freedesktop.org/">gstreamer.freedesktop.org</a>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Wolf is under <strong>heavy development</strong>; it&#8217;s <strong>not user-friendly</strong> nor easy to use (we are working on it)</p>
 </div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We implemented a custom plugin that turns a stream of bytes into valid Moonlight RTP packets.
-This way users will be able to compose Gstreamer pipelines in any form or shape and, near the end, plug our plugin so that it can be streamed to Moonlight.<br>
-Here are a few simple examples that will be available out of the box:</p>
+<p>The only way to run Wolf right now is to manually compile it.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Grab the screen</p>
-<div class="ulist">
-<ul>
-<li>
-<p>pipe the same video to a file if you wish to save it locally too.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Grab a video from a local file (or the network)</p>
-</li>
-<li>
-<p>Grab a webcam stream from the local network and send it via Moonlight</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_plugin"><a class="anchor" href="#_the_plugin"></a>The plugin</h2>
-<div class="sectionbody">
-<div class="imageblock kroki">
+<div class="listingblock">
+<div class="title">Build dependencies</div>
 <div class="content">
-<img src="https://kroki.io/mermaid/svg/eNpLy8kvT85ILCpR8AniUlAIi3bNS85PSU1RKMtMSc2PVdDVVSjOzMsG0nYKAdFBIQEKufn5eTmZ6RklCgWJlTn5iSmpRRBlRclgVaHRoS4BYE2xAKDSHkY=" alt="Our plugin sits between the encoded video bitestream and a downstream UDP sink that will send the RTP packets to Moonlight">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y ninja-build clang-10 libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev</code></pre>
 </div>
-<div class="title">Figure 1. Our plugin sits between the encoded video bitestream and a downstream UDP sink that will send the RTP packets to Moonlight</div>
 </div>
-<div class="paragraph">
-<p>Given that this is a direct transformation from one input buffer to another output buffer we decided to use <a href="https://gstreamer.freedesktop.org/documentation/base/gstbasetransform.html?gi-language=c">GstBaseTransform</a> as the base class.
-This will implement a lot of boilerplate code for us so that we can focus on the main <a href="https://gstreamer.freedesktop.org/documentation/base/gstbasetransform.html?gi-language=c#GstBaseTransformClass::transform"><code>_transform</code></a> virtual method implementation.</p>
-</div>
-<div class="paragraph">
-<p>Following the nomenclature used in the <a href="https://gstreamer.freedesktop.org/documentation/rtp/index.html?gi-language=c">official GStreamer RTP plugins</a> we called it <code>rtpmoonlightpay</code> as in RTP Moonlight Payloader.</p>
-</div>
-<div class="imageblock kroki">
+<div class="listingblock">
+<div class="title">Compile</div>
 <div class="content">
-<img src="https://kroki.io/mermaid/svg/eNpLy8kvT85ILCpR8AniUnCMLstMSc0vSS0uKS5KjlXQ1bVTcIKIFScn5qRCRJwhIsn5eWWpRSUQMZfoCiMzk9Q8qCbX6KKSgtz8_LyczPSMkoLESoiwW3RpSkFxZl52LACwtyjf" alt="A full example pipeline for video encoding and streaming">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -G Ninja
+
+ninja -C build</code></pre>
 </div>
-<div class="title">Figure 2. A full example pipeline for video encoding and streaming</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_code"><a class="anchor" href="#_code"></a>Code</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>GStreamer uses GObjects: a mechanism to retrofit Objects into C.
-I suggest you to get a bit familiar with it before diving into the code; <a href="http://sgros.blogspot.com/2016/01/few-tips-about-gobject-for-oo.html">here&#8217;s a great and simple tutorial</a>.</p>
 </div>
 <div class="paragraph">
-<p>Following the official docs at <a href="https://gstreamer.freedesktop.org/documentation/plugin-development/basics/boiler.html?gi-language=c">Plugin Write&#8217;s Guide</a> we started off with the <a href="https://github.com/GStreamer/gst-plugins-bad/blob/ca8068c6d793d7aaa6f2e2cc6324fdedfe2f33fa/tools/gst-element-maker">official bash script</a> that creates the boilerplate code from the selected base class.</p>
+<p>If compilations completes correctly you can already start Wolf; in order to successfully streaming you&#8217;ll probably need to install some Gstreamer plugins first:</p>
+</div>
+<div class="listingblock">
+<div class="title">Install gstreamer plugins</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Run!</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">build/src/wolf/wolf
+INFO  | Reading config file from: config.toml
+WARN  | Unable to open config file: config.toml, creating one using defaults
+INFO  | x509 certificates not present, generating...
+INFO  | HTTP server listening on port: 47989
+INFO  | HTTPS server listening on port: 47984</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should now be able to point Moonlight to the IP address of the server and start the pairing process.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Make sure to follow the next steps on how to configure Wolf!
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

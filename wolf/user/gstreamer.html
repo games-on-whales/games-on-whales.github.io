@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Code Structure :: Games On Whales</title>
+    <title>Gstreamer :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="stylesheet" href="../../_/css/site-extra.css">    <script>var uiRootPath = '../../_'</script>
@@ -57,50 +57,55 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+    <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/pairing.html">HTTP/S Pairing</a>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/rtsp-specs.html">RTSP specifications</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Control (via ENET)</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/control-specs.html">Control specifications</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/rtp-h264.html">Video stream via RTP</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../protocols/rtp-opus.html">Audio stream via RTP</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Code</span>
+    <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="structure.html">Structure</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gstreamer.html">GStreamer</a>
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -143,71 +148,34 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li>Code</li>
-    <li><a href="structure.html">Structure</a></li>
+    <li>User guide</li>
+    <li><a href="gstreamer.html">Gstreamer</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/code/pages/structure.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/gstreamer/docs/modules/user/pages/gstreamer.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Code Structure</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>The code is written in order to be as readable as possible <strong>with no side effects</strong> and <strong>no global objects/variables</strong>.</p>
-</div>
-<div class="paragraph">
-<p>We (try to) follow a functional approach where all the methods take immutable inputs and returns new outputs.<br>
-This way the core of the protocol is fully decoupled from the underlying platform/HTTP server of choice and can be re-used by other projects, also, it enables us to <strong>easily</strong> test most of the methods in isolation.</p>
-</div>
-<div class="paragraph">
-<p>We are trying to isolate the Moonlight protocol from the actual implementation so that we can create a portable C++ library of stateless methods, where possible, the code has been separated in logical modules.</p>
-</div>
-</div>
-</div>
+<h1 class="page">Gstreamer</h1>
 <div class="sect1">
-<h2 id="_srccrypto"><a class="anchor" href="#_srccrypto"></a>src/crypto</h2>
+<h2 id="_example_pipelines"><a class="anchor" href="#_example_pipelines"></a>Example pipelines</h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="TODO"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>The crypto module depends on OpenSSL and provides an interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/crypto/crypto/crypto.hpp">crypto.hpp</a>) to all the crypto related methods that are used by the other modules.</p>
+<p>Add more examples here</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_srcmoonlight"><a class="anchor" href="#_srcmoonlight"></a>src/moonlight</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Here we define the moonlight protocol interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight/protocol.hpp">protocol.hpp</a>) and the implementation (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight.cpp">moonlight.cpp</a>).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_srcstreaming"><a class="anchor" href="#_srcstreaming"></a>src/streaming</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This module implements a <a href="https://gstreamer.freedesktop.org/">gstreamer</a> plugin in order to encode video/audio streams into the Moonlight RDP format.<br>
-You can read more about our implementation in the <a href="gstreamer.html" class="xref page">gstreamer page</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_srcwolf"><a class="anchor" href="#_srcwolf"></a>src/wolf</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The wolf module defines the glue code in order to make the moonlight protocols to work over TCP/UDP.<br>
-Here will also live all the platform dependent code and the result will be an executable binary: <code>wolf</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tests"><a class="anchor" href="#_tests"></a>tests</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Unit tests will live under <code>tests/</code>, we are implementing unit tests for most of the methods and, where possible, also mocking packets/requests like on a real Moonlight session.</p>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
