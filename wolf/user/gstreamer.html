@@ -161,6 +161,35 @@
 <article class="doc">
 <h1 class="page">Gstreamer</h1>
 <div class="sect1">
+<h2 id="_cli_interface"><a class="anchor" href="#_cli_interface"></a>CLI interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To list the installed plugins use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-inspect-1.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To analyse some media use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-discoverer-1.0 -v https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To test out pipelines in your system use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-launch-1.0 videotestsrc ! autovideosink</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_example_pipelines"><a class="anchor" href="#_example_pipelines"></a>Example pipelines</h2>
 <div class="sectionbody">
 <div class="paragraph">
