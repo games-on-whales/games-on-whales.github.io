@@ -163,19 +163,157 @@
 <div class="sect1">
 <h2 id="_example_pipelines"><a class="anchor" href="#_example_pipelines"></a>Example pipelines</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="TODO"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Add more examples here</p>
+<p>See more examples at: <a href="https://github.com/matthew1000/gstreamer-cheat-sheet">matthew1000/gstreamer-cheat-sheet</a></p>
 </div>
-</td>
-</tr>
-</table>
+<div class="sect2">
+<h3 id="_stream_your_desktop"><a class="anchor" href="#_stream_your_desktop"></a>Stream your desktop</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Desktop"
+[apps.video]
+source = "avfvideosrc capture-screen-cursor=true capture-screen=true"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This works in OSX, for X11 you can use <a href="https://gstreamer.freedesktop.org/documentation/ximagesrc/index.html?gi-language=c"><code>ximagesrc</code></a> or on Wayland you can try: <a href="https://wiki.archlinux.org/title/GStreamer#PipeWire"><code>pipewiresrc</code></a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_play_some_audio"><a class="anchor" href="#_play_some_audio"></a>Play some audio</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Music"
+# Audio sample downloaded from https://www.bensound.com/free-music-for-videos
+# try also: spacescope style=color-lines
+[apps.video]
+source = """
+filesrc location=/Users/ale/Downloads/elevate.mp3 !
+tee name=t
+! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+t. ! decodebin ! audioconvert ! wavescope style=color-lines
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v elevate.mp3
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true  !
+ audio/mpeg, mpegversion=(int)1, mpegaudioversion=(int)1, layer=(int)3, rate=(int)44100, channels=(int)2 !
+ decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stream_a_remote_video"><a class="anchor" href="#_stream_a_remote_video"></a>Stream a remote video</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "BigBuckBunny (MP4 - remote)"
+[apps.video]
+# taken from https://gist.github.com/jsturgis/3b19447b304616f18657
+source = """
+curlhttpsrc location="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" !
+qtdemux name=demux
+demux.audio_0 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0 ! decodebin
+\
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+ audio/mpeg, mpegversion=(int)4, framed=(boolean)true, stream-format=(string)raw, level=(string)2, base-profile=(string)lc, profile=(string)lc, codec_data=(buffer)1210, rate=(int)44100, channels=(int)2 !
+ decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stream_from_twitch"><a class="anchor" href="#_stream_from_twitch"></a>Stream from Twitch</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Twitch.tv"
+[apps.video]
+# location is the result of
+# youtube-dl --format mp4 --get-url https://www.twitch.tv/videos/560738950
+source = """
+curlhttpsrc location="https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8" !
+hlsdemux !
+tsdemux name=demux
+demux.audio_0_0100 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0_0101 ! queue ! decodebin
+\
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+audio/mpeg, framed=(boolean)true, mpegversion=(int)4, level=(string)2, base-profile=(string)lc, profile=(string)lc, rate=(int)44100, channels=(int)2, stream-format=(string)adts !
+decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_picture_in_picture"><a class="anchor" href="#_picture_in_picture"></a>Picture in picture</h3>
+<div class="paragraph">
+<p>The element <a href="https://gstreamer.freedesktop.org/documentation/compositor/index.html?gi-language=c#compositor-page"><code>compositor</code></a> allows video to be mixed (overlayed, put side-by-side, etc).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "PIP: Desktop + Twitch"
+[apps.video]
+# location is the result of
+# youtube-dl --format mp4 --get-url https://www.twitch.tv/videos/560738950
+source = """
+curlhttpsrc location="https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8" !
+hlsdemux !
+tsdemux name=demux
+demux.audio_0_0100 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0_0101 ! queue !
+decodebin !
+videoscale !
+videorate !
+video/x-raw, width=(int)640, height=(int)360, framerate={fps}/1 !
+compositor name=comp sink_0::alpha=1.0 sink_0::zorder=2 sink_0::xpos=1280 sink_1::alpha=1.0 sink_1::zorder=1 !
+avfvideosrc capture-screen-cursor=true capture-screen=true
+\
+"""
+
+video_params = """
+videoscale !
+videoconvert !
+videorate !
+video/x-raw, width={width}, height={height}, framerate={fps}/1, format=I420, chroma-site={color_range}, colorimetry={color_space} !
+comp.
+comp.
+\
+"""
+
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+audio/mpeg, framed=(boolean)true, mpegversion=(int)4, level=(string)2, base-profile=(string)lc, profile=(string)lc, rate=(int)44100, channels=(int)2, stream-format=(string)adts !
+decodebin
+"""</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>

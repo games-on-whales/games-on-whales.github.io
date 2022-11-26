@@ -193,15 +193,15 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">paired_clients = [] <i class="conum" data-value="1"></i><b>(1)</b>
 hostname = "wolf"   <i class="conum" data-value="2"></i><b>(2)</b>
-uuid = "0f75f4d1-e28e-410a-b318-c0579f18f8d1" <i class="conum" data-value="3"></i><b>(3)</b>
+support_hevc = false <i class="conum" data-value="3"></i><b>(3)</b>
+uuid = "0f75f4d1-e28e-410a-b318-c0579f18f8d1" <i class="conum" data-value="4"></i><b>(4)</b>
 
 
-[[apps]] <i class="conum" data-value="4"></i><b>(4)</b>
-title = "Desktop"
-support_hdr = true
-id = "1"
+[[apps]] <i class="conum" data-value="5"></i><b>(5)</b>
+title = "Test ball"
+support_hdr = false
 
-[gstreamer] <i class="conum" data-value="5"></i><b>(5)</b>
+[gstreamer] <i class="conum" data-value="6"></i><b>(6)</b>
 
 [gstreamer.audio]
 default_source = "audiotestsrc wave=ticks is-live=true"
@@ -251,14 +251,18 @@ _port}\
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>uuid</strong>: a randomly generated UUID, it&#8217;s used by Moonlight to know if the current host has already been paired</td>
+<td><strong>support_hevc</strong>: when set to <code>true</code> will enable support for HEVC in Moonlight</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>apps</strong>: the list of apps that will be seen in Moonlight</td>
+<td><strong>uuid</strong>: a randomly generated UUID, it&#8217;s used by Moonlight to know if the current host has already been paired</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>apps</strong>: the list of apps that will be seen in Moonlight</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
 <td><strong>gstreamer</strong>: here are all the default parts that compose the two video and audio pipelines.</td>
 </tr>
 </table>
@@ -276,8 +280,7 @@ You can re-define parts of the Gstreamer pipeline easily, ex:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
 title = "SMPTE"
-support_hdr = true
-id = "2"
+
 [apps.video]
 source = "videotestsrc pattern=smpte is-live=true"</code></pre>
 </div>
