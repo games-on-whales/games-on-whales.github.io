@@ -103,7 +103,13 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -200,6 +206,14 @@
 <h3 id="_srccrypto"><a class="anchor" href="#_srccrypto"></a>src/crypto</h3>
 <div class="paragraph">
 <p>The crypto module depends on OpenSSL and provides an interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/crypto/crypto/crypto.hpp">crypto.hpp</a>) to all the crypto related methods that are used by the other modules.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srcinput"><a class="anchor" href="#_srcinput"></a>src/input</h3>
+<div class="paragraph">
+<p>Here are the methods that will deal with a Moonlight input event (ex: Keyboard, Mouse, Joypad).<br>
+The code here will be platform specific with a default failover of <code>noop</code>.
+In Linux we used <code>uinput</code> and <a href="https://www.freedesktop.org/wiki/Software/libevdev/">libevdev</a>.</p>
 </div>
 </div>
 <div class="sect2">
