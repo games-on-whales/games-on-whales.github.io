@@ -219,6 +219,9 @@
 <div class="sect1">
 <h2 id="_mouse_relative_move"><a class="anchor" href="#_mouse_relative_move"></a>Mouse: relative move</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Moonlight will send mouse relative coordinates when the option "Optimize mouse for remote desktop instead of games" is turned <code>OFF</code>.</p>
+</div>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZraaVQmpedl1-eB-QaAjUBdbmk5pQkKkSABIx0DY1hApFctQA1hSb-" alt="The full format of a `MOUSE_MOVE_REL` packet">
@@ -228,11 +231,26 @@
 <div class="paragraph">
 <p><code>Delta X</code> and <code>Delta Y</code> defines the relative movement that the mouse must perform.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Delta X</code> and <code>Delta Y</code> are encoded as <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_mouse_absolute_move"><a class="anchor" href="#_mouse_absolute_move"></a>Mouse: absolute move</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Moonlight will send mouse absolute coordinates when the option "Optimize mouse for remote desktop instead of games" is turned <code>ON</code>.</p>
+</div>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZraaVQmpedl1-eB-QaAjUBdUWAmEa6hsZWCpEgpomuoSmKMjNdQ3MrBbB9IK6FriHQGIiLuGoBFAQvcw==" alt="The full format of a `MOUSE_MOVE_ABS` packet">
@@ -259,7 +277,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>X</code>, <code>Y</code>, <code>width</code> and <code>height</code> are all sent in big endian.
+<code>X</code>, <code>Y</code>, <code>width</code> and <code>height</code> are encoded as <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>.
 </td>
 </tr>
 </table>
