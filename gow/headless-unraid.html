@@ -293,7 +293,7 @@ anyone can write to it.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --headless --app [appname] pull</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --platform headless --app [appname] pull</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -315,14 +315,14 @@ Nvidia users: be sure to add <code>--gpu nvidia</code> to your <code>run-gow</co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --headless --app [application] up -d # start the containers in background</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">run-gow --platform headless --app [application] up -d # start the containers in background</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This will take some time to start; you can check the status using:
-<code>run-gow --headless --app [application] ps</code>. If one or more containers are
+<code>run-gow --platform headless --app [application] ps</code>. If one or more containers are
 stopped, you can
-check the logs using: <code>run-gow --headless --app [application] logs -f</code>.</p>
+check the logs using: <code>run-gow --platform headless --app [application] logs -f</code>.</p>
 </div>
 </div>
 <div class="sect2">
