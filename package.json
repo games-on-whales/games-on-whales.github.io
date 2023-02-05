@@ -3,6 +3,7 @@
     "@antora/cli": "3.0.1",
     "@antora/lunr-extension": "1.0.0-alpha.8",
     "@antora/site-generator": "3.0.1",
+    "@asciidoctor/tabs": "^1.0.0-beta.3",
     "asciidoctor-kroki": "0.15.4"
   }
 }
