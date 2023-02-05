@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Troubleshooting :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,7 +199,7 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Configuration</li>
+    <li>Advanced</li>
     <li><a href="troubleshooting.html">Troubleshooting</a></li>
   </ul>
 </nav>
@@ -204,13 +210,26 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
+<h1 class="page">Troubleshooting</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Here’s a list of common problems, feel free to
-<a href="https://github.com/games-on-whales/gow/issues/new">open an issue</a> if
-something is not listed here.</p>
+<p>Here’s a list of common problems and their solutions.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re having trouble with something and you don&#8217;t see it mentioned, or
+if you need more help solving your problem, feel free to
+<a href="https://github.com/games-on-whales/gow/issues/new">open an issue</a> or
+<a href="https://discord.gg/kRGUDHNHt2">reach out on Discord</a>!
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -219,44 +238,29 @@ something is not listed here.</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-In order for Sunshine to be able to stream your desktop, you must meet the <a href="monitor.html" class="xref page">Monitor requirements</a>.
+In order to be able to stream your desktop, you must meet the <a href="monitor.html" class="xref page">Monitor requirements</a>.
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_intel_igpu"><a class="anchor" href="#_intel_igpu"></a>Intel iGPU</h3>
-<div class="paragraph">
-<p>The intel iGPU on Linux isn’t working well with the current Sunshine
-version, this is a known issue. You can follow the development on the
-open <a href="https://github.com/SunshineStream/Sunshine/pull/77">pull request</a>.</p>
-</div>
-<div class="paragraph">
-<p>You can still try to use software encoding instead by forcing it on the
-Sunshine configs.</p>
-</div>
-<div class="paragraph">
-<p>Force the encoder to software</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_lag_slow_missing_frames"><a class="anchor" href="#_lag_slow_missing_frames"></a>Lag, slow, missing frames</h3>
+<div class="sect1">
+<h2 id="_lag_slow_missing_frames"><a class="anchor" href="#_lag_slow_missing_frames"></a>Lag, slow, missing frames</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>You can see more stats in Moonlight during the streaming if you press
 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></span> (see:
 <a href="https://github.com/moonlight-stream/moonlight-docs/wiki/Setup-Guide#keyboardmousegamepad-input-options">all
-keyboard options</a>) .</p>
+keyboard options</a>).</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mkdir_cannot_create_directory_homeretrosunshine_permission_denied"><a class="anchor" href="#_mkdir_cannot_create_directory_homeretrosunshine_permission_denied"></a>mkdir: cannot create directory `/home/retro/sunshine/': Permission denied</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Feel free to <a href="https://github.com/games-on-whales/gow/issues/new">open an
-issue on Github</a> or reach out on the
-<a href="https://discord.gg/kRGUDHNHt2">Discord</a> channel if you need more help.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_mkdir_cannot_create_directory_homeretrosunshine_permission_denied"><a class="anchor" href="#_mkdir_cannot_create_directory_homeretrosunshine_permission_denied"></a>mkdir: cannot create directory `/home/retro/sunshine/': Permission denied</h3>
-<div class="paragraph">
-<p>This means that your <code>local_state</code> folder as defined in the <code>.env</code> file
+<p>This means that your <code>local_state</code> folder as defined in the <code>user.env</code> file
 is not owned by user 1000. You can fix this by:</p>
 </div>
 <div class="listingblock">
@@ -265,113 +269,31 @@ is not owned by user 1000. You can fix this by:</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_error_could_not_create_sunshine_mouse_no_such_file_or_directory"><a class="anchor" href="#_error_could_not_create_sunshine_mouse_no_such_file_or_directory"></a>Error: Could not create Sunshine Mouse: No such file or directory</h3>
+</div>
+<div class="sect1">
+<h2 id="_i_can_use_my_mouse_and_keyboard_but_my_gamepad_doesnt_work"><a class="anchor" href="#_i_can_use_my_mouse_and_keyboard_but_my_gamepad_doesnt_work"></a>I can use my mouse and keyboard but my gamepad doesn’t work</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Make sure that <code>/dev/uinput/</code> is present in the host and that it does
-have the correct permissions:</p>
+<p>If keyboard and mouse are working it means that <code>uinput</code>, <code>Xorg</code> and <code>Sunshine</code>
+are correctly working.</p>
+</div>
+<div class="paragraph">
+<p>Gamepad devices are created by <code>Sunshine</code> on connection, only if the client
+has one attached. Gamepads are not handled by <code>Xorg</code> as input devices; instead
+they are directly accessed by the app that wants to use them.  That’s why on
+containers that use gamepads have to run in <code>privileged</code> mode.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -la /dev/uinput
-crw-rw---- 1 $USER input 10, 223 Jun  9 08:57 /dev/uinput # Check that $USER is not root but your current user</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If that’s not the case try following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The official Sunshine instructions about <code>udev</code> at:
-<a href="https://github.com/loki-47-6F-64/sunshine#setup" class="bare">https://github.com/loki-47-6F-64/sunshine#setup</a></p>
-</li>
-<li>
-<p>The solution proposed at:
-<a href="https://github.com/chrippa/ds4drv/issues/93#issuecomment-265300511" class="bare">https://github.com/chrippa/ds4drv/issues/93#issuecomment-265300511</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p>(On Debian I had to modify <code>/etc/modules-load.d/modules.conf</code>, adding
-<code>/etc/modules-load.d/uinput.conf</code> didn’t trigger anything to me)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Or if you are in a rush you can run the following:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo chmod 0660 /dev/uinput
-sudo chown 1000:input /dev/uinput</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>but remember that on startup you’ll have to do it again.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_i_can_use_my_mouse_and_keyboard_but_my_joypad_doesnt_work"><a class="anchor" href="#_i_can_use_my_mouse_and_keyboard_but_my_joypad_doesnt_work"></a>I can use my mouse and keyboard but my joypad doesn’t work</h3>
-<div class="paragraph">
-<p>If keyboard and mouse are working it means that <code>uinput</code>, <code>Xorg</code> and
-<code>Sunshine</code> are correctly working.</p>
-</div>
-<div class="paragraph">
-<p>Joypad devices are created by <code>Sunshine</code> on connection, only if the
-client have one attached. Joypads are not handled by <code>Xorg</code> but they are
-directly accessed by X11 app, that’s why on <code>RetroArch</code> we have to use:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">network_mode: host
-privileged: true
-volumes:
-  - /dev/input:/dev/input:ro
-  - /run/udev:/run/udev:ro
-  - /dev/uinput:/dev/uinput:ro</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If this is already present in your <code>docker-compose.yml</code> you have to
-check for file permissions. Make sure that <code>messagebus</code> gid inside the
-containers maps to <code>input</code> gid on your host, in order to do that first
-check what’s the gid of the files inside <code>/dev/input</code> as seen by the
-docker container:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it gow_retroarch_1 ls -la /dev/input
-
-drwxr-xr-x  4 root root          380 Jun 30 17:25 .
-drwxr-xr-x 13 root root         2940 Jun 30 17:25 ..
-drwxr-xr-x  2 root root           80 Jun 27 09:43 by-id
-drwxr-xr-x  2 root root          160 Jun 27 09:43 by-path
-crw-rw----  1 root messagebus 13, 64 Jun 27 09:43 event0
-crw-rw----  1 root messagebus 13, 65 Jun 27 09:43 event1
-crw-rw----  1 root messagebus 13, 66 Jun 27 09:43 event2
-crw-rw----  1 root messagebus 13, 67 Jun 27 09:43 event3
-crw-rw----  1 root messagebus 13, 68 Jun 27 09:43 event4
-...
-...</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then check that the current user inside the container is part of the
-<code>messagebus</code> group:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it gow_retroarch_1 id
-
-uid=1000(retro) gid=1000(retro) groups=1000(retro),105(messagebus)</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">network_mode: ${UDEVD_NETWORK}
+privileged: true</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_retroarch_is_missing_icons"><a class="anchor" href="#_retroarch_is_missing_icons"></a>RetroArch is missing icons!</h3>
+</div>
+<div class="sect1">
+<h2 id="_retroarch_is_missing_icons"><a class="anchor" href="#_retroarch_is_missing_icons"></a>RetroArch is missing icons!</h2>
+<div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -402,22 +324,39 @@ previous menu by pressing backspace
 <p>Press <kbd>F</kbd> to toggle fullscreen if you need to.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_how_can_i_get_the_full_logs_of_xorg"><a class="anchor" href="#_how_can_i_get_the_full_logs_of_xorg"></a>How can I get the full logs of Xorg?</h3>
+</div>
+<div class="sect1">
+<h2 id="_how_can_i_get_the_full_logs_of_xorg"><a class="anchor" href="#_how_can_i_get_the_full_logs_of_xorg"></a>How can I get the full logs of Xorg?</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Xorg is logging more than what you can see from the command line, you
-have to get out the log file at <code>/var/log/Xorg.0.log</code> from inside the
-Docker container. Running the following should print out the full log
-file:</p>
+<p>Xorg is logging more than what you can see from the command line; you can get
+the full log file at <code>/var/log/Xorg.0.log</code> from inside the Docker container.
+Running the following should copy it to your current directory, even if the
+container is no longer running:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it gow_xorg_1 cat /var/log/Xorg.0.log</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker cp gow-xorg-1:/var/log/Xorg.0.log .</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you&#8217;re running in headless mode, it&#8217;s likely that the file will be
+called <code>Xorg.99.log</code> instead of <code>Xorg.0.log</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_xorg_failed_to_acquire_modesetting_permission"><a class="anchor" href="#_xorg_failed_to_acquire_modesetting_permission"></a>Xorg: Failed to acquire modesetting permission</h3>
+<div class="sect1">
+<h2 id="_xorg_failed_to_acquire_modesetting_permission"><a class="anchor" href="#_xorg_failed_to_acquire_modesetting_permission"></a>Xorg: Failed to acquire modesetting permission</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>I’m still not sure about this one, it happened to me when trying to
 start GOW on a Desktop system when the screen was locked. Unlocking the
@@ -426,7 +365,6 @@ screen first and then running GOW solved the issue for me.</p>
 <div class="paragraph">
 <p><a href="https://wiki.archlinux.org/title/Kernel_mode_setting#Disabling_modesetting">Disabling
 modesetting</a> might be another way to get around it.</p>
-</div>
 </div>
 </div>
 </div>

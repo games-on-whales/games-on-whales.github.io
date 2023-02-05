@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Connecting :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
-  </li>
-</ul>
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,57 +199,52 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Installation</li>
-    <li><a href="desktop.html">Desktop</a></li>
+    <li>Getting Started</li>
+    <li><a href="connecting.html">Connecting</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/desktop.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/connecting.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_desktop_environments"><a class="anchor" href="#_desktop_environments"></a>Desktop environments</h2>
+<h1 class="page">Connecting</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Generally, instead of running <code>Xorg</code> and <code>PulseAudio</code> from inside
-Docker, you can use your current desktop and audio system and just pass
-the required sockets in order for GUI containers to use your desktop and
-audio.</p>
+<p>Once the containers are up and running, connect to your server using
+<a href="https://moonlight-stream.org/">Moonlight</a>. You may need to manually specify the
+IP address of your host system if it isn&#8217;t automatically discovered.</p>
 </div>
 <div class="paragraph">
-<p>There are still some benefits of <em>containerizing</em> GUI applications and
-run them over Docker:</p>
+<p>If this is your first time connecting, you&#8217;ll need to pair your client and
+server.  Moonlight will prompt you with a PIN to enter on the server side.
+To validate the PIN you can use the Sunshine web interface (at
+<code><a href="https://&lt;IP&gt;:47990/" class="bare">https://&lt;IP&gt;:47990/</a></code> default username: <code>admin</code>, password: <code>admin</code>) or
+you can directly call: <code>curl &lt;IP&gt;:47989/pin/&lt;PIN&gt;</code>.</p>
 </div>
+<div class="paragraph">
+<p>After you&#8217;ve completed the pairing step, you can click your host in Moonlight,
+then open the <code>Desktop</code> app. At this point you should be able to see your X11
+apps running!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>It’s easy to control how much CPU and Memory to allocate to each app that runs via Docker</p>
+<p>Check out the <a href="troubleshooting.html" class="xref page">troubleshooting</a> guide if anything
+isn&#8217;t working quite right</p>
 </li>
 <li>
-<p>You don’t have to manage installation scripts, dependencies conflicts, and updates</p>
-<div class="ulist">
-<ul>
-<li>
-<p>we’ll do that for you</p>
+<p>Play some games!</p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p>You can easily delete all files created by the application by removing the docker container</p>
-</li>
-<li>
-<p>It’s easier to backup configuration files and state</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You should also checkout
-<a href="https://github.com/mviereck/x11docker">x11docker</a>: a project focused on
-running GUI apps on top of your existing Desktop environment</p>
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Configuration :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,25 +199,120 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Installation</li>
-    <li><a href="headless.html">Headless</a></li>
-    <li><a href="raspberry-headless.html">Raspberry</a></li>
+    <li>Getting Started</li>
+    <li><a href="configuration.html">Configuration</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/raspberry-headless.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/configuration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_raspberry_pi"><a class="anchor" href="#_raspberry_pi"></a>Raspberry PI</h2>
+<h1 class="page">Configuration</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>It should be possible to run everything on Raspberry PIs too, we are
-working on it, <a href="https://github.com/games-on-whales/gow/issues/20">stay
-tuned</a></p>
+<p>Before launching GoW for the first time, you&#8217;ll want to set up your environment
+to your tastes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_local_state"><a class="anchor" href="#_local_state"></a>Local state</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GoW is set up to use a directory of your choice from your host system as a
+place to store anything that needs to persist when you stop and restart
+containers.  Because this same directory is (typically) mapped into each
+container, it can also be a way to share data between multiple containers.</p>
+</div>
+<div class="paragraph">
+<p>Before you launch GoW for the first time, create a new directory and update the
+<code>local_state</code> variable in your <a href="#_user_environment">User environment</a> to match.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+On unRAID, the <code>local_state</code> folder you just created will likely be owned
+by <code>root</code>, and it may not be writable from the containers launched by GoW,
+which mostly do <em>not</em> run as <code>root</code>. Until GoW has support for changing the UID
+inside the containers, you may need to <code>chmod 777 local_state</code> to make sure
+anyone can write to it.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_time_zone"><a class="anchor" href="#_time_zone"></a>Time zone</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to make the time zone inside your container match your actual local
+time zone, you&#8217;ll need to update the <code>TIME_ZONE</code> variable in your <a href="#User
+environment">[User
+environment]</a>.  If you&#8217;re not sure what to set it to, check out
+<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">this list</a> of <code>tz</code>
+database time zones.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_environment"><a class="anchor" href="#_user_environment"></a>User environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your user environment is typically stored in the <code>user.env</code> file in the
+directory you cloned GoW into.  It contains a simple list of environment
+variables, one per line.  Comments and blank lines are allowed, but variable
+substitutions are not.</p>
+</div>
+<div class="paragraph">
+<p>If it&#8217;s more convenient to store your user environment outside the git
+directory, you can also put it in <code>$HOME/.config/gow/user.env</code> instead.  If
+both files exist, the one in <code>$HOME/.config</code> will be preferred.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_platform_environment"><a class="anchor" href="#_platform_environment"></a>Platform environment</h2>
+<div class="sectionbody">
+<div id="_tabs_1" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_host_desktop" class="tab">
+<p>Host Desktop</p>
+</li>
+<li id="_tabs_1_headless" class="tab">
+<p>Headless</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_host_desktop--panel" class="tabpanel" aria-labelledby="_tabs_1_host_desktop">
+<div class="paragraph">
+<p>Configuration values that are specific to running with the host desktop can be
+found in the <code>env/host-desktop.env</code> file. You might need to tweak the socket
+locations or <code>XORG_DISPLAY</code> based on your system.</p>
+</div>
+</div>
+<div id="_tabs_1_headless--panel" class="tabpanel" aria-labelledby="_tabs_1_headless">
+<div class="paragraph">
+<p>Configuration values that are specific to running in headless mode can be found
+in the <code>env/headless.env</code> file.  Most of those values will already be set
+correctly, but you may want to tweak the resolution, frame rate, and display
+port to suit your preferences.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now it&#8217;s time to <a href="running.html" class="xref page">launch GoW</a>!</p>
 </div>
 </div>
 </div>

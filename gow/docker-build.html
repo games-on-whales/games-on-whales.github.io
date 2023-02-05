@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Docker builds :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -204,8 +210,8 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_docker_build"><a class="anchor" href="#_docker_build"></a>Docker build</h2>
+<h1 class="page">Docker builds</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>So you don’t trust downloading Docker images from the web, eh? You are
@@ -229,8 +235,11 @@ this is the sha256 checksum of the image generated on Github</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_example"><a class="anchor" href="#_example"></a>Example</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example"><a class="anchor" href="#_example"></a>Example</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Here’s an example from the commit
 <a href="https://github.com/games-on-whales/gow/commit/98e508019247f8aecd82db9ffb4320f00de4e1dc"><code>98e5080</code></a>
@@ -255,13 +264,15 @@ Digest:sha256:6b8555260ed07c7ed466e0b821922a3cedf4ee27b9d6b8fea9d6aa2995b75f61</
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_i_dont_trust_you_cant_i_just_build_the_images_myself"><a class="anchor" href="#_i_dont_trust_you_cant_i_just_build_the_images_myself"></a>I don’t trust you, can&#8217;t I just build the images myself?</h3>
+</div>
+<div class="sect1">
+<h2 id="_i_dont_trust_you_cant_i_just_build_the_images_myself"><a class="anchor" href="#_i_dont_trust_you_cant_i_just_build_the_images_myself"></a>I don’t trust you, can&#8217;t I just build the images myself?</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>You sure can! Here&#8217;s what you&#8217;ll need to know.</p>
 </div>
-<div class="sect3">
-<h4 id="_base_images"><a class="anchor" href="#_base_images"></a>Base Images</h4>
+<div class="sect2">
+<h3 id="_base_images"><a class="anchor" href="#_base_images"></a>Base Images</h3>
 <div class="paragraph">
 <p>We have two images that are only used as the base for our other images; they
 aren&#8217;t ever launched by themselves and therefore they don&#8217;t appear in the
@@ -300,8 +311,8 @@ BUILD_BASE_APP_IMAGE=my-gow-base-app</code></pre>
 <p>You can, of course, choose any tags you like instead of <code>my-gow-base</code> and <code>my-gow-base-app</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_app_and_system_images"><a class="anchor" href="#_app_and_system_images"></a>App and System Images</h4>
+<div class="sect2">
+<h3 id="_app_and_system_images"><a class="anchor" href="#_app_and_system_images"></a>App and System Images</h3>
 <div class="paragraph">
 <p>Any of the app or system images described in the compose files can be easily
 built using the <code>run-gow</code> script.  First, edit the appropriate compose YAML files
@@ -321,7 +332,6 @@ comment out the <code>image:</code> lines to make sure there&#8217;s no confusio
 <p>You should call <code>run-gow</code> with the same options you plan to run apps with;
 specifically, be sure to use the right combination of <code>--gpu</code>, <code>--platform</code>,
 <code>--streamer</code>, and <code>--app</code>.</p>
-</div>
 </div>
 </div>
 </div>

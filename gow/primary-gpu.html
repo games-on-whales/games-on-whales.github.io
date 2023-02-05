@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Primary GPU :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,120 +199,98 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Installation</li>
-    <li><a href="headless.html">Headless</a></li>
-    <li><a href="debian-headless.html">Debian/Ubuntu</a></li>
+    <li>Advanced</li>
+    <li><a href="primary-gpu.html">Multiple GPUs</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/debian-headless.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/primary-gpu.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_debianubuntu_instructions"><a class="anchor" href="#_debianubuntu_instructions"></a>Debian/Ubuntu instructions</h2>
+<h1 class="page">Primary GPU</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Make sure to checkout the
-<a href="overview.html" class="xref page">Overview</a>
-first.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_requirement_uinput"><a class="anchor" href="#_requirement_uinput"></a>Requirement: uinput</h3>
 <div class="paragraph">
-<p>This is a required kernel module in order for Sunshine to manage and
-create virtual devices (mouse, joypad, etc.).</p>
+<p>If you have more than one GPU in your system, which can frequently happen if
+you have both a dedicated GPU and an iGPU, you may find yourself in a situation
+where Xorg won&#8217;t start because it&#8217;s trying to use the wrong GPU.
+Unfortunately, the <code>run-gow</code> script is currently <em>not</em> smart enough to set up
+this configuration for you, but it <em>is</em> possible to manually tell Xorg which
+GPU to use.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_primarygpu_option"><a class="anchor" href="#_the_primarygpu_option"></a>The <code>PrimaryGPU</code> option</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>PrimaryGPU</code> option in the <code>OutputClass</code> section of <code>xorg.conf</code> can be used
+to specify which GPU to use based on which driver it uses.</p>
 </div>
 <div class="paragraph">
-<p>Make sure that <code>/dev/uinput</code> is present in the host.</p>
+<p>First, create a file somewhere on your host called <code>xorg-primary-gpu.conf</code>.
+Set the contents based on what type of GPU you want to use as primary:</p>
 </div>
-<div class="listingblock">
+<div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -la /dev/uinput
-crw------- 1 root root 10, 223 Jul 15 11:46 /dev/uinput</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_quickstart"><a class="anchor" href="#_quickstart"></a>Quickstart</h3>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-In order for Sunshine to be able to stream your desktop, you must meet the <a href="monitor.html" class="xref page">Monitor requirements</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h4>
-<div class="paragraph">
-<p>Before launching GoW for the first time, you&#8217;ll want to set up your environment
-to your tastes.  Be sure to edit the <code>user.env</code> file to set <code>local_state</code> and
-<code>TIME_ZONE</code>.  You might need to tweak the socket locations or <code>XORG_DISPLAY</code>
-in <code>env/headless.env</code> based on your system.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_launching"><a class="anchor" href="#_launching"></a>Launching</h3>
-<div class="paragraph">
-<p>To launch Games on Whales, you can use the <code>run-gow</code> script.  See the usage
-message (<code>run-gow --help</code>) for full details. Some examples follow:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo run-gow --platform headless --gpu nvidia --app retroarch pull
-sudo run-gow --platform headless --gpu nvidia --app retroarch up</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Currently supported apps are <code>steam</code>, <code>retroarch</code>, and <code>firefox</code>, but you can
-add any others you&#8217;d like.  Use the existing files as a guide.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_connecting"><a class="anchor" href="#_connecting"></a>Connecting</h3>
-<div class="paragraph">
-<p>Connect over Moonlight by manually adding the IP address of the PC
-running the Docker container. To validate the PIN you can use the
-Sunshine web interface (at <code><a href="https://&lt;IP&gt;:47990/" class="bare">https://&lt;IP&gt;:47990/</a></code> default username:
-<code>admin</code>, password: <code>admin</code>) or directly calling:
-<code>curl &lt;IP&gt;:47989/pin/&lt;PIN&gt;</code>.</p>
-</div>
-<div class="paragraph">
-<p>From Moonlight open the <code>Desktop</code> app, from there you should be able to
-see your X11 apps running!</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h3>
-<div class="ulist">
+<div class="ulist tablist">
 <ul>
-<li>
-<p>Checkout the
-<a href="troubleshooting.html" class="xref page">troubleshooting</a>
-page if anything is not working on your side</p>
+<li id="_tabs_1_nvidia" class="tab">
+<p>NVIDIA</p>
 </li>
-<li>
-<p>Check out how to configure and use your GPU in order to get HW
-acceleration (if you have one)</p>
+<li id="_tabs_1_amd" class="tab">
+<p>AMD</p>
+</li>
+<li id="_tabs_1_intel" class="tab">
+<p>Intel</p>
 </li>
 </ul>
+</div>
+<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
+<div class="paragraph">
+<p>Section "OutputClass"
+    Identifier "nvidia"
+    MatchDriver "nvidia-drm"
+    Driver "nvidia"
+    Option "AllowEmptyInitialConfiguration"
+    ModulePath "/nvidia/xorg"
+    Option "PrimaryGPU" "yes"
+EndSection</p>
+</div>
+</div>
+<div id="_tabs_1_amd--panel" class="tabpanel" aria-labelledby="_tabs_1_amd">
+<div class="paragraph">
+<p>Section "OutputClass"
+    Identifier "amd"
+    MatchDriver "amdgpu"
+    Driver "amdgpu"
+    Option "AllowEmptyInitialConfiguration"
+    Option "PrimaryGPU" "yes"
+EndSection</p>
+</div>
+</div>
+<div id="_tabs_1_intel--panel" class="tabpanel" aria-labelledby="_tabs_1_intel">
+<div class="paragraph">
+<p>Section "OutputClass"
+    Identifier "intel"
+    MatchDriver "i915" # change this to the correct driver for your iGPU
+    Driver "i915"      # change this to the correct driver for your iGPU
+    Option "AllowEmptyInitialConfiguration"
+    Option "PrimaryGPU" "yes"
+EndSection</p>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, open <code>config/platforms/headless.yml</code> and add a line to the volumes for the xorg container to use this new configuration:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>- /path/to/xorg-primary-gpu.conf:/usr/share/X11/xorg.conf.d/01-primary-gpu.conf:ro</pre>
 </div>
 </div>
 </div>

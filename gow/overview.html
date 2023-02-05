@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Overview :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -204,65 +210,150 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h1 class="page">Overview</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Games on Whales (GOW)</strong> lets you stream games (and GUI) running on
-Docker with HW acceleration and low latency.</p>
+<p><strong>Games on Whales (GOW)</strong> lets you stream games (and other graphical
+applications) running in Docker containers with hardware acceleration and low
+latency.</p>
 </div>
 <div class="paragraph">
-<p>The basic idea is that a
-<a href="https://en.wikipedia.org/wiki/Server_(computing)">server</a> can stream
-games to clients the same way you play a video on Youtube. There are a
-lot of supported clients already such as: mobile phones, laptops,
-desktops, and even the Nintendo Switch!</p>
+<p>The goal is to allow a
+<a href="https://en.wikipedia.org/wiki/Server_(computing)">server</a> to stream
+games to clients the same way you play a video on YouTube.  A server is not
+necessarily a
+<a href="https://upload.wikimedia.org/wikipedia/commons/6/69/Wikimedia_Foundation_Servers-8055_35.jpg">gigantic beast of a machine</a>;
+in fact, GoW will probably run on hardware you already have, such as a laptop
+or desktop computer, or even something smaller and compact like a Raspberry Pi
+(<a href="https://github.com/games-on-whales/gow/issues/20">in theory</a>).</p>
 </div>
-<div class="paragraph">
-<p>A server is not necessary a <a href="https://upload.wikimedia.org/wikipedia/commons/6/69/Wikimedia_Foundation_Servers-8055_35.jpg">gigantic beast of a machine</a>, it can be: a laptop, a normal desktop machine, or even something smaller and compact like a Raspberry PI (<a href="https://github.com/games-on-whales/gow/issues/20">in theory</a>).
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 Generally, you should be able to pick any OS that supports
 <a href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> and start using
-GOW!</p>
+GoW, but testing and development are focused on Linux-based systems.
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_how_does_it_work"><a class="anchor" href="#_how_does_it_work"></a>How does it work?</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_does_it_work"><a class="anchor" href="#_how_does_it_work"></a>How does it work?</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We bring together a few different components:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Platform</dt>
+<dd>
+<p>Most of the software in the Games on Whales system runs in
+<a href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> containers.
+Containers are software packages that are designed to make installation and
+configuration easy by providing a consistent platform everywhere the package is
+run.</p>
+<div class="paragraph">
+<p>You can choose to run GoW in either Host Desktop mode, or Headless mode.  In
+Headless mode, we run a few platform containers for you:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://moonlight-stream.org/">Moonlight</a>: An open source
-implementation of NVIDIA’s GameStream protocol. You can stream your
-collection of PC games from your GameStream-compatible PC to any
-supported device and play them remotely</p>
-</li>
-<li>
-<p><a href="https://github.com/loki-47-6F-64/sunshine">Sunshine</a>: An opensource
-Gamestream host for Moonlight. This gives us the ability to stream from
-a Linux box since it’s not tied to the proprietary Nvidia GameStream
-(Windows only and not opensource)</p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a>: The platform
-that we use in order to deliver software packages (called containers)
-that you can easily run without having to manually install and configure
-everything</p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/X.Org_Server">Xorg</a>: The window system
-that we use in order to manage and display graphical applications
+<p><a href="https://en.wikipedia.org/wiki/X.Org_Server">Xorg</a>: The famous windowing system
+for managing and displaying graphical applications
 (<a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a>)</p>
 </li>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/PulseAudio">PulseAudio</a>: The software
-that will manage audio for our GUIs</p>
+<p><a href="https://en.wikipedia.org/wiki/PulseAudio">PulseAudio</a>: A sound server that can
+manage audio coming from multiple sources (apps).</p>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In Host Desktop mode, we expect the host server to provide those pieces.</p>
+</div>
+</dd>
+<dt class="hdlist1">Streaming Server</dt>
+<dd>
+<p>GoW streams running apps to clients using NVIDIA&#8217;s GameStream protocol.  We
+provide a choice of two open-source server implementations.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Although NVIDIA has announced that they are ending support for GameStream
+in early 2023, these open-source implementations (and thus GoW itself) do not
+rely on any NVIDIA support or infrastructure and will continue to work even
+after that date.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/LizardByte/Sunshine">Sunshine</a>: The original open-source
+GameStream host, and still the most well-tested. Use this if you&#8217;re unsure
+which one to pick.</p>
+</li>
+<li>
+<p><a href="https://github.com/games-on-whales/wolf">Wolf</a>: A new GameStream host, still
+in alpha.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Client</dt>
+<dd>
+<p><a href="https://moonlight-stream.org/">Moonlight</a> is an open-source GameStream protocol
+client.  Moonlight runs on many platforms, including: mobile phones, laptops,
+desktops, Steam Deck, and even the Nintendo Switch!</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Moonlight is not distributed with GoW.  You&#8217;ll need to install it on each
+device you plan to use as a client for playing games.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">Applications</dt>
+<dd>
+<p>The GoW system aims to be compatible with as many GUI app containers as
+possible.  Here&#8217;s a selection of the ones we provide, though adding more is a
+very straightforward process.</p>
+<div class="ulist">
+<ul>
 <li>
 <p><a href="https://en.wikipedia.org/wiki/RetroArch">RetroArch</a>: An open source,
 cross-platform frontend for emulators, game engines, and more!</p>
 </li>
+<li>
+<p><a href="https://store.steampowered.com/">Steam</a>: The popular game store and launcher,
+now sandboxed in a container</p>
+</li>
+<li>
+<p><a href="https://www.firefox.com">Firefox</a>: A modern web browser</p>
+</li>
 </ul>
+</div>
+</dd>
+</dl>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -271,7 +362,6 @@ cross-platform frontend for emulators, game engines, and more!</p>
 </div>
 <div class="paragraph">
 <p>Head over to the <a href="components-overview.html" class="xref page">components overview</a> if you are interested in how these pieces of software are tied together by GOW</p>
-</div>
 </div>
 </div>
 </div>

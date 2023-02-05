@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Components Overview :: Games On Whales</title>
+    <title>run-gow :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -74,7 +74,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="overview.html">Overview</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="components-overview.html">Components</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -137,7 +137,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="run-gow.html">run-gow</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -199,148 +199,186 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>What is GOW?</li>
-    <li><a href="components-overview.html">Components</a></li>
+    <li>Advanced</li>
+    <li><a href="run-gow.html">run-gow</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/components-overview.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/run-gow.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Components Overview</h1>
+<h1 class="page"><code>run-gow</code></h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock tip">
+<div class="paragraph">
+<p>Games on Whales ties together several different components, with support for
+many host OSes and hardware configurations.  In order to make it easier to
+manage all that, and even make most of it automatic, we&#8217;ve provided a Bash
+script to handle the details for you.</p>
+</div>
+<div class="paragraph">
+<p>You can think of <code>run-gow</code> as a frontend for <code>docker-compose</code>; it takes some of
+its own arguments at the beginning, but passes everything else on untouched.
+The complete usage description is below, but first let&#8217;s talk about a few of
+the options you&#8217;re definitely going to want to set.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_platform"><a class="anchor" href="#_platform"></a><code>--platform</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>--platform</code> option is used to specify whether the underlying Xorg and
+Pulse platform is provided by the host computer, or if GoW should launch
+containers for those components.</p>
+</div>
+<div class="paragraph">
+<p>Use <code>--platform host</code> to use the host&#8217;s platform, or <code>--platform headless</code> to
+launch the platform in containers.  The default is <code>--platform host</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gpu"><a class="anchor" href="#_gpu"></a><code>--gpu</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some GPUs require extra configuration, so the <code>--gpu</code> option is available to
+tell <code>run-gow</code> which GPU you plan on using.  Possible values are <code>nvidia</code> and
+<code>intel</code>. Notably, AMD GPUs are reported to be working well without any
+additional configuration, so you won&#8217;t need this option if you&#8217;re using AMD.</p>
+</div>
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Make sure to read the <a href="overview.html" class="xref page">overview</a> section before continuing, to get a grasp on core concept behind GOW.
+If you&#8217;re running headless and you have more than one GPU, including
+if you have a dedicated GPU and an iGPU, you may need to manually tell Xorg
+which GPU to use. See <a href="primary-gpu.html" class="xref page">here</a> for details on how to do
+that.  You should set the <code>--gpu</code> option appropriately for the GPU you plan to
+use.
 </td>
 </tr>
 </table>
 </div>
-<div class="imageblock">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_app"><a class="anchor" href="#_app"></a><code>--app</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, if you launch GoW and connect with Moonlight, you&#8217;ll only see a
+basic desktop.  However, it&#8217;s likely that you have at least one application in
+mind that you&#8217;d like to launch, and you can use the <code>--app</code> argument to specify
+that.  Supported apps can be found in the <code>compose/apps</code> directory; just leave
+off the <code>.yml</code>:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="_images/gow-diagram.svg" alt="gow diagram">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ ./run-gow --app steam</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>GOW is a composition of Docker containers that enable users to stream graphical applications to Moonlight clients.</p>
+<p>You can specify <code>--app [app name]</code> as many times as you like, if you want to
+launch multiple applications.</p>
 </div>
-<div class="paragraph">
-<p>We wrapped each individual piece of software with the necessary dependencies
-into its own Docker image and use
-<a href="https://docs.docker.com/compose/"><code>docker-compose</code></a> in order to manage the
-composition of all the necessary pieces.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_streaming_host"><a class="anchor" href="#_streaming_host"></a>Streaming host</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The streaming host is the heart of this system; it&#8217;s in charge of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Encoding the graphical environment (<code>Xorg</code>) and audio (<code>PulseAudio</code>) into a video that will be streamed to <a href="https://moonlight-stream.org/">Moonlight</a> clients</p>
-<div class="paragraph">
-<p>This process can be hardware accelerated using
-<a href="https://en.wikipedia.org/wiki/Video_Acceleration_API">VAAPI</a> or
-<a href="https://en.wikipedia.org/wiki/CUDA">CUDA</a> depending on your GPU hardware</p>
-</div>
-</li>
-<li>
-<p>Translating remote input devices into local input devices (eg: keyboards, mice, gamepads)</p>
-<div class="paragraph">
-<p>This is achieved by using the <a href="requirements.html" class="xref page">uinput</a> kernel module.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Games on Whales currently has support for two streaming hosts: <a href="https://github.com/LizardByte/Sunshine">Sunshine</a> (more mature, and the default), and <a href="https://github.com/games-on-whales/wolf">Wolf</a> (still in alpha, but very usable).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_xorg_pulseaudio"><a class="anchor" href="#_xorg_pulseaudio"></a>Xorg &amp; PulseAudio</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>These two components are in charge of <strong>Display</strong> and <strong>Audio</strong>, respectively.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If your OS comes with a
-<a href="https://en.wikipedia.org/wiki/Desktop_environment">desktop environment</a> already,
-you will most likely want to use that instead of trying to run it in a
-container.</p>
-</li>
-<li>
-<p>If you&#8217;re running a
-<a href="https://en.wikipedia.org/wiki/Headless_computer">headless</a> system you&#8217;ll need to
-run them in order to run graphical applications. You can use our Docker images
-for that.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>While PulseAudio runs just fine without a real sound device, for best results
-Xorg should be hardware accelerated using a GPU. That&#8217;s the main reason why we
-choose the full Xorg server over <a href="https://en.wikipedia.org/wiki/Xvfb"><code>Xvfb</code></a>.
-While it&#8217;s more complicated to run the full Xorg server, the benefits of having
-hardware acceleration are too great to be dismissed.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_guis"><a class="anchor" href="#_guis"></a>GUIs</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Graphical applications can run easily on top of Xorg and PulseAudio&#8201;&#8212;&#8201;that&#8217;s
-how most desktop environments work!</p>
-</div>
-<div class="imageblock">
+<details>
+<summary class="title"><code>run-gow</code> Usage</summary>
 <div class="content">
-<img src="_images/gui-overview.svg" alt="gui overview">
+<div class="literalblock">
+<div class="content">
+<pre>Launch the Games on Whales system
+
+Usage: run-gow [options] [compose commands]
+Arguments after the last option will be passed directly to 'docker compose'.
+For example, to launch the containers in the background, try:
+  $ run-gow --app retroarch up -d
+
+Options:
+  -h, --help
+      Print this help text.
+
+  -a, --app &lt;app name&gt;
+      Specify an application to launch. Can be used multiple times.
+
+  -d, --debug
+      Print some extra debugging information before running Docker commands.
+
+  -e, --env-file &lt;file&gt;
+      Specify an additional file of environment varibles to load before launching 'docker compose'.
+
+  -g, --gpu &lt;type&gt;
+      Use this option to specify what type of GPU to use with Games on Whales. Not
+      all GPU types require this option (notably, AMD does not).
+      Possible types:
+        nvidia, intel
+
+  -p, --platform
+      Use this option to specify whether system services like Xorg should be containerized or not.
+      Possible values:
+        headless     - run xorg, udev, and pulse in containers
+        host         - use system services already running on the host server [default]
+
+  -q, --quiet
+      If set, this script will not produce any output of its own. This will not affect output from 'docker compose'.
+
+  -s, --streamer
+      Use this option to specify which streaming server should be used to connect with Moonlight.
+      Possible values:
+        sunshine     - the original, more stable option [default]
+        wolf         - the bleeding edge option. still in beta.
+
+  -x, --headless
+      DEPRECATED.  If set, has the same effect as '--platform headless'
+
+  --
+      Signifies the end of options.</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Sharing <a href="https://en.wikipedia.org/wiki/Unix_domain_socket">sockets</a> between
-containers is the mechanism that enables us to have proper isolation. Instead
-of having a big single Docker image which installs and runs all the individual
-pieces of software together, we can decouple them and share only a
-communication channel.</p>
 </div>
-<div class="paragraph">
-<p>This means that it&#8217;s very simple to make a Docker container of any given GUI
-application and that same container will work both on <strong>GOW</strong> or on a normal
-<strong>Desktop Environment</strong>, enabling users to have a high degree of freedom on how
-to use them.</p>
-</div>
+</details>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_gpu"><a class="anchor" href="#_gpu"></a>GPU</h2>
+<h2 id="_run_gow_rc"><a class="anchor" href="#_run_gow_rc"></a><code>run-gow-rc</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A GPU is not required to run any of this, but it&#8217;s highly recommended for best
-results.</p>
+<p>Once you&#8217;ve got your system set up how you like it, you&#8217;ll find that many of
+the options you provide to <code>run-gow</code> won&#8217;t actually change very frequently, if
+at all.  In order to cut down on the repetitiveness of always having to type
+those arguments every time you use <code>run-gow</code>, we&#8217;ve provided a mechanism to
+supply a set of "default arguments".</p>
 </div>
 <div class="paragraph">
-<p>Sharing a GPU across Docker containers is generally done by sharing the
-<a href="https://en.wikipedia.org/wiki/Direct_Rendering_Manager">DRM devices
-(<code>/dev/dri/cardX</code>)</a>. This should work as long as your GPU supports <code>VA-API</code>.
-Notably, NVIDIA cards <em>don&#8217;t</em>; instead we provide <a href="nvidia.html" class="xref page">specific
-instructions</a> for them.</p>
+<p>You can do that by creating a file called <code>$HOME/.config/gow/run-gow-rc</code> that
+contains the defaults you&#8217;d like to use.  The script will use the first
+non-empty, non-commented line as defaults each time you run, and any extra
+arugments you provide on the command line will override what&#8217;s in the
+<code>run-gow-rc</code> file.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you set your <code>run-gow-rc</code> to this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--platform headless --gpu nvidia</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ ./run-gow --app steam up</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>run-gow</code> will launch Steam in headless mode with NVIDIA GPU.</p>
 </div>
 </div>
 </div>

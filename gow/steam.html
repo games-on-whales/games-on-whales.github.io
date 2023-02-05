@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Steam :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,7 +199,7 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Configuration</li>
+    <li>Advanced</li>
     <li><a href="steam.html">Steam</a></li>
   </ul>
 </nav>
@@ -204,19 +210,66 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_steam"><a class="anchor" href="#_steam"></a>Steam</h2>
+<h1 class="page">Steam</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can use the <code>gameonwhales/steam</code> image to play Steam games on GOW.
-It’s highly recommended using a GPU in order to run Steam games.</p>
+<p>You can use the <code>gameonwhales/steam</code> image to play Steam games on GOW.  It’s
+highly recommended to use a GPU in order to run Steam games.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The Steam client and many Steam games are 32-bit applications and
+therefore require 32-bit drivers for your GPU.  If the multilib drivers are not
+automatically installed on your host, please make sure you have installed both
+the 64-bit and the 32-bit drivers installed.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>There are a few connected bits that we took care for you, here’s a
-rundown of the possible errors you might encounter:</p>
+<p>Here are a few frequently asked questions related to Steam support; if you run
+into any other issues, feel free to file an issue on GitHub or reach out in
+Discord.</p>
 </div>
-<div class="sect2">
-<h3 id="_can_i_run_windows_games"><a class="anchor" href="#_can_i_run_windows_games"></a>Can I run Windows games?</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_can_steam_see_my_gpu"><a class="anchor" href="#_can_steam_see_my_gpu"></a>Can Steam see my GPU?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can look at Steam&#8217;s 'System Information' to verify that your GPU is detected.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ui_why_are_all_the_steam_windows_black"><a class="anchor" href="#_ui_why_are_all_the_steam_windows_black"></a>UI: Why are all the Steam windows black?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many parts of the Steam client&#8217;s UI are rendered using an integrated webview,
+which can be sensitive to the size of <code>/dev/shm</code>.  You can check the size in
+your container like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ docker exec -it gow-steam-1 df -h | grep shm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If it is at least 500MB, you may be experiencing a different issue.  Check the
+logs at <code>local_state/.steam/debian-installation/error.log</code> for more info on the
+specific issue.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_can_i_run_windows_games"><a class="anchor" href="#_can_i_run_windows_games"></a>Can I run Windows games?</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Surprisingly, you can! And it’s fairly easy to do it using
 <a href="https://www.protondb.com/">proton</a> which is integrated in Steam via
@@ -239,88 +292,37 @@ rundown of the possible errors you might encounter:</p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_something_is_wrong_where_are_the_logs"><a class="anchor" href="#_something_is_wrong_where_are_the_logs"></a>Something is wrong, where are the logs?</h3>
+</div>
+<div class="sect1">
+<h2 id="_something_is_wrong_where_are_the_logs"><a class="anchor" href="#_something_is_wrong_where_are_the_logs"></a>Something is wrong! Where are the logs?</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>There are a lot of different places for logs, for example, each game
-logs in a different folder but here are a few hints on where things are:</p>
+<p>There are a lot of different places for logs; for example, each game logs in a
+different folder.  Here are a few hints on where to look</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>local_state/.steam/debian-installation/error.log</code></p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p>This is where most of the issues with the Steam client are logged</p>
-</li>
-</ul>
 </div>
 </li>
 <li>
 <p><code>local_state/.config/</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>This is where games <em>usually</em> put log and config files</p>
-</li>
-<li>
-<p>For example <code>local_state/.config/unity3d/NoBrakesGames/Human/Player.log</code> is the log file for Human Fall Flat</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>This is where games <em>usually</em> put log and config files.  For example,
+<code>local_state/.config/unity3d/NoBrakesGames/Human/Player.log</code> is the log file
+for Human Fall Flat</p>
 </div>
 </li>
 <li>
 <p><code>local_state/Steam/logs/bootstrap_log.txt</code></p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p>This is the log file related to starting/updating the steam client</p>
-</li>
-</ul>
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ui_i_cant_see_my_games_or_store_black_pages"><a class="anchor" href="#_ui_i_cant_see_my_games_or_store_black_pages"></a>UI: I can’t see my games or store (black pages)</h3>
-<div class="paragraph">
-<p>Steam includes an integrated webview, there are a few things to check if
-you hit this issue:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Make sure that <code>/dev/shm</code> is <em>big enough</em></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>docker exec -it gow_steam_1 df -h</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>if <code>/dev/shm</code> is 64MB double check your docker-compose file</p>
-</li>
-<li>
-<p>Checkout the logs at <code>local_state/.steam/debian-installation/error.log</code> for more info on the specific issue.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_32_bit_drivers"><a class="anchor" href="#_32_bit_drivers"></a>32-bit Drivers</h3>
-<div class="paragraph">
-<p>Steam requires the 32-bit drivers for your GPU. If the multilib drivers are not automatically installed on your host, please make sure you have installed both the 64-bit and the 32-bit drivers installed.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_verify_steam_is_using_the_correct_gpu"><a class="anchor" href="#_verify_steam_is_using_the_correct_gpu"></a>Verify Steam is using the correct GPU</h3>
-<div class="paragraph">
-<p>You can look at Steam&#8217;s 'System Information' to verify that your GPU is detected.</p>
-</div>
 </div>
 </div>
 </div>

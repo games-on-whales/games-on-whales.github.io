@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>How can I use GOW? :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -204,75 +210,58 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_how_can_i_use_gow"><a class="anchor" href="#_how_can_i_use_gow"></a>How can I use GOW?</h2>
+<h1 class="page">How can I use GOW?</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Out of the box, by using the <code>docker-compose</code> default configuration, you
-should be able to run <code>RetroArch</code> and play games remotely from another
-machine. It’s all taken care from you and you only have to run the
-following:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/games-on-whales/gow.git
-cd gow
-mkdir local_state
-run-gow [--platform headless] --app retroarch up -d</code></pre>
+<p>One of the earliest use cases for Games on Whales was to be able to host retro
+video games on a central server running RetroArch and stream them to clients
+wherever they happened to be.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_can_i_use_it_for_something_else"><a class="anchor" href="#_can_i_use_it_for_something_else"></a>Can I use it for something else?</h3>
+</div>
+<div class="sect1">
+<h2 id="_can_i_use_it_for_something_else"><a class="anchor" href="#_can_i_use_it_for_something_else"></a>Can I use it for something else?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Absolutely! Streaming games works very well, but GoW can do so much more!</p>
+</div>
+<div class="paragraph">
+<p>Out of the box, GoW provides a platform for running just about any graphical
+applications you like.  In fact, despite the name, you can think of GoW as a
+low-latency remote desktop solution.  Often the focus is on a single
+full-screen application, but this does not necessarily have to be the case.</p>
+</div>
 <div class="paragraph">
 <p>You should be able to run any Graphical Application on top of the basic
-combination of <code>Xorg</code> + <code>PulseAudio</code> + <code>Sunshine</code>.  We supply compose files for
-<code>steam</code>, <code>retroarch</code>, and <code>firefox</code> by default, but you can use them as
-templates to create your own.  Then, you can use <code>--app [your app]</code> as an
-argument to <code>run-gow</code> to launch your app.</p>
+combination of <code>Xorg</code> + <code>PulseAudio</code> + <code>Sunshine</code>.  We supply the necessary
+configuration files for <code>steam</code>, <code>retroarch</code>, and <code>firefox</code> by default, but you
+can use them as templates to create your own. See
+<a href="adding-an-app.html" class="xref page">Adding an App</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p>A few things to note:
-- This is an image that we didn’t built:
-  <a href="https://github.com/andrewmackrodt/dockerfiles/tree/master/firefox-x11"><code>andrewmackrodt/firefox-x11</code></a>
-  it’s an open source Dockerfile and image. It’s a great example of running a
-  container which wasn’t built with GOW in mind.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>This container doesn’t need to be run with <code>privileged: true</code> nor
-<code>network_mode: host</code>. This is because mouse and keyboard events are
-handled by <code>Xorg</code> and passing the <code>X11</code> socket is enough to have display
-and inputs</p>
-<div class="ulist">
-<ul>
-<li>
-<p>This increases security for non trusted containers by restricting the
-things they can access</p>
-</li>
-<li>
-<p>If you would like to also have joypad support you’ll have to use
-<code>privileged</code> and <code>host</code> network just like in the <code>RetroArch</code> example</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<p>GoW is even often capable of running containers provided by third parties; as
+long as the container can accept a <code>DISPLAY</code> environment variable to specify
+the Xorg display, it can be made to work.  For example,
+<a href="https://github.com/andrewmackrodt/dockerfiles/tree/master/firefox-x11">this
+Firefox container</a> (<code>andrewmackrodt/firefox-x11</code>) is an open-source Dockerfile
+and image. It’s a great example of running a container which wasn’t built with
+GOW in mind.</p>
 </div>
 <div class="paragraph">
-<p>The main advantage is that if you have a desktop environment already,
-you can run this Firefox container even without using any of the GOW
-parts because you already have <code>Xorg</code>, <code>PulseAudio</code>, and possibly a
-keyboard and mouse connected.</p>
+<p>This container doesn’t need to be run any special privileges or network mode ,
+because mouse and keyboard events are handled by <code>Xorg</code> and passing the <code>X11</code>
+socket is enough to have display and inputs.  This increases security for non
+trusted containers by restricting what&#8217;s accessible inside the container.</p>
 </div>
 <div class="paragraph">
-<p>If you don’t have a desktop environment, or you would like to have a
-remote desktop solution that <strong>is faster</strong> than VNC or RDP that lets you
-run GUI <strong>with HW acceleration</strong>, then <strong>GOW</strong> is the solution for you!</p>
-</div>
-<div class="paragraph">
-<p>And it lets you re-use docker containers that can be run in both
-environments!</p>
+<p>Unfortunately, the same cannot be said for gamepads; if your container requires
+gamepad support you&#8217;ll need to use <code>privileged: true</code> and <code>network_mode:
+${UDEVD_NETWORK}</code> just like in the RetroArch example.  This is required
+because the device files for the gamepad do not exist at the time the container
+is launched (they&#8217;re only created once a client connects) and so far the only
+way we&#8217;ve found for a running container to see a newly created device file is
+using the <code>privileged</code> setting.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/#guis">Heres a blog post</a> with a few GUI docker containers like:</p>
@@ -295,7 +284,6 @@ environments!</p>
 </div>
 <div class="paragraph">
 <p>🚀 The sky is the limit! 🚀</p>
-</div>
 </div>
 </div>
 </div>

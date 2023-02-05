@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Windows :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,9 +199,8 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Installation</li>
-    <li><a href="desktop.html">Desktop</a></li>
-    <li><a href="windows.html">Windows</a></li>
+    <li>Advanced</li>
+    <li><a href="windows.html">Is Windows supported?</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/windows.adoc">Edit this Page</a></div>
@@ -205,37 +210,49 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_windows"><a class="anchor" href="#_windows"></a>Windows</h2>
-<div class="sectionbody">
+<h1 class="page">Windows</h1>
 <div class="paragraph">
-<p>On Windows your best bet is to just install the application like you’ll
-normally do without using Docker.</p>
-</div>
-<div class="paragraph">
-<p>It should be possible to run GOW on Windows but there are a few issues
-that we still haven’t figured out:</p>
+<p>Given the popularity of Windows as a desktop OS, it&#8217;s natural to wonder if the
+Games on Whales system can be run on Windows.  Unfortunately, as of right now,
+the answer is "no, not really".  There are a couple of reasons why:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>WSL2 is missing the uinput kernel module</p>
-<div class="ulist">
-<ul>
-<li>
-<p>We have built it from scratch by compiling the kernel, but even then,
-Xorg still fails to start</p>
+<p>Windows as a Server OS</p>
+<div class="paragraph">
+<p>Although Windows <em>is</em> popular as a desktop OS, and there are certainly many
+server solutions built on top of Windows, it really isn&#8217;t a very common server
+OS in home/hobbyist setups.</p>
+</div>
 </li>
-</ul>
+<li>
+<p>Docker on Windows</p>
+<div class="paragraph">
+<p>Docker on Windows requires an extra layer of virtualization that can slow
+things down, and even cause extra headaches, particularly when networking is
+involved.</p>
+</div>
+</li>
+<li>
+<p>WSL2</p>
+<div class="paragraph">
+<p>WSL2 is missing the <code>uinput</code> kernel module, and although we <em>have</em> been able to
+build the module ourselves, Xorg still fails to launch after doing so. That
+<em>should</em> be a solvable problem, but it will require some investigation to get
+going.</p>
 </div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/games-on-whales/gow/issues/13">You can follow the
-progress here</a></p>
-</div>
-</div>
+<p>For those reasons, we believe that on Windows, your best bet is to just install
+Sunshine and other applications like you normally would, even though it means
+foregoing the benefits of containerization.  Having said that, we&#8217;re open to
+the idea that that may not always be the case, and we&#8217;re open to new ideas and
+efforts to make progress on running GoW on Windows.
+<a href="https://github.com/games-on-whales/gow/issues/13">You can follow the current
+status here</a></p>
 </div>
 </article>
   </div>

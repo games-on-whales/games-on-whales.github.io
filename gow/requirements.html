@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Games On Whales</title>
+    <title>Requirements :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
@@ -87,55 +87,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Installation</span>
+    <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="headless.html">Headless</a>
+    <a class="nav-link" href="requirements.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="debian-headless.html">Debian/Ubuntu</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="headless-unraid.html">Unraid</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="raspberry-headless.html">Raspberry</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+    <a class="nav-link" href="monitor.html">Monitor requirements</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="desktop.html">Desktop</a>
-<ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="debian-desktop.html">Debian/Ubuntu</a>
+    <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="windows.html">Windows</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="running.html">Running</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connecting.html">Connecting</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Configuration</span>
+    <span class="nav-text">Advanced</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="monitor.html">Monitor requirements</a>
+    <a class="nav-link" href="which-platform.html">Which platform?</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+    <a class="nav-link" href="adding-an-app.html">Adding a new app</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="windows.html">Is Windows supported?</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="primary-gpu.html">Multiple GPUs</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="steam.html">Steam</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="nvidia.html">Nvidia GPU</a>
+    <a class="nav-link" href="run-gow.html">run-gow</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -193,107 +199,127 @@
   <ul>
     <li><a href="index.html">gow</a></li>
     <li><a href="index.html">Home</a></li>
-    <li>Installation</li>
-    <li><a href="desktop.html">Desktop</a></li>
-    <li><a href="debian-desktop.html">Debian/Ubuntu</a></li>
+    <li>Getting Started</li>
+    <li><a href="requirements.html">Prerequisites</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/debian-desktop.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/gow/edit/master/docs/modules/ROOT/pages/requirements.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
+<h1 class="page">Requirements</h1>
 <div class="sect1">
-<h2 id="_debianubuntu"><a class="anchor" href="#_debianubuntu"></a>Debian/Ubuntu</h2>
+<h2 id="_uinput"><a class="anchor" href="#_uinput"></a><code>uinput</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you already have a desktop environment you can still run our docker
-containers alongside normal desktop applications.</p>
+<p><code>uinput</code> is a required
+<a href="https://www.kernel.org/doc/html/v4.12/input/uinput.html">kernel module</a> allows
+software running on Linux systems to create virtual input devices. It&#8217;s
+required by the streaming host and it&#8217;s the only hard requirement that we need
+in the host machine&#8217;s kernel.</p>
 </div>
 <div class="paragraph">
-<p>Can you tell that Steam is runnning in Docker?</p>
+<p>Most Linux distributions, such as Ubuntu and Debian, already ship with it.  You
+can easily verify that it&#8217;s installed by checking for the <code>/dev/uinput</code> device
+on your host:</p>
 </div>
-<div class="sect2">
-<h3 id="_how_it_works"><a class="anchor" href="#_how_it_works"></a>How it works</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -la /dev/uinput
+crw------- 1 root root 10, 223 Jul 15 11:46 /dev/uinput</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>You can easily run Sunshine and Steam on Docker without having to
-install a single package on your desktop! We all know
-<a href="https://youtu.be/0506yDSgU7M?t=619">how catastrophic that can be</a>. The
-idea is to use Xorg and PulseAudio from the host OS and mount only the
-sockets to the Docker containers.</p>
+<p>If it&#8217;s not there by default, consult your distro&#8217;s documentation for adding
+kernel modules. If you&#8217;re using unRAID, see our <a href="#_tabs_1_unraid">unRAID
+instructions</a>.  If you&#8217;re using some other platform and you&#8217;re having
+difficulty with this step, come chat with us about it on
+<a href="https://discord.gg/kRGUDHNHt2">Discord</a>; we&#8217;d be happy to try to help you get on
+the right track.</p>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-In order for Sunshine to stream your desktop you have to <strong>have a
-monitor plugged</strong> (or use a dummy plug) and <strong>a user logged in</strong> (or enable
-<a href="https://help.ubuntu.com/community/AutoLogin">autologin</a>)
+If you have issues with inputs (mouse, gamepad, etc) while streaming with
+GOW, it&#8217;s very likely that something is wrong with <code>uinput</code>.
 </td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h3>
-<div class="paragraph">
-<p>Before launching GoW for the first time, you&#8217;ll want to set up your environment
-to your tastes.  Be sure to edit the <code>user.env</code> file to set <code>local_state</code> and
-<code>TIME_ZONE</code>.  You might need to tweak the socket locations or <code>XORG_DISPLAY</code>
-in <code>env/host-desktop.env</code> based on your system.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_launching"><a class="anchor" href="#_launching"></a>Launching</h3>
-<div class="paragraph">
-<p>To launch Games on Whales, you can use the <code>run-gow</code> script.  See the usage
-message (<code>run-gow --help</code>) for full details. Some examples follow:</p>
-</div>
-<div class="listingblock">
+<div class="sect1">
+<h2 id="_platform_specific_requirements"><a class="anchor" href="#_platform_specific_requirements"></a>Platform-specific requirements</h2>
+<div class="sectionbody">
+<div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo run-gow --gpu nvidia --app retroarch pull
-sudo run-gow --gpu nvidia --app retroarch up</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Currently supported apps are <code>steam</code>, <code>retroarch</code>, and <code>firefox</code>, but you can
-add any others you&#8217;d like.  Use the existing files as a guide.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_connecting"><a class="anchor" href="#_connecting"></a>Connecting</h3>
-<div class="paragraph">
-<p>Connect over Moonlight by manually adding the IP address of the PC
-running the Docker container. To validate the PIN you can use the
-Sunshine web interface (at <code><a href="https://&lt;IP&gt;:47990/" class="bare">https://&lt;IP&gt;:47990/</a></code> default username:
-<code>admin</code>, password: <code>admin</code>) or directly calling:
-<code>curl &lt;IP&gt;:47989/pin/&lt;PIN&gt;</code>.</p>
-</div>
-<div class="paragraph">
-<p>From Moonlight open the <code>Desktop</code> app, from there you should be able to
-see your X11 apps running!</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h3>
-<div class="ulist">
+<div class="ulist tablist">
 <ul>
-<li>
-<p>Checkout the
-<a href="troubleshooting.html" class="xref page">troubleshooting</a>
-page if anything is not working on your side</p>
+<li id="_tabs_1_host_desktop" class="tab">
+<p>Host Desktop</p>
 </li>
-<li>
-<p>Check out how to configure and use your GPU in order to get HW
-acceleration (if you have one)</p>
+<li id="_tabs_1_headless" class="tab">
+<p>Headless</p>
+</li>
+<li id="_tabs_1_unraid" class="tab">
+<p>unRAID</p>
 </li>
 </ul>
 </div>
+<div id="_tabs_1_host_desktop--panel" class="tabpanel" aria-labelledby="_tabs_1_host_desktop">
+<h3 id="_monitor" class="discrete">Monitor</h3>
+<div class="paragraph">
+<p>You must have a monitor connected, or alternatively a dummy plug.</p>
+</div>
+<h3 id="_user" class="discrete">User</h3>
+<div class="paragraph">
+<p>You must have a user logged in.  To make this easier for unattended systems,
+you might want to enable
+<a href="https://help.ubuntu.com/community/AutoLogin">autologin</a>.</p>
+</div>
+</div>
+<div id="_tabs_1_headless--panel" class="tabpanel" aria-labelledby="_tabs_1_headless">
+<h3 id="_monitor_2" class="discrete">Monitor</h3>
+<div class="paragraph">
+<p>You must meet the monitor requirements detailed here: <a href="monitor.html" class="xref page">Monitor requirements</a>.</p>
+</div>
+</div>
+<div id="_tabs_1_unraid--panel" class="tabpanel" aria-labelledby="_tabs_1_unraid">
+<h3 id="_monitor_3" class="discrete">Monitor</h3>
+<div class="paragraph">
+<p>You must meet the monitor requirements detailed here: <a href="monitor.html" class="xref page">Monitor requirements</a>.</p>
+</div>
+<h3 id="_uinput_2" class="discrete"><code>uinput</code></h3>
+<div class="paragraph">
+<p>unRAID before version 6.11.0-rc3 is missing the required <code>uinput</code> kernel module
+out of the box. If you are using an older version, we recommend installing the
+<a href="https://github.com/ich777/unraid-uinput">uinput plugin</a></p>
+</div>
+<h3 id="_docker_compose" class="discrete"><code>docker-compose</code></h3>
+<div class="paragraph">
+<p>unRAID doesn&#8217;t come with <code>docker-compose</code>, but you can easily install it by
+installing the
+<a href="https://forums.unraid.net/topic/114415-plugin-docker-compose-manager/">docker-compose-manager</a>
+plugin.</p>
+</div>
+<h3 id="_nvidia_gpu" class="discrete">NVIDIA GPU</h3>
+<div class="paragraph">
+<p>If you have an NVIDIA GPU you’ll also have to install the
+<a href="https://forums.unraid.net/topic/98978-plugin-nvidia-driver/">nvidia-driver
+plugin</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>After you&#8217;ve set up your host, you can <a href="installation.html" class="xref page">install</a> GoW.</p>
 </div>
 </div>
 </div>
