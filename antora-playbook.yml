@@ -14,11 +14,16 @@ ui:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files:
-    - ./supplemental-ui
     - path: css/vendor/tabs.css
       contents: ./node_modules/@asciidoctor/tabs/dist/css/tabs.css
     - path: js/vendor/tabs.js
       contents: ./node_modules/@asciidoctor/tabs/dist/js/tabs.js
+    - path: partials/footer-content.hbs
+      contents: ./supplemental-ui/partials/footer-content.hbs
+    - path: partials/header-content.hbs
+      contents: ./supplemental-ui/partials/header-content.hbs
+    - path: css/site-extra.css
+      contents: ./supplemental-ui/css/site-extra.css
     - path: partials/footer-scripts.hbs
       contents: |
         <script id="site-script" src="{{{uiRootPath}}}/js/site.js" data-ui-root-path="{{{uiRootPath}}}"></script>
@@ -31,6 +36,7 @@ ui:
       contents: |
         <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
         <link rel="stylesheet" href="{{{uiRootPath}}}/css/vendor/tabs.css">
+        <link rel="stylesheet" href="{{uiRootPath}}/css/site-extra.css">
 asciidoc:
   extensions:
     - asciidoctor-kroki
