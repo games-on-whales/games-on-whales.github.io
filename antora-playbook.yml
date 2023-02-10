@@ -4,7 +4,7 @@ site:
 content:
   sources:
     - url: git@github.com:games-on-whales/wolf.git
-      branches: main
+      branches: wayland
       start_path: docs
     - url: git@github.com:games-on-whales/gow.git
       branches: master
