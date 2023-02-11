@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RTSP :: Games On Whales</title>
+    <meta name="generator" content="Antora 3.0.1">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../../..">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf">Wolf</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="stable">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">stable</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../gow/index.html">gow</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../gow/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">wolf</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-wayland/index.html">dev-wayland</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../gow/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="index.html">Moonlight Protocols</a></li>
+    <li><a href="rtsp.html">RTSP</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">stable</button>
+  <div class="version-menu">
+    <a class="version is-current" href="rtsp.html">stable</a>
+    <a class="version" href="../../dev-wayland/protocols/rtsp.html">dev-wayland</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/protocols/pages/rtsp.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">RTSP</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The RTSP protocol starts when a Moonlight user launch an app, and it&#8217;s used to exchange information about the next streams (video, audio, control).</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqFkE1rwzAMhu_-FbqXsXtgha7LobB80KSEHd3YTQSOZWx5v39J1pZk65hPL7KeR0KMbHQCx7oqwXliaskIGZlsHM7aC-GkZ2zRScuQEVmDXc8gA2Srr4bMZao2QojOU3RQlPWhyCsB48uets0cvObordBW3dre0mp_PLymj_oSkFEhPX-i0gRSKWQkKw2Mk-UQlpoqrU_l3bHZJBDYazmgepkdv63XBnDk-TE4j12B34v8C7Zk2Y93XKLX2gpe7L_L8-KU79O10OkWL9hO8AW7APJMcTy-uWnCH0ct33cfd1MClrhH2wFa1l4HnnI_ph_0FzK_p3I=" alt="Diagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rtsp_specifications"><a class="anchor" href="#_rtsp_specifications"></a>RTSP specifications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RTSP messages are plaintext packets of variable size over TCP.</p>
+</div>
+<div class="paragraph">
+<p>Parsing of RTSP messages has been implemented using a formal PEG (Parsing Expression Grammars) definition; you can find it in <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/rtsp/parser.hpp">parser.hpp</a>.</p>
+</div>
+<div class="paragraph">
+<p>There are two types of message: <em>request</em> and <em>response</em></p>
+</div>
+<div class="sect2">
+<h3 id="_request_message"><a class="anchor" href="#_request_message"></a>Request message</h3>
+<div class="paragraph">
+<p>All messages have the following structure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>message</strong>: required</p>
+</li>
+<li>
+<p><strong>options</strong>: optional, zero or more key value options separated by newline</p>
+</li>
+<li>
+<p><strong>payload</strong>: optional, extra unstructured data that needs to be passed.</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="title">An example request message</div>
+<div class="content">
+<pre>OPTIONS rtsp://192.168.1.100:48010 RTSP/1.0 <i class="conum" data-value="1"></i><b>(1)</b>
+CSeq:  1 <i class="conum" data-value="2"></i><b>(2)</b>
+X-GS-ClientVersion: 14 <i class="conum" data-value="3"></i><b>(3)</b>
+<i class="conum" data-value="4"></i><b>(4)</b>
+a=fmtp:97 surround-params=21101 <i class="conum" data-value="5"></i><b>(5)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>message:</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>option 1</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>option 2</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>empty new line (end of options)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>payload</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_message"><a class="anchor" href="#_message"></a>Message</h4>
+<div class="paragraph">
+<p>The message part is the first line, it&#8217;s delimited by the newline character (<code>\r\n</code>) , and it&#8217;s composed by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>command</strong>: the first string, delimited by <code>&lt;space&gt;</code>, the command to be executed on the backend; one of: <code>[OPTIONS, DESCRIBE, SETUP, ANNOUNCE, PLAY]</code></p>
+</li>
+<li>
+<p><strong>target</strong>: the second string, delimited by <code>&lt;space&gt;</code>, specifies the ip address and port that is the target of the session.</p>
+</li>
+<li>
+<p><strong>protocol</strong>: last string, delimited by <code>&lt;space&gt;</code>, the RTSP protocol in use.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options"><a class="anchor" href="#_options"></a>Options</h4>
+<div class="paragraph">
+<p>Optional additional key values to be passed, delimited by the newline character (<code>\r\n</code>).
+The end of the options section is marked by an extra newline character (<code>\r\n</code>).</p>
+</div>
+<div class="paragraph">
+<p>Honorable mention goes to <code>CSeq</code> which is always present and represent the sequence number.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_payload"><a class="anchor" href="#_payload"></a>Payload</h4>
+<div class="paragraph">
+<p>Any extra unstructured text that it&#8217;s added after the end of the options before the end of the message will be parsed as the payload.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_response_message"><a class="anchor" href="#_response_message"></a>Response message</h3>
+<div class="paragraph">
+<p>Like requests, responses have a message, zero or more options and an optional payload.
+The main difference is in the format of the message.</p>
+</div>
+<div class="paragraph">
+<p>You can easily identify a response package by looking at the command part which is always <code>RTSP</code>.</p>
+</div>
+<div class="literalblock">
+<div class="title">An example response message</div>
+<div class="content">
+<pre>RTSP/1.0 200 OK <i class="conum" data-value="1"></i><b>(1)</b>
+CSeq: 1 <i class="conum" data-value="2"></i><b>(2)</b>
+
+a=fmtp:97 surround-params=21101 <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>message</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>option</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>payload</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_message_2"><a class="anchor" href="#_message_2"></a>Message</h4>
+<div class="paragraph">
+<p>Unlike requests a message in a response is composed by different parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>protocol: it&#8217;s always <code>RTSP/*</code> and it&#8217;s the easiest way to discriminate between request and response messages.</p>
+</li>
+<li>
+<p>status code: follows the HTTP status codes specification</p>
+</li>
+<li>
+<p>status string: follows the HTTP status codes specification</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <p>Copyright &#169; Alessandro Beltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
