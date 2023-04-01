@@ -188,8 +188,17 @@
 <div class="paragraph">
 <p>Moonlight will send all user inputs via the <a href="control-specs.html" class="xref page">control stream</a>.</p>
 </div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp9UctugzAQvPMVK_cCByRAqKr8BT32HuVgygKWjG2ZRSFF_HsNJIDSpBfLOzs7s4-wxEpD6cQlrp3pbaxEgSpuUJToAoBTZ4WGBTz7MFyYhRkgJBxoTcCJt4IaGHllNMWd_EFIs-kceWQpXx5eGOc1O9BSAW9Q1g1Bmk9RFATh3oXUtqeD_-76bVTf6luqizb8b9-QA_tcfuxfWpoB-xJXZUS5ErWfKXbmAunH2tZjRxs4ryAZkix599P7IK6k6-g-8Dz8gcgU6poadqM6VIKwfEVe_GDeInumnT-l09XiC_3HglKQYJv5fpe3kSusCDgZO6NEpp2me2ktrN-EkhqPYvMtx6PCoRa4m2_sJX4Bgm_LxA==" alt="General format of an `INPUT_DATA` message">
+</div>
+<div class="title">Figure 1. General format of an <code>INPUT_DATA</code> message</div>
+</div>
 <div class="paragraph">
-<p>The first 4 bytes of a packet of type <code>INPUT_DATA</code> will determine the type of input and the format of the packet itself (big endian):</p>
+<p>The first 4 bytes (big endian) following the header of a packet of type
+<code>INPUT_DATA</code> indicate the size of the message, which varies depending on the
+input type.  The next 4 bytes (little endian) specify the input type, which
+can be any of the values in the following table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -198,34 +207,46 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Input type</th>
-<th class="tableblock halign-left valign-top">HEX code</th>
+<th class="tableblock halign-left valign-top">Input type name</th>
+<th class="tableblock halign-left valign-top">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_MOVE_REL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x08</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000007</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_MOVE_ABS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0E</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000005</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_BUTTON</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x05</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_BUTTON_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000008</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">KEYBOARD_OR_SCROLL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0A</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_BUTTON_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000009</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEY_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000003</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEY_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000004</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_SCROLL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000A</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_HSCROLL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000001</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_MULTI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x1E</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x18</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000C</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -239,9 +260,9 @@
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZraaVQmpedl1-eB-QaAjUBdbmk5pQkKkSABIx0DY1hApFctQA1hSb-" alt="The full format of a `MOUSE_MOVE_REL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNkDFvgzAQhXd-xckTHiwBQilirRR17NgKMZhgAqpjI9sI2ir_vcZAk1AaZbCF333cvXt-ySoBpaI9OSrZtYTTgnFSM1oy5QFkuqUCnJjbp-_IQg7gGzaYqQBZeqKmhu-0ksIQ3XwxCKNzjq3ifndXWkhle2oQDYe0Zs2xNhDGZ4w9z7-4aETbmav5l6kHybuTmEsa_-p_fUMM6MV9obtYGAF6pZ9c0nIChd2JKNlDmEy21o7wrFlmaYIqqez6aCmN4QRDEAU7m4t9kKpR2ixRjLHcgIeZUoxTw8p_uWSrW7ymnra7rThUMm4ovKGHZs_0-116SW4rIMFML9XHdUJMQxYMO-s4sud5DGx1ErfNrbbfL5dTcvwDsp7hzQ==" alt="The full format of a `MOUSE_MOVE_REL` packet">
 </div>
-<div class="title">Figure 1. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
+<div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
 </div>
 <div class="paragraph">
 <p><code>Delta X</code> and <code>Delta Y</code> defines the relative movement that the mouse must perform.</p>
@@ -268,9 +289,9 @@
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZraaVQmpedl1-eB-QaAjUBdUWAmEa6hsZWCpEgpomuoSmKMjNdQ3MrBbB9IK6FriHQGIiLuGoBFAQvcw==" alt="The full format of a `MOUSE_MOVE_ABS` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNUsFugzAMvfMVVk5wQAJGS8Vx0qYdd9yEOIQRSrQ0QSEItqn_PgOlXSlMPeTJsV_sZzt2zgoJuaatu9eqqVxBMybcktGcaQsgqSsqYXCmeLUHZqY6sA3rzBiAJD5QU8JPXChp3Jp_M_CDY-qgZ3g-QJwpjTlrkFxAXDK-Lw344dFxLMu-qOCyasyf-peqH0o0B3kK1c7Zf6sbQiAvg0X-pfkBkFf6JRTNR6LEnlytWvB3o6y5IufkQ86UhBRKY_tkCvXD8Tov8LY4F7y4Bde1mUbRj-WKiBpGmmaCGpavEtlSunDO2ixnm_HIG7mrKnmfeIKu9cBqSPqV4rl-2_LclHfWGb_DerFpMdfmzSokM63Sn2QmD9exHXYyzhstbwGeetgsBHrf4-6cYBaNEKLn3goRHiIrdX4Bj88OOw==" alt="The full format of a `MOUSE_MOVE_ABS` packet">
 </div>
-<div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
+<div class="title">Figure 3. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
 </div>
 <div class="paragraph">
 <p>In order to define an absolute position Moonlight will send both:</p>
@@ -304,9 +325,9 @@
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZrZqXgmFySmZ8H5JnrGhpYKTiVlpQAubUAV2giPQ==" alt="The full format of a `MOUSE_BUTTON` packet">
+<img src="https://kroki.io/bytefield/svg/eNp9kMGOgyAQhu8-xYSTHEi0sU31CXrcu_GAFStZCgYwurvpuy-itrV19_IH5v8Y5p-wYrWEStOeXLTqWiJoyQRpGK2YDgBy01IJvli4a-jJUg0QWjbYyYA8u1LbwE9WK2mJ4d8M4t2twK7in3vJSqVdTwOSC8gaxi-NhTi5YRwE4WMKLtvOPv3_-PWsRHeVs2Xwvf4-NySATv6E_sVSQB_0SyhaTZx0kYhWPcTHaarXgfBcc8zSA9VKu_RoscbdREO0iw5uLe5Caq6NXTYxbmUFpjOlmaCWVX9y-61uyZpC9Gy5kmi75Stc2jspqLGjueRfH98SS2Z7pT-fIzMDuUt98NFHSUeJNmQ_ynHDiAv8CyPA0Nc=" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
 </div>
-<div class="title">Figure 3. The full format of a <code>MOUSE_BUTTON</code> packet</div>
+<div class="title">Figure 4. The full format of a <code>MOUSE_BUTTON_DOWN</code> or <code>MOUSE_BUTTON_UP</code> packet</div>
 </div>
 <div class="paragraph">
 <p><code>Action</code> can have the following values:</p>
@@ -373,46 +394,39 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_keyboard_or_mouse_scroll"><a class="anchor" href="#_keyboard_or_mouse_scroll"></a>Keyboard or mouse scroll</h2>
+<h2 id="_keyboard"><a class="anchor" href="#_keyboard"></a>Keyboard</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Unfortunately an input packet of type: <code>0x0A</code> can be either a keyboard packet or a mouse scroll packet.<br>
-In order to discriminate between the two you can check the next byte after the <code>Input Type</code>, if it&#8217;s <code>0x0A</code> the packet will be parsed as a <code>MOUSE_SCROLL</code> otherwise it&#8217;s a <code>KEYBOARD</code>.</p>
-</div>
-<div class="sect2">
-<h3 id="_mouse_scroll"><a class="anchor" href="#_mouse_scroll"></a>Mouse scroll</h3>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkBicnZqiUJIZUEqUMhI19RKwTOvoBQuYqZrZqVgUGHgCGSb61paKVSlFuUXAzmGQO1A_cHJRfk5OQqJufmleSUKhiAJI11DY3QJI5CEia6hKcyAWgA_OjJr" alt="The full format of a `MOUSE_SCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNkD1vgzAQhnd-xckTDEiQoihlyxCpY3eUweDjQzE2so1IWuW_1zihhHxUXV757h7fx-szLAUwRYewUrLvQk5z5GGNlKHyADLdUQEuubeh78hcHsE3eDSXAmRpS00N32kphQl184UQr877wGbcdydpLpXtqUE0HNIam6o2ECfnIPA8f96iEV1vbubPUwvJ-1ZcSzr4zT_uDQmQD_cif2LvQD7piUvKLpywJ4VKDhBvLlvdLxRcc5aZepBSKns9mUqjN9ExWkVra4sNwrJR2kxOjK4sQLxSCjk1yF5y9Fm3ZEkRWphGCvK85T1cclrpO3ZJHPAEhWRI_rUjaSWbSE61WR4A2eLX5PTy-eCtQDNIdbg1FzVk1t-1M3mU3SjRE9mO8vaiuk2sbFyYzAVvH_wA_Cf6DA==" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
 </div>
-<div class="title">Figure 4. The full format of a <code>MOUSE_SCROLL</code> packet</div>
+<div class="title">Figure 5. The full format of a <code>KEY_DOWN</code> or <code>KEY_UP</code> packet</div>
 </div>
 <div class="paragraph">
-<p>We only use <code>Scroll amount 1</code> to determine the amount of scroll to be applied.</p>
+<p><code>Action</code> can have the following values:</p>
 </div>
-<div class="admonitionblock warning">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-warning" title="TODO"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>What&#8217;s <code>Scroll amount 2</code>?</p>
-</div>
-</td>
+<th class="tableblock halign-left valign-top">Action data</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x04</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button released</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button pressed</p></td>
+</tr>
+</tbody>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_keyboard"><a class="anchor" href="#_keyboard"></a>Keyboard</h3>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNo9jb0OwjAMBvc-hV_AUtzSHywxMCIWBnaEEkOjQlKVVFVBvDvuUMY73Wd_MgAbH5N3qYUdNIohOrm04u9tUlOaVa1NbTJVBonhdLWdJDjPvajKsWQ4hH78mworhr1NPgalGhuGtwzxpbBFMgxHmfW9W1oipJxhDF2I05JTgVQwPKPzNy_DMqINUrne-P4AV58z6g==" alt="The full format of a `KEYBOARD` packet">
-</div>
-<div class="title">Figure 5. The full format of a <code>KEYBOARD</code> packet</div>
-</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -427,15 +441,8 @@ In order to discriminate between the two you can check the next byte after the <
 </tr>
 </table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Action</strong>: will have the value <code>0x04</code> when a button is pressed</p>
-</li>
-<li>
-<p><strong>Key code</strong> represent the corresponding keyboard code of the pressed input, see the following table:</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><code>Key code</code> represent the corresponding keyboard code of the pressed input, see the following table:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -917,20 +924,62 @@ In order to discriminate between the two you can check the next byte after the <
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_mouse_scroll"><a class="anchor" href="#_mouse_scroll"></a>Mouse scroll</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqNUT1vgzAU3PkVT57wgAQIRZStQ6KO3RGDKSagGhvZRtBW-e81BpJAPpTleH53nJ_vuQUtORSS9N5Riq71GMkp8ypKCiodgFS1hINtZuboWmUuBnA1HfREQJo0RFfwl5SCa0_VvxSC8JRh07G_W0hyIY2nAl4zSCpaHysNQXTC2HHcyxQ1bzt9df_l1i_BuobPlMLn_u3cEAH6sBV6KnsD9El-mCDFpOPmSZ4UPQTxNNV2IDz3jGbxQKWQ5vVoocZs_MEP_Z2JxRy8spZKL0mMqayEdFZJyoimxUMduecWPVJt3Da6aXWINKLjGs3by8xXdTkEZm2vjPTUJHzRxId0RSwLWJc3kXOqeyG_rzOnClIT-85mP8J-BP8OvJ9hTRwOBuJ4Vc2sk-F_lWsCFA==" alt="The full format of a `MOUSE_SCROLL` packet">
+</div>
+<div class="title">Figure 6. The full format of a <code>MOUSE_SCROLL</code> packet</div>
+</div>
+<div class="paragraph">
+<p>We only use <code>amount 1</code> to determine the amount of scroll to be applied.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="TODO"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What&#8217;s <code>amount 2</code>?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_horizontal_scroll"><a class="anchor" href="#_mouse_horizontal_scroll"></a>Mouse horizontal scroll</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp9kDFvgzAQhXd-xckTHizhCKKWLUOljt0RgykmoBob2UbQVvnvNQaaQNIynM7vPs7PLyx5JaHUbCBnrfqOCFZwQWrOSq4DgMx0TIIXc3cMPVmoEULLRzsPIEtbZmv4TislLTHNFwd6uOTYKf53X9JCabfTgGwEpDVvzrUFGl8wDoLw6qKRXW9v7r_e-q5E38plZPCvfu8bYkCvvkP_Ys-A3tinUKycOemeRLQagD7NrvaG8KI5Zt2BKqXd69E6mrKJxugQHV0s7kCqRhu7JjGlsgHZQmkumOXln9zDbfGeSpJo-ujjpTscsVb10qIFFmxvc41j294FILkdlP64TYAbyFwIR5_EVE5TiR4Uj9CNliRrR1-CHP8AVB3Wag==" alt="The full format of a `MOUSE_HSCROLL` packet">
+</div>
+<div class="title">Figure 7. The full format of a <code>MOUSE_HSCROLL</code> packet</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_controller_multi"><a class="anchor" href="#_controller_multi"></a>Controller multi</h2>
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNpVjcsKwjAQRfd-xYDrgWTS1hpwoyAIFcQH6EqKhra0JGIjIuK_Oyk-d3POzNx77wEcXHOtjr6EEaSM1h3NvjRVUXo2sXir981A9FgJlBoW-aE2Hta3k2FFGGuY2dPlYxIcatjY2rqrZZT8JP8EoVQaJs76s2sac4Z-sBFKTprnbR0oQTn4e0pRcuz44r2zMG3yog3lAkloyCjMEol7lt1MSFyRrXAbKEKKO9oFSpA4evnapUjDjsJOCVTqt1ZFqOKveDwBXkNPuw==" alt="The full format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNqVkztvgzAQgHd-xckTDEgYkShhq6pGHTpUVYdEUQYDJqA6dmRMQ1vlv9c88gQqdzmd7z7fy2c7oSmHRJKDu5Wi3LuMRJS5GSUJlRbAutgTDo1xo492Q0aiAlvRSrUOWIc7ojL4CVPBlVvk3xSwf9w42tJcb0QYCaljFsBzBmFG822mAAdHx7Es-1JFzvelusp_yRoLVu545yqcs71fNwSAnhsN_YnNAb2SLyZI0nJct-RKcQA8a6u6L8jpbJo5xUCpkLp7dHLVs_Eqz_emeiz64Ka5LNRpEvVUbkDf7zBJGVE0GQUxHYoX3GPxcLgeh4lRXhTrF5WCMT3K7gIjo-0gEqv8kyKjznFgVkFUKiV4gczol_cREN-Bb6Ygo6mCpWH6Bl4ZwrL5Ast_0SuDZ_CqeWy0LJPJWDDr_BecG7W3_Zyqg5Af1-tPC1jrHzBtvkG74lrz-gI_1drjgONh4AY-e4OReAZiPtNisai1gbx6HrVmbZxfLfGbPA==" alt="The full format of a `CONTROLLER_MULTI` packet">
 </div>
-<div class="title">Figure 6. The full format of a <code>CONTROLLER_MULTI</code> packet</div>
+<div class="title">Figure 8. The full format of a <code>CONTROLLER_MULTI</code> packet</div>
+</div>
+<div class="paragraph">
+<p><code>LT</code> and <code>RT</code> refer to the left and right triggers, respectively. <code>Left X</code> and
+the following fields refer to the values of the left and right sticks.</p>
 </div>
 <div class="sect2">
 <h3 id="_button_flags"><a class="anchor" href="#_button_flags"></a>Button flags</h3>
 <div class="paragraph">
-<p>The <code>button_flag</code> element encodes the currently pressed buttons in the joypad.</p>
+<p>The <code>buttons</code> element encodes the currently pressed buttons in the joypad.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1013,13 +1062,13 @@ In order to discriminate between the two you can check the next byte after the <
 <div class="content">
 <img src="https://kroki.io/wavedrom/svg/eNqrVihKTbdSiObiUlCoVlBKLCkpUrJSUIpU0lFQSsosKQZyDIHMvMTcVCDToMKgVgdVZQQulUBOSWVBqpWCEboWJ6INdyTK8FgdheT8vLRMoD-q0_LzSoozq4AyhmY6CmVpOZkFViVFpak6Chlwdi1XLQBAjURk" alt="When pressing  kbd:[A] and  kbd:[X] `button_flag` contains `0x0050` that `5` decodes as follows:">
 </div>
-<div class="title">Figure 7. When pressing  <kbd>A</kbd> and  <kbd>X</kbd> <code>button_flag</code> contains <code>0x0050</code> that <code>5</code> decodes as follows:</div>
+<div class="title">Figure 9. When pressing  <kbd>A</kbd> and  <kbd>X</kbd> <code>button_flag</code> contains <code>0x0050</code> that <code>5</code> decodes as follows:</div>
 </div>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/wavedrom/svg/eNqd01sLgjAYBuB7f8XHrneRZTfeaXaiI7aoiBCLWULN0BWV-N9bBUYH0O3uZfDw8W7fUojp1oSlpgGkyOc8RiagCbFcgjCgdcgTcaCLyPwDFbFyqWDg1yM1oZbhD2VbjZ406jdbxJuQrgJ1u-2OjP3AzthyvOm4EFa_hj6dM5oN1eSjrpp8ti1FHxZyvCg09de4N5nLE1ueWKXI77LYpPDujb-bogA7o0FT1gwjRssYbYVhE7EgFP8vDSLGk_AmSusGhr3PaCIeE8M52IdHk8cnimGX50zL7rs5AZo=" alt="The full format of the `button_flag` binary encoding">
 </div>
-<div class="title">Figure 8. The full format of the <code>button_flag</code> binary encoding</div>
+<div class="title">Figure 10. The full format of the <code>button_flag</code> binary encoding</div>
 </div>
 </div>
 </div>

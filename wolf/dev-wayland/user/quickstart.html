@@ -200,22 +200,147 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<h2 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The only way to run Wolf right now is to manually compile it.</p>
+<p>Wolf runs as a single container, it&#8217;ll spin up and down additional containers on-demand.</p>
 </div>
+<div id="_tabs_1" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_intelamd" class="tab">
+<p>Intel/AMD</p>
+</li>
+<li id="_tabs_1_nvidia" class="tab">
+<p>Nvidia</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_intelamd--panel" class="tabpanel" aria-labelledby="_tabs_1_intelamd">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e GST_DEBUG=2 \
+    -e RUST_BACKTRACE=full \
+    -e WOLF_LOG_LEVEL=DEBUG \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    -v ~/wolf:/wolf/cfg \
+    --device /dev/dri/renderD128 \
+    --device /dev/dri/card0 \
+    --device /dev/uinput \
+    --device-cgroup-rule "c 13:* rmw" \
+    -v /dev/shm:/dev/shm:rw \
+    -v /dev/input:/dev/input:rw \
+    -v /run/udev:/run/udev:rw \
+    ghcr.io/games-on-whales/wolf:dev-wayland</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
+<div class="paragraph">
+<p>Unfortunately on Nvidia things are a little bit more complex:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You have to build the images yourself (we are working on this)</p>
+</li>
+<li>
+<p>Your driver version must be <code>&gt;= 530.30.02</code></p>
+</li>
+<li>
+<p><code>--gpus</code> and the Nvidia Docker Toolkit seems to not work (to be investigated)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --rm \
+    --name wolf \
+    --network=host \
+    -e GST_DEBUG=2 \
+    -e RUST_BACKTRACE=full \
+    -e WOLF_LOG_LEVEL=DEBUG \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    -v ~/wolf:/wolf/cfg \
+    --device-cgroup-rule "c 13:* rmw" \
+    --device /dev/nvidia-uvm \
+    --device /dev/nvidia-uvm-tools \
+    --device /dev/dri/renderD128 \
+    --device /dev/dri/card0 \
+    --device /dev/nvidia-caps/nvidia-cap1 \
+    --device /dev/nvidia-caps/nvidia-cap2 \
+    --device /dev/nvidiactl \
+    --device /dev/nvidia0 \
+    --device /dev/nvidia-modeset \
+    --device /dev/nvidiactl \
+    --device /dev/uinput \
+    -v /dev/shm:/dev/shm:rw \
+    -v /dev/input:/dev/input:rw \
+    -v /run/udev:/run/udev:rw \
+    ghcr.io/games-on-whales/wolf:dev-wayland</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on your system you might also need to initialise the <code>nvidia-uvm</code> devices:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+## Script to initialize nvidia device nodes.
+## https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-verifications
+
+/sbin/modprobe nvidia
+if [ "$?" -eq 0 ]; then
+  # Count the number of NVIDIA controllers found.
+  NVDEVS=`lspci | grep -i NVIDIA`
+  N3D=`echo "$NVDEVS" | grep "3D controller" | wc -l`
+  NVGA=`echo "$NVDEVS" | grep "VGA compatible controller" | wc -l`
+  N=`expr $N3D + $NVGA - 1`
+  for i in `seq 0 $N`; do
+    mknod -m 666 /dev/nvidia$i c 195 $i
+  done
+  mknod -m 666 /dev/nvidiactl c 195 255
+else
+  exit 1
+fi
+
+/sbin/modprobe nvidia-uvm
+if [ "$?" -eq 0 ]; then
+  # Find out the major device number used by the nvidia-uvm driver
+  D=`grep nvidia-uvm /proc/devices | awk '{print $1}'`
+  mknod -m 666 /dev/nvidia-uvm c $D 0
+  mknod -m 666 /dev/nvidia-uvm-tools c $D 0
+else
+  exit 1
+fi</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_manual_build"><a class="anchor" href="#_manual_build"></a>Manual build</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="title">Build dependencies</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y ninja-build cmake clang libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev libevdev-dev</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y ninja-build cmake clang libboost-locale-dev libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev libevdev-dev</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Compile</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -G Ninja
-
 ninja -C build</code></pre>
 </div>
 </div>
@@ -275,10 +400,11 @@ crw------- 1 root root 10, 223 Jan 17 09:08 /dev/uinput</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Create <code>udev</code> rules</div>
+<div class="title">Create <code>udev</code> rules under <code>/etc/udev/rules.d/85-wolf-virtual-inputs.rules</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | \
-sudo tee /etc/udev/rules.d/85-wolf-virtual-inputs.rules</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"
+SUBSYSTEMS=="input", ATTRS{id/vendor}=="045e", ATTRS{id/product}=="02d1", ATTRS{id/version}=="ab00", MODE="0660", GROUP="input"</code></pre>
 </div>
 </div>
 <div class="paragraph">
