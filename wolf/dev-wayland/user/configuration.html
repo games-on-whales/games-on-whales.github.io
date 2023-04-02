@@ -191,91 +191,120 @@
 <div class="sect1">
 <h2 id="_env_variables"><a class="anchor" href="#_env_variables"></a>ENV variables</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>LOG_LEVEL</strong>: controls the log level, defaults to <code>INFO</code></p>
-</li>
-<li>
-<p><strong>CFG_FILE</strong>: path to the TOML config file, defaults to <code>config.toml</code></p>
-</li>
-<li>
-<p><strong>GST_DEBUG</strong>: Gstreamer debug print, see <a href="https://gstreamer.freedesktop.org/documentation/tutorials/basic/debugging-tools.html?gi-language=c">debugging-tools</a>.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_LOG_LEVEL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INFO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The log level to show, one of ERROR, WARNING, INFO, DEBUG, TRACE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_CFG_FILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/config.toml</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the config file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PRIVATE_KEY_FILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/key.pem</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the key.pem file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PRIVATE_CERT_FILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/cert.pem</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the cert.pem file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XDG_RUNTIME_DIR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/tmp/sockets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The full path where PulseAudio and video sockets will reside, this path is expected to be present in the host and mounted in the Wolf container</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PULSE_IMAGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ghcr.io/games-on-whales/pulseaudio:master</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the PulseAudio image to be started (when no connection is available)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_STOP_CONTAINER_ON_EXIT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRUE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to False in order to avoid force stop and removal of containers when the connection is closed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Additional env variables useful when debugging:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RUST_BACKTRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">full</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In case an exception is thrown in the Rust code, this sets the backtrace level</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GST_DEBUG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gstreamer debug print, see <a href="https://gstreamer.freedesktop.org/documentation/tutorials/basic/debugging-tools.html?gi-language=c">debugging-tools</a></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_toml_file"><a class="anchor" href="#_toml_file"></a>TOML file</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The TOML configuration file is read only once at startup (or created if not present) and it&#8217;ll be modified by Wolf when a new user is successfully paired.</p>
+<p>The TOML configuration file is read only once at startup (or created if not present) and it&#8217;ll be modified by Wolf only when a new user is successfully paired.</p>
 </div>
 <div class="listingblock">
 <div class="title">Default TOML configuration file</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">paired_clients = [] <i class="conum" data-value="1"></i><b>(1)</b>
-hostname = "wolf"   <i class="conum" data-value="2"></i><b>(2)</b>
-support_hevc = false <i class="conum" data-value="3"></i><b>(3)</b>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">hostname = "wolf"   <i class="conum" data-value="1"></i><b>(1)</b>
+support_hevc = true <i class="conum" data-value="2"></i><b>(2)</b>
+config_version = 2 <i class="conum" data-value="3"></i><b>(3)</b>
 uuid = "0f75f4d1-e28e-410a-b318-c0579f18f8d1" <i class="conum" data-value="4"></i><b>(4)</b>
 
-
-[[apps]] <i class="conum" data-value="5"></i><b>(5)</b>
-title = "Test ball"
-support_hdr = false
-
-[gstreamer] <i class="conum" data-value="6"></i><b>(6)</b>
-
-[gstreamer.audio]
-default_source = "audiotestsrc wave=ticks is-live=true"
-default_audio_params = """
-audioconvert ! audiorate ! audioresample ! audio/x-raw, \
-channels={channels}\
-"""
-default_opus_encoder = """
-opusenc bitrate={bitrate} bitrate-type=cbr frame-size={p\
-acket_duration} bandwidth=fullband audio-type=generic ma\
-x-payload-size=1400\
-"""
-default_sink = """
-rtpmoonlightpay_audio name=moonlight_pay packet_duration={packet_duration} encrypt={encrypt} aes_key="{aes_key}" aes_iv="{aes_iv}"  ! udpsink host={client_ip} port={client_port}\
-"""
-
-[gstreamer.video]
-default_source = "videotestsrc pattern=ball is-live=true"
-default_video_params = """
-videoscale ! videoconvert ! videorate ! video/x-raw, wid\
-th={width}, height={height}, framerate={fps}/1,format=I4\
-20, chroma-site={color_range}, colorimetry={color_space}\
-"""
-default_hevc_encoder = """
-x265enc tune=zerolatency speed-preset=superfast bitrate={bitrate} option-string="info=0:keyint=-1:qp=28:repeat-headers=1:slices={slices_per_frame}:frame-threads={slices_per_frame}:aud=0:annexb=1:log-level=3:open-gop=0:bframes=0:intra-refresh=0" ! video/x-h265, profile=main, stream-format=byte-stream\
-"""
-default_h264_encoder = """
-x264enc pass=qual tune=zerolatency speed-preset=superfast b-adapt=false bframes=0 ref=1 bitrate={bitrate} aud=false sliced-threads=true threads={slices_per_frame} option-string="slices={slices_per_frame}:keyint=infinite:open-gop=0" ! video/x-h264, profile=high, stream-format=byte-stream\
-"""
-default_sink = """
-rtpmoonlightpay_video name=moonlight_pay payload_size={payload_s\
-ize} fec_percentage={fec_percentage} min_required_fec_packets={m\
-in_required_fec_packets} ! udpsink host={client_ip} port={client\
-_port}\
-"""</code></pre>
+paired_clients = [] <i class="conum" data-value="5"></i><b>(5)</b>
+apps = [] <i class="conum" data-value="6"></i><b>(6)</b>
+gstreamer = {} <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>paired_clients</strong>: a list of all the Moonlight clients that have succesfully completed the pairing process; it&#8217;ll be populated by Wolf and saved to this file.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><strong>hostname</strong>: this is the name that will be displayed in the list of hosts in the Moonlight UI</td>
 </tr>
 <tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>support_hevc</strong>: when set to <code>false</code> will disable support for HEVC in Moonlight</td>
+</tr>
+<tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><strong>support_hevc</strong>: when set to <code>true</code> will enable support for HEVC in Moonlight</td>
+<td><strong>config_version</strong>: The version of this config file</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -283,19 +312,20 @@ _port}\
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>apps</strong>: the list of apps that will be seen in Moonlight</td>
+<td><strong>paired_clients</strong>: a list of all the Moonlight clients that have succesfully completed the pairing process; it&#8217;ll be populated by Wolf and saved to this file.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>gstreamer</strong>: here are all the default parts that compose the two video and audio pipelines.</td>
+<td><strong>apps</strong>: a list of apps, see: <a href="#_defining_apps">Defining apps</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><strong>gstreamer</strong> audio/video pipeline definitions, see <a href="#_gstreamer">Gstreamer</a></td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_defining_apps"><a class="anchor" href="#_defining_apps"></a>Defining apps</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_defining_apps"><a class="anchor" href="#_defining_apps"></a>Defining apps</h3>
 <div class="paragraph">
 <p>Apps defined here will be shown in Moonlight after successfully pairing with Wolf.<br>
 You can re-define parts of the Gstreamer pipeline easily, ex:</p>
@@ -303,14 +333,121 @@ You can re-define parts of the Gstreamer pipeline easily, ex:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "SMPTE"
+title = "Test ball" <i class="conum" data-value="1"></i><b>(1)</b>
+start_virtual_compositor = false <i class="conum" data-value="2"></i><b>(2)</b>
 
-[apps.video]
-source = "videotestsrc pattern=smpte is-live=true"</code></pre>
+[apps.runner] <i class="conum" data-value="3"></i><b>(3)</b>
+type = "process"
+run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""
+
+[apps.video] <i class="conum" data-value="4"></i><b>(4)</b>
+source = """
+videotestsrc pattern=ball flip=true is-live=true !
+video/x-raw, framerate={fps}/1
+\
+"""
+
+[apps.audio] <i class="conum" data-value="5"></i><b>(5)</b>
+source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>title</strong>: this is the name that will be displayed in Moonlight</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>start_virtual_compositor</strong>: set to True if this app needs our custom virtual compositor (TODO: document this better)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>runner</strong>: the type of process to run in order to start this app, see: <a href="#_app_runner">App Runner</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>video</strong>: here it&#8217;s possible to override the default video pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>audio</strong>: here it&#8217;s possible to override the default audio pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>See more examples in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
+</div>
+<div class="sect3">
+<h4 id="_app_runner"><a class="anchor" href="#_app_runner"></a>App Runner</h4>
+<div class="paragraph">
+<p>There are currently two types of runner supported: <code>docker</code> and <code>process</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_process"><a class="anchor" href="#_process"></a>Process</h4>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[apps.runner]
+type = "process"
+run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h4>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">type = "docker"
+name = "WolfSteam"
+image = "ghcr.io/games-on-whales/steam:wolf-changes"
+mounts = [
+  "/run/udev:/run/udev:ro"
+]
+env = [
+  "PROTON_LOG=1",
+  "RUN_GAMESCOPE=true",
+  "ENABLE_VKBASALT=1"
+]
+devices = []
+ports = []
+base_create_json = """ <i class="conum" data-value="1"></i><b>(1)</b>
+{
+  "HostConfig": {
+    "IpcMode": "host",
+    "CapAdd": ["SYS_ADMIN", "SYS_NICE"],
+    "Privileged": false
+  }
+}
+\
+"""</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>base_create_json</strong>: here you can re-define any property that&#8217;s defined in the docker API JSON format, see: <a href="https://docs.docker.com/engine/api/v1.40/#tag/Container/operation/ContainerCreate">docs.docker.com/engine/api/v1.40</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gstreamer"><a class="anchor" href="#_gstreamer"></a>Gstreamer</h3>
+<div class="paragraph">
+<p>In here we define the default pipeline for both video and audio streaming to Moonlight.<br>
+In order to automatically pick up the right encoder at runtime based on the user HW we run in order the list of encoders at <code>gstreamer.video.hevc_encoders</code> (and <code>gstreamer.video.h264_encoders</code>); the first set of plugins that can be correctly initialised by Gstreamer will be the selected encoder for all the pipelines.</p>
+</div>
+<div class="paragraph">
+<p>You can read more about gstreamer and custom pipelines in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
+</div>
 </div>
 </div>
 </div>
