@@ -327,6 +327,42 @@ local     nvidia-driver-vol</code></pre>
     ghcr.io/games-on-whales/wolf:dev-wayland</code></pre>
 </div>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>After starting the container you should also tweak the <code>~/wolf/config.toml</code> file with additional <code>devices</code> and <code>mounts</code> for each specified app; here&#8217;s an example for Steam</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[apps.runner]
+type = "docker"
+name = "WolfSteam"
+mounts = [
+  "/run/udev:/run/udev:ro",
+  "/home/YOUR_USER/retro:/home/retro:rw",
+  "nvidia-driver-vol:/usr/nvidia:rw"
+]
+devices = [
+  "/dev/nvidia0:/dev/nvidia0:mrw",
+  "/dev/nvidia-modeset:/dev/nvidia-modeset:mrw",
+  "/dev/nvidia-uvm:/dev/nvidia-uvm:mrw",
+  "/dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools:mrw",
+  "/dev/nvidiactl:/dev/nvidiactl:mrw"
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can leave everything else as is.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Docker compose:</p>
 </div>
@@ -400,6 +436,20 @@ fi</code></pre>
 </div>
 </div>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you can only see a black screen in Moonlight when trying an app it&#8217;s because the first time that you start an app Wolf will download the corresponding docker image.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>To keep things simple the scripts above defaulted to <code>network:host</code>; that&#8217;s not really required, the minimum set of ports that needs to be exposed are:</p>
