@@ -61,6 +61,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="overview.html">Overview</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
@@ -76,6 +79,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
   </li>
@@ -181,12 +187,16 @@
 </aside>
 <article class="doc">
 <h1 class="page">Quickstart</h1>
-<div class="sect1">
-<h2 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Wolf runs as a single container, it&#8217;ll spin up and down additional containers on-demand.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h2>
+<div class="sectionbody">
 <div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
 <div class="ulist tablist">
@@ -213,8 +223,7 @@
     -e HOST_APPS_STATE_FOLDER=/etc/wolf \
     -v /etc/wolf/wolf:/wolf/cfg \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
-    --device /dev/dri/renderD128 \
-    --device /dev/dri/card0 \
+    --device /dev/dri/
     --device /dev/uinput \
     --device-cgroup-rule "c 13:* rmw" \
     -v /dev/shm:/dev/shm:rw \
@@ -271,7 +280,7 @@ services:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://raw.githubusercontent.com/games-on-whales/gow/wolf-changes/images/nvidia-driver/Dockerfile | docker build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | docker build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,20 +417,9 @@ fi</code></pre>
 </div>
 </div>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>If you can only see a black screen with a cursor in Moonlight it&#8217;s because the first time that you start an app Wolf will download the corresponding docker image + first time updates.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
+<details>
+<summary class="title">Which ports are used by Wolf?</summary>
+<div class="content">
 <div class="paragraph">
 <p>To keep things simple the scripts above defaulted to <code>network:host</code>; that&#8217;s not really required, the minimum set of ports that needs to be exposed are:</p>
 </div>
@@ -436,63 +434,27 @@ EXPOSE 48010/tcp # RTSP</code></pre>
 </div>
 </div>
 </div>
+</details>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_manual_build"><a class="anchor" href="#_manual_build"></a>Manual build</h2>
+<h2 id="_moonlight_pairing"><a class="anchor" href="#_moonlight_pairing"></a>Moonlight pairing</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="title">Build dependencies</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y ninja-build cmake clang libboost-locale-dev libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev libevdev-dev</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Compile</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -G Ninja
-ninja -C build</code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>If compilations completes correctly you can already start Wolf; in order to successfully streaming you&#8217;ll probably need to install some Gstreamer plugins first:</p>
+<p>You should now be able to point Moonlight to the IP address of the server and start the pairing process:</p>
 </div>
-<div class="listingblock">
-<div class="title">Install gstreamer plugins</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad</code></pre>
-</div>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Based on your system you&#8217;ll also need some specific plugins in order to enable HW acceleration.
-For Intel/AMD you&#8217;ll need <a href="https://gstreamer.freedesktop.org/documentation/vaapi/index.html?gi-language=c"><code>vaapi</code></a>; Nvidia instead will need <a href="https://gstreamer.freedesktop.org/documentation/nvcodec/index.html?gi-language=c"><code>nvcodec</code></a>.</p>
-</div>
-<div class="paragraph">
-<p>If your package manager doesn&#8217;t include them you can build them from scratch by following the instructions used in our <a href="https://github.com/games-on-whales/wolf/blob/stable/gstreamer.Dockerfile">gstreamer.Dockerfile</a></p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Run!</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">build/src/wolf/wolf
-INFO  | Reading config file from: config.toml
-WARN  | Unable to open config file: config.toml, creating one using defaults
-INFO  | x509 certificates not present, generating...
-INFO  | HTTP server listening on port: 47989
-INFO  | HTTPS server listening on port: 47984</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should now be able to point Moonlight to the IP address of the server and start the pairing process.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In Moonlight, you&#8217;ll get a prompt for a PIN <span class="image"><img src="../_images/moonlight-pairing-code.png" alt="A screenshot of Moonlight asking for a PIN"></span></p>
+</li>
+<li>
+<p>Wolf will log a line with a link to a page where you can input that PIN (ex: <a href="http://localhost:47989/pin/#337327E8A6FC0C66" class="bare">http://localhost:47989/pin/#337327E8A6FC0C66</a> make sure to replace <code>localhost</code> with your server IP) <span class="image"><img src="../_images/wolf-pairing-code.png" alt="A screenshot of the Wolf page where you can insert the PIN"></span></p>
+</li>
+<li>
+<p>In Moonlight, you should now be able to see a list of the applications that are supported by Wolf <span class="image"><img src="../_images/moonlight-pairing-done.png" alt="A screenshot of Moonlight showing the apps"></span></p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -501,7 +463,10 @@ INFO  | HTTPS server listening on port: 47984</code></pre>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Make sure to follow the next steps on how to configure Wolf!
+<div class="paragraph">
+<p>If you can only see a <strong>black screen</strong> with a cursor in Moonlight it&#8217;s because the first time that you start an app Wolf will download the corresponding docker image + first time updates.<br>
+Keep an eye on the logs from Wolf to get more details.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -509,7 +474,7 @@ Make sure to follow the next steps on how to configure Wolf!
 </div>
 </div>
 <div class="sect1">
-<h2 id="_devices_support"><a class="anchor" href="#_devices_support"></a>devices support</h2>
+<h2 id="_virtual_devices_support"><a class="anchor" href="#_virtual_devices_support"></a>Virtual devices support</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use uinput to create virtual devices (Mouse, Keyboard and Joypad), make sure that <code>/dev/uinput</code> is present in the host:</p>

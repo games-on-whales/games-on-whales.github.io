@@ -62,6 +62,9 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="user/overview.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="user/quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -76,6 +79,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dev/manual_build.html">Manual build</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dev/code-structure.html">Code Structure</a>
   </li>
@@ -195,25 +201,39 @@ An intelligent wolf is better than a foolish lion.
 &#8212; Matshona Dhliwayo.
 </div>
 </div>
+<div class="paragraph">
+<p>Wolf is an open source streaming server for <a href="https://moonlight-stream.org/">Moonlight</a> that allows you to share a single server with multiple remote clients in order to play videogames!<br></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/wolf-introduction.svg" alt="Wolf introduction image"></span></p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s made from the ground up with the following primary goals:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Allow multiple users to stream different content by sharing a single remote host hardware</p>
+</li>
+<li>
+<p>Provide low latency video and audio stream with full support for gamepads</p>
+</li>
+<li>
+<p>Linux and Docker first: run your games with low privileges in containers (based on <a href="https://github.com/games-on-whales/gow">Games On Whales</a>)</p>
+</li>
+<li>
+<p>Mostly hackable, just edit the config file to modify encoding pipelines, GPU settings or Docker/Podman low level details</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It&#8217;s a specific tool for a specific need, are you looking for a general purpose streaming solution?
+Try out <a href="https://github.com/LizardByte/Sunshine">Sunshine</a>!</p>
+</div>
 <div class="videoblock">
 <div class="content">
 <iframe width="1280" height="720" src="https://www.youtube.com/embed/z5jzLIUH6rA?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rationale"><a class="anchor" href="#_rationale"></a>Rationale</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The goal is to create an open source backend for <a href="https://moonlight-stream.org/">Moonlight</a> based on <a href="https://gstreamer.freedesktop.org/">GStreamer</a>.</p>
-</div>
-<div class="paragraph">
-<p>In the process we would like to create a <strong>platform-agnostic</strong> C++ library that clearly defines the protocol and that can be used in other projects.
-While doing so, we are working on documenting and testing the protocol.</p>
-</div>
-<div class="paragraph">
-<p>At the beginning it&#8217;ll be focused on running in Docker so that we can replace <a href="https://github.com/LizardByte/Sunshine">Sunshine</a> in <a href="https://github.com/games-on-whales/gow">GOW</a> but the code is already structured in order to support multiple platforms.</p>
 </div>
 </div>
 </div>
@@ -223,13 +243,19 @@ While doing so, we are working on documenting and testing the protocol.</p>
 <div class="ulist">
 <ul>
 <li>
+<p><a href="https://github.com/Drakulix">@Drakulix</a> for the incredible help given in developing Wolf</p>
+</li>
+<li>
+<p><a href="https://github.com/zb140">@zb140</a> for the constant help and support in <a href="https://github.com/games-on-whales/gow">GOW</a></p>
+</li>
+<li>
 <p><a href="https://github.com/loki-47-6F-64">@loki-47-6F-64</a> for creating and sharing <a href="https://github.com/loki-47-6F-64/sunshine">Sunshine</a></p>
 </li>
 <li>
-<p>All the guys at the <a href="https://moonlight-stream.org/">Moonlight</a> Discord channel, for the tireless help they provide to anyone</p>
+<p><a href="https://github.com/ReenigneArcher">@ReenigneArcher</a> for beying the first stargazer of the project and taking care of keeping <a href="https://github.com/LizardByte/Sunshine">Sunshine alive</a></p>
 </li>
 <li>
-<p><a href="https://github.com/ReenigneArcher">@ReenigneArcher</a> for beying the first stargazer of the project and taking care of keeping <a href="https://github.com/SunshineStream/Sunshine">Sunshine alive</a></p>
+<p>All the guys at the <a href="https://moonlight-stream.org/">Moonlight</a> Discord channel, for the tireless help they provide to anyone</p>
 </li>
 </ul>
 </div>
