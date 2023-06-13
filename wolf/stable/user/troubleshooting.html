@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Audio stream via RTP :: Games On Whales</title>
+    <title>Troubleshooting :: Games On Whales</title>
     <meta name="generator" content="Antora 3.0.1">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
@@ -48,7 +48,7 @@
     </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="wolf" data-version="dev-wayland">
+<div class="nav-container" data-component="wolf" data-version="stable">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,16 +62,19 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/overview.html">Overview</a>
+    <a class="nav-link" href="overview.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
 </ul>
   </li>
@@ -93,32 +96,32 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="rtsp.html">RTSP</a>
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">RTP</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="4">
-    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="input-data.html">Input Data</a>
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
   </li>
 </ul>
   </li>
@@ -134,7 +137,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">wolf</span>
-    <span class="version">dev-wayland</span>
+    <span class="version">stable</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -146,13 +149,10 @@
       </ul>
     </li>
     <li class="component is-current">
-      <a class="title" href="../../stable/index.html">wolf</a>
+      <a class="title" href="../index.html">wolf</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../stable/index.html">stable</a>
-        </li>
-        <li class="version is-current">
-          <a href="../index.html">dev-wayland</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">stable</a>
         </li>
       </ul>
     </li>
@@ -168,130 +168,136 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
-    <li>Developer guide</li>
-    <li><a href="index.html">Moonlight Protocols</a></li>
-    <li>RTP</li>
-    <li><a href="rtp-opus.html">Audio (Opus)</a></li>
+    <li>User guide</li>
+    <li><a href="troubleshooting.html">Troubleshooting</a></li>
   </ul>
 </nav>
-<div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">dev-wayland</button>
-  <div class="version-menu">
-    <a class="version" href="../../stable/protocols/rtp-opus.html">stable</a>
-    <a class="version is-current" href="rtp-opus.html">dev-wayland</a>
-  </div>
-</div>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-wayland/docs/modules/protocols/pages/rtp-opus.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/troubleshooting.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Audio stream via RTP</h1>
-<div class="sect1">
-<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<h1 class="page">Troubleshooting</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>Audio is encoded using <a href="https://en.wikipedia.org/wiki/Opus_(audio_format)">Opus</a>, encrypted using AES CBC 128 bit and sent via RTP.</p>
-</div>
-<div class="paragraph">
-<p>Every 4 RTP packets with audio content will be followed by 2 extra RTP packets with FEC parity information.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ping"><a class="anchor" href="#_ping"></a>PING</h2>
-<div class="sectionbody">
-<div class="admonitionblock warning">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The port exchanged during the RTSP phase it&#8217;s not where the actual audio stream will take place!</p>
+<p>When something doesn&#8217;t work it&#8217;ll be helpful to be able to see the logs from Wolf, please change the env variable <code>WOLF_LOG_LEVEL</code> to <code>DEBUG</code> and try to replicate the issue.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_black_screen_in_moonlight"><a class="anchor" href="#_black_screen_in_moonlight"></a>Black screen in Moonlight</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If it&#8217;s the very first time that you are running an app, and you can only see a black screen with a cursor in Moonlight, it&#8217;s probably because Wolf is downloading the corresponding docker image and installing first time updates (when necessary).</p>
+</div>
+<div class="paragraph">
+<p>If this persists or Moonlight kicks you out of the streaming session then you should probably take a look at the Wolf logs to gather more informations.</p>
+</div>
+<div class="sect2">
+<h3 id="_vulkan_errors_in_app"><a class="anchor" href="#_vulkan_errors_in_app"></a>Vulkan errors in App</h3>
+<div class="paragraph">
+<p>Example log line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>vulkan: physical device 10de:1c03 compute queue doesn't support presenting on our surface, using graphics queue
+vulkan: selecting physical device 'NVIDIA GeForce GTX 1060 6GB': queue family 0
+vulkan: physical device supports DRM format modifiers
+vulkan: vkCreateDevice failed (VkResult: -7)
+Failed to initialize Vulkan</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We don&#8217;t have a solution (yet), reach us in our <a href="https://discord.gg/kRGUDHNHt2">Discord channel</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_address_already_in_use"><a class="anchor" href="#_address_already_in_use"></a>Address already in use</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ll see something like the following log lines:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>terminate called after throwing an instance of 'boost::wrapexcept&lt;boost::system::system_error&gt;'
+  what():  bind: Address already in use
+INFO  | Received interrupt signal 6, clean exit</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means that some other process is using the same ports that Wolf needs in order to communicate with Moonlight.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Have you left Sunshine running in the background?</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Moonlight will send a <code>PING</code> package to the exchanged port, this will tell us which random port the connecting client was able to open in order to communicate with Wolf.
-The client port from where Wolf receives the <code>PING</code> will also be the one where the actual RTP stream will be sent to.</p>
+<p>The following ports need to be available in order for Wolf to work:</p>
 </div>
-<div class="paragraph">
-<p>This is necessary because usually clients will be behind <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>47984/tcp - HTTPS</p>
+</li>
+<li>
+<p>47989/tcp - HTTP</p>
+</li>
+<li>
+<p>47998/udp - Video</p>
+</li>
+<li>
+<p>47999/udp - Control</p>
+</li>
+<li>
+<p>48000/udp - Audio</p>
+</li>
+<li>
+<p>48010/tcp - RTSP</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rtp_packets"><a class="anchor" href="#_rtp_packets"></a>RTP packets</h2>
+<h2 id="_unable_to_recognise_gpu_vendor"><a class="anchor" href="#_unable_to_recognise_gpu_vendor"></a>Unable to recognise GPU vendor</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The first 12 bytes of each packet are defined as follows:</p>
+<p>Example log line:</p>
 </div>
-<div class="imageblock text-center kroki">
+<div class="literalblock">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNo1zEEOwiAQBdA9p5ilLkhoUVQSV97AHsAgnQhRoJZpTDXe3YlJl__l__8RAL48XrGnAEfQLedcerwEjLdATEYttJRaJZiU3FkI6HocOe1ls7UwOH9HApoHZGuM1I2Fis8Js0fIU7r-y7qVRlugmLCSSwOT2cgDH9Q5-zCWHN-OYslQyzTyctV159NafH8TXTOD" alt="RTP header format in bits">
+<pre>WARN  | Unable to recognise GPU vendor: red hat, inc.</pre>
 </div>
-<div class="title">Figure 1. RTP header format in bits</div>
 </div>
 <div class="paragraph">
-<p>FEC packets will also add the followings 12 bytes after the RTP header and before the FEC actual information:</p>
-</div>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNo1zEEOgjAQBdA9p5ilLpoA1aokrLyBHMCUdrRNYIptiaLx7s5Clv_9mf8pAEwYnt5mBy3ImjMFi1eH_u4ykypXWo_qsmAqxaGBG5rO6WjBk8UX61FU-wYmvQxBW8jLhIyVErJqoNcJIeFjRjIINI89Rm5lLZT8t9mPmLIeJ3a1EyfeSgsZFwP5t84-EKQwR37fdN3lvC2-P3c0Olo=" alt="FEC additional header format in bits">
-</div>
-<div class="title">Figure 2. FEC additional header format in bits</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_opus_encoder"><a class="anchor" href="#_opus_encoder"></a>Opus encoder</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>All parameters for properly encoding using Opus are exchanged via the RTSP phase.</p>
-</div>
-<div class="paragraph">
-<p>In order to debug what&#8217;s exchanged it might be useful to checkout the <a href="https://datatracker.ietf.org/doc/html/rfc6716#section-3.1">RFC 6716 #section-3.1</a> which defines the Opus packet formats; from the specs:</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>A well-formed Opus packet MUST contain at least one byte [R1].
-This byte forms a table-of-contents (TOC) header that signals which of the various modes and configurations a given packet uses.
-It is composed of a configuration number, "config", a stereo flag, "s", and a frame count code, "c"</p>
-</div>
-</blockquote>
-</div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/wavedrom/svg/eNpljcEKwjAQRO_9imHPe1HQQ35FPNSyqYGaSLL1YMi_NyLIFm_D7Hs7FVlmh8sAVNComsmBphR9mIlBt6ClN6ce4_gQc2y8d4pKlmScg3HKHz6lNaqhj3bhQ18Z3yWH6lPUEt7Sn54ZL7-Ep9O8CuP-y21oG1kTPFs=" alt="The first byte of any Opus packet">
-</div>
-<div class="title">Figure 3. The first byte of any Opus packet</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_aes_encryption"><a class="anchor" href="#_aes_encryption"></a>AES encryption</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Encoded audio packets will be AES encrypted before being sent over the wire, key and IV are exchanged via HTTPS when calling the <code>launch</code> endpoint.
-These are the same key and IV used to also encrypt the Control stream.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_forward_error_correction_fec"><a class="anchor" href="#_forward_error_correction_fec"></a>Forward Error Correction (FEC)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Uses <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed Solomon</a> to encode the payload so that it can be checked on the receiving end for transmission errors (and possibly fix them).</p>
-</div>
-<div class="paragraph">
-<p>This operation will create extra parity blocks that will be sent in separate RTP packets.</p>
+<p>Do you have multiple GPUs installed (or even just a virtual display in a VM)?
+Checkout the <a href="configuration.html#_multiple_gpu" class="xref page">Multiple GPU configuration page</a></p>
 </div>
 </div>
 </div>
