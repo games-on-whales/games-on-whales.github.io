@@ -183,8 +183,11 @@
 <div class="listingblock">
 <div class="title">Build dependencies</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y ninja-build cmake clang libboost-locale-dev libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev libevdev-dev libdrm-dev libpci-dev</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apt install -y git ninja-build cmake clang libboost-locale-dev libboost-thread-dev libboost-filesystem-dev libboost-log-dev libboost-stacktrace-dev libssl-dev libgstreamer1.0-dev  libgstreamer-plugins-base1.0-dev libevdev-dev libdrm-dev libpci-dev libinput-dev libxkbcommon-dev libgbm-dev libpulse-dev libcurl4-openssl-dev</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Install Rust following the <a href="https://www.rust-lang.org/tools/install">official docs</a> or avoid building our custom compositor by passing <code>-DLINK_RUST_WAYLAND=OFF</code> to cmake.</p>
 </div>
 <div class="listingblock">
 <div class="title">Compile</div>

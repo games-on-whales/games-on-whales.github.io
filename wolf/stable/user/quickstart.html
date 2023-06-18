@@ -222,7 +222,7 @@
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
     -v /run/udev:/run/udev:rw \
-    ghcr.io/games-on-whales/wolf:dev-wayland</code></pre>
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -233,7 +233,7 @@
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
 services:
   wolf:
-    image: ghcr.io/games-on-whales/wolf:dev-wayland
+    image: ghcr.io/games-on-whales/wolf:stable
     environment:
       - XDG_RUNTIME_DIR=/tmp/sockets
       - HOST_APPS_STATE_FOLDER=/etc/wolf
@@ -356,7 +356,7 @@ Y</code></pre>
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
     -v /run/udev:/run/udev:rw \
-    ghcr.io/games-on-whales/wolf:dev-wayland</code></pre>
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -367,7 +367,7 @@ Y</code></pre>
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
 services:
   wolf:
-    image: ghcr.io/games-on-whales/wolf:dev-wayland
+    image: ghcr.io/games-on-whales/wolf:stable
     environment:
       - XDG_RUNTIME_DIR=/tmp/sockets
       - NVIDIA_DRIVER_VOLUME_NAME=nvidia-driver-vol
