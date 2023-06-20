@@ -172,8 +172,8 @@
     <li><a href="quickstart.html">Quickstart</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
-  </div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
+</div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
@@ -216,7 +216,7 @@
     -e HOST_APPS_STATE_FOLDER=/etc/wolf \
     -v /etc/wolf/wolf:/wolf/cfg \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
-    --device /dev/dri/
+    --device /dev/dri/ \
     --device /dev/uinput \
     --device-cgroup-rule "c 13:* rmw" \
     -v /dev/shm:/dev/shm:rw \
