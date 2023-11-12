@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Code Structure :: Games On Whales</title>
+    <meta name="generator" content="Antora 3.0.1">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../../..">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-api">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/overview.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="manual_build.html">Manual build</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-api</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../gow/index.html">gow</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../gow/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../stable/index.html">wolf</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-api</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../gow/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="code-structure.html">Code Structure</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-api</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/dev/code-structure.html">stable</a>
+    <a class="version" href="../../dev-input-protocol/dev/code-structure.html">dev-input-protocol</a>
+    <a class="version is-current" href="code-structure.html">dev-api</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-api/docs/modules/dev/pages/code-structure.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Code Structure</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The code is written in order to be as readable as possible <strong>with no side effects</strong> and <strong>no global objects/variables</strong>.</p>
+</div>
+<div class="paragraph">
+<p>We (try to) follow a <strong>functional programming</strong> paradigm where all the methods take <strong>immutable</strong> inputs and returns new outputs; this has great benefits:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Given the highly parallel nature of Wolf, we can easily share immutable data structures to multiple threads without having to deal with race conditions.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This gives us the power to support multiple concurrent users effortlessly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Code can easily be re-used by other projects since every part is highly decoupled.</p>
+</li>
+<li>
+<p>Enables testing most of the implemented methods in isolation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We are also trying to isolate the Moonlight protocol from the actual implementation so that we can create a portable C++ library of stateless methods, where possible, the code has been separated in logical modules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_srccrypto"><a class="anchor" href="#_srccrypto"></a>src/crypto</h3>
+<div class="paragraph">
+<p>The crypto module depends on OpenSSL and provides an interface (<a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/crypto/crypto/crypto.hpp">crypto.hpp</a>) to all the crypto related methods that are used by the other modules.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srcinput"><a class="anchor" href="#_srcinput"></a>src/input</h3>
+<div class="paragraph">
+<p>Here are the methods that will deal with a Moonlight input event (ex: Keyboard, Mouse, Joypad).<br>
+The code here will be platform specific with a default failover of <code>noop</code>.
+In Linux we used <code>uinput</code> and <a href="https://www.freedesktop.org/wiki/Software/libevdev/">libevdev</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srcmoonlight"><a class="anchor" href="#_srcmoonlight"></a>src/moonlight</h3>
+<div class="paragraph">
+<p>Here we define core Moonlight functions in order to create the foundation for a platform-agnostic portable library.
+It currently hosts the followings:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP/S protocol interface: <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight/protocol.hpp">protocol.hpp</a></p>
+</li>
+<li>
+<p>Reed Solomon FEC header <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/moonlight/fec.hpp">fec.hpp</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Based on top of <a href="https://github.com/sleepybishop/nanors">sleepybishop/nanors</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>RTSP message parser <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight/rtsp/parser.hpp">parser.hpp</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Built using <a href="https://github.com/yhirose/cpp-peglib">yhirose/cpp-peglib</a> by writing a formal PEG (Parsing Expression Grammars) definition for all messages</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srcstreaming"><a class="anchor" href="#_srcstreaming"></a>src/streaming</h3>
+<div class="paragraph">
+<p>This module implements a <a href="https://gstreamer.freedesktop.org/">gstreamer</a> plugin in order to encode video/audio streams into the Moonlight RDP format.<br>
+You can read more about our implementation in the dedicated <a href="gstreamer.html" class="xref page">gstreamer page</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srcwolf"><a class="anchor" href="#_srcwolf"></a>src/wolf</h3>
+<div class="paragraph">
+<p>The wolf module defines the glue code that wraps everything together into the final executable binary.
+It uses the following dependencies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.boost.org/">Boost</a>: mainly used for: logging, stacktrace, Asio (the basic building block of all network code in Wolf: HTTP/S, RTP, RTSP)</p>
+</li>
+<li>
+<p><a href="https://github.com/cgutman/enet">cgutman/enet</a> custom fork of <a href="https://github.com/lsalzman/enet">lsalzman/enet</a> used to run the Control stream over UDP.</p>
+</li>
+<li>
+<p><a href="https://github.com/arximboldi/immer">arximboldi/immer</a>: persistent and immutable data structures; used mainly for data that needs to be shared across threads/logical modules.</p>
+</li>
+<li>
+<p><a href="https://github.com/DeveloperPaul123/eventbus">DeveloperPaul123/eventbus</a>: used to decouple functional modules by sending (immutable) data as events to different parts of the app.</p>
+</li>
+<li>
+<p><a href="https://github.com/ericniebler/range-v3">ericniebler/range-v3</a>: modern ranges for C++</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/eidheim/Simple-Web-Server">eidheim/Simple-Web-Server</a>: a simple abstraction on top of Boost Asio, used to expose the HTTP/S API</p>
+</li>
+<li>
+<p><a href="https://github.com/ToruNiina/toml11">ToruNiina/toml11</a>: used to read/write the TOML configuration file</p>
+</li>
+<li>
+<p><a href="https://github.com/fmtlib/fmt">fmtlib/fmt</a>: string formatting library</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tests"><a class="anchor" href="#_tests"></a>tests</h3>
+<div class="paragraph">
+<p>Unit tests will live under <code>tests/</code> and are written using the <a href="https://github.com/catchorg/Catch2">Catch2</a> framework.<br>
+We are implementing unit tests for most of the methods and (where possible) also mocking packets/requests seen during real Moonlight sessions.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <p>Copyright &#169; Alessandro Beltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
