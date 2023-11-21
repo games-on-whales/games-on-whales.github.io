@@ -214,8 +214,11 @@
 <li id="_tabs_1_intelamd" class="tab">
 <p>Intel/AMD</p>
 </li>
-<li id="_tabs_1_nvidia" class="tab">
-<p>Nvidia</p>
+<li id="_tabs_1_nvidia_container_toolkit" class="tab">
+<p>Nvidia (Container Toolkit)</p>
+</li>
+<li id="_tabs_1_nvidia_manual" class="tab">
+<p>Nvidia (Manual)</p>
 </li>
 </ul>
 </div>
@@ -269,9 +272,138 @@ services:
 </div>
 </div>
 </div>
-<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
+<div id="_tabs_1_nvidia_container_toolkit--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_container_toolkit">
 <div class="paragraph">
-<p>Unfortunately on Nvidia things are a little bit more complex:</p>
+<p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Your driver version must be <code>&gt;= 530.30.02</code></p>
+</li>
+<li>
+<p>Make sure to install <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We also have to make sure that the <code>nvidia-drm</code> module has been loaded and that is loaded with the flag <code>modeset=1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">I get <code>N</code> or the file is not present, how do I set the flag?</summary>
+<div class="content">
+<div class="paragraph">
+<p>If using Grub, the easiest way to make the change persistent is to add <code>nvidia-drm.modeset=1</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code> ex:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code>sudo update-grub</code> and <strong>reboot</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For more options or details, you can see <a href="https://wiki.archlinux.org/title/Kernel_parameters">ArchWiki: Kernel parameters</a></p>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --rm \
+    --name wolf \
+    --network=host \
+    -e WOLF_LOG_LEVEL=DEBUG \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf/wolf:/wolf/cfg \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --gpus=all \
+    --device-cgroup-rule "c 13:* rmw" \
+    --device /dev/dri/ \
+    --device /dev/uinput \
+    -v /dev/shm:/dev/shm:rw \
+    -v /dev/input:/dev/input:rw \
+    -v /run/udev:/run/udev:rw \
+    -v /etc/wolf/ensure-groups:/opt/gow/ensure-groups:rw \
+   wolf/wolf:test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+    volumes:
+      - /etc/wolf/wolf:/wolf/cfg
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/shm:/dev/shm:rw
+      - /dev/input:/dev/input:rw
+    devices:
+      - /dev/dri
+      - /dev/uinput
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    network_mode: host
+    restart: unless-stopped</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can check if the driver is loaded by issuing <code>nvidia-smi</code> inside the container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it wolf nvidia-smi
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 3070         On | 00000000:0A:00.0 Off |                  N/A |
+|  0%   47C    P8               16W / 220W|    416MiB /  8192MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
++---------------------------------------------------------------------------------------+</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div class="paragraph">
+<p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -316,7 +448,7 @@ local     nvidia-driver-vol</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and make sure that the module is loaded with the flag <code>modeset=1</code>.</p>
+<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and that the module is loaded with the flag <code>modeset=1</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -459,12 +591,18 @@ fi</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">EXPOSE 47984/tcp # HTTPS
-EXPOSE 47989/tcp # HTTP
-EXPOSE 47998/udp # Video
-EXPOSE 47999/udp # Control
-EXPOSE 48000/udp # Audio
-EXPOSE 48010/tcp # RTSP</code></pre>
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># HTTPS
+EXPOSE 47984/tcp
+# HTTP
+EXPOSE 47989/tcp
+# Control
+EXPOSE 47999/udp
+# RTSP
+EXPOSE 48010/tcp
+# Video (up to 10 users)
+EXPOSE 48100-48110/udp
+# Audio (up to 10 users)
+EXPOSE 48200-48210/udp</code></pre>
 </div>
 </div>
 </div>
