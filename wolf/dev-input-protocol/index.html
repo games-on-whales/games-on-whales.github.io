@@ -52,7 +52,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all"></button>
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
     <h3 class="title"><a href="index.html">wolf</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dev/code-structure.html">Code Structure</a>
@@ -144,18 +144,16 @@
   </div>
   <ul class="components">
     <li class="component">
-      <a class="title" href="../../gow/index.html">gow</a>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../gow/index.html">default</a>
-        </li>
-      </ul>
+      <div class="title"><a href="../../gow/index.html">gow</a></div>
     </li>
     <li class="component is-current">
-      <a class="title" href="../stable/index.html">wolf</a>
+      <div class="title"><a href="../stable/index.html">wolf</a></div>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version is-current">
           <a href="index.html">dev-input-protocol</a>
@@ -184,6 +182,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">dev-input-protocol</button>
   <div class="version-menu">
     <a class="version" href="../stable/index.html">stable</a>
+    <a class="version" href="../dev-nix/index.html">dev-nix</a>
     <a class="version is-current" href="index.html">dev-input-protocol</a>
     <a class="version" href="../dev-api/index.html">dev-api</a>
   </div>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Headless Wayland :: Games On Whales</title>
+    <meta name="generator" content="Antora 3.0.1">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../../..">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-nix">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/overview.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="manual_build.html">Manual build</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-nix</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-nix</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-api/index.html">dev-api</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../gow/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="wayland.html">Headless Wayland</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-nix</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/dev/wayland.html">stable</a>
+    <a class="version is-current" href="wayland.html">dev-nix</a>
+    <a class="version" href="../../dev-input-protocol/dev/wayland.html">dev-input-protocol</a>
+    <a class="version" href="../../dev-api/dev/wayland.html">dev-api</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-nix/docs/modules/dev/pages/wayland.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Headless Wayland</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Gstreamer allows us to encode any video and stream it to Moonlight via our custom plugin, but we haven&#8217;t discussed the upstream video source.<br>
+You can just use <a href="https://gstreamer.freedesktop.org/documentation/ximagesrc/index.html?gi-language=c"><code>ximagesrc</code></a> and hook your host X11 desktop to the stream but there are some issues with that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Xorg has to be up and running; we can run it via Docker in GOW but that&#8217;s not without its challenges.</p>
+</li>
+<li>
+<p>You need a physical monitor or a dummy plugged into your GPU (or some esoteric <a href="https://games-on-whales.github.io/gow/monitor.html#_force_xorg_to_use_a_custom_edid">EDID trick</a> which works only when also performing a human sacrifice).</p>
+</li>
+<li>
+<p>It doesn&#8217;t scale well with multiple remote clients when sharing a single host</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ideally, can&#8217;t we just plug the shared video memory from the running App straight into Gstreamer ??</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpljTEOwjAMRfecwgpzr4DEAhNTB4aqQxqcEuHEUepKIMTdaVNUQGxffu9_D1cfk8kmgOWQOGKUWu6EkNGKiT2hUm7CCHqXEnlrxHMcNDwUQFMLmtDOae8zOr616rn6JyanYUO-v0hHIy6VwyB5KmEuqiUezzNojsyxqOX-Xoaq2v5U1j__5JMX9jX4AkhsTU8=" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>In theory, for a single fullscreen application that&#8217;s kind of possible (read until the end to get an idea of why it&#8217;s not so simple); but we need some way to <strong>compose</strong> multiple running windows into a single scene to be then encoded via the Gstreamer pipeline.<br>
+Turns out that&#8217;s exactly what a <a href="https://en.wikipedia.org/wiki/Compositing_window_manager">Compositing window manager</a> (or <strong>compositor</strong>) does, and since you can&#8217;t have just a compositor without the full <a href="https://en.wikipedia.org/wiki/X_Window_System">X Window System (X11)</a> running, we decided to follow the <a href="https://en.wikipedia.org/wiki/Wayland_(protocol)">Wayland</a> route.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_wayland_compositor"><a class="anchor" href="#_wayland_compositor"></a>Wayland compositor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are in a very fortunate position: we don&#8217;t even want to deal with real monitors, we just want to be the glue between an application running and the Gstreamer pipeline; for this reason we can have a simplified view (and implementation).</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNplUEtPwzAMvudXWOWcf4CQEI8eoAIxIQ7TDqF1R0QaR07GQ4j_TuNlWyputr-H7S--Wx8Mmwl6mgJ59GmVvh0CY5-M3zpUapxhhOYyBGd7kyz52MCPAlivEpppk6tbyzjS10b9Hvkv5MYGzpzdvqVXt8O9pI2JZxGyyK7y0mgTsSh7R7sh89YdkRdl7dhhNGXzTXsvBg8BfSnbx2cY2H4gx1p0h-zRFdn1UydYuRy01hfF7PjCYlh45zKqrz3R_2Oq7gq-t6vnmvN_GasyqeqKUKWhxAm0w1GgQwCH4oQs8lh080kDffpMkkD-ACxkpww=" alt="A high level overview of the main components">
+</div>
+<div class="title">Figure 1. A high level overview of the main components</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s dive into each of these parts in isolation.</p>
+</div>
+<div class="sect2">
+<h3 id="_wayland_clients"><a class="anchor" href="#_wayland_clients"></a>Wayland clients</h3>
+<div class="quoteblock">
+<blockquote>
+The Wayland protocol does not include a rendering API.
+Instead, Wayland follows a direct rendering model, in which the client must render the window contents to a buffer shareable with the compositor.
+</blockquote>
+<div class="attribution">
+&#8212; https://en.wikipedia.org/wiki/Wayland_(protocol)#Rendering_model
+</div>
+</div>
+<div class="paragraph">
+<p>By removing the X server from the picture we also removed the mechanism by which X clients typically render, but there&#8217;s another mechanism: <strong>direct rendering</strong>.<br></p>
+</div>
+<div class="paragraph">
+<p>With direct rendering, the client and the server share a video memory buffer.
+The client links to a rendering library such as OpenGL that knows how to program the hardware and renders directly into the buffer.
+The compositor in turn can take the buffer and use it as a texture when it composites the desktop.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpVjU0KwjAQhfc5xRDXvYKgghfowkXpIpZJHZxkQjKFinh3G3-K7h7fvPdNuVJMLrsAg4QkEaO2emOEjIO6ODIa45czgt2lxDQ4JYnFwt0AdK2iC31NR8roZe7NY-2fhL2FDdN40TNP-J4c6ptCKvnV_SigabbQ7SfvceGr7R-bb4JKf0VPfNtCXw==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>One simple way to implement this buffer would be to use <a href="https://en.wikipedia.org/wiki/Shared_memory#Support_on_Unix-like_systems">shm</a> as a simple shared region between clients and the server.
+Most Wayland compositors do their rendering on the GPU, and many Wayland clients do their rendering on the GPU as well.
+With the shared memory approach, sending buffers from the client to the compositor in such cases is very inefficient, as the client has to read their data from the GPU to the CPU, then the compositor has to read it from the CPU back to the GPU to be rendered.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://en.wikipedia.org/wiki/Direct_Rendering_Manager">Linux DRM</a> (Direct Rendering Manager) interface provides a means for us to export handles to GPU resources.
+Mesa, the predominant implementation of userspace Linux graphics drivers, implements a protocol that allows <a href="https://en.wikipedia.org/wiki/EGL_(API)">EGL</a> users to transfer handles to their GPU buffers from the client to the compositor for rendering, without ever copying data to the GPU.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpVjs0OwiAQhO88xaae-wbGxPjTgzYaG-PB9IDtUokUCOBfjO-uVFrbE7M7s8NnL1xqamgNhaq1kihd5p4CwWDhqKwEEsK-NkI01VrwgjqupI3gRQCOmUNa514tuUGmHjl5d_mDEiyCkeDV2Z3EFX8nM_-N5U6ZfjZFS0PnIlk3jRuNMshku4fS8Bsa2z9aoZEowtl8lzYeCVAQx5NQ1sH1dqR5wM99orAVyJy3WoZW_J0B0mCCcVyqu_ShhukDQQpvYg==" alt="Diagram">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wayland_compositor_2"><a class="anchor" href="#_wayland_compositor_2"></a>Wayland Compositor</h3>
+<div class="paragraph">
+<p>Wayland is designed to update everything atomically, such that no frame is ever presented in an invalid or intermediate state.
+Our custom Wayland compositor knows where to get the rendered buffers, but it doesn&#8217;t know when the buffer is ready to be rendered; here&#8217;s where the Wayland protocol comes into play.<br></p>
+</div>
+<div class="paragraph">
+<p>Client surfaces will start in a <em>pending</em> state (and no state at all when first created), this state is negotiated over the course of any number of <em>requests</em> from clients and <em>events</em> from the server; when both sides agree that it&#8217;s a consistent surface, the surface is <em>committed</em>.
+Until this time, the compositor will continue to render the last consistent state.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In Wayland, instead of continuously pushing new frames, you can let the compositor tell you when it&#8217;s ready for a new frame using <em>frame callbacks</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The compositor must finally <em>compose</em> the various surfaces into a single image, in order to do that efficiently we&#8217;ll also use EGL.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpljb0KwkAQhPt9iuWs8wYiiKiNXQqLkOI89uLh3g-XFRTx3TUxxIN0uzPfzPQ3F5LO2qOJPsVAQWp5MmEmIzp0TAD2axOqbUrsjBYXQ6_wBYhNLaR9O1wHl8nGRwvvmT9HtgpX7LqrXPhOv8humOmdxDyyMHVgVW2w2R9PLcxdpTZR61EqO_700oMxjItI8WDFZGXe-QBRS1ku" alt="The compositor communicates with the apps via the Wayland protocol, and compose surfaces via EGL">
+</div>
+<div class="title">Figure 2. The compositor communicates with the apps via the Wayland protocol, and compose surfaces via EGL</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gstreamer"><a class="anchor" href="#_gstreamer"></a>Gstreamer</h3>
+<div class="paragraph">
+<p>Our compositor finally composed an image, and we are ready to send this to our Moonlight client, how do we push this to the selected encoder in the Gstreamer pipeline without copying?
+Sad news is, we don&#8217;t (at least currently).</p>
+</div>
+<div class="paragraph">
+<p>Although Gstreamer supports <a href="https://gstreamer.freedesktop.org/documentation/additional/design/dmabuf.html?gi-language=c">DMA Buffers</a> (Direct Memory Access) which are an efficient way to share memory without going through the CPU,
+the support for modifiers of DMA Buffers is lacking behind significantly and varyies from one plugin to the next.</p>
+</div>
+<div class="paragraph">
+<p>What are modifiers? Modifiers add additional vendor specific properties to the internal pixel layout of a buffer. These modifiers are usually internally used by the GPU to speed up certain operations depending on characteristics of the hardware.
+None of this really has to worry us, because all of that is handled by the gpu driver. But because DMA buffers exist outside of the scope of a singular device, we need to carry the modifier of the buffer along.
+If it gets lost on the way, the program receiving the buffer has no idea how the data is layed out in memory and will likely output a broken image.</p>
+</div>
+<div class="paragraph">
+<p>Modifiers as such a crucial for communicating formats across devices, but they haven&#8217;t existed all the time. So called "explicit" modifiers are a relatively new addition to the apis in question. Previously the drivers managed modifiers internally without exposing them to the user.
+Buffers without an accompanying modifier are as such described as having an "implicit" modifier. Because the modifier is handled internally by the driver communication across devices is impossible with such a buffer.</p>
+</div>
+<div class="paragraph">
+<p>Because these changes are relatively new, a lot of software still has to adapt to the new explicit apis and many try to be able to handle both, implicit and explicit buffers. Gstreamer being composed of many plugins currently results in very different stages of transitioning between these apis.
+Some apis even got support for explicit modifiers, only to drop it a release later, because users of older plugins were complaining about incompatibilities&#8230;&#8203; This means the chance of getting a good image out of the pipeline starting with a DMA Buffer is very small.</p>
+</div>
+<div class="paragraph">
+<p>Given the state of things, we are currently copying the buffer through host-memory once to side-step this issue for now. The plan for the future is to provide first an experimental option for using DMA buffers,
+and later with more testing and development we will hopefully be able to share, compose and finally encode different buffer types with zero memory copied between the GPU and the CPU for truely the best possible latency.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNptTz1rwzAQ3fUrDndOh1I6BtIPnCGZHJIhZFDlsysi3xlZgpSS_x6dbYpKM4mnd-9rOFvqtdcdGO56JqRQhW-H4NEETa1DpZpEIxSrvnfW6GCZhgJ-FMBxb2tkKBN9ElgF1N1JXX8lB3ZNAQ_Otl_h00UU1UyVVfDpGv1s9Sbxgw3sR6v37QpeY9PgBNcHWD8-vTwDkuHaUispKcc4jrUYHLfMNOaM-XkzWCyWqWp0Z01gO92msn_hdJE3UPOWiSk3sMNLiF6UGfivy0Fihf4oN-InDwjOl-VgJO_svPM35WaLbyKykVU=" alt="Diagram">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_references"><a class="anchor" href="#_references"></a>References</h3>
+<div class="paragraph">
+<p>Special thanks to <a href="https://github.com/Drakulix">@drakulix</a> for patiently explaining this to me and lead the way in <a href="https://github.com/Drakulix/sunrise">drakulix/sunrise</a>.<br>
+Here&#8217;s a bunch of useful links, docs and videos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://wayland.freedesktop.org/docs/html/ch01.html">official Wayland docs</a> and the <a href="https://wayland-book.com/introduction.html">Wayland book</a></p>
+</li>
+<li>
+<p><a href="https://streaming.media.ccc.de/jev22/relive/49255">Why YOU should write a wayland compositor!</a> by <a href="https://github.com/Drakulix">@drakulix</a></p>
+</li>
+<li>
+<p><a href="https://drewdevault.com/2017/06/10/Introduction-to-Wayland.html">An introduction to wayland</a></p>
+</li>
+<li>
+<p><a href="https://www.khronos.org/egl/">EGL overview</a> and <a href="https://www.khronos.org/files/egl-1-4-quick-reference-card.pdf">quick reference card</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <p>Copyright &#169; Alessandro Beltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
