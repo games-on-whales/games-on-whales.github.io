@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -93,6 +93,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -153,9 +156,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -182,7 +182,6 @@
   <div class="version-menu">
     <a class="version is-current" href="control-specs.html">stable</a>
     <a class="version" href="../../dev-nix/protocols/control-specs.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/protocols/control-specs.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/protocols/control-specs.html">dev-api</a>
   </div>
 </div>
@@ -214,9 +213,9 @@ In order to decrypt you&#8217;ll have to use the keys that are exchanged during 
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/packetdiag/svg/eNqr5lJQSM7PKc9MKclQsFWwAHLz8lNS4zNSM9MzSoAipgYwIZgacwMuoJCBrqGVQkhlQSqQbaRrbKXgk5oHZJromlspBKcWApkWukZAYUfXYAV3Z1-FEEd3kEoTXWOgvtS85KLKgpLUFIWCxMqc_MQUrloA5mokog==" alt="The format of encrypted packets in bytes">
+<img src="https://kroki.io/bytefield/svg/eNp1jD0LwkAQRHt_xZLKFJcoWEg6sbASBLUSi83tGg8ut-fdxQ_E_24EFRu7mXnD27rAUeyZCYzTtiMGMoF1MmfuF2iFOsux9EGSaLF9wqbvWlwKYlX0rGOBJBrUx1BVRUkGm4BtLOtb4oNhSyoeMTAVTG63Hwwp4EUZ57ukjozEIR-8x1qukK35lMG9ih4dTB75L1rMl7CZLb54-gfvvhyqnqiarVz2n2-DHrIV3qwgvVSvPh79qFKSNn8CRGFhYQ==" alt="The format of encrypted packets (bytes)">
 </div>
-<div class="title">Figure 1. The format of encrypted packets in bytes</div>
+<div class="title">Figure 1. The format of encrypted packets (bytes)</div>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
 <colgroup>
@@ -307,9 +306,6 @@ All data is <a href="https://en.wikipedia.org/wiki/Endianness">little-endian</a>
 <p><a href="input-data.html" class="xref page">INPUT_DATA</a> (<code>0x0206</code>)</p>
 </li>
 <li>
-<p>RUMBLE_DATA (<code>0x010b</code>)</p>
-</li>
-<li>
 <p>TERMINATION (<code>0x0100</code>)</p>
 </li>
 <li>
@@ -318,24 +314,106 @@ All data is <a href="https://en.wikipedia.org/wiki/Endianness">little-endian</a>
 <li>
 <p>IDR_FRAME (<code>0x0302</code>)</p>
 </li>
+<li>
+<p>HDR_MODE (<code>0x010e</code>)</p>
+</li>
+<li>
+<p><a href="#_rumble_data">RUMBLE_DATA</a> (<code>0x010b</code>)</p>
+</li>
+<li>
+<p><a href="#_rumble_triggers">RUMBLE_TRIGGERS</a> (<code>0x5500</code>)</p>
+</li>
+<li>
+<p><a href="#_motion_event">MOTION_EVENT</a> (<code>0x5501</code>)</p>
+</li>
+<li>
+<p><a href="#_rgb_led">RGB_LED</a> (<code>0x5502</code>)</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The next two bytes indicate the size of the decrypted payload.  The format of the remaining data depends on the message type.</p>
+<p>The next two bytes indicate the size of the decrypted payload.
+The format of the remaining data depends on the message type.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="TODO"></i>
-</td>
-<td class="content">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_server_events"><a class="anchor" href="#_server_events"></a>Server events</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Add details of all the message types</p>
+<p>The following events are originating from the server and will be sent to Moonlight clients.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="sect2">
+<h3 id="_rumble_data"><a class="anchor" href="#_rumble_data"></a>Rumble data</h3>
+<div class="paragraph">
+<p>A simple schema for a controller number and low/high frequencies</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp1zDEOwjAMBdC9p7BgoUPagph6DybEkMamiRTi4iQtCHF3OgACITb__768C0KR_UgILhifkQCdkElupLmBE2P2FOtBOLFhP1-6n7PhkIS9igOZWGlkA-r1oW2rGp3uRZ9i3V0THR15VNFqIawIw_5QrFD0pFwYclKWNJJAc2nWTVcWT-v4AoscciRcwK2Ngw6wvZefapJ4WL51862eJzgKnf-5db39GTwAAVRdgQ==" alt="The payload for a Rumble packet (bytes)">
+</div>
+<div class="title">Figure 2. The payload for a Rumble packet (bytes)</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rumble_triggers"><a class="anchor" href="#_rumble_triggers"></a>Rumble Triggers</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>A simple schema for a controller number and left/right values</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp1zLEOgkAQBNCer9hgI8UBMaHhP6yMxXK7wCXHLdk7EGP8dyk00cJuZl4y56Acxa9M4IL1CzGQU7bJrbwvMAktnmM1qySx4veEw96thKTiTZzZxhJJLJjPQ9uWFTkcFKdYdffEvWNPJo6oTCVTuFyzIynejAvzkszISKxQb01T10X2tk42yG1SD4ccHm2cMcDpWXyr5z79M3XD-IMv1qxQxA==" alt="The payload for a Trigger packet (bytes)">
+</div>
+<div class="title">Figure 3. The payload for a Trigger packet (bytes)</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_motion_event"><a class="anchor" href="#_motion_event"></a>Motion Event</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>This is used to signal to Moonlight clients to start sending motion events (Gyro or Acceleration) to the server.<br>
+By default Moonlight disables these events in order to save bandwith.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp1zL0OwjAMBOCdp7BgoUP6g9Sl78GEGNzYlEhpHDkpUKG-Ox1AsLDd3SfdMSgn8TcmcMH6iRjIKdvsbrwuMApNnlMVVbJY8WvCYe1WQlbxJkW2qUQSC-bz0HVlRQ4HxTFV_Zz54tiTSVdUppIpnM6bPSnejQtxyubKSKxQP9q2borN23p5wNZm9bDbwrNLEQMcluJXFTP_szzHrzVL8QKGF1Bp" alt="The payload for a Motion packet (bytes)">
+</div>
+<div class="title">Figure 4. The payload for a Motion packet (bytes)</div>
+</div>
+<div class="paragraph">
+<p>Type could be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ACCELERATION (<code>0x01</code>)</p>
+</li>
+<li>
+<p>GYROSCOPE (<code>0x02</code>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rgb_led"><a class="anchor" href="#_rgb_led"></a>RGB LED</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>This is used to control the color of the LED of supported controllers.<br>
+An example of this is when setting the LED color in Steam, the server has to send this event all the way to the Moonlight client.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNp1zDELwjAQBeDdX3HookNaLXTp6OIuOInDNXdqIObCJa2K-N_toFIHt_feB28XlJP4nglcsL4jBnLKNruehwUuQp3nVEaVLFb8kPA0dCshq3iTIttUIIkF83lomqIkhyfFSyrbe-ajY08mnVGZCqawP0zmpHg1LsQumzMjscLyVtfLajF5Wys3mNqsHmZTeDQpYoDquRjr9gurX9j8g_UYXobJVQ4=" alt="The payload for a LED packet (bytes)">
+</div>
+<div class="title">Figure 5. The payload for a LED packet (bytes)</div>
+</div>
 </div>
 </div>
 </div>

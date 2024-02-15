@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -93,6 +93,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -153,9 +156,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -183,7 +183,6 @@
   <div class="version-menu">
     <a class="version is-current" href="input-data.html">stable</a>
     <a class="version" href="../../dev-nix/protocols/input-data.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/protocols/input-data.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/protocols/input-data.html">dev-api</a>
   </div>
 </div>
@@ -202,15 +201,14 @@
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp9UctugzAQvPMVK_cCByRAqKr8BT32HuVgygKWjG2ZRSFF_HsNJIDSpBfLOzs7s4-wxEpD6cQlrp3pbaxEgSpuUJToAoBTZ4WGBTz7MFyYhRkgJBxoTcCJt4IaGHllNMWd_EFIs-kceWQpXx5eGOc1O9BSAW9Q1g1Bmk9RFATh3oXUtqeD_-76bVTf6luqizb8b9-QA_tcfuxfWpoB-xJXZUS5ErWfKXbmAunH2tZjRxs4ryAZkix599P7IK6k6-g-8Dz8gcgU6poadqM6VIKwfEVe_GDeInumnT-l09XiC_3HglKQYJv5fpe3kSusCDgZO6NEpp2me2ktrN-EkhqPYvMtx6PCoRa4m2_sJX4Bgm_LxA==" alt="General format of an `INPUT_DATA` message">
+<img src="https://kroki.io/bytefield/svg/eNp1j7FuwzAMRPd8BeEuzSDbCIoO-o9OQQbGpG0BsiRQdJo08L9XaevCQNGNPN47HN-CcI7-wgQudH4mBnLCnboLFwWmSLPn3CSJGrvoy4RD2V1IsxpCxRopdmBW3Nq6IYeD4JSb8025d-zJ5BGFqWYKx9PumQTfzXfEyEgs0F7bQ_u63_3czvEK1ZcBsvvgCo62SKZ3khXuNicM8LKc9n_teku_dmGPWj77B3i0r9bjAQoipUqGp7v13CtYjemhqsZpWVZ0wFSqexd4GxacL0mbhA0LVtwwaon4BB6Vf_U=" alt="General format of an `INPUT_DATA` message">
 </div>
 <div class="title">Figure 1. General format of an <code>INPUT_DATA</code> message</div>
 </div>
 <div class="paragraph">
 <p>The first 4 bytes (big endian) following the header of a packet of type
-<code>INPUT_DATA</code> indicate the size of the message, which varies depending on the
-input type.  The next 4 bytes (little endian) specify the input type, which
-can be any of the values in the following table.</p>
+<code>INPUT_DATA</code> indicate the size of the message, which varies depending on the input type.
+The next 4 bytes (little endian) specify the input type, which can be any of the values in the following table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -257,8 +255,40 @@ can be any of the values in the following table.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000001</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOUCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000002</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000003</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_MULTI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000C</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_ARRIVAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000004</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_TOUCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000005</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_MOTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000006</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_BATTERY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000007</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HAPTICS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000D</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF8_TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000017</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -272,7 +302,7 @@ can be any of the values in the following table.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNkDFvgzAQhXd-xckTHiwBQilirRR17NgKMZhgAqpjI9sI2ir_vcZAk1AaZbCF333cvXt-ySoBpaI9OSrZtYTTgnFSM1oy5QFkuqUCnJjbp-_IQg7gGzaYqQBZeqKmhu-0ksIQ3XwxCKNzjq3ifndXWkhle2oQDYe0Zs2xNhDGZ4w9z7-4aETbmav5l6kHybuTmEsa_-p_fUMM6MV9obtYGAF6pZ9c0nIChd2JKNlDmEy21o7wrFlmaYIqqez6aCmN4QRDEAU7m4t9kKpR2ixRjLHcgIeZUoxTw8p_uWSrW7ymnra7rThUMm4ovKGHZs_0-116SW4rIMFML9XHdUJMQxYMO-s4sud5DGx1ErfNrbbfL5dTcvwDsp7hzQ==" alt="The full format of a `MOUSE_MOVE_REL` packet">
+<img src="https://kroki.io/bytefield/svg/eNp9kM9qwzAMxu99CpPTcsgfwuhKroO-wWAj5KBGSmvm2EFWmoyxd5_TJYOOsIOMrO-nD39-sUzemSuh0rYxA5JCzdSIvlKYqM7hYMhnPTtxjTOhg3O4a9sPkiAIpICuUcm6XpZphhrODJ3PTh9CrSaDib8AE6aEtqp3D8gwJj8WFwIkVvmUF_k-3i0au3FVotZxBxLFi3RyU6APqipDl7SavajP0vdg1eNXfU89LRSTAQkRt7kIyQio12ibLjbpt39pS5PMITYDWZLR8ftvosVhdievqnzah6cXoZ7nb_lTh1us-9nxuB63SR1_A73Lmts=" alt="The full format of a `MOUSE_MOVE_REL` packet">
 </div>
 <div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
 </div>
@@ -301,7 +331,7 @@ can be any of the values in the following table.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNUsFugzAMvfMVVk5wQAJGS8Vx0qYdd9yEOIQRSrQ0QSEItqn_PgOlXSlMPeTJsV_sZzt2zgoJuaatu9eqqVxBMybcktGcaQsgqSsqYXCmeLUHZqY6sA3rzBiAJD5QU8JPXChp3Jp_M_CDY-qgZ3g-QJwpjTlrkFxAXDK-Lw344dFxLMu-qOCyasyf-peqH0o0B3kK1c7Zf6sbQiAvg0X-pfkBkFf6JRTNR6LEnlytWvB3o6y5IufkQ86UhBRKY_tkCvXD8Tov8LY4F7y4Bde1mUbRj-WKiBpGmmaCGpavEtlSunDO2ixnm_HIG7mrKnmfeIKu9cBqSPqV4rl-2_LclHfWGb_DerFpMdfmzSokM63Sn2QmD9exHXYyzhstbwGeetgsBHrf4-6cYBaNEKLn3goRHiIrdX4Bj88OOw==" alt="The full format of a `MOUSE_MOVE_ABS` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNkM9OhDAQxu88RcNJDvxx3V0MRxN9AxMN4TDLDNBYWtKWBWN8d4uCuhs22UO_TOf7zUw7z1KTUeJIyLgsRY_EkGsqLT-Sy7BWYS_IxJ1WVpVKuAhqd-ey622IYCECVCULl_Isi2LkUGtoTXx4t1RxEhiaBjRhRCjzwrtBDUP406IhQNIsGZNNsg-82dNqWBy_UroF6wezdVCjo4nlmYvCimtj2UdmOpBs-1mcUruZ0iTAui-uc_6Lv85tzrjXhRPwN_QfNJdPMBmWSy6YO6c9Bo62uXJeQ7xu7OWhkkY7rWp1bZLsoPSbf-FxbuH77607uZ0kSVbkcZLdijHlHu5_G5y5qZP0aYq2Tu5Srwi-AHv5xqk=" alt="The full format of a `MOUSE_MOVE_ABS` packet">
 </div>
 <div class="title">Figure 3. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
 </div>
@@ -337,7 +367,7 @@ can be any of the values in the following table.</p>
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp9kMGOgyAQhu8-xYSTHEi0sU31CXrcu_GAFStZCgYwurvpuy-itrV19_IH5v8Y5p-wYrWEStOeXLTqWiJoyQRpGK2YDgBy01IJvli4a-jJUg0QWjbYyYA8u1LbwE9WK2mJ4d8M4t2twK7in3vJSqVdTwOSC8gaxi-NhTi5YRwE4WMKLtvOPv3_-PWsRHeVs2Xwvf4-NySATv6E_sVSQB_0SyhaTZx0kYhWPcTHaarXgfBcc8zSA9VKu_RoscbdREO0iw5uLe5Caq6NXTYxbmUFpjOlmaCWVX9y-61uyZpC9Gy5kmi75Stc2jspqLGjueRfH98SS2Z7pT-fIzMDuUt98NFHSUeJNmQ_ynHDiAv8CyPA0Nc=" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1j81ugzAQhO95CotTOfCTqoka3qMnxGFhl8SqsdF6CURV3712Q6Ie6GW03m882vmwTN6ZK6HStjMTkkLN1Im-UtioweFkyBcjO3GdM2GCc3hrO06SIQjkgK5T2eN7VeUFajgzDL5ob0K9JoOZvwAT5oS2bnYvyDBn94gLARKrcilfy2O6InbzAyS94wEkSXcra90S3AdVV2HKes1e1FflR7Dq7btJ_7gSCDWcTVYrkwEJPf8xt_J0GvASoaVF4i1bZ1mS2fFn8mT39JhFXtWhz_G3VJRTlHJDDlHeN8C-SX8AyKuGkA==" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
 </div>
 <div class="title">Figure 4. The full format of a <code>MOUSE_BUTTON_DOWN</code> or <code>MOUSE_BUTTON_UP</code> packet</div>
 </div>
@@ -410,7 +440,7 @@ can be any of the values in the following table.</p>
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNkD1vgzAQhnd-xckTDEiQoihlyxCpY3eUweDjQzE2so1IWuW_1zihhHxUXV757h7fx-szLAUwRYewUrLvQk5z5GGNlKHyADLdUQEuubeh78hcHsE3eDSXAmRpS00N32kphQl184UQr877wGbcdydpLpXtqUE0HNIam6o2ECfnIPA8f96iEV1vbubPUwvJ-1ZcSzr4zT_uDQmQD_cif2LvQD7piUvKLpywJ4VKDhBvLlvdLxRcc5aZepBSKns9mUqjN9ExWkVra4sNwrJR2kxOjK4sQLxSCjk1yF5y9Fm3ZEkRWphGCvK85T1cclrpO3ZJHPAEhWRI_rUjaSWbSE61WR4A2eLX5PTy-eCtQDNIdbg1FzVk1t-1M3mU3SjRE9mO8vaiuk2sbFyYzAVvH_wA_Cf6DA==" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1UEFugzAQvPMKi1M5EFCKoopbDn1CT4jDhl2IFeNFtglEVf9ek0JbonAZ7Xpmx5r50IYsqyuhkLpSPZJAaahy8kr-RbSMvSKbdIYdV6z8BI3fpe56FyM42AFyJeLlPM93CUpoDLQ2Od0c1ZIUxvYMhnBHqIsyeEEDQ_xjcSZAMiId0316iIKZMzwsTFizacGF0UydePRqEEXup7iWxjrxmdsOtMi-yv-qEHwM1uEsNaTA-Zwb4lpBYx-0a8WFbqJipA3D_YOhr25RKrBuRaaiWF1pGt0U-mkBmtzA5vLbwPzvZERWFL66w72_Cd4nSJ_AcYLXDfaYeXi7r9kfEZTRN2aur6M=" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
 </div>
 <div class="title">Figure 5. The full format of a <code>KEY_DOWN</code> or <code>KEY_UP</code> packet</div>
 </div>
@@ -941,7 +971,7 @@ can be any of the values in the following table.</p>
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNUT1vgzAU3PkVT57wgAQIRZStQ6KO3RGDKSagGhvZRtBW-e81BpJAPpTleH53nJ_vuQUtORSS9N5Riq71GMkp8ypKCiodgFS1hINtZuboWmUuBnA1HfREQJo0RFfwl5SCa0_VvxSC8JRh07G_W0hyIY2nAl4zSCpaHysNQXTC2HHcyxQ1bzt9df_l1i_BuobPlMLn_u3cEAH6sBV6KnsD9El-mCDFpOPmSZ4UPQTxNNV2IDz3jGbxQKWQ5vVoocZs_MEP_Z2JxRy8spZKL0mMqayEdFZJyoimxUMduecWPVJt3Da6aXWINKLjGs3by8xXdTkEZm2vjPTUJHzRxId0RSwLWJc3kXOqeyG_rzOnClIT-85mP8J-BP8OvJ9hTRwOBuJ4Vc2sk-F_lWsCFA==" alt="The full format of a `MOUSE_SCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqVkD1uhDAQhXtOMaJaCn6CotWKLkX2BqkQxYCHxYqx0dgsRFHuHpPASkgUSfM84zfzWX5vmskadScBUjdqFARCMjVO3snfQG_EqMimAxtnGqN8hTffSz2MLhboMEFhGoi39aJIUiHxxtjbtP5w1EpSIrYdMomEhC6r4CQYp_gX0REKYsjmLM_O0WqxmTYjbA336MLNqs3shxHKwldxK9k6-CzsgBqev6rjKSaFzv_weO7kaHYQYm9G7UK_4p_rKn_asYanKjqG5P-A5H-EZFDuDO2ZSxZRcJCLJjcZfn8Es6IXEFkofaDnn1QXeV0kO5CXh-yN69XL5bKrVjeoom8IlreS" alt="The full format of a `MOUSE_SCROLL` packet">
 </div>
 <div class="title">Figure 6. The full format of a <code>MOUSE_SCROLL</code> packet</div>
 </div>
@@ -969,29 +999,195 @@ can be any of the values in the following table.</p>
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp9kDFvgzAQhXd-xckTHizhCKKWLUOljt0RgykmoBob2UbQVvnvNQaaQNIynM7vPs7PLyx5JaHUbCBnrfqOCFZwQWrOSq4DgMx0TIIXc3cMPVmoEULLRzsPIEtbZmv4TislLTHNFwd6uOTYKf53X9JCabfTgGwEpDVvzrUFGl8wDoLw6qKRXW9v7r_e-q5E38plZPCvfu8bYkCvvkP_Ys-A3tinUKycOemeRLQagD7NrvaG8KI5Zt2BKqXd69E6mrKJxugQHV0s7kCqRhu7JjGlsgHZQmkumOXln9zDbfGeSpJo-ujjpTscsVb10qIFFmxvc41j294FILkdlP64TYAbyFwIR5_EVE5TiR4Uj9CNliRrR1-CHP8AVB3Wag==" alt="The full format of a `MOUSE_HSCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNptj79uhDAMxneeImLqDeHPqTCwdegjdEIMPmzuooYEOeGgqvruDRTUol6GT1_8_WzZb4bJWX0nFMq0ekQSqJhar-4UKqK3OGpy6cDW29bq4OAa_soMo5cIHhJA2wq5t1dVkqKCK0Pv0suHp06RRuluwIQJoambKIqekGGSP0NuBEgssjk7Z-Vpi9hOexB3lnvw8R5d7BzgUtRVcLJT7Lz4rNwARjx_NUeqKLLl5RvMpMGHUx_jMfR2ND7eYA2_g88raWj2y2ZH-29fQ36y_P53YXKiDgeW65WLvCySPZAVyQ-1othd_ho1p29pl4yW" alt="The full format of a `MOUSE_HSCROLL` packet">
 </div>
 <div class="title">Figure 7. The full format of a <code>MOUSE_HSCROLL</code> packet</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_controller_multi"><a class="anchor" href="#_controller_multi"></a>Controller multi</h2>
+<h2 id="_touch"><a class="anchor" href="#_touch"></a>Touch</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pen"><a class="anchor" href="#_pen"></a>Pen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controller"><a class="anchor" href="#_controller"></a>Controller</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_controller_arrival"><a class="anchor" href="#_controller_arrival"></a>Controller arrival</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>Sent when a new connector has been plugged, it&#8217;ll specify the supported capabilities and the specific type of controller to be emulated.</p>
+</div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqVkztvgzAQgHd-xckTDEgYkShhq6pGHTpUVYdEUQYDJqA6dmRMQ1vlv9c88gQqdzmd7z7fy2c7oSmHRJKDu5Wi3LuMRJS5GSUJlRbAutgTDo1xo492Q0aiAlvRSrUOWIc7ojL4CVPBlVvk3xSwf9w42tJcb0QYCaljFsBzBmFG822mAAdHx7Es-1JFzvelusp_yRoLVu545yqcs71fNwSAnhsN_YnNAb2SLyZI0nJct-RKcQA8a6u6L8jpbJo5xUCpkLp7dHLVs_Eqz_emeiz64Ka5LNRpEvVUbkDf7zBJGVE0GQUxHYoX3GPxcLgeh4lRXhTrF5WCMT3K7gIjo-0gEqv8kyKjznFgVkFUKiV4gczol_cREN-Bb6Ygo6mCpWH6Bl4ZwrL5Ast_0SuDZ_CqeWy0LJPJWDDr_BecG7W3_Zyqg5Af1-tPC1jrHzBtvkG74lrz-gI_1drjgONh4AY-e4OReAZiPtNisai1gbx6HrVmbZxfLfGbPA==" alt="The full format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1jL0OgkAQhHufYoONFPxojAXvYWUsltsFLjnuLncLQgzvLok_iQXdzHwzc7WBozMjE2irzEAMpAMr0SOvCfSOBsOx8MGJU86sCtvVa-sHyQgFcySnIPvOqyovSGMbsI9FPQs3mg1lscPAlDPZ2313oICP7H3RMRIHKKfyVF7SD6rdBImSYGCfwLOKHi0clz8qs-ctptBvoXoQcRYag238dc5L-gK9qFqR" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
 </div>
-<div class="title">Figure 8. The full format of a <code>CONTROLLER_MULTI</code> packet</div>
+<div class="title">Figure 8. The full format of a <code>CONTROLLER_ARRIVAL</code> packet</div>
 </div>
 <div class="paragraph">
-<p><code>LT</code> and <code>RT</code> refer to the left and right triggers, respectively. <code>Left X</code> and
-the following fields refer to the values of the left and right sticks.</p>
+<p>Where controller type can be:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Moonlight code</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unknown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x00</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XBOX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x02</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nintendo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x03</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>And the capabilities is a bitfield with the followings options:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Moonlight code</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Analog triggers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rumble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x02</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger Rumble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x04</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Touchpad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x08</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accelerometer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gyro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Battery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x40</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RGB LED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x80</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
-<h3 id="_button_flags"><a class="anchor" href="#_button_flags"></a>Button flags</h3>
+<h3 id="_controller_multi"><a class="anchor" href="#_controller_multi"></a>Controller multi</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since Moonlight 5.0.0 the format has been slightly changed (without breaking the legacy format)
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNq1kM9OwzAMxu88hdVd4JC29MChz7DTBNKmaQc3dttoaVI56TaEeHeKSiWEOERC3Gx_P3_-8-KEg7cXJjBO24kYyAjraC48V2DwNFkOxSg-eu3tHGE358aNU1SEEXMkr0Gt7XWdF2SwExxC0bxGbg1bUqFHYcqZ3PF0d0-CV7VY9IzEAuWtrMqnhy9J_HUVstbLgDFbpcbfwBkLx3qOVGskRHirw4gOqvfTdyrTUSxsshQUl4MHDOcUPnGBJjpoLXYhaYft86_Y4w9sl4ZtuY2wTxv8iR6S0J3p-lTbhT38xz-h-qPrB4bb_24=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+</div>
+<div class="title">Figure 9. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
+</div>
+<details>
+<summary class="title">Legacy format</summary>
+<div class="content">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqNksFuwjAMhu88RdTTOBTaCtDobZrGaadpk4YQB5O4EC0kyEmh07R3XwqFCWilXCyn_vzbTf4PTWiN2qNgUnNVCmRCEnIn9-i_sK0RpUI73JFxhhvlM1j7s9S70sUCHAxAGM7ic3ueD4ZCwppga4erb4eFRCViuwFCMUChF8vegyA4xCeJDYJAYkmVZMmk35TIHM6FqDC0BRedSytTeThFtsh9GheSrGM_ud2BZqPf5TXGG4pQgfO_2MWl0A5m12DEjXZklEKKmgYF_-NvaTjeYtS2aXa3wShsg1XpnNE2CqNf3zvA9AZ8CwUVFo59Bo4_wvNAmOR6Ey59oucBz5BUUx5klvG4U0xj5WpT9nstBtXoDoa-Lg5tNq9V0bKFd_bkaG8fsjokyX1IX-rsuaXw1NKRXqqjDr2AMH30YTars5a5_jLqrLfs_wEnYlDA" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+</div>
+<div class="title">Figure 10. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
+</div>
+</div>
+</details>
 <div class="paragraph">
-<p>The <code>buttons</code> element encodes the currently pressed buttons in the joypad.</p>
+<p><code>LT</code> and <code>RT</code> refer to the left and right triggers, respectively. <code>Left X</code> and the following fields refer to the values of the left and right sticks.</p>
+</div>
+<div class="sect3">
+<h4 id="_active_mask"><a class="anchor" href="#_active_mask"></a>Active mask</h4>
+<div class="paragraph">
+<p>The active mask represent a bitfield with bits set for each controller present.
+If you combine this with the <code>ctrl #</code> (controller number) you can detect when a controller has been <strong>unplugged</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="EXAMPLE"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>An active mask of <code>0x0</code> and a controller number of <code>0x1</code> means that the first controller has been unplugged.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_button_flags"><a class="anchor" href="#_button_flags"></a>Button flags</h4>
+<div class="paragraph">
+<p>The <code>buttons</code> element encodes the currently pressed buttons in the joypad.<br></p>
+</div>
+<div class="paragraph">
+<p>In order to get the new added buttons you have to combine <code>btn flags</code> and <code>btn flags 2</code> so that</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c hljs" data-lang="c">(button_flags | (button_flags2 &lt;&lt; 16))</code></pre>
+</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1065,6 +1261,34 @@ the following fields refer to the values of the left and right sticks.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0x8000</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SPECIAL_FLAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0400</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x010000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x020000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x040000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x080000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Touchpad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x100000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MISC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x200000</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -1074,21 +1298,34 @@ the following fields refer to the values of the left and right sticks.</p>
 <div class="content">
 <img src="https://kroki.io/wavedrom/svg/eNqrVihKTbdSiObiUlCoVlBKLCkpUrJSUIpU0lFQSsosKQZyDIHMvMTcVCDToMKgVgdVZQQulUBOSWVBqpWCEboWJ6INdyTK8FgdheT8vLRMoD-q0_LzSoozq4AyhmY6CmVpOZkFViVFpak6Chlwdi1XLQBAjURk" alt="When pressing  kbd:[A] and  kbd:[X] `button_flag` contains `0x0050` that `5` decodes as follows:">
 </div>
-<div class="title">Figure 9. When pressing  <kbd>A</kbd> and  <kbd>X</kbd> <code>button_flag</code> contains <code>0x0050</code> that <code>5</code> decodes as follows:</div>
+<div class="title">Figure 11. When pressing  <kbd>A</kbd> and  <kbd>X</kbd> <code>button_flag</code> contains <code>0x0050</code> that <code>5</code> decodes as follows:</div>
 </div>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/wavedrom/svg/eNqd01sLgjAYBuB7f8XHrneRZTfeaXaiI7aoiBCLWULN0BWV-N9bBUYH0O3uZfDw8W7fUojp1oSlpgGkyOc8RiagCbFcgjCgdcgTcaCLyPwDFbFyqWDg1yM1oZbhD2VbjZ406jdbxJuQrgJ1u-2OjP3AzthyvOm4EFa_hj6dM5oN1eSjrpp8ti1FHxZyvCg09de4N5nLE1ueWKXI77LYpPDujb-bogA7o0FT1gwjRssYbYVhE7EgFP8vDSLGk_AmSusGhr3PaCIeE8M52IdHk8cnimGX50zL7rs5AZo=" alt="The full format of the `button_flag` binary encoding">
 </div>
-<div class="title">Figure 10. The full format of the <code>button_flag</code> binary encoding</div>
+<div class="title">Figure 12. The full format of the <code>button_flag</code> binary encoding</div>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_controller_touch"><a class="anchor" href="#_controller_touch"></a>Controller Touch</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
 </div>
-<div class="sect1">
-<h2 id="_controller"><a class="anchor" href="#_controller"></a>Controller</h2>
-<div class="sectionbody">
-
+</div>
+<div class="sect2">
+<h3 id="_controller_motion"><a class="anchor" href="#_controller_motion"></a>Controller Motion</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controller_battery"><a class="anchor" href="#_controller_battery"></a>Controller Battery</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
 </div>
 </div>
 </article>

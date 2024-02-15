@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="manual_build.html">Manual build</a>
+    <a class="nav-link" href="manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="code-structure.html">Code Structure</a>
@@ -156,9 +156,6 @@
           <a href="../index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -184,7 +181,6 @@
   <div class="version-menu">
     <a class="version" href="../../stable/dev/gstreamer.html">stable</a>
     <a class="version is-current" href="gstreamer.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/dev/gstreamer.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/dev/gstreamer.html">dev-api</a>
   </div>
 </div>
@@ -272,11 +268,11 @@ This allows users to be able to compose Gstreamer pipelines in any form or shape
 <div class="title">Figure 3. An example pipeline for <strong>audio</strong> encoding and streaming</div>
 </div>
 <div class="paragraph">
-<p>This flow is general enough to enable us to use the same plugin for both H.264 and HEVC (and any other encoder that will be supported in future).
+<p>This flow is general enough to enable us to use the same plugin for H.264, HEVC and AV1 (and any other encoder that will be supported in future).
 Downstream, it&#8217;s also trivial to switch between UDP/TCP or even a complete different delivery method if needed.</p>
 </div>
 <div class="paragraph">
-<p>We decided to split between audio and video because they have different RTP packet structure, (non overlapping) properties, different FEC encoding and different encryption requirements but the basic flow is the same for both plugins.</p>
+<p>We decided to split between audio and video because they have different RTP packet structure, non overlapping properties, different FEC encoding and different encryption requirements but the basic flow is the same for both plugins.</p>
 </div>
 <div class="paragraph">
 <p>Given that this is a direct transformation from one input buffer to another output buffer we decided to use <a href="https://gstreamer.freedesktop.org/documentation/base/gstbasetransform.html?gi-language=c">GstBaseTransform</a> as the base class.
@@ -300,21 +296,21 @@ I suggest you to get a bit familiar with it before diving into the code; <a href
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/gstrtpmoonlightpay_video.hpp">gstrtpmoonlightpay_video.hpp</a> and <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/gstrtpmoonlightpay_video.cpp">gstrtpmoonlightpay_video.cpp</a> contain all the boilerplate code needed to setup a plugin, property definitions, etc.</p>
+<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/gstrtpmoonlightpay_video.hpp">gstrtpmoonlightpay_video.hpp</a> and <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/gstrtpmoonlightpay_video.cpp">gstrtpmoonlightpay_video.cpp</a> contain all the boilerplate code needed to setup a plugin, property definitions, etc.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/gstrtpmoonlightpay_audio.hpp">gstrtpmoonlightpay_audio.hpp</a> and <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/gstrtpmoonlightpay_audio.cpp">gstrtpmoonlightpay_audio.cpp</a> for audio.</p>
+<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/gstrtpmoonlightpay_audio.hpp">gstrtpmoonlightpay_audio.hpp</a> and <a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/gstrtpmoonlightpay_audio.cpp">gstrtpmoonlightpay_audio.cpp</a> for audio.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/video.hpp">video.hpp</a> contains all the functions that turns a linear buffer of data into a list of correctly formed RTP packets.</p>
+<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/video.hpp">video.hpp</a> contains all the functions that turns a linear buffer of data into a list of correctly formed RTP packets.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/streaming/streaming/gst-plugin/audio.hpp">audio.hpp</a> same for audio</p>
+<p><a href="https://github.com/games-on-whales/wolf/blob/HEAD/src/moonlight-server/gst-plugin/audio.hpp">audio.hpp</a> same for audio</p>
 </li>
 </ul>
 </div>

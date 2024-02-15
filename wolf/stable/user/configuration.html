@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -93,6 +93,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -153,9 +156,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -181,7 +181,6 @@
   <div class="version-menu">
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/user/configuration.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/user/configuration.html">dev-api</a>
   </div>
 </div>
@@ -224,17 +223,17 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_CFG_FILE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/config.toml</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/wolf/cfg/config.toml</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the config file</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PRIVATE_KEY_FILE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/key.pem</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/wolf/cfg/key.pem</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the key.pem file</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PRIVATE_CERT_FILE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/wolf/cfg/cert.pem</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/etc/wolf/cfg/cert.pem</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Full path to the cert.pem file</p></td>
 </tr>
 <tr>
@@ -271,6 +270,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_RENDER_NODE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/dev/dri/renderD128</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The default render node used for virtual desktops; see: <a href="#_multiple_gpu">Multiple GPUs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_DOCKER_FAKE_UDEV_PATH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$HOST_APPS_STATE_FOLDER/fake-udev</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path on the host for the fake-udev CLI tool</p></td>
 </tr>
 </tbody>
 </table>

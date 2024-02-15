@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -156,9 +156,6 @@
           <a href="../index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -186,7 +183,6 @@
   <div class="version-menu">
     <a class="version" href="../../stable/protocols/input-data.html">stable</a>
     <a class="version is-current" href="input-data.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/protocols/input-data.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/protocols/input-data.html">dev-api</a>
   </div>
 </div>
@@ -205,7 +201,7 @@
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1j7FuwzAMRPd8BeEuzeDECIoO-o9OQQbGpG0CsiRQdJo08L9XaevCQNGNPN47HN-Cco7-wgQSWj8RA4lya3LhosAYafKc90mjxTb6MmFfdglpsprQcIcUW6gX3DkS7BXHvD_fjDthT3UeUJl2TOF42jyT4nv9HTAwEis01-bQvG43P7dzvEL1ZYAsH1zB0RWp7kSzwd3lhAFe5tP2r91u6deu7NHKX_8Aj-7VcjxAQbRUyfB0d547A2cxPVSzOM7zgvaYSnUvgddhQXxJWiWsWHAq_WAl4hN5qn-Y" alt="General format of an `INPUT_DATA` message">
+<img src="https://kroki.io/bytefield/svg/eNp1j7FuwzAMRPd8BeEuzSDbCIoO-o9OQQbGpG0BsiRQdJo08L9XaevCQNGNPN47HN-CcI7-wgQudH4mBnLCnboLFwWmSLPn3CSJGrvoy4RD2V1IsxpCxRopdmBW3Nq6IYeD4JSb8025d-zJ5BGFqWYKx9PumQTfzXfEyEgs0F7bQ_u63_3czvEK1ZcBsvvgCo62SKZ3khXuNicM8LKc9n_teku_dmGPWj77B3i0r9bjAQoipUqGp7v13CtYjemhqsZpWVZ0wFSqexd4GxacL0mbhA0LVtwwaon4BB6Vf_U=" alt="General format of an `INPUT_DATA` message">
 </div>
 <div class="title">Figure 1. General format of an <code>INPUT_DATA</code> message</div>
 </div>
@@ -306,7 +302,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp9kMFqwzAMhu99CpPTcnAbwuhKroO-wWAj5KBGSmvm2EFWmoyxd5_TJYOOsIOMrP_Tj3-_OKbg7ZVQGVfbHkmhYarFXClOVOuxtxR2HXvxtbexg3O8G9f1ohEEtoC-VnpZLwo0cGZow-70IdQYsqjDBZhwS-jKavOADIP-MbgQILHKxizP9ulm1tgPi5I0nluQJJ2lkx8jfVBlETvdGA6iPovQgVOPX9U99TRTTBYkBlznEiQroF6TdTpfpd_-pR2NMoVYDeRIBs_vv4lmh8mdgiqzcR-fnsd6nr7lTx1use5nx-Ny3CZV-g3zGJp-" alt="The full format of a `MOUSE_MOVE_REL` packet">
+<img src="https://kroki.io/bytefield/svg/eNp9kM9qwzAMxu99CpPTcsgfwuhKroO-wWAj5KBGSmvm2EFWmoyxd5_TJYOOsIOMrO-nD39-sUzemSuh0rYxA5JCzdSIvlKYqM7hYMhnPTtxjTOhg3O4a9sPkiAIpICuUcm6XpZphhrODJ3PTh9CrSaDib8AE6aEtqp3D8gwJj8WFwIkVvmUF_k-3i0au3FVotZxBxLFi3RyU6APqipDl7SavajP0vdg1eNXfU89LRSTAQkRt7kIyQio12ibLjbpt39pS5PMITYDWZLR8ftvosVhdievqnzah6cXoZ7nb_lTh1us-9nxuB63SR1_A73Lmts=" alt="The full format of a `MOUSE_MOVE_REL` packet">
 </div>
 <div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
 </div>
@@ -335,7 +331,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNkMFugzAMhu88RcRpHGhZ15aJ46TtDSZtQhxcbCBaSFASCtO0d1-ywbZWVOohvxz_n-3Ez1KTUeJIyLgsRY_EkGsqLT-Sy7BWYS_IrDutrCqVcBHU7s5l19sYwcIKUJUsnsuzDDnUGlqzPrxbqjgJjE0DmnBFKPMiuEENQ_zToCFA0iwZk02yj4LJ02qYnbBSugUbRpN1UKOjieWZi-KKa2PZR2Y6kGz7WZxSu4nSJMC6Dy5z4Uu4zG3OuNeZE_A39B80lXuYDMslF8yd0x4DR9tcOa8hXjf28lBJo_WrWlybJDso_RZeeJxb-P57605uvSTJgjx62S0YPvdw_9vgzE2dpE8-2jq5S4Mi-gJ738ZM" alt="The full format of a `MOUSE_MOVE_ABS` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNkM9OhDAQxu88RcNJDvxx3V0MRxN9AxMN4TDLDNBYWtKWBWN8d4uCuhs22UO_TOf7zUw7z1KTUeJIyLgsRY_EkGsqLT-Sy7BWYS_IxJ1WVpVKuAhqd-ey622IYCECVCULl_Isi2LkUGtoTXx4t1RxEhiaBjRhRCjzwrtBDUP406IhQNIsGZNNsg-82dNqWBy_UroF6wezdVCjo4nlmYvCimtj2UdmOpBs-1mcUruZ0iTAui-uc_6Lv85tzrjXhRPwN_QfNJdPMBmWSy6YO6c9Bo62uXJeQ7xu7OWhkkY7rWp1bZLsoPSbf-FxbuH77607uZ0kSVbkcZLdijHlHu5_G5y5qZP0aYq2Tu5Srwi-AHv5xqk=" alt="The full format of a `MOUSE_MOVE_ABS` packet">
 </div>
 <div class="title">Figure 3. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
 </div>
@@ -371,7 +367,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1j0FvgzAMhe_9FRGncaBl01qt_I-dUA8GmzZaiJFjCtO0_75kpdUO7PLk-Ht58nv3QoHdldBY37oRyaAVatVeKW5Mzzg6CrtBWLllFyc4x7f1w6gFgsIWkFtT3L9XFVo4C_Rh13wqdZYcFuECQrgl9PVp84QCU3ELuBAgiSnn8qU85AsSnu4g61h60CzfLKzhObr3pq7iVHRWgpqvKgzgzev3Kf_jyiCWYJ8tViEHGlv-Y2704XQQNEFPs6Zb1s7ypBPLR_Zgt_SURcHUsc_ht1SSY5JyRfZJ3lbA8yn_ARPThjM=" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1j81ugzAQhO95CotTOfCTqoka3qMnxGFhl8SqsdF6CURV3712Q6Ie6GW03m882vmwTN6ZK6HStjMTkkLN1Im-UtioweFkyBcjO3GdM2GCc3hrO06SIQjkgK5T2eN7VeUFajgzDL5ob0K9JoOZvwAT5oS2bnYvyDBn94gLARKrcilfy2O6InbzAyS94wEkSXcra90S3AdVV2HKes1e1FflR7Dq7btJ_7gSCDWcTVYrkwEJPf8xt_J0GvASoaVF4i1bZ1mS2fFn8mT39JhFXtWhz_G3VJRTlHJDDlHeN8C-SX8AyKuGkA==" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
 </div>
 <div class="title">Figure 4. The full format of a <code>MOUSE_BUTTON_DOWN</code> or <code>MOUSE_BUTTON_UP</code> packet</div>
 </div>
@@ -444,7 +440,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1UEFugzAQvPMKi1M5kKAURRW3HPqEnhCHDbsQK443WptAVPXvNSm0JUouo13P7FgzH1bIsbkQKm1r0yEp1EK11xcKL-rE2Bly67Ow55pNmKANu7bnzqcIHlaAXKt0Pi8K1NAKnNx6f_XUaDKYugMI4YrQllX0ggJ9-mNwIEASlQ3ZJtsm0cQJ9zMTNywn8HEyUXseghpUWYQpbbQ4rz4Ldwar8q_qvyqGEIJtPEmFDPiQ8om4MdC6O-1ScaSrqhnpieHmzjAUNysNOL8gM1UuriwNfgz9sABLvmc5_jYw_TsakVNlqG5762-E9xGyB7Ab4fUJu8sDvN3W_I-IquQbgXavRg==" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1UEFugzAQvPMKi1M5EFCKoopbDn1CT4jDhl2IFeNFtglEVf9ek0JbonAZ7Xpmx5r50IYsqyuhkLpSPZJAaahy8kr-RbSMvSKbdIYdV6z8BI3fpe56FyM42AFyJeLlPM93CUpoDLQ2Od0c1ZIUxvYMhnBHqIsyeEEDQ_xjcSZAMiId0316iIKZMzwsTFizacGF0UydePRqEEXup7iWxjrxmdsOtMi-yv-qEHwM1uEsNaTA-Zwb4lpBYx-0a8WFbqJipA3D_YOhr25RKrBuRaaiWF1pGt0U-mkBmtzA5vLbwPzvZERWFL66w72_Cd4nSJ_AcYLXDfaYeXi7r9kfEZTRN2aur6M=" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
 </div>
 <div class="title">Figure 5. The full format of a <code>KEY_DOWN</code> or <code>KEY_UP</code> packet</div>
 </div>
@@ -975,7 +971,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqVkLFuhDAMhneeImI6Bu4oqk4ntg69N-iEGAw2R1RIkGMOqqrv3tDCSUgM7fLHzm9_Uf43w-RseydU2lTtgKRQM1Wi7-RvVGdxaMmderZiK9v6Cm6-16YfJEYQOALaSsXrepahhhtD507lh1CtqcXYNcCER0KTF8EBGcb4F9AQILFKpiRNztFisR1XI6wtdyDhapV28sOg8sxXca3ZifrMXA9GPX8V-1NMLYj_3_7cQWgSFUJnByOhX_HPNYU_3VCqpyLah6T_gKR_hCQq3xjGM-csomAnF0MyWn5_BLOgZxA5lftAzz-pzvI6S7IjLw_ZGterl8tlUy1uUETfG2C3NQ==" alt="The full format of a `MOUSE_SCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqVkD1uhDAQhXtOMaJaCn6CotWKLkX2BqkQxYCHxYqx0dgsRFHuHpPASkgUSfM84zfzWX5vmskadScBUjdqFARCMjVO3snfQG_EqMimAxtnGqN8hTffSz2MLhboMEFhGoi39aJIUiHxxtjbtP5w1EpSIrYdMomEhC6r4CQYp_gX0REKYsjmLM_O0WqxmTYjbA336MLNqs3shxHKwldxK9k6-CzsgBqev6rjKSaFzv_weO7kaHYQYm9G7UK_4p_rKn_asYanKjqG5P-A5H-EZFDuDO2ZSxZRcJCLJjcZfn8Es6IXEFkofaDnn1QXeV0kO5CXh-yN69XL5bKrVjeoom8IlreS" alt="The full format of a `MOUSE_SCROLL` packet">
 </div>
 <div class="title">Figure 6. The full format of a <code>MOUSE_SCROLL</code> packet</div>
 </div>
@@ -1003,7 +999,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNptj7FuhDAMhneeImLqDdzBqTCwdegjdEIMPmzuooYYOeGgqvruDRTUol6GX3_8f7bsNyvk2NwJlbaNGZAUaqHG6zuFiuoYB0Pu1At7btgEB9fw17YffILg4QjIjUq29rJEDVeBzp0uH55aTQYTdwMhPBLaqo6i6AkFxuRnxI0ASVQ6pee0OKyR8LgFccvSgY-36MJTgAtVlcElrRbn1WfperDq-aveU3mezi9bYSEDPhz6GI-h48H6eIUN_A4-L6Slyc-b7e2_fS35keX978LkVBUOLJYrZ3mZJX0gC5Ltanm-uew1qg_fq5uMOQ==" alt="The full format of a `MOUSE_HSCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNptj79uhDAMxneeImLqDeHPqTCwdegjdEIMPmzuooYEOeGgqvruDRTUol6GT1_8_WzZb4bJWX0nFMq0ekQSqJhar-4UKqK3OGpy6cDW29bq4OAa_soMo5cIHhJA2wq5t1dVkqKCK0Pv0suHp06RRuluwIQJoambKIqekGGSP0NuBEgssjk7Z-Vpi9hOexB3lnvw8R5d7BzgUtRVcLJT7Lz4rNwARjx_NUeqKLLl5RvMpMGHUx_jMfR2ND7eYA2_g88raWj2y2ZH-29fQ36y_P53YXKiDgeW65WLvCySPZAVyQ-1othd_ho1p29pl4yW" alt="The full format of a `MOUSE_HSCROLL` packet">
 </div>
 <div class="title">Figure 7. The full format of a <code>MOUSE_HSCROLL</code> packet</div>
 </div>
@@ -1038,7 +1034,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1jL0OgkAQhHufYoONFPxojAXvYWUsltsFLjnuLncLQgzvLok_iQXdzHwzc7WBozMjE2irzEAMpAMr0SOvCfSOBsOx8MGJU86sCtvVa-sHyQgFcySnIPvOq4o0tgH7WNSzcKPZUBY7DEw5k73ddwcK-MjeBx0jcYByKk_lJf2g2k2QKAkG9gk8q-jRwnH5ozJ73mIK_RaqBxFnoTHYxl_nvKQvPdpaNA==" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
+<img src="https://kroki.io/bytefield/svg/eNp1jL0OgkAQhHufYoONFPxojAXvYWUsltsFLjnuLncLQgzvLok_iQXdzHwzc7WBozMjE2irzEAMpAMr0SOvCfSOBsOx8MGJU86sCtvVa-sHyQgFcySnIPvOqyovSGMbsI9FPQs3mg1lscPAlDPZ2313oICP7H3RMRIHKKfyVF7SD6rdBImSYGCfwLOKHi0clz8qs-ctptBvoXoQcRYag238dc5L-gK9qFqR" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
 </div>
 <div class="title">Figure 8. The full format of a <code>CONTROLLER_ARRIVAL</code> packet</div>
 </div>
@@ -1141,7 +1137,7 @@ Since Moonlight 5.0.0 the format has been slightly changed (without breaking the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNq1kM9OwzAMxu88hdVd4JCt9MChz7DTBNKmaQc3dtpoaVI56TaEeHeKSiWEOERC3Gx_P3_-8-KFY3AXJrBeu5EYyArrZC88VaAPNDqOm0FCCjq4KcJ2yq0fxqQIE66Rgga1tNc1WWwF-7hpXhMby45U7FCY1kz-eLq7J8Grmg06RmKB8lZW5dPDlyThugiFCdJjKhapCTfw1sGxniJlrMQEb3Uc0EP1fvpOFTqJg1WRg-J8bo_xnMNnLtAkD8ZhG7N22D7_ij3-wHZ52JZNgn3e4E_0kIXubNvl2s7s4T_-CdUfXT8AUyv_EQ==" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNq1kM9OwzAMxu88hdVd4JC29MChz7DTBNKmaQc3dttoaVI56TaEeHeKSiWEOERC3Gx_P3_-8-KEg7cXJjBO24kYyAjraC48V2DwNFkOxSg-eu3tHGE358aNU1SEEXMkr0Gt7XWdF2SwExxC0bxGbg1bUqFHYcqZ3PF0d0-CV7VY9IzEAuWtrMqnhy9J_HUVstbLgDFbpcbfwBkLx3qOVGskRHirw4gOqvfTdyrTUSxsshQUl4MHDOcUPnGBJjpoLXYhaYft86_Y4w9sl4ZtuY2wTxv8iR6S0J3p-lTbhT38xz-h-qPrB4bb_24=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
 </div>
 <div class="title">Figure 9. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
 </div>
@@ -1150,7 +1146,7 @@ Since Moonlight 5.0.0 the format has been slightly changed (without breaking the
 <div class="content">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNksFuwjAMhu88RdTTOBTaCtDobZrGaadpk4YQB5O4EC0kyEmh07R3XwqFCWilXCyn_vzbTf4PTWiN2qNgUnNVCmRCEnIn9-i_sK0RpUI73JFxhhvlM1j7s9S70sUCHAxAGM7ic3ueCwlrgq0drr4dFhKViO0GCMUAhV4sew-C4BCfBDYIAoklVZIlk35TInM4F6LC0BZcdC6tTOXhFNki92lcSLKO_eR2B5qNfpfXGG8oQgXO_2AXl0I7mF2DETfakVEKKWoaFPyPv6XheIdR26bZ3QajsA1WpXNG2yiMfn3vANMb8C0UVFg49hk4_gjPA2GS60249ImeBzxDUk15kFnG404xjZWrTdnvtRhUozsY-ro4tNm8VkXLFt7Zk6O9fcjqkCT3IX2ps-eWwlNLR3qpjjr0AsL00YfZrM5a5vrLqLPesv8HhwRQYw==" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNksFuwjAMhu88RdTTOBTaCtDobZrGaadpk4YQB5O4EC0kyEmh07R3XwqFCWilXCyn_vzbTf4PTWiN2qNgUnNVCmRCEnIn9-i_sK0RpUI73JFxhhvlM1j7s9S70sUCHAxAGM7ic3ueD4ZCwppga4erb4eFRCViuwFCMUChF8vegyA4xCeJDYJAYkmVZMmk35TIHM6FqDC0BRedSytTeThFtsh9GheSrGM_ud2BZqPf5TXGG4pQgfO_2MWl0A5m12DEjXZklEKKmgYF_-NvaTjeYtS2aXa3wShsg1XpnNE2CqNf3zvA9AZ8CwUVFo59Bo4_wvNAmOR6Ey59oucBz5BUUx5klvG4U0xj5WpT9nstBtXoDoa-Lg5tNq9V0bKFd_bkaG8fsjokyX1IX-rsuaXw1NKRXqqjDr2AMH30YTars5a5_jLqrLfs_wEnYlDA" alt="The legacy format of a `CONTROLLER_MULTI` packet">
 </div>
 <div class="title">Figure 10. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
 </div>

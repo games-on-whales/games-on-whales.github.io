@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -156,9 +156,6 @@
           <a href="../index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -184,7 +181,6 @@
   <div class="version-menu">
     <a class="version" href="../../stable/user/quickstart.html">stable</a>
     <a class="version is-current" href="quickstart.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/user/quickstart.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/user/quickstart.html">dev-api</a>
   </div>
 </div>
@@ -213,11 +209,8 @@
 <li id="_tabs_1_intelamd" class="tab">
 <p>Intel/AMD</p>
 </li>
-<li id="_tabs_1_nvidia_container_toolkit" class="tab">
-<p>Nvidia (Container Toolkit)</p>
-</li>
-<li id="_tabs_1_nvidia_manual" class="tab">
-<p>Nvidia (Manual)</p>
+<li id="_tabs_1_nvidia" class="tab">
+<p>Nvidia</p>
 </li>
 </ul>
 </div>
@@ -233,13 +226,14 @@
     -e XDG_RUNTIME_DIR=/tmp/sockets \
     -v /tmp/sockets:/tmp/sockets:rw \
     -e HOST_APPS_STATE_FOLDER=/etc/wolf \
-    -v /etc/wolf/wolf:/wolf/cfg \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /etc/wolf/wolf:/wolf/cfg:rw \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
     --device /dev/dri/ \
     --device /dev/uinput \
-    --device-cgroup-rule "c 13:* rmw" \
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
+    -v /run/udev:/run/udev:rw
     ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
@@ -271,136 +265,7 @@ services:
 </div>
 </div>
 </div>
-<div id="_tabs_1_nvidia_container_toolkit--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_container_toolkit">
-<div class="paragraph">
-<p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Your driver version must be <code>&gt;= 530.30.02</code></p>
-</li>
-<li>
-<p>Make sure to install <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>We also have to make sure that the <code>nvidia-drm</code> module has been loaded and that is loaded with the flag <code>modeset=1</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
-Y</code></pre>
-</div>
-</div>
-<details>
-<summary class="title">I get <code>N</code> or the file is not present, how do I set the flag?</summary>
-<div class="content">
-<div class="paragraph">
-<p>If using Grub, the easiest way to make the change persistent is to add <code>nvidia-drm.modeset=1</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code> ex:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then <code>sudo update-grub</code> and <strong>reboot</strong>.</p>
-</div>
-<div class="paragraph">
-<p>For more options or details, you can see <a href="https://wiki.archlinux.org/title/Kernel_parameters">ArchWiki: Kernel parameters</a></p>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>Docker CLI:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
-    --rm \
-    --name wolf \
-    --network=host \
-    -e WOLF_LOG_LEVEL=DEBUG \
-    -e XDG_RUNTIME_DIR=/tmp/sockets \
-    -v /tmp/sockets:/tmp/sockets:rw \
-    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
-    -v /etc/wolf/wolf:/wolf/cfg \
-    -v /var/run/docker.sock:/var/run/docker.sock:rw \
-    --gpus=all \
-    --device-cgroup-rule "c 13:* rmw" \
-    --device /dev/dri/ \
-    --device /dev/uinput \
-    -v /dev/shm:/dev/shm:rw \
-    -v /dev/input:/dev/input:rw \
-    -v /run/udev:/run/udev:rw \
-    -v /etc/wolf/ensure-groups:/opt/gow/ensure-groups:rw \
-   ghcr.io/games-on-whales/wolf:stable</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Docker compose:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
-services:
-  wolf:
-    image: ghcr.io/games-on-whales/wolf:stable
-    environment:
-      - XDG_RUNTIME_DIR=/tmp/sockets
-      - HOST_APPS_STATE_FOLDER=/etc/wolf
-    volumes:
-      - /etc/wolf/wolf:/wolf/cfg
-      - /tmp/sockets:/tmp/sockets:rw
-      - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /dev/shm:/dev/shm:rw
-      - /dev/input:/dev/input:rw
-    devices:
-      - /dev/dri
-      - /dev/uinput
-    device_cgroup_rules:
-      - 'c 13:* rmw'
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-    network_mode: host
-    restart: unless-stopped</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can check if the driver is loaded by issuing <code>nvidia-smi</code> inside the container:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it wolf nvidia-smi
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  NVIDIA GeForce RTX 3070         On | 00000000:0A:00.0 Off |                  N/A |
-|  0%   47C    P8               16W / 220W|    416MiB /  8192MiB |      0%      Default |
-|                                         |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
-
-+---------------------------------------------------------------------------------------+
-| Processes:                                                                            |
-|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
-|        ID   ID                                                             Usage      |
-|=======================================================================================|
-+---------------------------------------------------------------------------------------+</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
 <div class="paragraph">
 <p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
 </div>
@@ -487,9 +352,9 @@ Y</code></pre>
     -e NVIDIA_DRIVER_VOLUME_NAME=nvidia-driver-vol \
     -v nvidia-driver-vol:/usr/nvidia:rw \
     -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
     -v /etc/wolf/wolf:/wolf/cfg \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
-    --device-cgroup-rule "c 13:* rmw" \
     --device /dev/nvidia-uvm \
     --device /dev/nvidia-uvm-tools \
     --device /dev/dri/ \
@@ -501,6 +366,7 @@ Y</code></pre>
     --device /dev/uinput \
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
+    -v /run/udev:/run/udev:rw
     ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
@@ -545,8 +411,16 @@ volumes:
 </div>
 </div>
 <div class="paragraph">
-<p>Depending on your system you might also need to initialise the <code>nvidia-uvm</code> devices:</p>
+<p>If you are missing any of the <code>/dev/nvidia*</code> devices you might also need to initialise them using:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo nvidia-container-cli --load-kmods info</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">Or if that fails:</summary>
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
@@ -579,6 +453,8 @@ else
 fi</code></pre>
 </div>
 </div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -665,9 +541,17 @@ crw------- 1 root root 10, 223 Jan 17 09:08 /dev/uinput</code></pre>
 <div class="listingblock">
 <div class="title">Create <code>udev</code> rules under <code>/etc/udev/rules.d/85-wolf-virtual-inputs.rules</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Allows Wolf to acces /dev/uinput
+KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+
+# Move virtual keyboard and mouse into a different seat
 SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"
-SUBSYSTEMS=="input", ATTRS{id/vendor}=="045e", ATTRS{id/product}=="02d1", ATTRS{id/version}=="ab00", MODE="0660", GROUP="input"</code></pre>
+
+# Joypads
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"</code></pre>
 </div>
 </div>
 <details>
@@ -693,12 +577,15 @@ This is usually not the default on servers, but if that is already working for y
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>SUBSYSTEMS=="input", ATTRS{id/vendor}=="045e", ATTRS{id/product}=="02d1", ATTRS{id/version}=="ab00", MODE="0660", GROUP="input"</pre>
+<pre>SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now the virtual controllers are different, because we need to emulate an existing brand for them to be picked up correctly, so our virtual controllers have a vendor/product id resembling an Xbox controller.
-But the version is again specific to Wolf.</p>
+<p>Now the virtual controllers are different, because we need to emulate an existing brand for them to be picked up correctly, so our virtual controllers have a vendor/product id resembling a real controller.
+The assigned name instead is specific to Wolf.</p>
 </div>
 <div class="paragraph">
 <p>You can&#8217;t assign controllers a seat however (well - you can - but it won&#8217;t have the same effect), so we just give it permissions where only user+group can pick it up.</p>

@@ -83,7 +83,7 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../dev/manual_build.html">Manual build</a>
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -156,9 +156,6 @@
           <a href="../index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-input-protocol/index.html">dev-input-protocol</a>
-        </li>
-        <li class="version">
           <a href="../../dev-api/index.html">dev-api</a>
         </li>
       </ul>
@@ -184,7 +181,6 @@
   <div class="version-menu">
     <a class="version" href="../../stable/user/overview.html">stable</a>
     <a class="version is-current" href="overview.html">dev-nix</a>
-    <a class="version" href="../../dev-input-protocol/user/overview.html">dev-input-protocol</a>
     <a class="version" href="../../dev-api/user/overview.html">dev-api</a>
   </div>
 </div>
@@ -199,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wolf is an open source streaming server for <a href="https://moonlight-stream.org/">Moonlight</a> that allows you to share a single server with multiple remote clients in order to play videogames!<br></p>
+<p>Wolf is an open source streaming server for <a href="https://moonlight-stream.org/">Moonlight</a> that allows you to share a single server with multiple remote clients in order to stream video and audio with low latency<br></p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/wolf-introduction.svg" alt="Wolf introduction image"></span></p>
@@ -209,13 +205,26 @@
 <div class="sect1">
 <h2 id="_how_it_works"><a class="anchor" href="#_how_it_works"></a>How it works</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Wolf runs as a Docker container that will start and stop automatically new containers on-demand.
+This has a few major advantages:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each remote client will run in a separate and isolated container.</p>
+</li>
+<li>
+<p>Input devices (mouse, keyboard, joypads) are completely isolated between multiple users.</p>
+</li>
+<li>
+<p>Nothing is permanently installed on the host; wiping down the Docker images and the permanent storage folder is all you need to completely clean your server.</p>
+</li>
+</ul>
 </div>
-<div class="sect1">
-<h2 id="_what_can_i_do_with_it"><a class="anchor" href="#_what_can_i_do_with_it"></a>What can I do with it?</h2>
-<div class="sectionbody">
-
+<div class="paragraph">
+<p>If you are curious to look under the hood of Wolf we have some high-level docs under the <em>Developer guide,</em> and you can always take a look at the actual code since everything is open source.</p>
+</div>
 </div>
 </div>
 </article>
