@@ -155,9 +155,6 @@
         <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
-        <li class="version">
-          <a href="../../dev-api/index.html">dev-api</a>
-        </li>
       </ul>
     </li>
   </ul>
@@ -181,7 +178,6 @@
   <div class="version-menu">
     <a class="version is-current" href="quickstart.html">stable</a>
     <a class="version" href="../../dev-nix/user/quickstart.html">dev-nix</a>
-    <a class="version" href="../../dev-api/user/quickstart.html">dev-api</a>
   </div>
 </div>
 <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
@@ -232,7 +228,8 @@
     --device /dev/uinput \
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
-    -v /run/udev:/run/udev:rw
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
@@ -255,6 +252,8 @@ services:
       - /dev/shm:/dev/shm:rw
       - /dev/input:/dev/input:rw
       - /run/udev:/run/udev:rw
+    device_cgroup_rules:
+      - 'c 13:* rmw'
     devices:
       - /dev/dri
       - /dev/uinput
@@ -363,7 +362,8 @@ Y</code></pre>
     --device /dev/uinput \
     -v /dev/shm:/dev/shm:rw \
     -v /dev/input:/dev/input:rw \
-    -v /run/udev:/run/udev:rw
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
 </div>
 </div>
@@ -386,6 +386,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - /dev/shm:/dev/shm:rw
       - /dev/input:/dev/input:rw
+      - /run/udev:/run/udev:rw
       - nvidia-driver-vol:/usr/nvidia:rw
     devices:
       - /dev/dri
