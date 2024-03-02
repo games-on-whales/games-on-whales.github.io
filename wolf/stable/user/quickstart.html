@@ -288,18 +288,18 @@ services:
 <p>This will create <code>gow/nvidia-driver:latest</code> locally.</p>
 </div>
 <div class="paragraph">
-<p>Unfortunately, docker doesn&#8217;t seem to support directly mounting images, but you can <a href="https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container">pre-polulate volumes</a>!</p>
+<p>Unfortunately, docker doesn&#8217;t seem to support directly mounting images, but you can <a href="https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container">pre-polulate volumes</a> by running:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --name nvidia-driver-container --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh
-
-docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "sh": executable file not found in $PATH: unknown.
-ERRO[0003] error waiting for container:</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, the command will fail because the image contains no binary, but it&#8217;ll create a new volume nevertheless.</p>
+<p>It will create a Docker container, populate <code>nvidia-driver-vol</code> with Nvidia driver if it wasn&#8217;t already done and remove the container.</p>
+</div>
+<div class="paragraph">
+<p>Check volume exists with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
