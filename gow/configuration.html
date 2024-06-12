@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Configuration :: Games On Whales</title>
-    <meta name="generator" content="Antora 3.0.1">
+    <link rel="canonical" href="https://games-on-whales.github.io/gow/configuration.html">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../_/css/site.css">
 <link rel="stylesheet" href="../_/css/vendor/tabs.css">
 <link rel="stylesheet" href="../_/css/site-extra.css">
@@ -14,7 +15,7 @@
     <div class="fancy-stripe"></div>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="..">Games On Whales</a>
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
                 <div class="navbar-item search hide-for-print">
                     <div id="search-field" class="field">
                         <input id="search-input" type="text" placeholder="Search the docs">
@@ -31,8 +32,10 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link" href="#">Projects</a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
                         <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -40,6 +43,7 @@
                     <div class="navbar-dropdown">
                         <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
                         <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
                     </div>
                 </div>
             </div>
@@ -174,6 +178,9 @@
           <a href="../wolf/stable/index.html">stable</a>
         </li>
         <li class="version">
+          <a href="../wolf/dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
           <a href="../wolf/dev-nix/index.html">dev-nix</a>
         </li>
       </ul>
@@ -186,7 +193,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../wolf/stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">gow</a></li>
@@ -222,7 +229,7 @@ container, it can also be a way to share data between multiple containers.</p>
 </div>
 <div class="paragraph">
 <p>Before you launch GoW for the first time, create a new directory and update the
-<code>LOCAL_STATE</code> variable in your <a href="#_user_environment">User environment</a> to match.</p>
+<code>LOCAL_STATE</code> variable in your <code>User environment</code> to match.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -247,9 +254,8 @@ anyone can write to it.
 <div class="sectionbody">
 <div class="paragraph">
 <p>In order to make the time zone inside your container match your actual local
-time zone, you&#8217;ll need to update the <code>TIME_ZONE</code> variable in your <a href="#User
-environment">[User
-environment]</a>.  If you&#8217;re not sure what to set it to, check out
+time zone, you&#8217;ll need to update the <code>TIME_ZONE</code> variable in your <code>User
+environment</code>.  If you&#8217;re not sure what to set it to, check out
 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">this list</a> of <code>tz</code>
 database time zones.</p>
 </div>
@@ -313,8 +319,14 @@ port to suit your preferences.</p>
 </main>
 </div>
 <footer class="footer">
-    <p>Copyright &#169; Alessandro Beltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
-    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
 </footer><script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
 <script async src="../_/js/vendor/highlight.js"></script>
 <script async src="../_/js/vendor/tabs.js"></script>

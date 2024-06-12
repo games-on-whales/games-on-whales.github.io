@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Input Data :: Games On Whales</title>
-    <meta name="generator" content="Antora 3.0.1">
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/protocols/input-data.html">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
 <link rel="stylesheet" href="../../../_/css/site-extra.css">
@@ -14,7 +15,7 @@
     <div class="fancy-stripe"></div>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="../../..">Games On Whales</a>
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
                 <div class="navbar-item search hide-for-print">
                     <div id="search-field" class="field">
                         <input id="search-input" type="text" placeholder="Search the docs">
@@ -31,8 +32,10 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link" href="#">Projects</a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
                         <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -40,6 +43,7 @@
                     <div class="navbar-dropdown">
                         <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
                         <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
                     </div>
                 </div>
             </div>
@@ -62,9 +66,6 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/overview.html">Overview</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -82,6 +83,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
@@ -153,6 +157,9 @@
           <a href="../index.html">stable</a>
         </li>
         <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
       </ul>
@@ -165,7 +172,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../../gow/index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
@@ -179,6 +186,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">stable</button>
   <div class="version-menu">
     <a class="version is-current" href="input-data.html">stable</a>
+    <a class="version" href="../../dev-tracy/protocols/input-data.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/protocols/input-data.html">dev-nix</a>
   </div>
 </div>
@@ -197,7 +205,7 @@
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1j7FuwzAMRPd8BeEuzSDbCIoO-o9OQQbGpG0BsiRQdJo08L9XaevCQNGNPN47HN-CcI7-wgQudH4mBnLCnboLFwWmSLPn3CSJGrvoy4RD2V1IsxpCxRopdmBW3Nq6IYeD4JSb8025d-zJ5BGFqWYKx9PumQTfzXfEyEgs0F7bQ_u63_3czvEK1ZcBsvvgCo62SKZ3khXuNicM8LKc9n_teku_dmGPWj77B3i0r9bjAQoipUqGp7v13CtYjemhqsZpWVZ0wFSqexd4GxacL0mbhA0LVtwwaon4BB6Vf_U=" alt="General format of an `INPUT_DATA` message">
+<img src="https://kroki.io/bytefield/svg/eNqFksFugzAMhu99Ciu9wCFSQVVV5Ql22GGH3VAPZgkQKU1YMCpdxbsvYaVl66ZdULA__3Z-J5GqQiLfgShrju89wkVU2hhga5Ryr3ZsTFerJGAWpMcTr73rW26wVIY3CqXyK4Cia9HCFDyE32QiSzdAQmqgrwQU4ojURH1niXf6Q0GWj4c0RKby6SNK54NmB1YbEI3SdUOQbcf0-xTatj3d-ydFbDs3XiaBvZ5bxUJ5pCicl-SbM_3RXtEuXWQerwlbYE_Tif0DZjmwFzwbh3JGbbCBe3eCbL8sjhbFmaC4epCPt0UcfoLsWVn2Oxmu98vVN8Mm3-wm424aEwDR_CAVzB54pX1H8w62YR-PeBxxxr0ySEr-VSCRkM3J_L7O9UUYVREIcm2MErnjOM6lNbZhdKOtWorFJ3BZKixqQfj4NILEJyUg5J4=" alt="General format of an `INPUT_DATA` message">
 </div>
 <div class="title">Figure 1. General format of an <code>INPUT_DATA</code> message</div>
 </div>
@@ -298,7 +306,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp9kM9qwzAMxu99CpPTcsgfwuhKroO-wWAj5KBGSmvm2EFWmoyxd5_TJYOOsIOMrO-nD39-sUzemSuh0rYxA5JCzdSIvlKYqM7hYMhnPTtxjTOhg3O4a9sPkiAIpICuUcm6XpZphhrODJ3PTh9CrSaDib8AE6aEtqp3D8gwJj8WFwIkVvmUF_k-3i0au3FVotZxBxLFi3RyU6APqipDl7SavajP0vdg1eNXfU89LRSTAQkRt7kIyQio12ibLjbpt39pS5PMITYDWZLR8ftvosVhdievqnzah6cXoZ7nb_lTh1us-9nxuB63SR1_A73Lmts=" alt="The full format of a `MOUSE_MOVE_REL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhvf8ipO7wIAEKEoRa6WoQ4cOHVohBlMfAdWxqTEKacV_r-1CShLaDrbsu-e-3vMYllRr1UJa7AL63lH4TMuacyA3lLEEN2TwVyvPYAKYoodgp2TXBJwWyIMKKUO1Asjahgpwxtx8PUcWsgdPY6-_HZCle6orm18KHbT1B0IUD7lvLC7cXWkhlcnZgqg5pBXWu0pDtB788y5q0XT6p76X2bJT4bkTyNOxQWLCLaXNe06-St7txYi2_sxzPSasgdy7F_kHjGIgj_TIJWUTKowMgZIHiJJ5sJXI9gTZqEE8nBaRX4LkAQVZJs14C6OHfRiHGyec9ZnyJ1FKqcwyyBRm04d9YlZkXkFZq1ZPW1mbDZ1RtyOlkFON7BeOMOSawjNZpuNF-uVPetJwcSCB-iDV22miMYPNji1kYb8xrcfm3FlZLk7ixjq3bbfT5Sy5_wWrZf-E" alt="The full format of a `MOUSE_MOVE_REL` packet">
 </div>
 <div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
 </div>
@@ -327,7 +335,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNkM9OhDAQxu88RcNJDvxx3V0MRxN9AxMN4TDLDNBYWtKWBWN8d4uCuhs22UO_TOf7zUw7z1KTUeJIyLgsRY_EkGsqLT-Sy7BWYS_IxJ1WVpVKuAhqd-ey622IYCECVCULl_Isi2LkUGtoTXx4t1RxEhiaBjRhRCjzwrtBDUP406IhQNIsGZNNsg-82dNqWBy_UroF6wezdVCjo4nlmYvCimtj2UdmOpBs-1mcUruZ0iTAui-uc_6Lv85tzrjXhRPwN_QfNJdPMBmWSy6YO6c9Bo62uXJeQ7xu7OWhkkY7rWp1bZLsoPSbf-FxbuH77607uZ0kSVbkcZLdijHlHu5_G5y5qZP0aYq2Tu5Srwi-AHv5xqk=" alt="The full format of a `MOUSE_MOVE_ABS` packet">
+<img src="https://kroki.io/bytefield/svg/eNqNkj1vgzAQhnd-xcldYEACSj7EWKlVhw4dOrRCDE4xAdWxqTGCtOK_90wgISlRO3Ayd899-D3bKcuo1qqCaLN16WdN4TvKCs6B3NA0XbMl6RzLshETkCrauFsl69LldMO4mzOaMmUBxFVJBfTOBH_tntzIFmzNWn0IQBztqM5NfSm0WxVfDPygSxz09Om9iTZSYc0KRMEhylmxzTX4YeecT1GIstan_nZs2o6Np0EgL_uSEUw3lMbzlHyXvN6JAa2cSeT3NSEE8tifyB-gHwB5pnsuaTqiAmVwlWzAX0-TjURmJogHDYLuuIjkEiRPTJB5Eq83c3Wv9QJv2QtnYtj-KEomFS6DjGmmvNfiGCh_62aFqvS4lRA3dEYtBkoxTjVLr3DklcxzwQX3NnKcnppOoCHdwKyC2DwL_M5rNEWq83_2Ozyp603HTc3KJphupPogV4ZDwZe96mh8Yzxvxtwbs5gJGN_d-ljgIrpCs3owpxDN7cpKnB86BCth" alt="The full format of a `MOUSE_MOVE_ABS` packet">
 </div>
 <div class="title">Figure 3. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
 </div>
@@ -363,7 +371,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1j81ugzAQhO95CotTOfCTqoka3qMnxGFhl8SqsdF6CURV3712Q6Ie6GW03m882vmwTN6ZK6HStjMTkkLN1Im-UtioweFkyBcjO3GdM2GCc3hrO06SIQjkgK5T2eN7VeUFajgzDL5ob0K9JoOZvwAT5oS2bnYvyDBn94gLARKrcilfy2O6InbzAyS94wEkSXcra90S3AdVV2HKes1e1FflR7Dq7btJ_7gSCDWcTVYrkwEJPf8xt_J0GvASoaVF4i1bZ1mS2fFn8mT39JhFXtWhz_G3VJRTlHJDDlHeN8C-SX8AyKuGkA==" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx_c8xcldYLAEKIlSnqBDhw7dEIMJJlh1bGofCmnFu9d2CqUtVZfT2f_ffUc1bxiisZBXJ8peewbveSOkBHLH6vrA92SMN5vIYQpqwy70ZHTfUckqLmnLWc3NBqCwHVMQPkv3jAJZ6QEi5APeBCjyM8PW59cKqRVvHNJsLGP3E8KDySttXE4LSkjIWy5OLUK6HePvXQjV9fhVPyp82anwUgTyfO04ceGeQucvyaOW_Vl9ojZeKL_HhC2Qh-CRf8A0A_LErlKzekKVWwM1-gLpYRnsV-R7guJzB9k4H6L8CZJHrsg66cZbGT0ZkizZT5KrPu-k0cbdgoSdTumTYedO5DzaCGNxusrWXWhBEXZEoX0fATVcMuT1X3CFMymZRS9Om1hrS3G8aPNCZu2W3efiFgo3zz4M5c29N8mK2XlzWBHSMv4AHVDrOQ==" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
 </div>
 <div class="title">Figure 4. The full format of a <code>MOUSE_BUTTON_DOWN</code> or <code>MOUSE_BUTTON_UP</code> packet</div>
 </div>
@@ -436,7 +444,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1UEFugzAQvPMKi1M5EFCKoopbDn1CT4jDhl2IFeNFtglEVf9ek0JbonAZ7Xpmx5r50IYsqyuhkLpSPZJAaahy8kr-RbSMvSKbdIYdV6z8BI3fpe56FyM42AFyJeLlPM93CUpoDLQ2Od0c1ZIUxvYMhnBHqIsyeEEDQ_xjcSZAMiId0316iIKZMzwsTFizacGF0UydePRqEEXup7iWxjrxmdsOtMi-yv-qEHwM1uEsNaTA-Zwb4lpBYx-0a8WFbqJipA3D_YOhr25RKrBuRaaiWF1pGt0U-mkBmtzA5vLbwPzvZERWFL66w72_Cd4nSJ_AcYLXDfaYeXi7r9kfEZTRN2aur6M=" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vwjAQhnd-xcldkiFSkkYIZWOo1KFDh25RhgM7H8LYqe2I0Cr_vbZLIFBQl9PZ73N39nsBZRUaozTkmzrCzx7hO69azoE8IaUrtiRjuFgEFhNAFR6iWsm-izhuGI8ahpSpBUChOxTgL0t7DDy5kQMEhg3mV4Ai36NpXH8pTKTbLwZJOpahvfHlPuQbqWxPDaLlkDesrRsDSTaG169oRdeby_ygcGOnwXMRyMexY8SWO8rYfE5uJe_34oTqcKb8_SZkQF59Rv4BkxTIOx65RDqhwtoQKXmAZDUvdha5N0Fx8iAdz4sob0HyxgS5T9rv3fl6PMRpvPTGOc2OP5tSSWWXQaYy1z4e0K7IZlHVKm2mrWR2QzOK4Na00r3Do4pxNIw-giuOtb5hr4kdO8JWUvagYXrTcC_pRHLU5kqMZ944YfL8rgGCmYNUu7MDp7muEdNQWOuW3j8XXlyI74S1C88P1HVmw8ofs4uwKMMfCiwUWw==" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
 </div>
 <div class="title">Figure 5. The full format of a <code>KEY_DOWN</code> or <code>KEY_UP</code> packet</div>
 </div>
@@ -967,7 +975,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqVkD1uhDAQhXtOMaJaCn6CotWKLkX2BqkQxYCHxYqx0dgsRFHuHpPASkgUSfM84zfzWX5vmskadScBUjdqFARCMjVO3snfQG_EqMimAxtnGqN8hTffSz2MLhboMEFhGoi39aJIUiHxxtjbtP5w1EpSIrYdMomEhC6r4CQYp_gX0REKYsjmLM_O0WqxmTYjbA336MLNqs3shxHKwldxK9k6-CzsgBqev6rjKSaFzv_weO7kaHYQYm9G7UK_4p_rKn_asYanKjqG5P-A5H-EZFDuDO2ZSxZRcJCLJjcZfn8Es6IXEFkofaDnn1QXeV0kO5CXh-yN69XL5bKrVjeoom8IlreS" alt="The full format of a `MOUSE_SCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqVUrFugzAU3PmKJ3eBAQlQFCG2Do06dOjQDTGYYgKqY1PbKKQV_95nApSkVGmXx7PvfM--wy1YSY1RGpJ879P3lsJnUtacA7mjRRGzLek9x3GRJqBQ9OjvlWwbn9Occb9itGDKAUh1QwUMmxku3YGZyw5cwzpzBiBNDtRUVl8K4-v6g0EY9ZmHO8PxoSS5VKipQdQckorV-8pAuOm9y1vUomnN93w3tWOnwUsQyMupYQSPW5bBfsl8lbw9iJGqvQXy85mwAfI4dOQGMYyAPNMTl7SYqAJt8JU8QhgvD1uL7J0gHT2I-jmI7JpInpgg60x83srTgy6Igu0E4fTZk1IqzIJMkFUPOooJYeeXtdJmCmWDAa2yFOPUsOIX3jl3Qg-yFYaM0Wf41W0OIWa-KhL9QyT6o0iwcMwCUxLD_3Tti2DmKNXbbMwobYWYhhQN3Q6u2vJgS7BS7udyCex2WOL4ohtRJ_O-AFMSHEo=" alt="The full format of a `MOUSE_SCROLL` packet">
 </div>
 <div class="title">Figure 6. The full format of a <code>MOUSE_SCROLL</code> packet</div>
 </div>
@@ -995,7 +1003,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 <div class="sectionbody">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNptj79uhDAMxneeImLqDeHPqTCwdegjdEIMPmzuooYEOeGgqvruDRTUol6GT1_8_WzZb4bJWX0nFMq0ekQSqJhar-4UKqK3OGpy6cDW29bq4OAa_soMo5cIHhJA2wq5t1dVkqKCK0Pv0suHp06RRuluwIQJoambKIqekGGSP0NuBEgssjk7Z-Vpi9hOexB3lnvw8R5d7BzgUtRVcLJT7Lz4rNwARjx_NUeqKLLl5RvMpMGHUx_jMfR2ND7eYA2_g88raWj2y2ZH-29fQ36y_P53YXKiDgeW65WLvCySPZAVyQ-1othd_ho1p29pl4yW" alt="The full format of a `MOUSE_HSCROLL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhnd-xcldYLCEUUARW4dKHTp06IYYTDEB1bGpbRTSiv9e24UE2lRlOB2-577eC2vWUGOUhrw6YPo-UPjMm45zQHe0rvcsQ1MUBKHFBNSKnvBByaHHnFaM45bRmqkAoNA9FeAfS_sberKSI4SGjeY7AEV-pKZ19aUwWHcfDEgylZF98ene5JVUtqYG0XHIW9YdWgNkN0XbKTrRD-baPyxc26XxOgjo5dwzZNMdZay_Jl8lH45iRnW0ivxeE3aAHr2H_gFJAuiZnrmk9YIKKwNW8gRkv052ErmZoJg1SKbLIcqfIHpiAt0mnTrBjeXjMU7iLJpDtv9FlUYqew20hFz9eMzsjayHm05ps5xlZ0-0odI0dh-ZYcU4Naz-A0f0KAdh0Axzei2ceHJRZuv-mlcwc5LqbT0w01DYBTO_pTP3zsQ3jEfI5i1NF488BGX0BZNE8T8=" alt="The full format of a `MOUSE_HSCROLL` packet">
 </div>
 <div class="title">Figure 7. The full format of a <code>MOUSE_HSCROLL</code> packet</div>
 </div>
@@ -1030,7 +1038,7 @@ The next 4 bytes (little endian) specify the input type, which can be any of the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1jL0OgkAQhHufYoONFPxojAXvYWUsltsFLjnuLncLQgzvLok_iQXdzHwzc7WBozMjE2irzEAMpAMr0SOvCfSOBsOx8MGJU86sCtvVa-sHyQgFcySnIPvOqyovSGMbsI9FPQs3mg1lscPAlDPZ2313oICP7H3RMRIHKKfyVF7SD6rdBImSYGCfwLOKHi0clz8qs-ctptBvoXoQcRYag238dc5L-gK9qFqR" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx3ee4uQsMFgCFEURT9AhQ4duiOHADiA5NrWNQlrx7rXdkJI2URfrfP_ffceMH9FabaCoW4rvI8JnceyFALJBxvZ8R-YkimKHSWAaz7TVahyowJoL2nFkXEcApRlQQnBW7hsHslYTxJZP9luAsjih7Xx-JS01_QeHLJ-rxHlCeHiKWmmX04DsBRQd79vOQradk_suejmM9qd-XPqyS-G1COTtMnDiwj1lnb0mGyXGk7yiJlkpf8eELZCXYJF_wCwH8ooXoZAtqHRroFqdIduvg_2KfE9QXneQz7dDVL9BcuCSPCbdeA9GT6c0T3eLFFI0VgvYkGXl2Xyn-laeaQ0Oz6R6tFZJOApszY1xJ_sCpoW_Og==" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
 </div>
 <div class="title">Figure 8. The full format of a <code>CONTROLLER_ARRIVAL</code> packet</div>
 </div>
@@ -1133,7 +1141,7 @@ Since Moonlight 5.0.0 the format has been slightly changed (without breaking the
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNq1kM9OwzAMxu88hdVd4JC29MChz7DTBNKmaQc3dttoaVI56TaEeHeKSiWEOERC3Gx_P3_-8-KEg7cXJjBO24kYyAjraC48V2DwNFkOxSg-eu3tHGE358aNU1SEEXMkr0Gt7XWdF2SwExxC0bxGbg1bUqFHYcqZ3PF0d0-CV7VY9IzEAuWtrMqnhy9J_HUVstbLgDFbpcbfwBkLx3qOVGskRHirw4gOqvfTdyrTUSxsshQUl4MHDOcUPnGBJjpoLXYhaYft86_Y4w9sl4ZtuY2wTxv8iR6S0J3p-lTbhT38xz-h-qPrB4bb_24=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNq1krFugzAQhvc8xclZYLAUUBRFPEGHDFWUIRFiMMGAVcemtmlIK969Ng0pTZFKVXWxbN9399_9tpfRnBijNERpgclzTeAtyhnngOYky9Z0hVp_NvMsJiBT5IwLJesKc5JSjktKMqpmALGuiIDuMrFHryNT2YBnaGM-AhBHJ2JKV18KgzV7pRCEbeLbmy69W6JUKltTg2AcopKyojQQLFv_axdMVLX51PdiJ9sLD4OAdpeKIpvuKGP3Q_IoeX0SV1T7g8j3MWEJ6KHboR_AIAT0SC5ckqxHhbUBK3mGYD1Mdha5niC-ehC2t4dI7kG0oQKNk3a8kdEXzSJcrPqQVb95kktl3wL1IVfd-R1b9xucM6UN3GSSIYWORnGYoykoORr2QuFE9NMUfmIDqRGQc1LoST1sdqNYcIdtp2EbmhvYTxN26GESuu3--P4X7OE__ITwj1XfAR3sZCY=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
 </div>
 <div class="title">Figure 9. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
 </div>
@@ -1142,7 +1150,7 @@ Since Moonlight 5.0.0 the format has been slightly changed (without breaking the
 <div class="content">
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNqNksFuwjAMhu88RdTTOBTaCtDobZrGaadpk4YQB5O4EC0kyEmh07R3XwqFCWilXCyn_vzbTf4PTWiN2qNgUnNVCmRCEnIn9-i_sK0RpUI73JFxhhvlM1j7s9S70sUCHAxAGM7ic3ueD4ZCwppga4erb4eFRCViuwFCMUChF8vegyA4xCeJDYJAYkmVZMmk35TIHM6FqDC0BRedSytTeThFtsh9GheSrGM_ud2BZqPf5TXGG4pQgfO_2MWl0A5m12DEjXZklEKKmgYF_-NvaTjeYtS2aXa3wShsg1XpnNE2CqNf3zvA9AZ8CwUVFo59Bo4_wvNAmOR6Ey59oucBz5BUUx5klvG4U0xj5WpT9nstBtXoDoa-Lg5tNq9V0bKFd_bkaG8fsjokyX1IX-rsuaXw1NKRXqqjDr2AMH30YTars5a5_jLqrLfs_wEnYlDA" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+<img src="https://kroki.io/bytefield/svg/eNqVkztPwzAQgPf-ipNZkiFSHIWqZEMIxMCAEAMo6uAkThth7OI4NID63zmbpPSRirCczr7vHr47ewUvmTG6hiRbBOytYfCVlJUQQM5YUcz4lGz8ycRDTEKh2TpYaNWsAsEyLoIlZwXXE4C0XjEJ7nKOR8-RmWrBM7w1PwZIk1dmlja-kiaoq08ONNrMfbxx7k4kmdIYswZZCUiWvFosDdB44-9XUclVY37ze6lN2yfeNQJ5_Fhxgu6WMqjvkrkSzavs0NrfsRw_E2Igt04jf4A0AnLPPoRiRY9KbEOg1RrobNfZtsjWBGnXg2izHcT8ECR3XJJhEp838PSwDaNw2psw-7YnpdI4C9KbbPSwpVgGtr8NykrXpp9KjBPaw_KO0lwww4uTHGXDYLQPkhy3QSshsK-dg2C_6Q9plpvqnZOhSqOjCuJxFWSNMUrWZBx993gCpAfgw1hQ8NLA08j0Dn4eCWv3fZ7-RT-PGEPYXuSjluX8_GSw_ku4j324oJKbtdIv2w3tKrdReQ0pbvbUrTeKyIowPBb02mpXA4bLAQ-6tcYn4o0QFzMUNzdWG8iLzbDaZO5_A1axtWk=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
 </div>
 <div class="title">Figure 10. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
 </div>
@@ -1329,8 +1337,14 @@ If you combine this with the <code>ctrl #</code> (controller number) you can det
 </main>
 </div>
 <footer class="footer">
-    <p>Copyright &#169; Alessandro Beltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
-    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
 </footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
 <script async src="../../../_/js/vendor/tabs.js"></script>

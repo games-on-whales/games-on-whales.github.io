@@ -1,8 +1,230 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<script>location="gow/index.html"</script>
-<meta http-equiv="refresh" content="0; url=gow/index.html">
-<meta name="robots" content="noindex">
-<title>Redirect Notice</title>
-<h1>Redirect Notice</h1>
-<p>The page you requested has been relocated to <a href="gow/index.html">gow/index.html</a>.</p>
+<html data-theme="light" class="has-navbar-top" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Games on Whales</title>
+    <link href="https://fonts.cdnfonts.com/css/tiny-box" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css"
+          integrity="sha512-dF4b2QV/0kq+qlwefqCyb+edbWZ63ihXhE4A2Pju3u4QyaeFzMChqincJsKYwghbclpLE92jPb9yaz/LQ8aNlg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"
+          integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css"
+          integrity="sha512-DJLNx+VLY4aEiEQFjiawXaiceujj5GA7lIY8CHCIGQCBPfsEG0nGz1edb4Jvw1LR7q031zS5PpPqFuPA8ihlRA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css"
+          integrity="sha512-Hp+WwK4QdKZk9/W0ViDvLunYjFrGJmNDt6sCflZNkjgvNq9mY+0tMbd6tWMiAlcf1OQyqL4gn2rYp7UsfssZPA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        /* see: https://github.com/jgthms/bulma/issues/218 */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content {
+            height: 100%;
+        }
+
+        .gow-title {
+            font-family: 'Tiny Box CollageBitA12', sans-serif;
+            font-size: 3.5rem;
+        }
+
+        .gow-background {
+            background: rgb(0, 94, 195);
+        }
+
+        .gow-text-color {
+            color: rgb(255, 255, 255);
+        }
+
+        .hero-background {
+            background: rgb(0, 117, 130);
+            background: linear-gradient(132deg, rgba(0, 117, 130, 1) 0%, rgba(0, 94, 195, 1) 50%, rgba(0, 47, 255, 1) 100%);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar is-dark">
+    <div class="container">
+        <div class="navbar-brand" style="width:100%">
+            <div class="column is-narrow">
+                <figure class="image is-64x64">
+                    <!-- TODO: LOGO -->
+                    <img class="is-rounded"
+                         src="https://images.opencollective.com/games-on-whales/33a2797/logo/128.png?height=128"/>
+                </figure>
+            </div>
+            <div class="column is-align-content-center">
+                <div class="buttons is-pulled-right">
+                    <a href="https://github.com/games-on-whales" class="button is-dark">
+                        <span class="icon">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                    </a>
+                    <a href="https://discord.gg/kRGUDHNHt2" class="button is-dark">
+                        <span class="icon">
+                            <i class="fa-brands fa-discord"></i>
+                        </span>
+                    </a>
+                    <a href="https://opencollective.com/games-on-whales/donate"
+                       class="button is-link">
+                        <span class="icon">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<section class="hero hero-background is-large">
+    <div data-theme="dark" class="hero-body">
+        <div class="container">
+            <div class="container has-text-centered">
+                <p class="title gow-title">Games on Whales</p>
+                <p class="subtitle mt-2 is-size-4">Stream multiple virtual desktops and games running in Docker!</p>
+                <a href="https://games-on-whales.github.io/wolf/stable/user/quickstart.html">
+                    <button class="button is-light is-outlined is-large">Quickstart!</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section is-medium">
+    <p class="title has-text-centered">Features</p>
+    <div class="fixed-grid has-3-cols is-centered">
+        <div class="grid">
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Multi user</p>
+                    <p>Allow multiple users to stream different content by sharing single remote host
+                        hardware.</p>
+                </div>
+            </div>
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Headless</p>
+                    <p>On demand creation of virtual desktops with full support for any resolution/FPS without the need
+                        for
+                        a monitor or a dummy plug.</p>
+                </div>
+            </div>
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Virtual devices</p>
+                    <p>Supports mouse, keyboard, touchpad and joypads with Gyro,
+                        Acceleration and touchpad support when using a DualSense.</p>
+                </div>
+            </div>
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Low latency</p>
+                    <p>Implements the Moonlight protocol to stream with low latency to a wide variety of supported
+                        clients.</p>
+                </div>
+            </div>
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Linux and Docker first</p>
+                    <p>Run games and apps in Docker containers, with support for Steam, Firefox, Retroarch, and
+                        more!</p>
+                </div>
+            </div>
+            <div class="column is-flex is-vcentered is-align-content-center has-text-centered">
+                <div class="box gow-background has-text-white">
+                    <p class="title gow-text-color">Open Source</p>
+                    <p>Our projects are fully open source, MIT licensed, and we welcome contributions from the
+                        community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section is-medium gow-background">
+    <p class="title has-text-centered gow-text-color">Projects</p>
+    <div class="mt-6">
+        <div class="grid">
+            <div class="cell">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Wolf</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            The main streaming server: create on-demand virtual desktops for multiple players!
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="https://games-on-whales.github.io/wolf/stable/"
+                           class="card-footer-item">Docs</a>
+                        <a href="https://github.com/games-on-whales/wolf" class="card-footer-item">Code</a>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="cell ">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">inputtino</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            A virtual input library, supports mouse, keyboard, joypad, trackpad and more!
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="https://github.com/games-on-whales/inputtino" class="card-footer-item">Code</a>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="cell ">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">gst-wayland-display</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            A micro Wayland compositor that can be used as a Gstreamer plugin.
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="https://github.com/games-on-whales/gst-wayland-display"
+                           class="card-footer-item">Code</a>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="cell ">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">GOW</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            A collection of Dockerized games and apps like Steam, Firefox and Retroarch
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="https://games-on-whales.github.io/gow/index.html"
+                           class="card-footer-item">Docs</a>
+                        <a href="https://github.com/games-on-whales/gow" class="card-footer-item">Code</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
