@@ -5,7 +5,7 @@ site:
 content:
   sources:
     - url: git@github.com:games-on-whales/wolf.git
-      branches: [stable, dev*]
+      branches: [ stable, dev* ]
       start_path: docs
     - url: git@github.com:games-on-whales/gow.git
       branches: master
@@ -17,7 +17,7 @@ urls:
   redirect_facility: static
 runtime:
   log:
-    failure_level: warn
+    #failure_level: warn # TODO: remove failing branches from Wolf
     level: debug
 ui:
   bundle:
