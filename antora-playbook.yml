@@ -1,6 +1,7 @@
 site:
   title: Games On Whales
-  start_page: gow::index.adoc
+  url: https://games-on-whales.github.io
+  start_page: wolf::index.adoc
 content:
   sources:
     - url: git@github.com:games-on-whales/wolf.git
@@ -14,6 +15,10 @@ urls:
   latest_version_segment: stable
   latest_version_segment_strategy: replace
   redirect_facility: static
+runtime:
+  log:
+    failure_level: warn
+    level: debug
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable

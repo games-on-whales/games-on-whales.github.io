@@ -1,6 +1,5 @@
 site:
   title: Games On Whales
-  start_page: gow::index.adoc
 content:
   sources:
     - url: ./workspace/gow
@@ -9,6 +8,10 @@ content:
     - url: ./workspace/wolf
       branches: HEAD
       start_path: docs
+runtime:
+  log:
+    failure_level: warn
+    level: debug
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable

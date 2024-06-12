@@ -1,13 +1,11 @@
 = Games on Whales docs portal
 
+https://games-on-whales.github.io/
+
 == Quickstart
 
 [bash]
 ....
 npm i
-....
-
-[bash]
-....
 npx antora --fetch antora-playbook.yml
 ....
