@@ -234,8 +234,8 @@
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
     --device /dev/dri/ \
     --device /dev/uinput \
-    -v /dev/shm:/dev/shm:rw \
-    -v /dev/input:/dev/input:rw \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
     -v /run/udev:/run/udev:rw \
     --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
@@ -257,14 +257,14 @@ services:
       - /etc/wolf/:/etc/wolf
       - /tmp/sockets:/tmp/sockets:rw
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /dev/shm:/dev/shm:rw
-      - /dev/input:/dev/input:rw
+      - /dev/:/dev/:rw
       - /run/udev:/run/udev:rw
     device_cgroup_rules:
       - 'c 13:* rmw'
     devices:
       - /dev/dri
       - /dev/uinput
+      - /dev/uhid
     network_mode: host
     restart: unless-stopped</code></pre>
 </div>
@@ -368,8 +368,8 @@ Y</code></pre>
     --device /dev/nvidia0 \
     --device /dev/nvidia-modeset \
     --device /dev/uinput \
-    -v /dev/shm:/dev/shm:rw \
-    -v /dev/input:/dev/input:rw \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
     -v /run/udev:/run/udev:rw \
     --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
@@ -392,13 +392,13 @@ services:
       - /etc/wolf/:/etc/wolf:rw
       - /tmp/sockets:/tmp/sockets:rw
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /dev/shm:/dev/shm:rw
-      - /dev/input:/dev/input:rw
+      - /dev/:/dev/:rw
       - /run/udev:/run/udev:rw
       - nvidia-driver-vol:/usr/nvidia:rw
     devices:
       - /dev/dri
       - /dev/uinput
+      - /dev/uhid
       - /dev/nvidia-uvm
       - /dev/nvidia-uvm-tools
       - /dev/nvidia-caps/nvidia-cap1
@@ -549,6 +549,9 @@ crw------- 1 root root 10, 223 Jan 17 09:08 /dev/uinput</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Allows Wolf to acces /dev/uinput
 KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+
+# Allows Wolf to access /dev/uhid
+KERNEL=="uhid", TAG+="uaccess"
 
 # Move virtual keyboard and mouse into a different seat
 SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"

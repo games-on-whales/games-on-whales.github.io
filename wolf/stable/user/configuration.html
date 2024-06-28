@@ -476,6 +476,39 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 <div class="paragraph">
 <p>See more examples in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_override_the_default_joypad_mapping"><a class="anchor" href="#_override_the_default_joypad_mapping"></a>Override the default joypad mapping</h3>
+<div class="paragraph">
+<p>By default, Wolf will try to match the joypad type that Moonlight sends with the correct mapping.
+It is possible to override this behaviour by setting the <code>joypad_mapping</code> property in the <code>apps</code> entry; example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Test ball"
+joypad_type = "xbox" # Force the joypad to always be xbox</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The available joypad types are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>auto</code> (default)</p>
+</li>
+<li>
+<p><code>xbox</code></p>
+</li>
+<li>
+<p><code>nintendo</code></p>
+</li>
+<li>
+<p><code>ps</code></p>
+</li>
+</ul>
+</div>
 <div class="sect3">
 <h4 id="_app_runner"><a class="anchor" href="#_app_runner"></a>App Runner</h4>
 <div class="paragraph">
