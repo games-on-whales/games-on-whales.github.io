@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Input Data :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/protocols/input-data.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-nvidia-ct">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="4">
+    <a class="nav-link" href="input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-nvidia-ct</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-nvidia-ct</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="index.html">Moonlight Protocols</a></li>
+    <li><a href="control-specs.html">Control (via ENET)</a></li>
+    <li><a href="input-data.html">Input Data</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-nvidia-ct</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/protocols/input-data.html">stable</a>
+    <a class="version" href="../../dev-tracy/protocols/input-data.html">dev-tracy</a>
+    <a class="version is-current" href="input-data.html">dev-nvidia-ct</a>
+    <a class="version" href="../../dev-nix/protocols/input-data.html">dev-nix</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-nvidia-ct/docs/modules/protocols/pages/input-data.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Input Data</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Moonlight will send all user inputs via the <a href="control-specs.html" class="xref page">control stream</a>.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFksFugzAMhu99Ciu9wCFSQVVV5Ql22GGH3VAPZgkQKU1YMCpdxbsvYaVl66ZdULA__3Z-J5GqQiLfgShrju89wkVU2hhga5Ryr3ZsTFerJGAWpMcTr73rW26wVIY3CqXyK4Cia9HCFDyE32QiSzdAQmqgrwQU4ojURH1niXf6Q0GWj4c0RKby6SNK54NmB1YbEI3SdUOQbcf0-xTatj3d-ydFbDs3XiaBvZ5bxUJ5pCicl-SbM_3RXtEuXWQerwlbYE_Tif0DZjmwFzwbh3JGbbCBe3eCbL8sjhbFmaC4epCPt0UcfoLsWVn2Oxmu98vVN8Mm3-wm424aEwDR_CAVzB54pX1H8w62YR-PeBxxxr0ySEr-VSCRkM3J_L7O9UUYVREIcm2MErnjOM6lNbZhdKOtWorFJ3BZKixqQfj4NILEJyUg5J4=" alt="General format of an `INPUT_DATA` message">
+</div>
+<div class="title">Figure 1. General format of an <code>INPUT_DATA</code> message</div>
+</div>
+<div class="paragraph">
+<p>The first 4 bytes (big endian) following the header of a packet of type
+<code>INPUT_DATA</code> indicate the size of the message, which varies depending on the input type.
+The next 4 bytes (little endian) specify the input type, which can be any of the values in the following table.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Input type name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_MOVE_REL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000007</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_MOVE_ABS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000005</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_BUTTON_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000008</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_BUTTON_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000009</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEY_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000003</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEY_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000004</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_SCROLL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000A</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOUSE_HSCROLL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000001</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOUCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000002</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000003</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_MULTI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000C</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_ARRIVAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000004</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_TOUCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000005</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_MOTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000006</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONTROLLER_BATTERY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x55000007</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HAPTICS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0000000D</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF8_TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00000017</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_relative_move"><a class="anchor" href="#_mouse_relative_move"></a>Mouse: relative move</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Moonlight will send mouse relative coordinates when the option "Optimize mouse for remote desktop instead of games" is turned <code>OFF</code>.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhvf8ipO7wIAEKEoRa6WoQ4cOHVohBlMfAdWxqTEKacV_r-1CShLaDrbsu-e-3vMYllRr1UJa7AL63lH4TMuacyA3lLEEN2TwVyvPYAKYoodgp2TXBJwWyIMKKUO1Asjahgpwxtx8PUcWsgdPY6-_HZCle6orm18KHbT1B0IUD7lvLC7cXWkhlcnZgqg5pBXWu0pDtB788y5q0XT6p76X2bJT4bkTyNOxQWLCLaXNe06-St7txYi2_sxzPSasgdy7F_kHjGIgj_TIJWUTKowMgZIHiJJ5sJXI9gTZqEE8nBaRX4LkAQVZJs14C6OHfRiHGyec9ZnyJ1FKqcwyyBRm04d9YlZkXkFZq1ZPW1mbDZ1RtyOlkFON7BeOMOSawjNZpuNF-uVPetJwcSCB-iDV22miMYPNji1kYb8xrcfm3FlZLk7ixjq3bbfT5Sy5_wWrZf-E" alt="The full format of a `MOUSE_MOVE_REL` packet">
+</div>
+<div class="title">Figure 2. The full format of a <code>MOUSE_MOVE_REL</code> packet</div>
+</div>
+<div class="paragraph">
+<p><code>Delta X</code> and <code>Delta Y</code> defines the relative movement that the mouse must perform.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Delta X</code> and <code>Delta Y</code> are encoded as <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_absolute_move"><a class="anchor" href="#_mouse_absolute_move"></a>Mouse: absolute move</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Moonlight will send mouse absolute coordinates when the option "Optimize mouse for remote desktop instead of games" is turned <code>ON</code>.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqNkj1vgzAQhnd-xcldYEACSj7EWKlVhw4dOrRCDE4xAdWxqTGCtOK_90wgISlRO3Ayd899-D3bKcuo1qqCaLN16WdN4TvKCs6B3NA0XbMl6RzLshETkCrauFsl69LldMO4mzOaMmUBxFVJBfTOBH_tntzIFmzNWn0IQBztqM5NfSm0WxVfDPygSxz09Om9iTZSYc0KRMEhylmxzTX4YeecT1GIstan_nZs2o6Np0EgL_uSEUw3lMbzlHyXvN6JAa2cSeT3NSEE8tifyB-gHwB5pnsuaTqiAmVwlWzAX0-TjURmJogHDYLuuIjkEiRPTJB5Eq83c3Wv9QJv2QtnYtj-KEomFS6DjGmmvNfiGCh_62aFqvS4lRA3dEYtBkoxTjVLr3DklcxzwQX3NnKcnppOoCHdwKyC2DwL_M5rNEWq83_2Ozyp603HTc3KJphupPogV4ZDwZe96mh8Yzxvxtwbs5gJGN_d-ljgIrpCs3owpxDN7cpKnB86BCth" alt="The full format of a `MOUSE_MOVE_ABS` packet">
+</div>
+<div class="title">Figure 3. The full format of a <code>MOUSE_MOVE_ABS</code> packet</div>
+</div>
+<div class="paragraph">
+<p>In order to define an absolute position Moonlight will send both:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>width</code>, <code>height</code> which represent the size of the viewport on the client side</p>
+</li>
+<li>
+<p><code>X</code>,<code>Y</code> are the absolute coordinates of the mouse on the client side</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>X</code>, <code>Y</code>, <code>width</code> and <code>height</code> are encoded as <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_button"><a class="anchor" href="#_mouse_button"></a>Mouse: button</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx_c8xcldYLAEKIlSnqBDhw7dEIMJJlh1bGofCmnFu9d2CqUtVZfT2f_ffUc1bxiisZBXJ8peewbveSOkBHLH6vrA92SMN5vIYQpqwy70ZHTfUckqLmnLWc3NBqCwHVMQPkv3jAJZ6QEi5APeBCjyM8PW59cKqRVvHNJsLGP3E8KDySttXE4LSkjIWy5OLUK6HePvXQjV9fhVPyp82anwUgTyfO04ceGeQucvyaOW_Vl9ojZeKL_HhC2Qh-CRf8A0A_LErlKzekKVWwM1-gLpYRnsV-R7guJzB9k4H6L8CZJHrsg66cZbGT0ZkizZT5KrPu-k0cbdgoSdTumTYedO5DzaCGNxusrWXWhBEXZEoX0fATVcMuT1X3CFMymZRS9Om1hrS3G8aPNCZu2W3efiFgo3zz4M5c29N8mK2XlzWBHSMv4AHVDrOQ==" alt="The full format of a `MOUSE_BUTTON_DOWN` or `MOUSE_BUTTON_UP` packet">
+</div>
+<div class="title">Figure 4. The full format of a <code>MOUSE_BUTTON_DOWN</code> or <code>MOUSE_BUTTON_UP</code> packet</div>
+</div>
+<div class="paragraph">
+<p><code>Action</code> can have the following values:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Action data</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x09</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button released</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x08</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button pressed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>Button</code> can have the following values:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Button data</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button left</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button middle</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button right</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button side</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button extra</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keyboard"><a class="anchor" href="#_keyboard"></a>Keyboard</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vwjAQhnd-xcldkiFSkkYIZWOo1KFDh25RhgM7H8LYqe2I0Cr_vbZLIFBQl9PZ73N39nsBZRUaozTkmzrCzx7hO69azoE8IaUrtiRjuFgEFhNAFR6iWsm-izhuGI8ahpSpBUChOxTgL0t7DDy5kQMEhg3mV4Ai36NpXH8pTKTbLwZJOpahvfHlPuQbqWxPDaLlkDesrRsDSTaG169oRdeby_ygcGOnwXMRyMexY8SWO8rYfE5uJe_34oTqcKb8_SZkQF59Rv4BkxTIOx65RDqhwtoQKXmAZDUvdha5N0Fx8iAdz4sob0HyxgS5T9rv3fl6PMRpvPTGOc2OP5tSSWWXQaYy1z4e0K7IZlHVKm2mrWR2QzOK4Na00r3Do4pxNIw-giuOtb5hr4kdO8JWUvagYXrTcC_pRHLU5kqMZ944YfL8rgGCmYNUu7MDp7muEdNQWOuW3j8XXlyI74S1C88P1HVmw8ofs4uwKMMfCiwUWw==" alt="The full format of a `KEY_DOWN` or `KEY_UP` packet">
+</div>
+<div class="title">Figure 5. The full format of a <code>KEY_DOWN</code> or <code>KEY_UP</code> packet</div>
+</div>
+<div class="paragraph">
+<p><code>Action</code> can have the following values:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Action data</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x04</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button released</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button pressed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="TODO"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What&#8217;s <code>modifiers</code>?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>Key code</code> represent the corresponding keyboard code of the pressed input, see the following table:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Moonlight code</th>
+<th class="tableblock halign-left valign-top">Keyboard button</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x08</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>BACKSPACE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x09</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>TAB</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>CLEAR</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>ENTER</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTSHIFT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTCTRL</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTALT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>PAUSE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x14</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>CAPSLOCK</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>KATAKANAHIRAGANA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>HANGEUL</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>HANJA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>KATAKANA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x1B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>ESC</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SPACE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x21</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>PAGEUP</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>PAGEDOWN</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x23</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>END</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x24</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>HOME</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x26</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>UP</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x27</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x28</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>DOWN</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x29</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SELECT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>PRINT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SYSRQ</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>INSERT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>DELETE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>HELP</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x30</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>0</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x31</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>1</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>2</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x33</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>3</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x34</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>4</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x35</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>5</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x36</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>6</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x37</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>7</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x38</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>8</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x39</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>9</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x41</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>A</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x42</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>B</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x43</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>C</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x44</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>D</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x45</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>E</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x46</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x47</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>G</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x48</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>H</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x49</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>I</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>J</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>K</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>L</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>M</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>N</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>O</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x50</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>P</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x51</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Q</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x52</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>R</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x53</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>S</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x54</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>T</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x55</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>U</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x56</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>V</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x57</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>W</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x58</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>X</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x59</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Y</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x5A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Z</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x5B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTMETA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x5C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHTMETA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x5F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SLEEP</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x60</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 0</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x61</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 1</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x62</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 2</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x63</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 3</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 4</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x65</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 5</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x66</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 6</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x67</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 7</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x68</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 8</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x69</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD 9</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x6A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD ASTERISK</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x6B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD PLUS</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x6C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD COMMA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x6D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD MINUS</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x6E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD DOT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x6F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMPAD SLASH</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x70</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F1</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x71</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F2</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x72</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F3</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x73</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F4</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x74</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F5</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x75</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F6</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x76</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F7</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x77</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F8</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x78</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F9</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x79</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F10</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x7A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F11</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x7B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>F12</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x90</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>NUMLOCK</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x91</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SCROLLLOCK</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTSHIFT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHTSHIFT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTCTRL</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHTCTRL</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTALT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xA5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHTALT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SEMICOLON</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>EQUAL</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>COMMA</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>MINUS</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>DOT</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xBF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SLASH</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xC0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>GRAVE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>LEFTBRACE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xDC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>BACKSLASH</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xDD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>RIGHTBRACE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xDE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>APOSTROPHE</kbd></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0xE2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>102ND</kbd></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_scroll"><a class="anchor" href="#_mouse_scroll"></a>Mouse scroll</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqVUrFugzAU3PmKJ3eBAQlQFCG2Do06dOjQDTGYYgKqY1PbKKQV_95nApSkVGmXx7PvfM--wy1YSY1RGpJ879P3lsJnUtacA7mjRRGzLek9x3GRJqBQ9OjvlWwbn9Occb9itGDKAUh1QwUMmxku3YGZyw5cwzpzBiBNDtRUVl8K4-v6g0EY9ZmHO8PxoSS5VKipQdQckorV-8pAuOm9y1vUomnN93w3tWOnwUsQyMupYQSPW5bBfsl8lbw9iJGqvQXy85mwAfI4dOQGMYyAPNMTl7SYqAJt8JU8QhgvD1uL7J0gHT2I-jmI7JpInpgg60x83srTgy6Igu0E4fTZk1IqzIJMkFUPOooJYeeXtdJmCmWDAa2yFOPUsOIX3jl3Qg-yFYaM0Wf41W0OIWa-KhL9QyT6o0iwcMwCUxLD_3Tti2DmKNXbbMwobYWYhhQN3Q6u2vJgS7BS7udyCex2WOL4ohtRJ_O-AFMSHEo=" alt="The full format of a `MOUSE_SCROLL` packet">
+</div>
+<div class="title">Figure 6. The full format of a <code>MOUSE_SCROLL</code> packet</div>
+</div>
+<div class="paragraph">
+<p>We only use <code>amount 1</code> to determine the amount of scroll to be applied.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="TODO"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What&#8217;s <code>amount 2</code>?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mouse_horizontal_scroll"><a class="anchor" href="#_mouse_horizontal_scroll"></a>Mouse horizontal scroll</h2>
+<div class="sectionbody">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhnd-xcldYLCEUUARW4dKHTp06IYYTDEB1bGpbRTSiv9e24UE2lRlOB2-577eC2vWUGOUhrw6YPo-UPjMm45zQHe0rvcsQ1MUBKHFBNSKnvBByaHHnFaM45bRmqkAoNA9FeAfS_sberKSI4SGjeY7AEV-pKZ19aUwWHcfDEgylZF98ene5JVUtqYG0XHIW9YdWgNkN0XbKTrRD-baPyxc26XxOgjo5dwzZNMdZay_Jl8lH45iRnW0ivxeE3aAHr2H_gFJAuiZnrmk9YIKKwNW8gRkv052ErmZoJg1SKbLIcqfIHpiAt0mnTrBjeXjMU7iLJpDtv9FlUYqew20hFz9eMzsjayHm05ps5xlZ0-0odI0dh-ZYcU4Naz-A0f0KAdh0Axzei2ceHJRZuv-mlcwc5LqbT0w01DYBTO_pTP3zsQ3jEfI5i1NF488BGX0BZNE8T8=" alt="The full format of a `MOUSE_HSCROLL` packet">
+</div>
+<div class="title">Figure 7. The full format of a <code>MOUSE_HSCROLL</code> packet</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_touch"><a class="anchor" href="#_touch"></a>Touch</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pen"><a class="anchor" href="#_pen"></a>Pen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controller"><a class="anchor" href="#_controller"></a>Controller</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_controller_arrival"><a class="anchor" href="#_controller_arrival"></a>Controller arrival</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>Sent when a new connector has been plugged, it&#8217;ll specify the supported capabilities and the specific type of controller to be emulated.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx3ee4uQsMFgCFEURT9AhQ4duiOHADiA5NrWNQlrx7rXdkJI2URfrfP_ffceMH9FabaCoW4rvI8JnceyFALJBxvZ8R-YkimKHSWAaz7TVahyowJoL2nFkXEcApRlQQnBW7hsHslYTxJZP9luAsjih7Xx-JS01_QeHLJ-rxHlCeHiKWmmX04DsBRQd79vOQradk_suejmM9qd-XPqyS-G1COTtMnDiwj1lnb0mGyXGk7yiJlkpf8eELZCXYJF_wCwH8ooXoZAtqHRroFqdIduvg_2KfE9QXneQz7dDVL9BcuCSPCbdeA9GT6c0T3eLFFI0VgvYkGXl2Xyn-laeaQ0Oz6R6tFZJOApszY1xJ_sCpoW_Og==" alt="The full format of a `CONTROLLER_ARRIVAL` packet">
+</div>
+<div class="title">Figure 8. The full format of a <code>CONTROLLER_ARRIVAL</code> packet</div>
+</div>
+<div class="paragraph">
+<p>Where controller type can be:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Moonlight code</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unknown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x00</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XBOX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x02</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nintendo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x03</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>And the capabilities is a bitfield with the followings options:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Moonlight code</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Analog triggers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rumble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x02</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger Rumble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x04</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Touchpad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x08</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accelerometer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gyro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Battery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x40</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RGB LED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x80</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_controller_multi"><a class="anchor" href="#_controller_multi"></a>Controller multi</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since Moonlight 5.0.0 the format has been slightly changed (without breaking the legacy format)
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNq1krFugzAQhvc8xclZYLAUUBRFPEGHDFWUIRFiMMGAVcemtmlIK969Ng0pTZFKVXWxbN9399_9tpfRnBijNERpgclzTeAtyhnngOYky9Z0hVp_NvMsJiBT5IwLJesKc5JSjktKMqpmALGuiIDuMrFHryNT2YBnaGM-AhBHJ2JKV18KgzV7pRCEbeLbmy69W6JUKltTg2AcopKyojQQLFv_axdMVLX51PdiJ9sLD4OAdpeKIpvuKGP3Q_IoeX0SV1T7g8j3MWEJ6KHboR_AIAT0SC5ckqxHhbUBK3mGYD1Mdha5niC-ehC2t4dI7kG0oQKNk3a8kdEXzSJcrPqQVb95kktl3wL1IVfd-R1b9xucM6UN3GSSIYWORnGYoykoORr2QuFE9NMUfmIDqRGQc1LoST1sdqNYcIdtp2EbmhvYTxN26GESuu3--P4X7OE__ITwj1XfAR3sZCY=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+</div>
+<div class="title">Figure 9. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
+</div>
+<details>
+<summary class="title">Legacy format</summary>
+<div class="content">
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqVkztPwzAQgPf-ipNZkiFSHIWqZEMIxMCAEAMo6uAkThth7OI4NID63zmbpPSRirCczr7vHr47ewUvmTG6hiRbBOytYfCVlJUQQM5YUcz4lGz8ycRDTEKh2TpYaNWsAsEyLoIlZwXXE4C0XjEJ7nKOR8-RmWrBM7w1PwZIk1dmlja-kiaoq08ONNrMfbxx7k4kmdIYswZZCUiWvFosDdB44-9XUclVY37ze6lN2yfeNQJ5_Fhxgu6WMqjvkrkSzavs0NrfsRw_E2Igt04jf4A0AnLPPoRiRY9KbEOg1RrobNfZtsjWBGnXg2izHcT8ECR3XJJhEp838PSwDaNw2psw-7YnpdI4C9KbbPSwpVgGtr8NykrXpp9KjBPaw_KO0lwww4uTHGXDYLQPkhy3QSshsK-dg2C_6Q9plpvqnZOhSqOjCuJxFWSNMUrWZBx993gCpAfgw1hQ8NLA08j0Dn4eCWv3fZ7-RT-PGEPYXuSjluX8_GSw_ku4j324oJKbtdIv2w3tKrdReQ0pbvbUrTeKyIowPBb02mpXA4bLAQ-6tcYn4o0QFzMUNzdWG8iLzbDaZO5_A1axtWk=" alt="The legacy format of a `CONTROLLER_MULTI` packet">
+</div>
+<div class="title">Figure 10. The legacy format of a <code>CONTROLLER_MULTI</code> packet</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p><code>LT</code> and <code>RT</code> refer to the left and right triggers, respectively. <code>Left X</code> and the following fields refer to the values of the left and right sticks.</p>
+</div>
+<div class="sect3">
+<h4 id="_active_mask"><a class="anchor" href="#_active_mask"></a>Active mask</h4>
+<div class="paragraph">
+<p>The active mask represent a bitfield with bits set for each controller present.
+If you combine this with the <code>ctrl #</code> (controller number) you can detect when a controller has been <strong>unplugged</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="EXAMPLE"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>An active mask of <code>0x0</code> and a controller number of <code>0x1</code> means that the first controller has been unplugged.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_button_flags"><a class="anchor" href="#_button_flags"></a>Button flags</h4>
+<div class="paragraph">
+<p>The <code>buttons</code> element encodes the currently pressed buttons in the joypad.<br></p>
+</div>
+<div class="paragraph">
+<p>In order to get the new added buttons you have to combine <code>btn flags</code> and <code>btn flags 2</code> so that</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c hljs" data-lang="c">(button_flags | (button_flags2 &lt;&lt; 16))</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Button type</th>
+<th class="tableblock halign-left valign-top">Flag (HEX)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DPAD_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0001</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DPAD_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0002</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DPAD_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0004</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DPAD_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0008</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">START</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0010</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BACK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0020</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0400</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEFT_STICK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0040</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RIGHT_STICK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEFT_BUTTON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RIGHT_BUTTON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x8000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SPECIAL_FLAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0400</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x010000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x020000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x040000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PADDLE 4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x080000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Touchpad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x100000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MISC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x200000</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If more than one button is being pressed at the same time <code>button_flag</code> will contain the sum of both values.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNqrVihKTbdSiObiUlCoVlBKLCkpUrJSUIpU0lFQSsosKQZyDIHMvMTcVCDToMKgVgdVZQQulUBOSWVBqpWCEboWJ6INdyTK8FgdheT8vLRMoD-q0_LzSoozq4AyhmY6CmVpOZkFViVFpak6Chlwdi1XLQBAjURk" alt="When pressing  kbd:[A] and  kbd:[X] `button_flag` contains `0x0050` that `5` decodes as follows:">
+</div>
+<div class="title">Figure 11. When pressing  <kbd>A</kbd> and  <kbd>X</kbd> <code>button_flag</code> contains <code>0x0050</code> that <code>5</code> decodes as follows:</div>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNqd01sLgjAYBuB7f8XHrneRZTfeaXaiI7aoiBCLWULN0BWV-N9bBUYH0O3uZfDw8W7fUojp1oSlpgGkyOc8RiagCbFcgjCgdcgTcaCLyPwDFbFyqWDg1yM1oZbhD2VbjZ406jdbxJuQrgJ1u-2OjP3AzthyvOm4EFa_hj6dM5oN1eSjrpp8ti1FHxZyvCg09de4N5nLE1ueWKXI77LYpPDujb-bogA7o0FT1gwjRssYbYVhE7EgFP8vDSLGk_AmSusGhr3PaCIeE8M52IdHk8cnimGX50zL7rs5AZo=" alt="The full format of the `button_flag` binary encoding">
+</div>
+<div class="title">Figure 12. The full format of the <code>button_flag</code> binary encoding</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controller_touch"><a class="anchor" href="#_controller_touch"></a>Controller Touch</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controller_motion"><a class="anchor" href="#_controller_motion"></a>Controller Motion</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controller_battery"><a class="anchor" href="#_controller_battery"></a>Controller Battery</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

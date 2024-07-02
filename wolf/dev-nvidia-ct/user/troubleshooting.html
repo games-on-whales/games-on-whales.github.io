@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Troubleshooting :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/user/troubleshooting.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-nvidia-ct">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-nvidia-ct</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-nvidia-ct</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>User guide</li>
+    <li><a href="troubleshooting.html">Troubleshooting</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-nvidia-ct</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/user/troubleshooting.html">stable</a>
+    <a class="version" href="../../dev-tracy/user/troubleshooting.html">dev-tracy</a>
+    <a class="version is-current" href="troubleshooting.html">dev-nvidia-ct</a>
+    <a class="version" href="../../dev-nix/user/troubleshooting.html">dev-nix</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-nvidia-ct/docs/modules/user/pages/troubleshooting.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Troubleshooting</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When something doesn&#8217;t work it&#8217;ll be helpful to be able to see the logs from Wolf, please change the env variable <code>WOLF_LOG_LEVEL</code> to <code>DEBUG</code> and try to replicate the issue.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_black_screen_in_moonlight"><a class="anchor" href="#_black_screen_in_moonlight"></a>Black screen in Moonlight</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If it&#8217;s the very first time that you are running an app, and you can only see a black screen with a cursor in Moonlight, it&#8217;s probably because Wolf is downloading the corresponding docker image and installing first time updates (when necessary).</p>
+</div>
+<div class="paragraph">
+<p>If this persists or Moonlight kicks you out of the streaming session then you should probably take a look at the Wolf logs to gather more informations.</p>
+</div>
+<div class="sect2">
+<h3 id="_vulkan_errors_in_app"><a class="anchor" href="#_vulkan_errors_in_app"></a>Vulkan errors in App</h3>
+<div class="paragraph">
+<p>Example log line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>vulkan: physical device 10de:1c03 compute queue doesn't support presenting on our surface, using graphics queue
+vulkan: selecting physical device 'NVIDIA GeForce GTX 1060 6GB': queue family 0
+vulkan: physical device supports DRM format modifiers
+vulkan: vkCreateDevice failed (VkResult: -7)
+Failed to initialize Vulkan</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vulkan errors are generally related to the video drivers.</p>
+</div>
+<details>
+<summary class="title">Nvidia GPU checklist</summary>
+<div class="content">
+<div class="paragraph">
+<p>Make sure to follow all the instructions on the <a href="quickstart.html" class="xref page">Quickstart</a> page.
+Here&#8217;s a brief summary of things to check:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Check that the nvidia volume driver has been created&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker volume ls | grep nvidia-driver
+
+local     nvidia-driver-vol</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;and that the same volume name is passed in the env variable <code>NVIDIA_DRIVER_VOLUME_NAME</code></p>
+</li>
+<li>
+<p>Make sure that the <code>nvidia-drm</code> module has been loaded&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo dmesg | grep nvidia-drm    # Should print something like the following:
+[   12.561107] [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+[   14.138312] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:01:00.0 on minor 0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;and check that the module is loaded with the flag <code>modeset=1</code>.</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_address_already_in_use"><a class="anchor" href="#_address_already_in_use"></a>Address already in use</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ll see something like the following log lines:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>terminate called after throwing an instance of 'boost::wrapexcept&lt;boost::system::system_error&gt;'
+  what():  bind: Address already in use
+INFO  | Received interrupt signal 6, clean exit</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means that some other process is using the same ports that Wolf needs in order to communicate with Moonlight.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Have you left Sunshine running in the background?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following ports need to be available in order for Wolf to work:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>47984/tcp - HTTPS</p>
+</li>
+<li>
+<p>47989/tcp - HTTP</p>
+</li>
+<li>
+<p>47999/udp - Control</p>
+</li>
+<li>
+<p>48100/udp - Video</p>
+</li>
+<li>
+<p>48200/udp - Audio</p>
+</li>
+<li>
+<p>48010/tcp - RTSP</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unable_to_recognise_gpu_vendor"><a class="anchor" href="#_unable_to_recognise_gpu_vendor"></a>Unable to recognise GPU vendor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Example log line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>WARN  | Unable to recognise GPU vendor: red hat, inc.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Do you have multiple GPUs installed (or even just a virtual display in a VM)?<br>
+Checkout the <a href="configuration.html#_multiple_gpu" class="xref page">Multiple GPU configuration page</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_intel_mfx_err_unsupported"><a class="anchor" href="#_intel_mfx_err_unsupported"></a>Intel: MFX_ERR_UNSUPPORTED</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Example log line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>0:01:31.983118812     1 0x7f1d50000b70 ERROR             qsvencoder gstqsvencoder.cpp:1098:gst_qsv_encoder_init_encode_session:&lt;qsvh265enc3&gt; MFXVideoENCODE::Query failed -3 (MFX_ERR_UNSUPPORTED)
+0:01:31.983243805     1 0x7f1d50000b70 WARN            videoencoder gstvideoencoder.c:771:gst_video_encoder_setcaps:&lt;qsvh265enc3&gt; rejected caps video/x-raw(memory:VAMemory), width=(int)1280, height=(int)720, framerate=(fraction)60/1, format=(string)NV12, chroma-site=(string)mpeg2, colorimetry=(string)bt601</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Follow the steps outlined in <a href="https://www.intel.com/content/www/us/en/support/articles/000089952/software/iot-software.html">here</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo apt install --reinstall linux-firmware</code></p>
+</li>
+<li>
+<p>Add <code>i915.enable_guc=2</code>  in <code>/etc/default/grub</code>: <code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.force_probe=* i915.enable_guc=2"</code></p>
+</li>
+<li>
+<p><code>sudo update-initramfs –u</code></p>
+</li>
+<li>
+<p><code>sudo update-grub</code></p>
+</li>
+<li>
+<p>Reboot the system.</p>
+</li>
+<li>
+<p>After reboot, execute the command: <code>dmesg | grep guc</code></p>
+</li>
+<li>
+<p>Verify the logs for guc information.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note: If output doesn&#8217;t contain guc details, then install the latest guc/huc firmware. Copy the <a href="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915">firmware</a> to <code>/lib/firmware/i915/</code>, and reboot the system.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
