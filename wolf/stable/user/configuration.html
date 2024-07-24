@@ -160,9 +160,6 @@
           <a href="../../dev-tracy/index.html">dev-tracy</a>
         </li>
         <li class="version">
-          <a href="../../dev-nvidia-ct/index.html">dev-nvidia-ct</a>
-        </li>
-        <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
       </ul>
@@ -188,7 +185,6 @@
   <div class="version-menu">
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
-    <a class="version" href="../../dev-nvidia-ct/user/configuration.html">dev-nvidia-ct</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
   </div>
 </div>
@@ -348,6 +344,24 @@ Can be changed in the <code>config.toml</code> file</p>
 <p><code>app_title</code>: the title of the app as defined in the <code>config.toml</code> file</p>
 </li>
 </ul>
+</div>
+<div class="sect2">
+<h3 id="_share_home_folder_with_multiple_clients"><a class="anchor" href="#_share_home_folder_with_multiple_clients"></a>Share home folder with multiple clients</h3>
+<div class="paragraph">
+<p>By default, Wolf will create a new home folder for each client, but if you want to share the same home folder with multiple clients, you can set the <code>app_state_folder</code> to the same value for each paired client; example:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[paired_clients]]
+app_state_folder = "common"               # &lt;-- !!!
+
+[[paired_clients]]
+app_state_folder = "common"               # &lt;-- !!!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This way, when running any app from those two clients, they will share the same home folder by mounting <code>${HOST_APPS_STATE_FOLDER}/common/${app_title}</code> as <code>/home/retro</code> in the docker container.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_change_the_host_apps_state_folder"><a class="anchor" href="#_change_the_host_apps_state_folder"></a>Change the <code>HOST_APPS_STATE_FOLDER</code></h3>
@@ -547,7 +561,7 @@ mounts = [
 ]
 env = [
   "PROTON_LOG=1",
-  "RUN_GAMESCOPE=true",
+  "RUN_SWAY=true",
   "ENABLE_VKBASALT=1"
 ]
 devices = []
@@ -711,6 +725,36 @@ image = "ghcr.io/games-on-whales/steam:edge"
 render_node = "/dev/dri/renderD129"</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_directly_launch_a_steam_game"><a class="anchor" href="#_directly_launch_a_steam_game"></a>Directly launch a Steam game</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to directly launch a Steam game from Moonlight you can just copy the existing <code><a id="apps"></a></code> entry for Steam, change the name and just add the Steam app ID as env variable; example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Elden Ring"
+start_virtual_compositor = true
+
+[apps.runner]
+env = [
+  "PROTON_LOG=1",
+  "RUN_SWAY=true",
+  "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*",
+  "STEAM_STARTUP_FLAGS=steam://rungameid/1245620"
+]
+# COPY EVERYTHING ELSE ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can get the app ID from <a href="https://steamdb.info/" class="bare">https://steamdb.info/</a></p>
+</div>
+<div class="paragraph">
+<p>(Thanks to @nathanle1406 for the tip)</p>
 </div>
 </div>
 </div>

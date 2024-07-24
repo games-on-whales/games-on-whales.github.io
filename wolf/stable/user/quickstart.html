@@ -160,9 +160,6 @@
           <a href="../../dev-tracy/index.html">dev-tracy</a>
         </li>
         <li class="version">
-          <a href="../../dev-nvidia-ct/index.html">dev-nvidia-ct</a>
-        </li>
-        <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
       </ul>
@@ -188,7 +185,6 @@
   <div class="version-menu">
     <a class="version is-current" href="quickstart.html">stable</a>
     <a class="version" href="../../dev-tracy/user/quickstart.html">dev-tracy</a>
-    <a class="version" href="../../dev-nvidia-ct/user/quickstart.html">dev-nvidia-ct</a>
     <a class="version" href="../../dev-nix/user/quickstart.html">dev-nix</a>
   </div>
 </div>
@@ -217,8 +213,14 @@
 <li id="_tabs_1_intelamd" class="tab">
 <p>Intel/AMD</p>
 </li>
-<li id="_tabs_1_nvidia" class="tab">
-<p>Nvidia</p>
+<li id="_tabs_1_nvidia_container_toolkit" class="tab">
+<p>Nvidia (Container Toolkit)</p>
+</li>
+<li id="_tabs_1_nvidia_manual" class="tab">
+<p>Nvidia (Manual)</p>
+</li>
+<li id="_tabs_1_wsl2" class="tab">
+<p>WSL2</p>
 </li>
 </ul>
 </div>
@@ -250,7 +252,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
 services:
   wolf:
     image: ghcr.io/games-on-whales/wolf:stable
@@ -274,19 +276,93 @@ services:
 </div>
 </div>
 </div>
-<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
+<div id="_tabs_1_nvidia_container_toolkit--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_container_toolkit">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
+<p>Make sure that the version of the Nvidia container toolkit is <code>&gt;= 1.16.0</code> and that your driver version is <code>&gt;= 530.30.02</code> (you can check the driver version with <code>nvidia-smi</code>).</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Your driver version must be <code>&gt;= 530.30.02</code></p>
-</li>
-<li>
-<p><code>--gpus</code> and the Nvidia Docker Toolkit seems to not work (to be investigated)</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo nvidia-container-cli -V
+cli-version: 1.16.0
+lib-version: 1.16.0
+build date: 2024-07-15T13:41+00:00</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --gpus=all \
+    --device /dev/dri/ \
+    --device /dev/uinput \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+    volumes:
+      - /etc/wolf/:/etc/wolf
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/:/dev/:rw
+      - /run/udev:/run/udev:rw
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    devices:
+      - /dev/dri
+      - /dev/uinput
+      - /dev/uhid
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    network_mode: host
+    restart: unless-stopped</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div class="paragraph">
+<p>Unfortunately, on Nvidia, things are a little bit more complex..</p>
+</div>
+<div class="paragraph">
+<p>Make sure that your driver version is <code>&gt;= 530.30.02</code></p>
 </div>
 <div class="paragraph">
 <p>First, let&#8217;s build an additional docker image that will contain the Nvidia driver files:</p>
@@ -384,7 +460,7 @@ Y</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
 services:
   wolf:
     image: ghcr.io/games-on-whales/wolf:stable
@@ -465,6 +541,54 @@ fi</code></pre>
 </div>
 </div>
 </details>
+</div>
+<div id="_tabs_1_wsl2--panel" class="tabpanel" aria-labelledby="_tabs_1_wsl2">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="EXPERIMENTAL""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Running Wolf in WSL2 hasn&#8217;t been properly tested.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can run Wolf in a very unprivileged setting without <code>uinput/uhid</code>, unfortunately this means that you&#8217;ll be restricted to <strong>only using mouse and keyboard</strong>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For Nvidia users, follow the Nvidia instructions above.
+This should work for AMD/Intel users.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --device /dev/dri/ \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
