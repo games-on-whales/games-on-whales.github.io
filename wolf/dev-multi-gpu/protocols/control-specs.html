@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Control specifications :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/protocols/control-specs.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-multi-gpu">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-multi-gpu</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-multi-gpu</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="index.html">Moonlight Protocols</a></li>
+    <li><a href="control-specs.html">Control (via ENET)</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-multi-gpu</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/protocols/control-specs.html">stable</a>
+    <a class="version" href="../../dev-tracy/protocols/control-specs.html">dev-tracy</a>
+    <a class="version" href="../../dev-nix/protocols/control-specs.html">dev-nix</a>
+    <a class="version is-current" href="control-specs.html">dev-multi-gpu</a>
+    <a class="version" href="../../dev-fake-uinput/protocols/control-specs.html">dev-fake-uinput</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-multi-gpu/docs/modules/protocols/pages/control-specs.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Control specifications</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The control stream runs over UDP via a <a href="https://github.com/cgutman/enet/tree/4cde9cc3dcc5c30775a80da1de87f39f98672a31">custom fork</a> of <a href="https://github.com/lsalzman/enet">ENET</a> that supports IPV4 and IPV6.</p>
+</div>
+<div class="paragraph">
+<p>All the exchanged messages are encrypted using AES GCM 128 bit.<br>
+In order to decrypt you&#8217;ll have to use the keys that are exchanged during the <code>HTTP launch</code> phase.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_encrypted_packet_format"><a class="anchor" href="#_encrypted_packet_format"></a>Encrypted packet format</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES GCM</a> not only provides confidentiality by encrypting the message but, by using the GCM TAG, it also guarantees that no one has tampered the original payload.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkUFPhDAQhe_7Kyb1AocmQjaGcDMe1oMmJu6NcBhsF0hKy5YSWA3_3bYuLLoaL03b981M32vA-AGN0R2kRUnx2CN8pIdaCCA3yFjC78gUbjaBxSQwjQMttepbKrDgglYcGdcbgKxrUYK_zO0x8GShRggMH82XAFnaoKlcfyUN7ep3DlE85aG98eV-SQulbc8OZC0grXhdVgai7RR-f0Ut295c5geZGzsPXotA9qeWE1vuKGP3a_JNib6RZ7QLV8q1TdgCefQ78g8YxUBe8CQUshmVNgaq1QBRsi52Ebk3QXbOIJ6Wj8h_guSJS_I7ae1dW_eJLcWv_EjmpG2ca2n38Az7-90iJ3_I2aK7bxqptayGfGZLbC-2bSt3jm5XrYxRTfgJmHPEtQ==" alt="The format of encrypted packets (bytes)">
+</div>
+<div class="title">Figure 1. The format of encrypted packets (bytes)</div>
+</div>
+<table class="tableblock frame-all grid-all fit-content stretch">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Size in bytes</th>
+<th class="tableblock halign-left valign-top">C++ type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned short int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of message, fixed at <code>0x0001</code> for this type of packet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Len</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned short int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the rest of the message in bytes (Seq + TAG + Payload)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unsigned int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Monotonically increasing sequence number (used as IV for AES-GCM)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GCM TAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AES GCM TAG</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Payload</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">until Len</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AES encrypted payload</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+All data is <a href="https://en.wikipedia.org/wiki/Endianness">little-endian</a> encoded
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decrypted_payload"><a class="anchor" href="#_decrypted_payload"></a>Decrypted payload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first two bytes of the decrypted payload represent the <strong>type</strong> of the message; the following types are encoded:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>START_A (<code>0x0305</code>)</p>
+</li>
+<li>
+<p>START_B (<code>0x0307</code>)</p>
+</li>
+<li>
+<p>INVALIDATE_REF_FRAMES (<code>0x0301</code>)</p>
+</li>
+<li>
+<p>LOSS_STATS (<code>0x0201</code>)</p>
+</li>
+<li>
+<p>FRAME_STATS (<code>0x0204</code>)</p>
+</li>
+<li>
+<p><a href="input-data.html" class="xref page">INPUT_DATA</a> (<code>0x0206</code>)</p>
+</li>
+<li>
+<p>TERMINATION (<code>0x0100</code>)</p>
+</li>
+<li>
+<p>PERIODIC_PING (<code>0x0200</code>)</p>
+</li>
+<li>
+<p>IDR_FRAME (<code>0x0302</code>)</p>
+</li>
+<li>
+<p>HDR_MODE (<code>0x010e</code>)</p>
+</li>
+<li>
+<p><a href="#_rumble_data">RUMBLE_DATA</a> (<code>0x010b</code>)</p>
+</li>
+<li>
+<p><a href="#_rumble_triggers">RUMBLE_TRIGGERS</a> (<code>0x5500</code>)</p>
+</li>
+<li>
+<p><a href="#_motion_event">MOTION_EVENT</a> (<code>0x5501</code>)</p>
+</li>
+<li>
+<p><a href="#_rgb_led">RGB_LED</a> (<code>0x5502</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The next two bytes indicate the size of the decrypted payload.
+The format of the remaining data depends on the message type.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_server_events"><a class="anchor" href="#_server_events"></a>Server events</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following events are originating from the server and will be sent to Moonlight clients.</p>
+</div>
+<div class="sect2">
+<h3 id="_rumble_data"><a class="anchor" href="#_rumble_data"></a>Rumble data</h3>
+<div class="paragraph">
+<p>A simple schema for a controller number and low/high frequencies</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkbtugzAUhvc8xZGzwGAJUFRFPEGHDB26IQYTHy6SYxNfFNKKd69xAyVNqi6Wff7v3H5HHGtmrTaQVw1lZ8fgM687IYBsGed7fCFjvNlEHpPANbvQRivXU8EqFLRFxlFvAArTMwkhWPpnFMhKDRBZHOy3AEV-Yrad6itpqek-ENJsLGMfCenhyCulfU0DshOQt9g1rYV0N8b3U3Syd_anf1RMbefGaxHI-7VH4tMnyvr7mjwq4U7yhpp4pTyuCTsgr-FG_gHTDMgbuwrF-IxKbwPV6gLpfp08WTTNBMXNg2xcPqL8DZIDSvKc9Os9WT0ZkjSpgnFLDSedQU5mz72xa_VotYDtomb3qvDz1xrPf-mt_6wH4AuDIMDV" alt="The payload for a Rumble packet (bytes)">
+</div>
+<div class="title">Figure 2. The payload for a Rumble packet (bytes)</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rumble_triggers"><a class="anchor" href="#_rumble_triggers"></a>Rumble Triggers</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>A simple schema for a controller number and left/right values</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx3ee4uQsMFgClFQRT9ChQ4dsiOGIzYfk2NQYhaTi3Wu7CXXbVF2s8_1_9x0z3qAxeoSibim-TQjvRdMLAWSDjO35E1mSKIotJoFpPNNWq2mgAmsuaMeRcR0BlOOAEryzst_Yk7WaITZ8Np8ClMUJTefyK2no2F85ZPlSJdbjw_1T1ErbnCPIXkDR8b7tDGTbJfneRS-HyXzVj0tX9l44FIEcLgMnNtxRxtoheVRiOskbOiaB8ntM2AJ59hb5B8xyIK94EQrZHZV2DVSrM2T7MNityPUE5W0H-bIeovoJkhcuyWPSjvdg9HTe7dLUL27NcTRawIbAmiUJVcEb85em3SlC8QOZLrQY" alt="The payload for a Trigger packet (bytes)">
+</div>
+<div class="title">Figure 3. The payload for a Trigger packet (bytes)</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_motion_event"><a class="anchor" href="#_motion_event"></a>Motion Event</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>This is used to signal to Moonlight clients to start sending motion events (Gyro or Acceleration) to the server.<br>
+By default Moonlight disables these events in order to save bandwith.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkb9uwyAQxnc_xYksZkAKVlJFfoIOHTpkszycA7EtEXAxVpxUfvcCTVy3TdUFwX2_--4PqZBHdM72kFc1w7cB4T0_tkoBWaEQO_lEJpokqcc0CItnVlszdExhJRVrJAppE4Ci71BDDJb-mUayMiOkTo7uU4AiP6Frgr_RjvXtVQLPppL6SEyPR14Z6z170K2CvJFt3Tjgm4l-76LV3eC-6qdFKHsvvBSB7C-dJD49UM7fl-TBqOGkb2hPF8rvMWED5DneyD8gz4C84kUZFHdU-zUwa87Ad8vksKLQExS3HWTT_BHlT5C8SE0ek368B6Ovx-12zePiZo-DswpWBGYXulQtOvmXFvqcNT7RD-U2s70=" alt="The payload for a Motion packet (bytes)">
+</div>
+<div class="title">Figure 4. The payload for a Motion packet (bytes)</div>
+</div>
+<div class="paragraph">
+<p>Type could be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ACCELERATION (<code>0x01</code>)</p>
+</li>
+<li>
+<p>GYROSCOPE (<code>0x02</code>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rgb_led"><a class="anchor" href="#_rgb_led"></a>RGB LED</h3>
+<div class="paragraph">
+<p><mark><span class="icon"><i class="fa fa-bullhorn"></i></span> new in Moonlight 5.0.0</mark></p>
+</div>
+<div class="paragraph">
+<p>This is used to control the color of the LED of supported controllers.<br>
+An example of this is when setting the LED color in Steam, the server has to send this event all the way to the Moonlight client.</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhnd-xclZYLAUUFJFjF3aIUNVdUMMR-yAJccmxiikFf-9xk2o06bqYtn3Pvfeh2PG92it6SCvaorHHuEj3wspgSyQsQ1_IGMSRbHDFDCDJ1ob3bdUYsUlbTgybiKAomtRgQ-W7hl7stIDxJYP9kuAIj-gbSZ_rSztxDuHNBvLxEV8uj_yShvn2YESEvKGi7qxkK7G5LYLodreftePi6nstXAoAnk7t5y49Imy7h6SOy37g7qgXRIov8eEFZBnfyP_gGkG5AXPUiO7osqtgRp9gnQTJk8rmnqC4rKDbJw_ovwJki1X5D7pxrsz-nJYr5eZX9zssbNGwoLA7JKE6usspLfC01_CYyh8AkWcuGI=" alt="The payload for a LED packet (bytes)">
+</div>
+<div class="title">Figure 5. The payload for a LED packet (bytes)</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

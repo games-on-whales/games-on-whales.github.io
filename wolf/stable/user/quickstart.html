@@ -162,6 +162,12 @@
         <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
+        <li class="version">
+          <a href="../../dev-multi-gpu/index.html">dev-multi-gpu</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
       </ul>
     </li>
   </ul>
@@ -186,6 +192,8 @@
     <a class="version is-current" href="quickstart.html">stable</a>
     <a class="version" href="../../dev-tracy/user/quickstart.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/quickstart.html">dev-nix</a>
+    <a class="version" href="../../dev-multi-gpu/user/quickstart.html">dev-multi-gpu</a>
+    <a class="version" href="../../dev-fake-uinput/user/quickstart.html">dev-fake-uinput</a>
   </div>
 </div>
 <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
@@ -312,6 +320,8 @@ build date: 2024-07-15T13:41+00:00</code></pre>
     -e HOST_APPS_STATE_FOLDER=/etc/wolf \
     -v /etc/wolf:/etc/wolf:rw \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e NVIDIA_VISIBLE_DEVICES=all \
     --gpus=all \
     --device /dev/dri/ \
     --device /dev/uinput \
@@ -334,6 +344,8 @@ services:
     environment:
       - XDG_RUNTIME_DIR=/tmp/sockets
       - HOST_APPS_STATE_FOLDER=/etc/wolf
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /etc/wolf/:/etc/wolf
       - /tmp/sockets:/tmp/sockets:rw

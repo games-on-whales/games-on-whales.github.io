@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quickstart :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/user/quickstart.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-multi-gpu">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-multi-gpu</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-multi-gpu</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>User guide</li>
+    <li><a href="quickstart.html">Quickstart</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-multi-gpu</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/user/quickstart.html">stable</a>
+    <a class="version" href="../../dev-tracy/user/quickstart.html">dev-tracy</a>
+    <a class="version" href="../../dev-nix/user/quickstart.html">dev-nix</a>
+    <a class="version is-current" href="quickstart.html">dev-multi-gpu</a>
+    <a class="version" href="../../dev-fake-uinput/user/quickstart.html">dev-fake-uinput</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-multi-gpu/docs/modules/user/pages/quickstart.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Quickstart</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wolf runs as a single container, it&#8217;ll spin up and down additional containers on-demand.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h2>
+<div class="sectionbody">
+<div id="_tabs_1" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_intelamd" class="tab">
+<p>Intel/AMD</p>
+</li>
+<li id="_tabs_1_nvidia_container_toolkit" class="tab">
+<p>Nvidia (Container Toolkit)</p>
+</li>
+<li id="_tabs_1_nvidia_manual" class="tab">
+<p>Nvidia (Manual)</p>
+</li>
+<li id="_tabs_1_wsl2" class="tab">
+<p>WSL2</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_intelamd--panel" class="tabpanel" aria-labelledby="_tabs_1_intelamd">
+<div class="paragraph">
+<p>Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --device /dev/dri/ \
+    --device /dev/uinput \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+    volumes:
+      - /etc/wolf/:/etc/wolf
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/:/dev/:rw
+      - /run/udev:/run/udev:rw
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    devices:
+      - /dev/dri
+      - /dev/uinput
+      - /dev/uhid
+    network_mode: host
+    restart: unless-stopped</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_nvidia_container_toolkit--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_container_toolkit">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Make sure that the version of the Nvidia container toolkit is <code>&gt;= 1.16.0</code> and that your driver version is <code>&gt;= 530.30.02</code> (you can check the driver version with <code>nvidia-smi</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo nvidia-container-cli -V
+cli-version: 1.16.0
+lib-version: 1.16.0
+build date: 2024-07-15T13:41+00:00</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --gpus=all \
+    --device /dev/dri/ \
+    --device /dev/uinput \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+    volumes:
+      - /etc/wolf/:/etc/wolf
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/:/dev/:rw
+      - /run/udev:/run/udev:rw
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    devices:
+      - /dev/dri
+      - /dev/uinput
+      - /dev/uhid
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    network_mode: host
+    restart: unless-stopped</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div class="paragraph">
+<p>Unfortunately, on Nvidia, things are a little bit more complex..</p>
+</div>
+<div class="paragraph">
+<p>Make sure that your driver version is <code>&gt;= 530.30.02</code></p>
+</div>
+<div class="paragraph">
+<p>First, let&#8217;s build an additional docker image that will contain the Nvidia driver files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | docker build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create <code>gow/nvidia-driver:latest</code> locally.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, docker doesn&#8217;t seem to support directly mounting images, but you can <a href="https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container">pre-polulate volumes</a> by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It will create a Docker container, populate <code>nvidia-driver-vol</code> with Nvidia driver if it wasn&#8217;t already done and remove the container.</p>
+</div>
+<div class="paragraph">
+<p>Check volume exists with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker volume ls | grep nvidia-driver
+
+local     nvidia-driver-vol</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and that the module is loaded with the flag <code>modeset=1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">I get <code>N</code> or the file is not present, how do I set the flag?</summary>
+<div class="content">
+<div class="paragraph">
+<p>If using Grub, the easiest way to make the change persistent is to add <code>nvidia-drm.modeset=1</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code> ex:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code>sudo update-grub</code> and <strong>reboot</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For more options or details, you can see <a href="https://wiki.archlinux.org/title/Kernel_parameters">ArchWiki: Kernel parameters</a></p>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>You can now finally start the container; Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e NVIDIA_DRIVER_VOLUME_NAME=nvidia-driver-vol \
+    -v nvidia-driver-vol:/usr/nvidia:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --device /dev/nvidia-uvm \
+    --device /dev/nvidia-uvm-tools \
+    --device /dev/dri/ \
+    --device /dev/nvidia-caps/nvidia-cap1 \
+    --device /dev/nvidia-caps/nvidia-cap2 \
+    --device /dev/nvidiactl \
+    --device /dev/nvidia0 \
+    --device /dev/nvidia-modeset \
+    --device /dev/uinput \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - NVIDIA_DRIVER_VOLUME_NAME=nvidia-driver-vol
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+    volumes:
+      - /etc/wolf/:/etc/wolf:rw
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/:/dev/:rw
+      - /run/udev:/run/udev:rw
+      - nvidia-driver-vol:/usr/nvidia:rw
+    devices:
+      - /dev/dri
+      - /dev/uinput
+      - /dev/uhid
+      - /dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools
+      - /dev/nvidia-caps/nvidia-cap1
+      - /dev/nvidia-caps/nvidia-cap2
+      - /dev/nvidiactl
+      - /dev/nvidia0
+      - /dev/nvidia-modeset
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    network_mode: host
+    restart: unless-stopped
+
+volumes:
+  nvidia-driver-vol:
+    external: true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are missing any of the <code>/dev/nvidia*</code> devices you might also need to initialise them using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo nvidia-container-cli --load-kmods info</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">Or if that fails:</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+## Script to initialize nvidia device nodes.
+## https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-verifications
+
+/sbin/modprobe nvidia
+if [ "$?" -eq 0 ]; then
+  # Count the number of NVIDIA controllers found.
+  NVDEVS=`lspci | grep -i NVIDIA`
+  N3D=`echo "$NVDEVS" | grep "3D controller" | wc -l`
+  NVGA=`echo "$NVDEVS" | grep "VGA compatible controller" | wc -l`
+  N=`expr $N3D + $NVGA - 1`
+  for i in `seq 0 $N`; do
+    mknod -m 666 /dev/nvidia$i c 195 $i
+  done
+  mknod -m 666 /dev/nvidiactl c 195 255
+else
+  exit 1
+fi
+
+/sbin/modprobe nvidia-uvm
+if [ "$?" -eq 0 ]; then
+  # Find out the major device number used by the nvidia-uvm driver
+  D=`grep nvidia-uvm /proc/devices | awk '{print $1}'`
+  mknod -m 666 /dev/nvidia-uvm c $D 0
+  mknod -m 666 /dev/nvidia-uvm-tools c $D 0
+else
+  exit 1
+fi</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div id="_tabs_1_wsl2--panel" class="tabpanel" aria-labelledby="_tabs_1_wsl2">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="EXPERIMENTAL""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Running Wolf in WSL2 hasn&#8217;t been properly tested.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can run Wolf in a very unprivileged setting without <code>uinput/uhid</code>, unfortunately this means that you&#8217;ll be restricted to <strong>only using mouse and keyboard</strong>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For Nvidia users, follow the Nvidia instructions above.
+This should work for AMD/Intel users.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --device /dev/dri/ \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<details>
+<summary class="title">Which ports are used by Wolf?</summary>
+<div class="content">
+<div class="paragraph">
+<p>To keep things simple the scripts above defaulted to <code>network:host</code>; that&#8217;s not really required, the minimum set of ports that needs to be exposed are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># HTTPS
+EXPOSE 47984/tcp
+# HTTP
+EXPOSE 47989/tcp
+# Control
+EXPOSE 47999/udp
+# RTSP
+EXPOSE 48010/tcp
+# Video (up to 10 users, you can open more ports if needed)
+EXPOSE 48100-48110/udp
+# Audio (up to 10 users, you can open more ports if needed)
+EXPOSE 48200-48210/udp</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_moonlight_pairing"><a class="anchor" href="#_moonlight_pairing"></a>Moonlight pairing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You should now be able to point Moonlight to the IP address of the server and start the pairing process:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In Moonlight, you&#8217;ll get a prompt for a PIN <span class="image"><img src="../_images/moonlight-pairing-code.png" alt="A screenshot of Moonlight asking for a PIN"></span></p>
+</li>
+<li>
+<p>Wolf will log a line with a link to a page where you can input that PIN (ex: <a href="http://localhost:47989/pin/#337327E8A6FC0C66" class="bare">http://localhost:47989/pin/#337327E8A6FC0C66</a> make sure to replace <code>localhost</code> with your server IP) <span class="image"><img src="../_images/wolf-pairing-code.png" alt="A screenshot of the Wolf page where you can insert the PIN"></span></p>
+</li>
+<li>
+<p>In Moonlight, you should now be able to see a list of the applications that are supported by Wolf <span class="image"><img src="../_images/moonlight-pairing-done.png" alt="A screenshot of Moonlight showing the apps"></span></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you can only see a <strong>black screen</strong> with a cursor in Moonlight it&#8217;s because the first time that you start an app Wolf will download the corresponding docker image + first time updates.<br>
+Keep an eye on the logs from Wolf to get more details.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_virtual_devices_support"><a class="anchor" href="#_virtual_devices_support"></a>Virtual devices support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We use uinput to create virtual devices (Mouse, Keyboard and Joypad), make sure that <code>/dev/uinput</code> is present in the host:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -la /dev/uinput
+crw------- 1 root root 10, 223 Jan 17 09:08 /dev/uinput</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Add your user to group <code>input</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo usermod -a -G input $USER</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Create <code>udev</code> rules under <code>/etc/udev/rules.d/85-wolf-virtual-inputs.rules</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Allows Wolf to acces /dev/uinput
+KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+
+# Allows Wolf to access /dev/uhid
+KERNEL=="uhid", TAG+="uaccess"
+
+# Move virtual keyboard and mouse into a different seat
+SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"
+
+# Joypads
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">What does that mean?</summary>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Allows Wolf to access <code>/dev/uinput</code> on your system.
+It needs that node to create the virtual devices.
+This is usually not the default on servers, but if that is already working for you on your desktop system, you can skip this line.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This line checks for the custom vendor-id that Wolf gives to newly created virtual devices and assigns them to <code>seat9</code>, which will cause any session with a lower seat (usually you only have <code>seat1</code> for your main session) to ignore the devices.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
+SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the virtual controllers are different, because we need to emulate an existing brand for them to be picked up correctly, so our virtual controllers have a vendor/product id resembling a real controller.
+The assigned name instead is specific to Wolf.</p>
+</div>
+<div class="paragraph">
+<p>You can&#8217;t assign controllers a seat however (well - you can - but it won&#8217;t have the same effect), so we just give it permissions where only user+group can pick it up.</p>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>Reload the udev rules either by rebooting or run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">udevadm control --reload-rules &amp;&amp; udevadm trigger</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
