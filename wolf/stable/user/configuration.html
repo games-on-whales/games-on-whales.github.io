@@ -163,9 +163,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-multi-gpu/index.html">dev-multi-gpu</a>
-        </li>
-        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
       </ul>
@@ -192,7 +189,6 @@
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
-    <a class="version" href="../../dev-multi-gpu/user/configuration.html">dev-multi-gpu</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
   </div>
 </div>
@@ -284,6 +280,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The default render node used for virtual desktops; see: <a href="#_multiple_gpu">Multiple GPUs</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_ENCODER_NODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$WOLF_RENDER_NODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default render node used for the Gstreamer pipelines; see: <a href="#_multiple_gpu">Multiple GPUs</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_DOCKER_FAKE_UDEV_PATH</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$HOST_APPS_STATE_FOLDER/fake-udev</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The path on the host for the fake-udev CLI tool</p></td>
@@ -355,6 +356,21 @@ Can be changed in the <code>config.toml</code> file</p>
 </div>
 <div class="sect2">
 <h3 id="_share_home_folder_with_multiple_clients"><a class="anchor" href="#_share_home_folder_with_multiple_clients"></a>Share home folder with multiple clients</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This will break isolation, if you want to connect with multiple clients at the same time you should not share the home folder.
+You can follow development of that feature <a href="https://github.com/games-on-whales/wolf/issues/83">here</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>By default, Wolf will create a new home folder for each client, but if you want to share the same home folder with multiple clients, you can set the <code>app_state_folder</code> to the same value for each paired client; example:<br></p>
 </div>
@@ -618,67 +634,32 @@ There are two main separated parts that make use of HW acceleration in Wolf:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Gstreamer video encoding: this will use HW acceleration in order to efficiently encode the video stream with H.264 or HEVC.</p>
+<p><strong>App render node</strong>: this will use HW acceleration in order to create virtual Wayland desktops and run the chosen app (ex: Firefox, Steam, &#8230;&#8203;).
+Use the <code>WOLF_RENDER_NODE</code> (defaults to <code>/dev/dri/renderD128</code>) env variable to control this.</p>
 </li>
 <li>
-<p>App render node: this will use HW acceleration in order to create virtual Wayland desktops and run the chosen app (ex: Firefox, Steam, &#8230;&#8203;)</p>
+<p><strong>Gstreamer video encoding</strong>: this will use HW acceleration in order to efficiently encode the video stream with H.264 or HEVC.
+Use the <code>WOLF_ENCODER_NODE</code> (defaults to <code>WOLF_RENDER_NODE</code>) env variable to control this.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>They can be configured separately, and ideally you could even <strong>use two GPUs at the same time</strong> for different jobs; a common setup would be to use the integrated GPU just for the streaming part and use a powerful GPU to play apps/games.</p>
+<p>They can be configured separately, and in theory you could even <strong>use two GPUs at the same time</strong> for different jobs; ex: use the integrated GPU just for the streaming part and use a powerful GPU to play apps/games.</p>
 </div>
-<div class="sect2">
-<h3 id="_gstreamer_video_encoding"><a class="anchor" href="#_gstreamer_video_encoding"></a>Gstreamer video encoding</h3>
-<div class="paragraph">
-<p>The streaming video encoding pipeline is fully controlled by the <code>config.toml</code> file; here the order in which entries are listed is important because Wolf will just try each listed plugin; the first one that works is the one that will be used.</p>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="EXAMPLE"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you have an Intel iGPU and a Nvidia card in the same host, and you would like to use QuickSync in order to do the encoding, you can either:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Delete the <code>nvcodec</code> entries under <code>gstreamer.video.hevc_encoders</code></p>
-</li>
-<li>
-<p>Cut the <code>qsv</code> entry and paste it above the <code>nvcodec</code> entry</p>
-</li>
-</ul>
+<p>This isn&#8217;t recommended, it might introduce additional latency and it&#8217;s not optimal.
+HW encoding on modern GPUs is very lightweight and it&#8217;s better to use the same GPU for both jobs.</p>
 </div>
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>On top of that, each single <code>apps</code> entry support overriding the default streaming pipeline; for example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "Test ball"
-
-# More options here, removed for brevity...
-
-[apps.video]
-source = """
-videotestsrc pattern=ball flip=true is-live=true !
-video/x-raw, framerate={fps}/1
-\
-"""</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In case you have two GPUs that will use the same encoder pipeline (example: an AMD iGPU and an AMD GPU card) you can override the <code>encoder_pipeline</code> with the corresponding encoder plugin; see:
-<a href="https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1167">gstreamer/issues/1167</a>.</p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_app_render_node"><a class="anchor" href="#_app_render_node"></a>App render node</h3>
@@ -732,6 +713,61 @@ image = "ghcr.io/games-on-whales/steam:edge"
 # More options here, removed for brevity...
 render_node = "/dev/dri/renderD129"</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gstreamer_video_encoding"><a class="anchor" href="#_gstreamer_video_encoding"></a>Gstreamer video encoding</h3>
+<div class="paragraph">
+<p>The easy way to control this is to just edit the env variable <code>WOLF_ENCODER_NODE</code> (defaults to match <code>WOLF_RENDER_NODE</code> in order to use the same GPU for both), this will set the default render node used for the Gstreamer pipelines.</p>
+</div>
+<div class="paragraph">
+<p>The streaming video encoding pipeline is fully controlled by the <code>config.toml</code> file; here the order in which entries are listed is important because Wolf will just try each listed plugin; the first one that works is the one that will be used.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="EXAMPLE"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you have an Intel iGPU and a Nvidia card in the same host, and you would like to use QuickSync in order to do the encoding, you can either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Delete the <code>nvcodec</code> entries under <code>gstreamer.video.hevc_encoders</code></p>
+</li>
+<li>
+<p>Cut the <code>qsv</code> entry and paste it above the <code>nvcodec</code> entry</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>On top of that, each single <code>apps</code> entry support overriding the default streaming pipeline; for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Test ball"
+
+# More options here, removed for brevity...
+
+[apps.video]
+source = """
+videotestsrc pattern=ball flip=true is-live=true !
+video/x-raw, framerate={fps}/1
+\
+"""</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In case you have two GPUs that will use the same encoder pipeline (example: an AMD iGPU and an AMD GPU card) you can override the <code>video_params</code> with the corresponding encoder plugin; see:
+<a href="https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1167">gstreamer/issues/1167</a>.</p>
 </div>
 </div>
 </div>

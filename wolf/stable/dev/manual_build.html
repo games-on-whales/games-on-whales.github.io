@@ -163,9 +163,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-multi-gpu/index.html">dev-multi-gpu</a>
-        </li>
-        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
       </ul>
@@ -192,7 +189,6 @@
     <a class="version is-current" href="manual_build.html">stable</a>
     <a class="version" href="../../dev-tracy/dev/manual_build.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/dev/manual_build.html">dev-nix</a>
-    <a class="version" href="../../dev-multi-gpu/dev/manual_build.html">dev-multi-gpu</a>
     <a class="version" href="../../dev-fake-uinput/dev/manual_build.html">dev-fake-uinput</a>
   </div>
 </div>
@@ -249,7 +245,7 @@ This will make sure that you end up with all the required plugins.</p>
 <div class="listingblock">
 <div class="title">Build gstreamer</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone -b 1.22.7 --depth=1 https://gitlab.freedesktop.org/gstreamer/gstreamer.git
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone -b 1.24.6 --depth=1 https://gitlab.freedesktop.org/gstreamer/gstreamer.git
 cd gstreamer
 # Setup a place where we'll put the libraries
 mkdir -p $HOME/gstreamer/include -p $HOME/gstreamer/usr/local/include
