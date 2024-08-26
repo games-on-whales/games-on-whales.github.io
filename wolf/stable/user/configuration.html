@@ -77,6 +77,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="steam.html">Steam</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -776,29 +779,7 @@ video/x-raw, framerate={fps}/1
 <h2 id="_directly_launch_a_steam_game"><a class="anchor" href="#_directly_launch_a_steam_game"></a>Directly launch a Steam game</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to directly launch a Steam game from Moonlight you can just copy the existing <code><a id="apps"></a></code> entry for Steam, change the name and just add the Steam app ID as env variable; example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "Elden Ring"
-start_virtual_compositor = true
-
-[apps.runner]
-env = [
-  "PROTON_LOG=1",
-  "RUN_SWAY=true",
-  "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*",
-  "STEAM_STARTUP_FLAGS=steam://rungameid/1245620"
-]
-# COPY EVERYTHING ELSE ...</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can get the app ID from <a href="https://steamdb.info/" class="bare">https://steamdb.info/</a></p>
-</div>
-<div class="paragraph">
-<p>(Thanks to @nathanle1406 for the tip)</p>
+<p>This has been moved to the <a href="steam.html" class="xref page">Steam</a> page.</p>
 </div>
 </div>
 </div>
