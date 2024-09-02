@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Video stream via RTP :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/protocols/rtp-video.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-backend-api">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/steam.html">Steam</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="4">
+    <a class="nav-link" href="rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-backend-api</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fix-109/index.html">dev-fix-109</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-backend-api</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="index.html">Moonlight Protocols</a></li>
+    <li>RTP</li>
+    <li><a href="rtp-video.html">Video (H.264/HEVC)</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-backend-api</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/protocols/rtp-video.html">stable</a>
+    <a class="version" href="../../dev-tracy/protocols/rtp-video.html">dev-tracy</a>
+    <a class="version" href="../../dev-nix/protocols/rtp-video.html">dev-nix</a>
+    <a class="version" href="../../dev-fix-109/protocols/rtp-video.html">dev-fix-109</a>
+    <a class="version" href="../../dev-fake-uinput/protocols/rtp-video.html">dev-fake-uinput</a>
+    <a class="version is-current" href="rtp-video.html">dev-backend-api</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-backend-api/docs/modules/protocols/pages/rtp-video.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Video stream via RTP</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here are a few random notes about the low level details of the video streaming protocol in Moonlight.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ping"><a class="anchor" href="#_ping"></a>PING</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The port exchanged during the RTSP phase it&#8217;s not where the actual video stream will take place!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Moonlight will send a <code>PING</code> package to the exchanged port, this will tell us which random port the connecting client was able to open in order to communicate with Wolf.
+The client port from where Wolf receives the <code>PING</code> will also be the one where the actual RTP stream will be sent to.</p>
+</div>
+<div class="paragraph">
+<p>This is necessary because usually clients will be behind <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rtp_packets"><a class="anchor" href="#_rtp_packets"></a>RTP packets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The video binary NAL unit (see below) will be separated in chunks of <code>packetSize</code> (default: <code>1024</code>, exchanged during <code>RTSP</code>) + <code>RTP_HEADER_SIZE</code> (16 byte).</p>
+</div>
+<div class="paragraph">
+<p>The first 32 bytes of each packet are defined as follows:</p>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/packetdiag/svg/eNo1jUEOwiAURPc9xV_qgqSAoiVx5Q3sAQzCjxAtVKCaary7PyZdzsubmU8DYNP9FVz1cAApKMfk8OwxXH0lpNoFLZJoG0It22nwaBxmSnvGtxpGY29Yoc4jEuOKSa6h4GPCaBHiNFz-shRMSQ01DFiqGUZCasM6GihztD6nGN6mhhShpClTc9X3p-OatE4xLug3Y8H8RNc03x9HTzjH" alt="RTP header format in bits">
+</div>
+<div class="title">Figure 1. RTP header format in bits</div>
+</div>
+<div class="imageblock text-center kroki">
+<div class="content">
+<img src="https://kroki.io/packetdiag/svg/eNpNy00OwiAUBOB9T_EuQEJBgZK4MnoNg-W1JdJiKP4kxrv7umjjcr6Z-VQAbYqv4MsAB5CC8pQ8XgYM_VCIFF9pHQleEXEmawtzyehGuLv2hgXC5PFNnRRMSQtddiNuqHZM06OLrp8pasF0YyHjjPmJnsRwZrSF8RFLgPPpuE2NYc3-v7jG1N6WplGsFvRZMExdqr4_Z3c6tQ==" alt="NV Video header format in bits">
+</div>
+<div class="title">Figure 2. NV Video header format in bits</div>
+</div>
+<div class="paragraph">
+<p>The very first packet of the sequence will also contain the hardcoded <code>017charss</code> string before the actual video payload</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="TODO"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What does this content mean?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNqV0LEKwjAQxvG9T_GR-Ya2gbbc0gcRhygXDdRUkihiyLubybnZ_ge_4eMygtwYpw7IUCaloBhqXRVBXVyK9VpqevOQmv2nHwodtXo-bifdYJcG27B3HhusbrRnwnX31tVnZ7v7FN1XGMNE2IyXyBgJb7u5J6fwEsL936UrPxo7cDU=" alt="Video payload starts after the 8 hardcoded bytes `017charss` (hex: 0137636861727373)">
+</div>
+<div class="title">Figure 3. Video payload starts after the 8 hardcoded bytes <code>017charss</code> (hex: 0137636861727373)</div>
+</div>
+<div class="sect2">
+<h3 id="_nv_video_flags"><a class="anchor" href="#_nv_video_flags"></a>NV Video flags</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Content</th>
+<th class="tableblock halign-left valign-top">value (decimal)</th>
+<th class="tableblock halign-left valign-top">value (binary)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains Picture data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00000001</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOF (End of File)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00000010</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOF (Start of File)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00000100</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>They&#8217;ll be summed together, for example: 5 means Picture data AND Start of File.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_forward_error_correction_fec"><a class="anchor" href="#_forward_error_correction_fec"></a>Forward Error Correction (FEC)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Uses <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed Solomon</a> to encode the payload so that it can be checked on the receiving end for transmission errors (and possibly fix them).</p>
+</div>
+<div class="paragraph">
+<p>This operation will create extra parity blocks that will be sent in separate RTP packets.
+The size of this can be set by changing the <code>fecpercentage</code> param.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="EXAMPLE"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>With a video payload of <code>4KB</code>, a <code>packetSize</code> of 1024 and a <code>fecpercentage</code> of 50%:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>4 RTP packets will contain the video data</p>
+</li>
+<li>
+<p>2 extra RTP packets will be sent with the FEC parity information</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The total overhead of sending 4KB of video will be:<br>
+headers * packets + FEC = 32 * 6 + 2048 = 2248 bytes</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This extra packets can be easily identified since the NV Video flag will always be 0.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_h_264_binary_format"><a class="anchor" href="#_h_264_binary_format"></a>H.264 binary format</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read more at <a href="https://stackoverflow.com/a/24890903/3901988">stackoverflow.com</a> and <a href="https://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/">yumichan.net</a>.</p>
+</div>
+<div class="paragraph">
+<p>The video stream is separated in NAL (Network Abstraction Layer) units.
+Each of this unit starts with a three-byte or four-byte start code <code>0x000001</code> or <code>0x00000001</code></p>
+</div>
+<div class="literalblock">
+<div class="title">A complete H.264 example stream composed of 3 NALU</div>
+<div class="content">
+<pre>0x0000 | 00 00 00 01 67 64 00 0A AC 72 84 44 26 84 00 00
+0x0010 | 03 00 04 00 00 03 00 CA 3C 48 96 11 80 00 00 00
+0x0020 | 01 68 E8 43 8F 13 21 30 00 00 01 65 88 81 00 05
+0x0030 | 4E 7F 87 DF 61 A5 8B 95 EE A4 E9 38 B7 6A 30 6A
+0x0040 | 71 B9 55 60 0B 76 2E B5 0E E4 80 59 27 B8 67 A9
+0x0050 | 63 37 5E 82 20 55 FB E4 6A E9 37 35 72 E2 22 91
+0x0060 | 9E 4D FF 60 86 CE 7E 42 B7 95 CE 2A E1 26 BE 87
+0x0070 | 73 84 26 BA 16 36 F4 E6 9F 17 DA D8 64 75 54 B1
+0x0080 | F3 45 0C 0B 3C 74 B3 9D BC EB 53 73 87 C3 0E 62
+0x0090 | 47 48 62 CA 59 EB 86 3F 3A FA 86 B5 BF A8 6D 06
+0x00A0 | 16 50 82 C4 CE 62 9E 4E E6 4C C7 30 3E DE A1 0B
+0x00B0 | D8 83 0B B6 B8 28 BC A9 EB 77 43 FC 7A 17 94 85
+0x00C0 | 21 CA 37 6B 30 95 B5 46 77 30 60 B7 12 D6 8C C5
+0x00D0 | 54 85 29 D8 69 A9 6F 12 4E 71 DF E3 E2 B1 6B 6B
+0x00E0 | BF 9F FB 2E 57 30 A9 69 76 C4 46 A2 DF FA 91 D9
+0x00F0 | 50 74 55 1D 49 04 5A 1C D6 86 68 7C B6 61 48 6C
+0x0100 | 96 E6 12 4C 27 AD BA C7 51 99 8E D0 F0 ED 8E F6
+0x0110 | 65 79 79 A6 12 A1 95 DB C8 AE E3 B6 35 E6 8D BC
+0x0120 | 48 A3 7F AF 4A 28 8A 53 E2 7E 68 08 9F 67 77 98
+0x0130 | 52 DB 50 84 D6 5E 25 E1 4A 99 58 34 C7 11 D6 43
+0x0140 | FF C4 FD 9A 44 16 D1 B2 FB 02 DB A1 89 69 34 C2
+0x0150 | 32 55 98 F9 9B B2 31 3F 49 59 0C 06 8C DB A5 B2
+0x0160 | 9D 7E 12 2F D0 87 94 44 E4 0A 76 EF 99 2D 91 18
+0x0170 | 39 50 3B 29 3B F5 2C 97 73 48 91 83 B0 A6 F3 4B
+0x0180 | 70 2F 1C 8F 3B 78 23 C6 AA 86 46 43 1D D7 2A 23
+0x0190 | 5E 2C D9 48 0A F5 F5 2C D1 FB 3F F0 4B 78 37 E9
+0x01A0 | 45 DD 72 CF 80 35 C3 95 07 F3 D9 06 E5 4A 58 76
+0x01B0 | 03 6C 81 20 62 45 65 44 73 BC FE C1 9F 31 E5 DB
+0x01C0 | 89 5C 6B 79 D8 68 90 D7 26 A8 A1 88 86 81 DC 9A
+0x01D0 | 4F 40 A5 23 C7 DE BE 6F 76 AB 79 16 51 21 67 83
+0x01E0 | 2E F3 D6 27 1A 42 C2 94 D1 5D 6C DB 4A 7A E2 CB
+0x01F0 | 0B B0 68 0B BE 19 59 00 50 FC C0 BD 9D F5 F5 F8
+0x0200 | A8 17 19 D6 B3 E9 74 BA 50 E5 2C 45 7B F9 93 EA
+0x0210 | 5A F9 A9 30 B1 6F 5B 36 24 1E 8D 55 57 F4 CC 67
+0x0220 | B2 65 6A A9 36 26 D0 06 B8 E2 E3 73 8B D1 C0 1C
+0x0230 | 52 15 CA B5 AC 60 3E 36 42 F1 2C BD 99 77 AB A8
+0x0240 | A9 A4 8E 9C 8B 84 DE 73 F0 91 29 97 AE DB AF D6
+0x0250 | F8 5E 9B 86 B3 B3 03 B3 AC 75 6F A6 11 69 2F 3D
+0x0260 | 3A CE FA 53 86 60 95 6C BB C5 4E F3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a complete H.264 stream.
+If you type these values into a hex editor and save the file with a <code>.264</code> extension, you will be able to convert it to this image:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://i.stack.imgur.com/Szfku.png" alt="The decoded H.264 stream above">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nal_unit_header"><a class="anchor" href="#_nal_unit_header"></a>NAL Unit Header</h3>
+<div class="paragraph">
+<p>The first byte after the start code it&#8217;s called NAL Unit Header and indicates the type of data contained in it and other information.<br>
+In the example above the first header byte is <code>0x67</code>, le&#8217;ts see what that means:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNptz8sKwjAQheF9nmLIOotevEBeRST0MtGBmpR0WrSh725cVCK4--HwLU6EgDcNFyEAIsiGOUgN0vrQUt-jMysGLxXIlnhKS5nSNQ9MWTwLBfwaUUO1qV_vmsEEtIb6LsNVjusd1__w7IjNZ8_4MefnnR8SvyrovLOUnkTrHU-0pqU8KVjsQKPmMKOC-7c3sb0BkIxLLA==" alt="`0x67` in hex is `01100111` in binary">
+</div>
+<div class="title">Figure 4. <code>0x67</code> in hex is <code>01100111</code> in binary</div>
+</div>
+<table class="tableblock frame-all grid-all fit-content stretch">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Size in bits</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Forbidden zero</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to check whether there is any error occurred during the transmission.<br>
+The H.264 specification declares a value of 1 as a syntax violation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nal_ref_idc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Current frame priority</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nal_unit_type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This component specifies the NAL unit payload type</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_nal_ref_idc"><a class="anchor" href="#_nal_ref_idc"></a>nal_ref_idc</h4>
+<div class="paragraph">
+<p>Just by looking at this two bits you can already understand what type of information will be encoded:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content stretch">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start Code Type</th>
+<th class="tableblock halign-left valign-top">nal_ref_idc (in binary)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I-frame or header data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P-frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B-frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">other data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Read the full table <a href="https://yumichan.net/video-processing/video-compression/breif-description-of-nal_ref_idc-value-in-h-246-nalu/">here</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nal_unit_type"><a class="anchor" href="#_nal_unit_type"></a>nal_unit_type</h4>
+<div class="paragraph">
+<p>The 5 remaining bits will uniquely identify which exact type of NAL unit we are looking at, here are the most common:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Unit type</th>
+<th class="tableblock halign-left valign-top">nal_unit_type (binary)</th>
+<th class="tableblock halign-left valign-top">nal_unit_type (decimal)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coded slice of a non-IDR picture</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coded slice of an IDR picture</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00101</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supplemental enhancement information (SEI)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00110</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sequence parameter set (SPS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Picture parameter set (PPS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Access unit delimiter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Full table <a href="https://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="paragraph">
+<p>Looking back at the example above we can now identify the following 3 NALU:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNptz8sKwjAQheG9T3HIOotevEBeRST0MtGBmpR0KtrSdzcuKhXcHfj5BmZGpKvBeQfMUJVIVAbKhVhz25K3E8WgNABVswyp5RrKV3dKM3tmGvLqyaBY9O8FX3U2krPcNomvuNjicsXlPzx6FvvpG37Y8tPK94lfNJrgHadXZhe8DDylkh81Hq7j3kgcSeP23ctueQPRhUti" alt="A SPS NALU">
+</div>
+<div class="title">Figure 5. A SPS NALU</div>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNptz8sKwjAQheG9T3HIOoteVCSvIhJ6mehATUo6FW3puxsXlQruDvx8AzMj0tXgvANmqEokKgPlQqy5bcnbiWJQGoCqWYbUcg3lqzulmT0zDXn1ZFAs-veCrzobyVlum8RXXGxxueLyHx49i_30DT9s-Wnl-8QvGk3wjtMrswteBp5SyY8aD9dxbySOpHH77mW3vAHRxUtj" alt="A PPS NALU">
+</div>
+<div class="title">Figure 6. A PPS NALU</div>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/wavedrom/svg/eNptz8sKwjAQheF9n-KQ9Sx6sS7yKiKhl4kGalLiVLSl725cVCq4O_DzDcyCyBeNUwYsUI1IVBrKhti6vmdvZo5BEQDVOrmnVhCUb26cZv7MCfIaWaNc6feCbwYT2RrXd4lvuNzjasPVPzx5J-bTd7ze83rjh8TPhC5469Iriw1e7m5OpTgSHnZwo5Y4MeH63Wu2vgHRBUtg" alt="A IDR frame NALU">
+</div>
+<div class="title">Figure 7. A IDR frame NALU</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_idr_requests"><a class="anchor" href="#_idr_requests"></a>IDR Requests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During the stream the client is actively asking for IDR frames via the Control UDP stream (see: <a href="control-specs.html" class="xref page">Control specifications</a>).</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
