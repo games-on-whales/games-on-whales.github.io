@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Troubleshooting :: Games On Whales</title>
-    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/user/troubleshooting.html">
+    <title>Pegasus Frontend Configuration :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/apps/pegasus.html">
     <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
@@ -66,26 +66,26 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="quickstart.html">Quickstart</a>
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configuration.html">Configuration</a>
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../apps/index.html">Apps</a>
+    <a class="nav-link" href="index.html">Apps</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../apps/steam.html">Steam</a>
+    <a class="nav-link" href="steam.html">Steam</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="pegasus.html">Pegasus Frontend Configuration</a>
   </li>
 </ul>
   </li>
@@ -195,243 +195,267 @@
   <ul>
     <li><a href="../index.html">wolf</a></li>
     <li>User guide</li>
-    <li><a href="troubleshooting.html">Troubleshooting</a></li>
+    <li><a href="index.html">Apps</a></li>
+    <li><a href="pegasus.html">Pegasus Frontend Configuration</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">dev-backend-api</button>
   <div class="version-menu">
-    <a class="version" href="../../stable/user/troubleshooting.html">stable</a>
-    <a class="version" href="../../dev-tracy/user/troubleshooting.html">dev-tracy</a>
-    <a class="version" href="../../dev-nix/user/troubleshooting.html">dev-nix</a>
-    <a class="version" href="../../dev-fake-uinput/user/troubleshooting.html">dev-fake-uinput</a>
-    <a class="version is-current" href="troubleshooting.html">dev-backend-api</a>
+    <a class="version" href="../../stable/apps/pegasus.html">stable</a>
+    <a class="version is-missing" href="../../dev-tracy/index.html">dev-tracy</a>
+    <a class="version is-missing" href="../../dev-nix/index.html">dev-nix</a>
+    <a class="version is-missing" href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+    <a class="version is-current" href="pegasus.html">dev-backend-api</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-backend-api/docs/modules/user/pages/troubleshooting.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-backend-api/docs/modules/apps/pages/pegasus.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Troubleshooting</h1>
+<h1 class="page">Pegasus Frontend Configuration</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>When something doesn&#8217;t work it&#8217;ll be helpful to be able to see the logs from Wolf, please change the env variable <code>WOLF_LOG_LEVEL</code> to <code>DEBUG</code> and try to replicate the issue.</p>
-</div>
-</td>
-</tr>
-</table>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_getting_started">Getting Started</a>
+<ul class="sectlevel2">
+<li><a href="#_rom_directory_structure">ROM Directory Structure</a></li>
+<li><a href="#_setting_up_rom_directories">Setting Up ROM Directories</a></li>
+</ul>
+</li>
+<li><a href="#_configuration">Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#_setting_up_bind_mounts_for_roms">Setting Up Bind Mounts for ROMs</a></li>
+<li><a href="#_example_configuration">Example Configuration</a></li>
+</ul>
+</li>
+<li><a href="#_emulators">Emulators</a></li>
+<li><a href="#_customization">Customization</a>
+<ul class="sectlevel2">
+<li><a href="#_theming">Theming</a></li>
+</ul>
+</li>
+<li><a href="#_troubleshooting_and_additional_resources">Troubleshooting and Additional Resources</a></li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_black_screen_in_moonlight"><a class="anchor" href="#_black_screen_in_moonlight"></a>Black screen in Moonlight</h2>
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If it&#8217;s the very first time that you are running an app, and you can only see a black screen with a cursor in Moonlight, it&#8217;s probably because Wolf is downloading the corresponding docker image and installing first time updates (when necessary).</p>
+<p>Pegasus is a powerful and flexible frontend for launching games, similar to EmulationStation. It provides a unified interface for interacting with various emulators, eliminating the need to manage multiple emulator interfaces separately.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_rom_directory_structure"><a class="anchor" href="#_rom_directory_structure"></a>ROM Directory Structure</h3>
 <div class="paragraph">
-<p>If this persists or Moonlight kicks you out of the streaming session then you should probably take a look at the Wolf logs to gather more informations.</p>
+<p>By default, Pegasus is configured to look for ROMs in the <code>/ROMs</code> directory, with subdirectories for each platform. You can either create the ROM directories in the format below or edit Pegasus to use your preferred location.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">/ROMs/3do
+/ROMs/amiga
+/ROMs/amigacd32
+/ROMs/arcade
+/ROMs/atari2600
+/ROMs/atari5200
+/ROMs/atari7800
+/ROMs/atarijaguar
+/ROMs/atarijaguarcd
+/ROMs/atarilynx
+/ROMs/atarist
+/ROMs/gb
+/ROMs/gba
+/ROMs/gbc
+/ROMs/gc
+/ROMs/genesis
+/ROMs/megacd
+/ROMs/model2
+/ROMs/model3
+/ROMs/n64
+/ROMs/naomi
+/ROMs/neogeo
+/ROMs/nes
+/ROMs/ngp
+/ROMs/ngpc
+/ROMs/ps2
+/ROMs/ps3
+/ROMs/psp
+/ROMs/psx
+/ROMs/saturn
+/ROMs/sega32x
+/ROMs/segacd
+/ROMs/snes
+/ROMs/snes_widescreen
+/ROMs/switch
+/ROMs/virtualboy
+/ROMs/wii
+/ROMs/wiiu
+/ROMs/wonderswan
+/ROMs/wonderswancolor
+/ROMs/xbox</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_vulkan_errors_in_app"><a class="anchor" href="#_vulkan_errors_in_app"></a>Vulkan errors in App</h3>
+<h3 id="_setting_up_rom_directories"><a class="anchor" href="#_setting_up_rom_directories"></a>Setting Up ROM Directories</h3>
 <div class="paragraph">
-<p>Example log line:</p>
+<p>To make your roms accessible to Pegasus within the container, you need to create a bind mount that maps your host ROM folder to the <code>/ROMs</code> directory in the container. This is done by editing the <code>config.toml</code> file.</p>
 </div>
-<div class="literalblock">
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_setting_up_bind_mounts_for_roms"><a class="anchor" href="#_setting_up_bind_mounts_for_roms"></a>Setting Up Bind Mounts for ROMs</h3>
+<div class="paragraph">
+<p>To create a bind mount for your ROMs, add the following line to the <code>"HostConfig"</code> section of your <code>config.toml</code>:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<pre>vulkan: physical device 10de:1c03 compute queue doesn't support presenting on our surface, using graphics queue
-vulkan: selecting physical device 'NVIDIA GeForce GTX 1060 6GB': queue family 0
-vulkan: physical device supports DRM format modifiers
-vulkan: vkCreateDevice failed (VkResult: -7)
-Failed to initialize Vulkan</pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">"Binds": [
+    "/path/to/roms:/ROMs"
+]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Vulkan errors are generally related to the video drivers.</p>
+<p>Replace <code>/path/to/roms</code> with the actual path to your ROM directory on the host system.</p>
 </div>
-<details>
-<summary class="title">Nvidia GPU checklist</summary>
-<div class="content">
+</div>
+<div class="sect2">
+<h3 id="_example_configuration"><a class="anchor" href="#_example_configuration"></a>Example Configuration</h3>
 <div class="paragraph">
-<p>Make sure to follow all the instructions on the <a href="quickstart.html" class="xref page">Quickstart</a> page.
-Here&#8217;s a brief summary of things to check:</p>
+<p>Here&#8217;s an example of how the Pegasus configuration might look in your <code>config.toml</code> file:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Check that the nvidia volume driver has been created&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>docker volume ls | grep nvidia-driver
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Pegasus"
+start_virtual_compositor = true
 
-local     nvidia-driver-vol</pre>
+[apps.runner]
+type = "docker"
+name = "WolfEmulators"
+image = "ghcr.io/games-on-whales/pegasus:edge"
+mounts = [
+    "/mnt/PATH_TO_ROMS_IN_YOUR_HOST/:/ROMs/:rw" # &lt;-- EDIT HERE
+]
+env = [
+"RUN_SWAY=1",
+"GOW_REQUIRED_DEVICES=/dev/input/event* /dev/dri/* /dev/nvidia*",
+]
+devices = []
+ports = []
+base_create_json = """
+{
+  "HostConfig": {
+    "Binds": [],
+    "IpcMode": "host",
+    "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN", "SYS_ADMIN", "SYS_NICE"],
+    "Privileged": false,
+    "DeviceCgroupRules": ["c 13:* rmw"]
+  }
+}
+"""</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;and that the same volume name is passed in the env variable <code>NVIDIA_DRIVER_VOLUME_NAME</code></p>
-</li>
-<li>
-<p>Make sure that the <code>nvidia-drm</code> module has been loaded&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo dmesg | grep nvidia-drm    # Should print something like the following:
-[   12.561107] [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
-[   14.138312] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:01:00.0 on minor 0</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;and check that the module is loaded with the flag <code>modeset=1</code>.</p>
-</li>
-</ul>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo cat /sys/module/nvidia_drm/parameters/modeset
-Y</pre>
-</div>
-</div>
-</div>
-</details>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_address_already_in_use"><a class="anchor" href="#_address_already_in_use"></a>Address already in use</h2>
+<h2 id="_emulators"><a class="anchor" href="#_emulators"></a>Emulators</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ll see something like the following log lines:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>terminate called after throwing an instance of 'boost::wrapexcept&lt;boost::system::system_error&gt;'
-  what():  bind: Address already in use
-INFO  | Received interrupt signal 6, clean exit</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This means that some other process is using the same ports that Wolf needs in order to communicate with Moonlight.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Have you left Sunshine running in the background?</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following ports need to be available in order for Wolf to work:</p>
+<p>Pegasus is preconfigured with several popular emulators. Each emulator is designed to run games for specific platforms. For detailed information on configuring and using these emulators, please refer to their respective documentation:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>47984/tcp - HTTPS</p>
+<p>RetroArch: <a href="https://docs.libretro.com/" class="bare">https://docs.libretro.com/</a></p>
 </li>
 <li>
-<p>47989/tcp - HTTP</p>
+<p>PCSX2: <a href="https://pcsx2.net/docs/" class="bare">https://pcsx2.net/docs/</a></p>
 </li>
 <li>
-<p>47999/udp - Control</p>
+<p>Xemu: <a href="https://xemu.app/docs/" class="bare">https://xemu.app/docs/</a></p>
 </li>
 <li>
-<p>48100/udp - Video</p>
+<p>RPCS3: <a href="https://rpcs3.net/quickstart" class="bare">https://rpcs3.net/quickstart</a></p>
 </li>
 <li>
-<p>48200/udp - Audio</p>
+<p>CEMU: <a href="https://cemu.cfw.guide/" class="bare">https://cemu.cfw.guide/</a></p>
 </li>
 <li>
-<p>48010/tcp - RTSP</p>
+<p>Dolphin: <a href="https://dolphin-emu.org/docs/guides/" class="bare">https://dolphin-emu.org/docs/guides/</a></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unable_to_recognise_gpu_vendor"><a class="anchor" href="#_unable_to_recognise_gpu_vendor"></a>Unable to recognise GPU vendor</h2>
+<h2 id="_customization"><a class="anchor" href="#_customization"></a>Customization</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_theming"><a class="anchor" href="#_theming"></a>Theming</h3>
 <div class="paragraph">
-<p>Example log line:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>WARN  | Unable to recognise GPU vendor: red hat, inc.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Do you have multiple GPUs installed (or even just a virtual display in a VM)?<br>
-Checkout the <a href="configuration.html#_multiple_gpu" class="xref page">Multiple GPU configuration page</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_intel_mfx_err_unsupported"><a class="anchor" href="#_intel_mfx_err_unsupported"></a>Intel: MFX_ERR_UNSUPPORTED</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Example log line:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>0:01:31.983118812     1 0x7f1d50000b70 ERROR             qsvencoder gstqsvencoder.cpp:1098:gst_qsv_encoder_init_encode_session:&lt;qsvh265enc3&gt; MFXVideoENCODE::Query failed -3 (MFX_ERR_UNSUPPORTED)
-0:01:31.983243805     1 0x7f1d50000b70 WARN            videoencoder gstvideoencoder.c:771:gst_video_encoder_setcaps:&lt;qsvh265enc3&gt; rejected caps video/x-raw(memory:VAMemory), width=(int)1280, height=(int)720, framerate=(fraction)60/1, format=(string)NV12, chroma-site=(string)mpeg2, colorimetry=(string)bt601</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Follow the steps outlined in <a href="https://www.intel.com/content/www/us/en/support/articles/000089952/software/iot-software.html">here</a>:</p>
+<p>Pegasus supports extensive customization through themes. You can change the look and feel of your frontend to suit your preferences.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>sudo apt install --reinstall linux-firmware</code></p>
+<p>For a demonstration of different themes, watch this <a href="https://www.youtube.com/watch?v=WYAgfutLbVE">YouTube video</a>.</p>
 </li>
 <li>
-<p>Add <code>i915.enable_guc=2</code>  in <code>/etc/default/grub</code>: <code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.force_probe=* i915.enable_guc=2"</code></p>
-</li>
-<li>
-<p><code>sudo update-initramfs –u</code></p>
-</li>
-<li>
-<p><code>sudo update-grub</code></p>
-</li>
-<li>
-<p>Reboot the system.</p>
-</li>
-<li>
-<p>After reboot, execute the command: <code>dmesg | grep guc</code></p>
-</li>
-<li>
-<p>Verify the logs for guc information.</p>
+<p>Browse and download themes from the official <a href="https://pegasus-frontend.org/tools/themes/">Pegasus Themes Gallery</a>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Note: If output doesn&#8217;t contain guc details, then install the latest guc/huc firmware. Copy the <a href="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915">firmware</a> to <code>/lib/firmware/i915/</code>, and reboot the system.</p>
+<p>To install a theme, you need to launch the Pegasus app at least once, then download the theme and place in:</p>
+</div>
+<div class="paragraph">
+<p><code>&lt;hostapps_folder&gt;/Pegasus/.config/pegasus-frontend/themes</code></p>
+</div>
+<div class="paragraph">
+<p>On the next Pegasus launch, you will be able to select the theme from within the settings.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_and_additional_resources"><a class="anchor" href="#_troubleshooting_and_additional_resources"></a>Troubleshooting and Additional Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you encounter any issues or need more information, consider the following resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Official Pegasus Documentation: <a href="https://pegasus-frontend.org/docs/" class="bare">https://pegasus-frontend.org/docs/</a></p>
+</li>
+<li>
+<p>Pegasus FAQ: <a href="https://pegasus-frontend.org/docs/faq/" class="bare">https://pegasus-frontend.org/docs/faq/</a></p>
+</li>
+<li>
+<p>Community Forums: <a href="https://pegasus-frontend.org/community/" class="bare">https://pegasus-frontend.org/community/</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For specific issues related to this container or its configuration, please refer to the project&#8217;s issue tracker or community support channels.</p>
 </div>
 </div>
 </div>

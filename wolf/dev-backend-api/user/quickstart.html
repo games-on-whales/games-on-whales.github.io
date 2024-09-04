@@ -78,7 +78,16 @@
     <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="steam.html">Steam</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -371,6 +380,31 @@ services:
     restart: unless-stopped</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and that the module is loaded with the flag <code>modeset=1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">I get <code>N</code> or the file is not present, how do I set the flag?</summary>
+<div class="content">
+<div class="paragraph">
+<p>If using Grub, the easiest way to make the change persistent is to add <code>nvidia-drm.modeset=1</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code> ex:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code>sudo update-grub</code> and <strong>reboot</strong>.</p>
+</div>
+</div>
+</details>
 </div>
 <div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
 <div class="paragraph">
