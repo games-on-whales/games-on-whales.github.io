@@ -175,6 +175,9 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
+          <a href="../../dev-mouse-sensitivity/index.html">dev-mouse-sensitivity</a>
+        </li>
+        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
         <li class="version">
@@ -204,6 +207,7 @@
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
+    <a class="version" href="../../dev-mouse-sensitivity/user/configuration.html">dev-mouse-sensitivity</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
     <a class="version" href="../../dev-backend-api/user/configuration.html">dev-backend-api</a>
   </div>
@@ -793,6 +797,90 @@ video/x-raw, framerate={fps}/1
 <div class="sectionbody">
 <div class="paragraph">
 <p>This has been moved to the <a href="#steam.adoc" class="xref unresolved">steam.adoc</a> page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"><a class="anchor" href="#_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"></a>Changing and Switching Keyboard Layouts in wolf Apps Containers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide demonstrates how to change the default keyboard layout and switch between multiple layouts in Docker containers.</p>
+</div>
+<div class="sect2">
+<h3 id="_create_a_configuration_file"><a class="anchor" href="#_create_a_configuration_file"></a>Create a Configuration File</h3>
+<div class="paragraph">
+<p>Create a config file at <code>${HOST_APPS_STATE_FOLDER}/cfg/90-custom.conf</code> with the following content:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>input type:keyboard {
+    xkb_layout "fr,us"
+    xkb_numlock "enable"
+}</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>xkb_layout : The first layout code you set will be the default layout. Add other layouts separated by commas. For more layout codes, see: <a href="https://man.archlinux.org/man/xkeyboard-config.7#LAYOUTS" class="bare">https://man.archlinux.org/man/xkeyboard-config.7#LAYOUTS</a></p>
+</li>
+<li>
+<p>xkb_numlock "enable" turns on NumLock by default.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_container_mounts"><a class="anchor" href="#_configure_container_mounts"></a>Configure Container Mounts</h3>
+<div class="paragraph">
+<p>In the same folder, edit <code>${HOST_APPS_STATE_FOLDER}/cfg/config.toml</code>
+For each container where you want to use the custom layout, edit the "mounts" variable as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mounts = [
+    "${HOST_APPS_STATE_FOLDER}/cfg/90-custom.conf:/etc/sway/config.d/90-custom.conf",
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This ensures that the config is not overwritten. On the next app restart, the keyboard layout will be set to the default one specified.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_switching_layouts"><a class="anchor" href="#_switching_layouts"></a>Switching Layouts</h3>
+<div class="sect3">
+<h4 id="_switching_layout_from_the_console_in_moonlight"><a class="anchor" href="#_switching_layout_from_the_console_in_moonlight"></a>Switching layout from the console in moonlight</h4>
+<div class="paragraph">
+<p>Start the console in Moonlight.
+Use the command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>swaymsg input type:keyboard xkb_switch_layout next</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_creating_a_steam_shortcut_for_layout_switching"><a class="anchor" href="#_creating_a_steam_shortcut_for_layout_switching"></a>Creating a Steam Shortcut for Layout Switching</h4>
+<div class="paragraph">
+<p>In Steam, add a "Non-Steam Game", and select anything as the target.
+Once the game is created in Steam, Right-click on it and select "Properties".
+In the "Target" field, enter:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/bin/bash -c "swaymsg input type:keyboard xkb_switch_layout next"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rename the game to "Switch Layout".
+Close the properties window.</p>
+</div>
+<div class="paragraph">
+<p>You now have a clickable link in Steam to switch layouts.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
