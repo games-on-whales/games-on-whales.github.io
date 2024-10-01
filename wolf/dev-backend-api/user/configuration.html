@@ -645,6 +645,32 @@ In order to automatically pick up the right encoder at runtime based on the user
 </div>
 </div>
 <div class="sect1">
+<h2 id="_co_op_sessions"><a class="anchor" href="#_co_op_sessions"></a>CO-OP sessions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There&#8217;s experimental support for CO-OP sessions, this will allow multiple clients to connect to the same virtual session and play together.<br></p>
+</div>
+<div class="paragraph">
+<p>In order to enable this you&#8217;ll have to add the following app entry in the <code>config.toml</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "CO-OP session"
+# Get the parent session ID from the Wolf logs
+runner = { type = "child_session", parent_session_id = "4135727842959053255" }
+video = { source = "interpipesrc listen-to=4135727842959053255 is-live=true stream-sync=restart-ts" }
+audio = { source = "pulsesrc device=\"virtual_sink_4135727842959053255.monitor\" server=\"{server_name}\"" }
+start_virtual_compositor = false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>parent_session_id</code> is the session ID of the parent session that you want to connect to.<br>
+The process will be simplified once we complete implementing a custom UI for Wolf, see: <a href="https://github.com/games-on-whales/wolf/issues/80">games-on-whales/wolf#80</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_multiple_gpu"><a class="anchor" href="#_multiple_gpu"></a>Multiple GPUs</h2>
 <div class="sectionbody">
 <div class="paragraph">
