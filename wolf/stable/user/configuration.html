@@ -425,6 +425,12 @@ app_state_folder = "common"               # &lt;-- !!!</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Keeping <code>HOST_APPS_STATE_FOLDER</code> unchanged and only modifying <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> is not sufficient. Because app container mount home directory according to <code>HOST_APPS_STATE_FOLDER</code> (i.e. <code>-v ${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}:/home/retro</code>)</p>
+</div>
+<div class="paragraph">
+<p>Since Wolf keeps the configuration in <code>/etc/wolf/cfg</code>, you need to add an additional mount to ensure that Wolf&#8217;s configuration is persistently stored (i.e., -v <code>/mnt/drive/wolf/cfg:/etc/wolf/cfg:rw</code>).</p>
+</div>
 </div>
 </div>
 </div>
@@ -600,7 +606,7 @@ run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""</code></pre>
 <pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">type = "docker"
 name = "WolfSteam"
 image = "ghcr.io/games-on-whales/steam:edge"
-mounts = [
+mounts = [ <i class="conum" data-value="1"></i><b>(1)</b>
   "/run/udev:/run/udev:ro"
 ]
 env = [
@@ -610,7 +616,8 @@ env = [
 ]
 devices = []
 ports = []
-base_create_json = """ <i class="conum" data-value="1"></i><b>(1)</b>
+<i class="conum" data-value="2"></i><b>(2)</b>
+base_create_json = """
 {
   "HostConfig": {
     "IpcMode": "host",
@@ -626,6 +633,10 @@ base_create_json = """ <i class="conum" data-value="1"></i><b>(1)</b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>mounts</strong>: Here you can define any additional mount that you want to add to the container. For example, you can add <code>mounts = ["/media/data/games:/games:rw"]</code> if you want to share games files between host and app container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><strong>base_create_json</strong>: here you can re-define any property that&#8217;s defined in the docker API JSON format, see: <a href="https://docs.docker.com/engine/api/v1.40/#tag/Container/operation/ContainerCreate">docs.docker.com/engine/api/v1.40</a></td>
 </tr>
 </table>
