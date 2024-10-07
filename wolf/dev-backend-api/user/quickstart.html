@@ -249,6 +249,9 @@
 <li id="_tabs_1_wsl2" class="tab">
 <p>WSL2</p>
 </li>
+<li id="_tabs_1_proxmox_lxc" class="tab">
+<p>Proxmox LXC</p>
+</li>
 </ul>
 </div>
 <div id="_tabs_1_intelamd--panel" class="tabpanel" aria-labelledby="_tabs_1_intelamd">
@@ -597,6 +600,48 @@ fi</code></pre>
 </div>
 </div>
 </details>
+<details>
+<summary class="title">I am still not able to see all the Nvidia devices</summary>
+<div class="content">
+<div class="paragraph">
+<p>You may need to setup your host to automatically load the NVIDIA GPU Kernel modules at boot time.</p>
+</div>
+<div class="paragraph">
+<p>First, create a new file <code>nvidia.conf</code> in the <code>/etc/modules-load.d/</code> directory and open it with a text editor.</p>
+</div>
+<div class="paragraph">
+<p><code>nano /etc/modules-load.d/nvidia.conf</code></p>
+</div>
+<div class="paragraph">
+<p>paste the following content to the file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">nvidia
+nvidia_uvm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the changes to take effect, update the <code>initramfs</code> file with the following command:
+<code>update-initramfs -u</code></p>
+</div>
+<div class="paragraph">
+<p>Add udev rules to add missing Nvidia devices
+<code>nano /etc/udev/rules.d/70-nvidia.rules</code>
+paste the following content to the file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># create necessary NVIDIA device files in /dev/*
+KERNEL=="nvidia", RUN+="/bin/bash -c '/usr/bin/nvidia-smi -L &amp;&amp; /bin/chmod 0666 /dev/nvidia*'"
+KERNEL=="nvidia_uvm", RUN+="/bin/bash -c '/usr/bin/nvidia-modprobe -c0 -u &amp;&amp; /bin/chmod 0666 /dev/nvidia-uvm*'"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>reboot</code> you host and try running <code>ls -l /dev/nvidia*</code> again.</p>
+</div>
+</div>
+</details>
 </div>
 <div id="_tabs_1_wsl2--panel" class="tabpanel" aria-labelledby="_tabs_1_wsl2">
 <div class="admonitionblock warning">
@@ -643,6 +688,152 @@ This should work for AMD/Intel users.</p>
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
     --device /dev/dri/ \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_proxmox_lxc--panel" class="tabpanel" aria-labelledby="_tabs_1_proxmox_lxc">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="WARNING"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>At the moment it is only possible to run Wolf inside a privileged LXC.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>First you need to make sure your GPU drivers are installed and loaded on your PVE host.</p>
+</div>
+<div class="paragraph">
+<p>Also make sure to add the virtual devices udev rules to the PVE host as explained in the <a href="#_virtual_devices_support">Virtual devices support</a> section.</p>
+</div>
+<div class="paragraph">
+<p>Now, we need to edit LXC config file to passtrough the GPU.</p>
+</div>
+<details>
+<summary class="title">I don&#8217;t have a LXC yet</summary>
+<div class="content">
+<div class="paragraph">
+<p>The easiest way to create an LXC to run Wolf is to use <a href="https://tteck.github.io/Proxmox/#docker-lxc">tteck&#8217;s PVE docker script</a>, this will create you a LXC with docker already good to go. (Make sure you choose privileged LXC and install docker-compose when prompted)</p>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>Enter the LXC config file: <code>nano /etc/pve/lxc/1XX.conf</code></p>
+</div>
+<div class="paragraph">
+<p>it should look similar to this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">arch: amd64
+cores: 8
+features: nesting=1
+hostname: wolf
+memory: 8192
+net0: name=eth0,bridge=vmbr0,hwaddr=BC:24:11:B7:90:5D,ip=dhcp,type=veth
+onboot: 1
+ostype: debian
+rootfs: local-lvm:vm-118-disk-0,size=128G
+swap: 512
+tags: proxmox-helper-scripts
+lxc.cgroup2.devices.allow: a
+lxc.cap.drop:
+lxc.cgroup2.devices.allow: c 188:* rwm
+lxc.cgroup2.devices.allow: c 189:* rwm
+lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
+lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>remove the following lines from the bottom, they are not needed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">lxc.cgroup2.devices.allow: c 188:* rwm
+lxc.cgroup2.devices.allow: c 189:* rwm
+lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
+lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>add these lines to the bottom of the file:</p>
+</div>
+<div class="paragraph">
+<p>For Nvidia</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dev0: /dev/uinput
+dev1: /dev/uhid
+dev2: /dev/nvidia0
+dev3: /dev/nvidiactl
+dev4: /dev/nvidia-modeset
+dev5: /dev/nvidia-uvm
+dev6: /dev/nvidia-uvm-tools
+dev7: /dev/nvidia-caps/nvidia-cap1
+dev8: /dev/nvidia-caps/nvidia-cap2
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Intel/AMD</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dev0: /dev/uinput
+dev1: /dev/uhid
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>save the file, exit, and restart your LXC.</p>
+</div>
+<div class="paragraph">
+<p>Your LXC is good to go, complete the installation based on the GPU following the other tabs.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Remarks"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When creating your docker-compose.yml don&#8217;t forget to modify the volume mapping for <code>/run/udev</code> path, as we mounted it on <code>/mnt/udev</code> inside our LXC</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">volumes:
+    - /mnt/udev:/run/udev:rw</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if you have a multi GPU setup, don&#8217;t forget to set the below env variable</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">environment:
+    - WOLF_RENDER_NODE=/dev/dri/renderD12X</code></pre>
 </div>
 </div>
 </div>

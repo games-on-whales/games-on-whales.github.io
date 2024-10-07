@@ -428,6 +428,12 @@ app_state_folder = "common"               # &lt;-- !!!</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Keeping <code>HOST_APPS_STATE_FOLDER</code> unchanged and only modifying <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> is not sufficient. Because app container mount home directory according to <code>HOST_APPS_STATE_FOLDER</code> (i.e. <code>-v ${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}:/home/retro</code>)</p>
+</div>
+<div class="paragraph">
+<p>Since Wolf keeps the configuration in <code>/etc/wolf/cfg</code>, you need to add an additional mount to ensure that Wolf&#8217;s configuration is persistently stored (i.e., -v <code>/mnt/drive/wolf/cfg:/etc/wolf/cfg:rw</code>).</p>
+</div>
 </div>
 </div>
 </div>
@@ -608,7 +614,7 @@ run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""</code></pre>
 <pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">type = "docker"
 name = "WolfSteam"
 image = "ghcr.io/games-on-whales/steam:edge"
-mounts = [
+mounts = [ <i class="conum" data-value="1"></i><b>(1)</b>
   "/run/udev:/run/udev:ro"
 ]
 env = [
@@ -618,7 +624,8 @@ env = [
 ]
 devices = []
 ports = []
-base_create_json = """ <i class="conum" data-value="1"></i><b>(1)</b>
+<i class="conum" data-value="2"></i><b>(2)</b>
+base_create_json = """
 {
   "HostConfig": {
     "IpcMode": "host",
@@ -634,6 +641,10 @@ base_create_json = """ <i class="conum" data-value="1"></i><b>(1)</b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>mounts</strong>: Here you can define any additional mount that you want to add to the container. For example, you can add <code>mounts = ["/media/data/games:/games:rw"]</code> if you want to share games files between host and app container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><strong>base_create_json</strong>: here you can re-define any property that&#8217;s defined in the docker API JSON format, see: <a href="https://docs.docker.com/engine/api/v1.40/#tag/Container/operation/ContainerCreate">docs.docker.com/engine/api/v1.40</a></td>
 </tr>
 </table>
@@ -675,6 +686,73 @@ start_virtual_compositor = false</code></pre>
 <div class="paragraph">
 <p>In this example, the <code>parent_session_id</code> is the session ID of the parent session that you want to connect to.<br>
 The process will be simplified once we complete implementing a custom UI for Wolf, see: <a href="https://github.com/games-on-whales/wolf/issues/80">games-on-whales/wolf#80</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_set_window_compositor"><a class="anchor" href="#_set_window_compositor"></a>Set Window compositor</h3>
+<div class="paragraph">
+<p>Wolf support both <a href="https://swaywm.org/">Sway</a> and <a href="https://github.com/ValveSoftware/gamescope">Gamescope</a> compositor.</p>
+</div>
+<div class="paragraph">
+<p>Sway is used by default, but some game may work better with one or the other.</p>
+</div>
+<div class="paragraph">
+<p>Usage is controlled by environment variables on <code>[apps.runner]</code> configs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>RUN_SWAY=1</code> - enable Sway (Default for newer Wolf installation)</p>
+</li>
+<li>
+<p><code>RUN_GAMESCOPE=1</code> - enable Gamescope</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Gamescope have some known issues:
+- It may be unstable with some Nvidia driver versions. See <a href="https://github.com/games-on-whales/wolf/issues/60">#60</a>.
+- It doesn&#8217;t support multiple windows which may cause issues with multi-window applications like Steam desktop UI.</p>
+</div>
+<div class="paragraph">
+<p>Switch to Gamescope only if you encounter issues with Sway.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="listingblock">
+<div class="title">Enable Sway</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[apps.runner]
+env = [
+    "RUN_SWAY=1",
+    # ...
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Enable Gamescope</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[apps.runner]
+env = [
+    "RUN_GAMESCOPE=1",
+    # ...
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If both are defined, Gamescoped is used. (see <a href="https://github.com/games-on-whales/gow/blob/master/images/base-app/scripts/launch-comp.sh">launch-comp.sh</a> for details)</p>
+</div>
 </div>
 </div>
 </div>
@@ -831,6 +909,117 @@ video/x-raw, framerate={fps}/1
 <div class="sectionbody">
 <div class="paragraph">
 <p>This has been moved to the <a href="#steam.adoc" class="xref unresolved">steam.adoc</a> page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"><a class="anchor" href="#_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"></a>Changing and Switching Keyboard Layouts in wolf Apps Containers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide demonstrates how to change the default keyboard layout and switch between multiple layouts in Docker containers.</p>
+</div>
+<div class="paragraph">
+<p>For Layout and Variant codes see: <a href="https://man.archlinux.org/man/xkeyboard-config.7#LAYOUTS" class="bare">https://man.archlinux.org/man/xkeyboard-config.7#LAYOUTS</a></p>
+</div>
+<div class="sect2">
+<h3 id="_using_environment_variable"><a class="anchor" href="#_using_environment_variable"></a>Using environment variable</h3>
+<div class="paragraph">
+<p>Add environment variable <code>XKB_DEFAULT_LAYOUT=&lt;layout&gt;</code> and <code>XKB_DEFAULT_VARIANT=&lt;variant&gt;</code> to <code>[apps.runner]</code> config.</p>
+</div>
+<div class="literalblock">
+<div class="title">Keyboard layout environment variable example</div>
+<div class="content">
+<pre>[apps.runner]
+env = [
+    # ...
+    "XKB_DEFAULT_LAYOUT=fr",
+    "XKB_DEFAULT_VARIANT=azerty",
+]</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_configuration_file"><a class="anchor" href="#_using_configuration_file"></a>Using configuration file</h3>
+<div class="paragraph">
+<p>Using configuration file allow more layouts to be configured.</p>
+</div>
+<div class="sect3">
+<h4 id="_create_a_configuration_file"><a class="anchor" href="#_create_a_configuration_file"></a>Create a Configuration File</h4>
+<div class="paragraph">
+<div class="title">Note: configuration file is only supported for Sway compositor and won&#8217;t have any effect wih Gamescope.</div>
+<p>Create a config file at <code>${HOST_APPS_STATE_FOLDER}/cfg/90-custom.conf</code> with the following content:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>input type:keyboard {
+    xkb_layout "fr,us"
+    xkb_numlock "enable"
+}</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>xkb_layout : The first layout code you set will be the default layout. Add other layouts separated by commas.</p>
+</li>
+<li>
+<p>xkb_numlock "enable" turns on NumLock by default.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configure_container_mounts"><a class="anchor" href="#_configure_container_mounts"></a>Configure Container Mounts</h4>
+<div class="paragraph">
+<p>In the same folder, edit <code>${HOST_APPS_STATE_FOLDER}/cfg/config.toml</code>
+For each container where you want to use the custom layout, edit the "mounts" variable as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mounts = [
+    "${HOST_APPS_STATE_FOLDER}/cfg/90-custom.conf:/etc/sway/config.d/90-custom.conf",
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This ensures that the config is not overwritten. On the next app restart, the keyboard layout will be set to the default one specified.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_switching_layouts"><a class="anchor" href="#_switching_layouts"></a>Switching Layouts</h4>
+<div class="sect4">
+<h5 id="_switching_layout_from_the_console_in_moonlight"><a class="anchor" href="#_switching_layout_from_the_console_in_moonlight"></a>Switching layout from the console in moonlight</h5>
+<div class="paragraph">
+<p>Start the console in Moonlight.
+Use the command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>swaymsg input type:keyboard xkb_switch_layout next</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_creating_a_steam_shortcut_for_layout_switching"><a class="anchor" href="#_creating_a_steam_shortcut_for_layout_switching"></a>Creating a Steam Shortcut for Layout Switching</h5>
+<div class="paragraph">
+<p>In Steam, add a "Non-Steam Game", and select anything as the target.
+Once the game is created in Steam, Right-click on it and select "Properties".
+In the "Target" field, enter:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/bin/bash -c "swaymsg input type:keyboard xkb_switch_layout next"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rename the game to "Switch Layout".
+Close the properties window.</p>
+</div>
+<div class="paragraph">
+<p>You now have a clickable link in Steam to switch layouts.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
