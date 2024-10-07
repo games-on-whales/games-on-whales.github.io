@@ -494,19 +494,20 @@ You can re-define parts of the Gstreamer pipeline easily, ex:</p>
 title = "Test ball" <i class="conum" data-value="1"></i><b>(1)</b>
 start_virtual_compositor = false <i class="conum" data-value="2"></i><b>(2)</b>
 app_state_folder = "some/folder" <i class="conum" data-value="3"></i><b>(3)</b>
+icon_png_path = "ball.png" <i class="conum" data-value="4"></i><b>(4)</b>
 
-[apps.runner] <i class="conum" data-value="4"></i><b>(4)</b>
+[apps.runner] <i class="conum" data-value="5"></i><b>(5)</b>
 type = "process"
 run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""
 
-[apps.video] <i class="conum" data-value="5"></i><b>(5)</b>
+[apps.video] <i class="conum" data-value="6"></i><b>(6)</b>
 source = """
 videotestsrc pattern=ball flip=true is-live=true !
 video/x-raw, framerate={fps}/1
 \
 """
 
-[apps.audio] <i class="conum" data-value="6"></i><b>(6)</b>
+[apps.audio] <i class="conum" data-value="7"></i><b>(7)</b>
 source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </div>
 </div>
@@ -526,14 +527,18 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>runner</strong>: the type of process to run in order to start this app, see: <a href="#_app_runner">App Runner</a></td>
+<td><strong>icon_png_path</strong>: this is the box art that will be displayed in Moonlight (PNG, ideally 200x266 or 628x888 pixels)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>video</strong>: here it&#8217;s possible to override the default video pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+<td><strong>runner</strong>: the type of process to run in order to start this app, see: <a href="#_app_runner">App Runner</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><strong>video</strong>: here it&#8217;s possible to override the default video pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
 <td><strong>audio</strong>: here it&#8217;s possible to override the default audio pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
 </tr>
 </table>
