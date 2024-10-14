@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Wolf API :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/dev/api.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="stable">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="api.html">Wolf API</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">stable</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">stable</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-mouse-sensitivity/index.html">dev-mouse-sensitivity</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>Developer guide</li>
+    <li><a href="api.html">Wolf API</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">stable</button>
+  <div class="version-menu">
+    <a class="version is-current" href="api.html">stable</a>
+    <a class="version is-missing" href="../../dev-tracy/index.html">dev-tracy</a>
+    <a class="version is-missing" href="../../dev-nix/index.html">dev-nix</a>
+    <a class="version is-missing" href="../../dev-mouse-sensitivity/index.html">dev-mouse-sensitivity</a>
+    <a class="version is-missing" href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/dev/pages/api.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Wolf API</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wolf exposes a REST API that allows you to interact with the platform programmatically.<br>
+The API can be accessed only via UNIX sockets, you can control the exact path by setting the <code>WOLF_SOCKET_PATH</code> environment variable. If you want to access the socket from outside the container, you should mount the socket to the host machine, ex: <code>-e WOLF_SOCKET_PATH=/var/run/wolf/wolf.sock</code> and <code>-v /var/run/wolf:/var/run/wolf</code> will allow you to access the socket from the host machine at <code>/var/run/wolf/wolf.sock</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can test out the API using the <code>curl</code> command, for example, to get the OpenAPI specification you can run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --unix-socket /var/run/wolf/wolf.sock http://localhost/api/v1/openapi-schema</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When looking at the examples in the <a href="#api_reference">API Reference</a> remember to add the <code>--unix-socket</code> flag to the <code>curl</code> command.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exposing_the_api_via_tcp"><a class="anchor" href="#_exposing_the_api_via_tcp"></a>Exposing the API via TCP</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Exposing the API is highly dangerous, via the API you can pair clients to the server, execute arbitrary commands, and more.<br>
+<strong>Make sure to secure the API properly if you decide to expose it.</strong></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you want to expose the API via TCP you can use a reverse proxy like <code>nginx</code>, for example, to expose the API on port 8080 you can use the following config</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>server {
+    listen 8080;
+
+    location / {
+        proxy_pass http://unix:/var/run/wolf/wolf.sock;
+        proxy_http_version 1.0;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save it as <code>wolf.conf</code> and start an Nginx container with the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --name wolf-proxy \
+           --network=host \
+           -v /var/run/wolf/wolf.sock:/var/run/wolf/wolf.sock:rw \
+           -v ./wolf.conf:/etc/nginx/conf.d/wolf.conf:ro \
+           nginx</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can now access the API via <code><a href="http://localhost:8080" class="bare">http://localhost:8080</a></code>, ex:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl localhost:8080/api/v1/openapi-schema</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api_reference"><a class="anchor" href="#api_reference"></a>API Reference</h2>
+<div class="sectionbody">
+<script
+  id="api-reference"
+  type="application/json">
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Wolf API",
+    "description": "API for the Wolf server",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/api/v1/apps": {
+      "get": {
+        "summary": "Get all apps",
+        "description": "This endpoint returns a list of all apps.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__AppListResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/clients": {
+      "get": {
+        "summary": "Get paired clients",
+        "description": "This endpoint returns a list of all paired clients.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__PairedClientsResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/events": {
+      "get": {
+        "summary": "Subscribe to events",
+        "description": "This endpoint allows clients to subscribe to events using SSE",
+        "responses": {}
+      }
+    },
+    "/api/v1/openapi-schema": {
+      "get": {
+        "summary": "Return this OpenAPI schema as JSON",
+        "description": "",
+        "responses": {}
+      }
+    },
+    "/api/v1/pair/pending": {
+      "get": {
+        "summary": "Get pending pair requests",
+        "description": "This endpoint returns a list of Moonlight clients that are currently waiting to be paired.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__PendingPairRequestsResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions": {
+      "get": {
+        "summary": "Get all stream sessions",
+        "description": "This endpoint returns a list of all active stream sessions.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__StreamSessionListResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/apps/add": {
+      "post": {
+        "summary": "Add an app",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/rfl__Reflector_wolf__core__events__App___ReflType"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/apps/delete": {
+      "post": {
+        "summary": "Remove an app",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__AppDeleteRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/pair/client": {
+      "post": {
+        "summary": "Pair a client",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__PairRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/runners/start": {
+      "post": {
+        "summary": "Start a runner in a given session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__RunnerStartRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/add": {
+      "post": {
+        "summary": "Create a new stream session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/rfl__Reflector_wolf__core__events__StreamSession___ReflType"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/pause": {
+      "post": {
+        "summary": "Pause a stream session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__StreamSessionPauseRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/stop": {
+      "post": {
+        "summary": "Stop a stream session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__StreamSessionStopRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "rfl__Reflector_wolf__core__events__App___ReflType": {
+        "type": "object",
+        "properties": {
+          "av1_gst_pipeline": {
+            "type": "string"
+          },
+          "h264_gst_pipeline": {
+            "type": "string"
+          },
+          "hevc_gst_pipeline": {
+            "type": "string"
+          },
+          "icon_png_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "joypad_type": {
+            "type": "string",
+            "enum": [
+              "XBOX",
+              "PS",
+              "NINTENDO",
+              "AUTO"
+            ]
+          },
+          "opus_gst_pipeline": {
+            "type": "string"
+          },
+          "render_node": {
+            "type": "string"
+          },
+          "runner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/wolf__config__AppCMD__tagged"
+              },
+              {
+                "$ref": "#/components/schemas/wolf__config__AppDocker__tagged"
+              },
+              {
+                "$ref": "#/components/schemas/wolf__config__AppChildSession__tagged"
+              }
+            ]
+          },
+          "start_virtual_compositor": {
+            "type": "boolean"
+          },
+          "support_hdr": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "av1_gst_pipeline",
+          "h264_gst_pipeline",
+          "hevc_gst_pipeline",
+          "id",
+          "joypad_type",
+          "opus_gst_pipeline",
+          "render_node",
+          "runner",
+          "start_virtual_compositor",
+          "support_hdr",
+          "title"
+        ]
+      },
+      "rfl__Reflector_wolf__core__events__StreamSession___ReflType": {
+        "type": "object",
+        "properties": {
+          "app_id": {
+            "type": "string"
+          },
+          "audio_channel_count": {
+            "type": "integer"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "client_ip": {
+            "type": "string"
+          },
+          "video_height": {
+            "type": "integer"
+          },
+          "video_refresh_rate": {
+            "type": "integer"
+          },
+          "video_width": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "app_id",
+          "audio_channel_count",
+          "client_id",
+          "client_ip",
+          "video_height",
+          "video_refresh_rate",
+          "video_width"
+        ]
+      },
+      "wolf__api__AppDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "wolf__api__AppListResponse": {
+        "type": "object",
+        "properties": {
+          "apps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/rfl__Reflector_wolf__core__events__App___ReflType"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "apps",
+          "success"
+        ]
+      },
+      "wolf__api__GenericErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "error",
+          "success"
+        ]
+      },
+      "wolf__api__GenericSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "wolf__api__PairRequest": {
+        "type": "object",
+        "properties": {
+          "pair_secret": {
+            "type": "string"
+          },
+          "pin": {
+            "type": "string",
+            "description": "The PIN created by the remote Moonlight client"
+          }
+        },
+        "required": [
+          "pair_secret",
+          "pin"
+        ]
+      },
+      "wolf__api__PairedClient": {
+        "type": "object",
+        "properties": {
+          "app_state_folder": {
+            "type": "string"
+          },
+          "client_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "app_state_folder",
+          "client_id"
+        ]
+      },
+      "wolf__api__PairedClientsResponse": {
+        "type": "object",
+        "properties": {
+          "clients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/wolf__api__PairedClient"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "clients",
+          "success"
+        ]
+      },
+      "wolf__api__PendingPairRequestsResponse": {
+        "type": "object",
+        "properties": {
+          "requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/wolf__api__PairRequest"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "requests",
+          "success"
+        ]
+      },
+      "wolf__api__RunnerStartRequest": {
+        "type": "object",
+        "properties": {
+          "runner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/wolf__config__AppCMD__tagged"
+              },
+              {
+                "$ref": "#/components/schemas/wolf__config__AppDocker__tagged"
+              },
+              {
+                "$ref": "#/components/schemas/wolf__config__AppChildSession__tagged"
+              }
+            ]
+          },
+          "session_id": {
+            "type": "string"
+          },
+          "stop_stream_when_over": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "runner",
+          "session_id",
+          "stop_stream_when_over"
+        ]
+      },
+      "wolf__api__StreamSessionListResponse": {
+        "type": "object",
+        "properties": {
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/rfl__Reflector_wolf__core__events__StreamSession___ReflType"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "sessions",
+          "success"
+        ]
+      },
+      "wolf__api__StreamSessionPauseRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id"
+        ]
+      },
+      "wolf__api__StreamSessionStopRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id"
+        ]
+      },
+      "wolf__config__AppCMD__tagged": {
+        "type": "object",
+        "properties": {
+          "run_cmd": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "process"
+            ]
+          }
+        },
+        "required": [
+          "run_cmd",
+          "type"
+        ]
+      },
+      "wolf__config__AppChildSession__tagged": {
+        "type": "object",
+        "properties": {
+          "parent_session_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "child_session"
+            ]
+          }
+        },
+        "required": [
+          "parent_session_id",
+          "type"
+        ]
+      },
+      "wolf__config__AppDocker__tagged": {
+        "type": "object",
+        "properties": {
+          "base_create_json": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "devices": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "env": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "image": {
+            "type": "string"
+          },
+          "mounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "docker"
+            ]
+          }
+        },
+        "required": [
+          "devices",
+          "env",
+          "image",
+          "mounts",
+          "name",
+          "ports",
+          "type"
+        ]
+      }
+    }
+  }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

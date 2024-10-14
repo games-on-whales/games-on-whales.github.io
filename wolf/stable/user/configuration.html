@@ -102,6 +102,9 @@
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/api.html">Wolf API</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -180,9 +183,6 @@
         <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
-        <li class="version">
-          <a href="../../dev-backend-api/index.html">dev-backend-api</a>
-        </li>
       </ul>
     </li>
   </ul>
@@ -209,7 +209,6 @@
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
     <a class="version" href="../../dev-mouse-sensitivity/user/configuration.html">dev-mouse-sensitivity</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
-    <a class="version" href="../../dev-backend-api/user/configuration.html">dev-backend-api</a>
   </div>
 </div>
 <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/configuration.adoc">Edit this Page</a></div>
@@ -497,19 +496,20 @@ You can re-define parts of the Gstreamer pipeline easily, ex:</p>
 title = "Test ball" <i class="conum" data-value="1"></i><b>(1)</b>
 start_virtual_compositor = false <i class="conum" data-value="2"></i><b>(2)</b>
 app_state_folder = "some/folder" <i class="conum" data-value="3"></i><b>(3)</b>
+icon_png_path = "ball.png" <i class="conum" data-value="4"></i><b>(4)</b>
 
-[apps.runner] <i class="conum" data-value="4"></i><b>(4)</b>
+[apps.runner] <i class="conum" data-value="5"></i><b>(5)</b>
 type = "process"
 run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""
 
-[apps.video] <i class="conum" data-value="5"></i><b>(5)</b>
+[apps.video] <i class="conum" data-value="6"></i><b>(6)</b>
 source = """
 videotestsrc pattern=ball flip=true is-live=true !
 video/x-raw, framerate={fps}/1
 \
 """
 
-[apps.audio] <i class="conum" data-value="6"></i><b>(6)</b>
+[apps.audio] <i class="conum" data-value="7"></i><b>(7)</b>
 source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </div>
 </div>
@@ -529,14 +529,18 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>runner</strong>: the type of process to run in order to start this app, see: <a href="#_app_runner">App Runner</a></td>
+<td><strong>icon_png_path</strong>: this is the box art that will be displayed in Moonlight (PNG, ideally 200x266 or 628x888 pixels)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><strong>video</strong>: here it&#8217;s possible to override the default video pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+<td><strong>runner</strong>: the type of process to run in order to start this app, see: <a href="#_app_runner">App Runner</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><strong>video</strong>: here it&#8217;s possible to override the default video pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
 <td><strong>audio</strong>: here it&#8217;s possible to override the default audio pipeline variables defined in: <a href="#_gstreamer">Gstreamer</a></td>
 </tr>
 </table>
@@ -652,6 +656,33 @@ In order to automatically pick up the right encoder at runtime based on the user
 <div class="paragraph">
 <p>You can read more about gstreamer and custom pipelines in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_co_op_sessions"><a class="anchor" href="#_co_op_sessions"></a>CO-OP sessions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There&#8217;s experimental support for CO-OP sessions, this will allow multiple clients to connect to the same virtual session and play together.<br></p>
+</div>
+<div class="paragraph">
+<p>In order to enable this you&#8217;ll have to add the following app entry in the <code>config.toml</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "CO-OP session"
+# Get the parent session ID from the Wolf logs
+runner = { type = "child_session", parent_session_id = "4135727842959053255" }
+video = { source = "interpipesrc listen-to=4135727842959053255_video is-live=true stream-sync=restart-ts max-bytes=0 max-buffers=3 block=false" }
+audio = { source = "interpipesrc listen-to=4135727842959053255_audio is-live=true stream-sync=restart-ts max-bytes=0 max-buffers=3 block=false" }
+start_virtual_compositor = false
+start_audio_server = false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>parent_session_id</code> is the session ID of the parent session that you want to connect to.<br>
+The process will be simplified once we complete implementing a custom UI for Wolf, see: <a href="https://github.com/games-on-whales/wolf/issues/80">games-on-whales/wolf#80</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="_set_window_compositor"><a class="anchor" href="#_set_window_compositor"></a>Set Window compositor</h3>
