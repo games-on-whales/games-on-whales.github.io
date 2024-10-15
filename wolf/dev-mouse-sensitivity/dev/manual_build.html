@@ -102,6 +102,9 @@
     <a class="nav-link" href="manual_build.html">Dev environment setup</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="api.html">Wolf API</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="code-structure.html">Code Structure</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -216,10 +219,80 @@
 </aside>
 <article class="doc">
 <h1 class="page">Dev environment setup</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="_devcontainers"><a class="anchor" href="#_devcontainers"></a>Devcontainers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This has been tested on Debian 12, you should adjust the setup based on your distro of choice.</p>
+<p>We provide a <a href="https://containers.dev/">devcontainer</a> configuration that will allow you to automatically setup a development environment for Wolf.
+The advantage of this solution is that you&#8217;ll be running the code in the exact same environment as users of the official docker image, plus you don&#8217;t have to worry about setting up the dependencies manually.</p>
+</div>
+<div class="paragraph">
+<p>The following are a few quickstep to get you started on VSCode:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>From an empty window open up the Command Palette using kbd:[CTRL+SHIFT+P] and search for <code>Dev containers: Clone Repository in Container Volume</code></p>
+</li>
+<li>
+<p>Follow the instructions, you&#8217;ll be asked to provide the repository URL, branch and so on; when you&#8217;ve finished VSCode will start building the container</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/devcontainers_build.png" alt="devcontainers build">
+</div>
+<div class="title">Figure 1. Give it time, this will go on for a while; luckily, only the first time you&#8217;ll have to wait this long.</div>
+</div>
+<div class="paragraph">
+<p>Once the process is over you should be able to see the files on the left panel, and you can start editing the code.
+Soon enough you&#8217;ll get this prompt:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/devcontainer_pick_tools.png" alt="devcontainer pick tools">
+</div>
+</div>
+<div class="paragraph">
+<p>Pick the last option: <code>Clang &#8230;&#8203;.</code> and you&#8217;ll be ready to go.</p>
+</div>
+<div class="sect2">
+<h3 id="_build_and_run_wolf"><a class="anchor" href="#_build_and_run_wolf"></a>Build and run Wolf</h3>
+<div class="paragraph">
+<p>In the bottom left corner of the window you should see these 3 handy little buttons, respectively: build, debug and run</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/devcontainer_buttons.png" alt="devcontainer buttons">
+</div>
+</div>
+<div class="paragraph">
+<p>Pressing the play button should compile and start Wolf and you should be able to see the logs in the terminal.
+To stop it, just press kbd:[CTRL+C] in the terminal.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_unit_tests"><a class="anchor" href="#_run_unit_tests"></a>Run unit tests</h3>
+<div class="paragraph">
+<p>To run tests you have to change the cmake target from the default <code>wolf</code> to <code>wolftests</code>.
+You can do that by clicking the cmake button on the bottom left corner of the window and selecting <code>wolftests</code> from the project outline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/devcontainer_tests.png" alt="devcontainer tests">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_manual_installation"><a class="anchor" href="#_manual_installation"></a>Manual installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This has been tested on Debian 12, you should adjust the setup based on your distro of choice.
+This guide will explain how to build and run Wolf outside of docker, but docker will need to be installed and configured on the host for Wolf to do anything useful.
+Consult your distribution&#8217;s documentation for instructions on setting up Docker.</p>
 </div>
 </div>
 </div>
@@ -257,6 +330,9 @@ This will make sure that you end up with all the required plugins.</p>
 	libopenjp2-7-dev liblcms2-dev libcairo2-dev libcairo-gobject2 libwebp7 librsvg2-dev libaom-dev \
 	libharfbuzz-dev libpango1.0-dev</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Please refer to <code>docker/gstreamer.Dockerfile</code> for an up-to-date list of parameters and versions.</p>
 </div>
 <div class="listingblock">
 <div class="title">Build gstreamer</div>
@@ -305,12 +381,13 @@ meson install -C build</code></pre>
 <div class="listingblock">
 <div class="title">Custom env</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH="$HOME/gstreamer/usr/local/bin:$PATH"
-export LIBRARY_PATH="$LIBRARY_PATH:$HOME/gstreamer/usr/local/lib/x86_64-linux-gnu/"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/gstreamer/lib/x86_64-linux-gnu/"
-export LDFLAGS="$LDFLAGS -L$HOME/gstreamer/usr/local/lib/x86_64-linux-gnu/"
-export CFLAGS="$CFLAGS -I$HOME/gstreamer/usr/local/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/gstreamer/usr/local/lib/x86_64-linux-gnu/pkgconfig/"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GSTREAMER_FOLDER="$HOME/gstreamer"
+export PATH="$GSTREAMER_FOLDER/usr/local/bin:$PATH"
+export LIBRARY_PATH="$LIBRARY_PATH:$GSTREAMER_FOLDER/usr/local/lib/x86_64-linux-gnu/"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GSTREAMER_FOLDER/lib/x86_64-linux-gnu/"
+export LDFLAGS="$LDFLAGS -L$GSTREAMER_FOLDER/usr/local/lib/x86_64-linux-gnu/"
+export CFLAGS="$CFLAGS -I$GSTREAMER_FOLDER/usr/local/include"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$GSTREAMER_FOLDER/usr/local/lib/x86_64-linux-gnu/pkgconfig/"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -345,11 +422,12 @@ cargo cinstall --prefix=$HOME/gst-wayland-display</code></pre>
 <div class="listingblock">
 <div class="title">Custom env</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export LIBRARY_PATH="$LIBRARY_PATH:$HOME/gst-wayland-display/lib/"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/gst-wayland-display/lib/"
-export LDFLAGS="$LDFLAGS -L$HOME/gst-wayland-display/lib"
-export CFLAGS="$CFLAGS -I$HOME/gst-wayland-display/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/gst-wayland-display/lib/pkgconfig/"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GSTWAYLANDDISPLAY_FOLDER="$HOME/gst-wayland-display"
+export LIBRARY_PATH="$LIBRARY_PATH:$GSTWAYLANDDISPLAY_FOLDER/lib/"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GSTWAYLANDDISPLAY_FOLDER/lib/"
+export LDFLAGS="$LDFLAGS -L$GSTWAYLANDDISPLAY_FOLDER/lib"
+export CFLAGS="$CFLAGS -I$GSTWAYLANDDISPLAY_FOLDER/include -fPIC"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$GSTWAYLANDDISPLAY_FOLDER/lib/pkgconfig/"</code></pre>
 </div>
 </div>
 </div>
@@ -388,17 +466,43 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/gst-wayland-display/lib/pkgconfig
 <div class="listingblock">
 <div class="title">Compile</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cmake -Bbuild -DCMAKE_C_FLAGS=$CFLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -G Ninja
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cmake -Bbuild -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -G Ninja
 ninja -C build</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If compilation completes correctly, you can finally start Wolf</p>
+<p>If compilation completes correctly, you can finally start Wolf.
+The built binary can be found at <code>build/src/moonlight-server/wolf</code>
+Since Wolf is configured via a swoth of environment variables, it may be a good idea to lanch it via shell script.</p>
+</div>
+<div class="listingblock">
+<div class="title">runwolf.sh</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+
+: ${WOLF_CFG_FOLDER:-"config"}
+
+XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/sockets}" \
+WOLF_LOG_LEVEL="${WOLF_LOG_LEVEL:-INFO}" \
+WOLF_CFG_FILE="${WOLF_CFG_FILE:-$WOLF_CFG_FOLDER/config.toml}" \
+WOLF_PRIVATE_KEY_FILE="${WOLF_PRIVATE_KEY_FILE:-$WOLF_CFG_FOLDER/key.pem}" \
+WOLF_PRIVATE_CERT_FILE="${WOLF_PRIVATE_CERT_FILE:-$WOLF_CFG_FOLDER/cert.pem}" \
+WOLF_PULSE_IMAGE="${WOLF_PULSE_IMAGE:-ghcr.io/games-on-whales/pulseaudio:master}" \
+WOLF_RENDER_NODE="${WOLF_RENDER_NODE:-/dev/dri/renderD128}" \
+WOLF_STOP_CONTAINER_ON_EXIT="${WOLF_STOP_CONTAINER_ON_EXIT:-TRUE}" \
+WOLF_DOCKER_SOCKET="${WOLF_DOCKER_SOCKET:-/var/run/docker.sock}" \
+RUST_BACKTRACE="${RUST_BACKTRACE:-full}" \
+RUST_LOG="${RUST_LOG:-WARN}" \
+HOST_APPS_STATE_FOLDER="${HOST_APPS_STATE_FOLDER:-$WOLF_CFG_FOLDER}" \
+GST_DEBUG="${GST_DEBUG:-2}" \
+./build/src/moonlight-server/wolf</code></pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="title">Run!</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">build/src/wolf/wolf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">chmod +x runwolf.sh
+./runwolf.sh
 INFO  | Reading config file from: config.toml
 WARN  | Unable to open config file: config.toml, creating one using defaults
 INFO  | x509 certificates not present, generating...

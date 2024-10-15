@@ -51,7 +51,7 @@
     </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="wolf" data-version="stable">
+<div class="nav-container" data-component="wolf" data-version="dev-mouse-sensitivity">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -159,17 +159,17 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">wolf</span>
-    <span class="version">stable</span>
+    <span class="version">dev-mouse-sensitivity</span>
   </div>
   <ul class="components">
     <li class="component">
       <div class="title"><a href="../../../gow/index.html">gow</a></div>
     </li>
     <li class="component is-current">
-      <div class="title"><a href="../index.html">wolf</a></div>
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="../index.html">stable</a>
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
         </li>
         <li class="version">
           <a href="../../dev-tracy/index.html">dev-tracy</a>
@@ -177,8 +177,8 @@
         <li class="version">
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
-        <li class="version">
-          <a href="../../dev-mouse-sensitivity/index.html">dev-mouse-sensitivity</a>
+        <li class="version is-current">
+          <a href="../index.html">dev-mouse-sensitivity</a>
         </li>
         <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
@@ -193,7 +193,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">wolf</a></li>
@@ -202,16 +202,16 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">stable</button>
+  <button class="version-menu-toggle" title="Show other versions of page">dev-mouse-sensitivity</button>
   <div class="version-menu">
-    <a class="version is-current" href="api.html">stable</a>
+    <a class="version" href="../../stable/dev/api.html">stable</a>
     <a class="version is-missing" href="../../dev-tracy/index.html">dev-tracy</a>
     <a class="version is-missing" href="../../dev-nix/index.html">dev-nix</a>
-    <a class="version" href="../../dev-mouse-sensitivity/dev/api.html">dev-mouse-sensitivity</a>
+    <a class="version is-current" href="api.html">dev-mouse-sensitivity</a>
     <a class="version is-missing" href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/dev/pages/api.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-mouse-sensitivity/docs/modules/dev/pages/api.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -704,15 +704,6 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "id": {
             "type": "string"
           },
-          "joypad_type": {
-            "type": "string",
-            "enum": [
-              "XBOX",
-              "PS",
-              "NINTENDO",
-              "AUTO"
-            ]
-          },
           "opus_gst_pipeline": {
             "type": "string"
           },
@@ -732,6 +723,9 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
               }
             ]
           },
+          "start_audio_server": {
+            "type": "boolean"
+          },
           "start_virtual_compositor": {
             "type": "boolean"
           },
@@ -747,10 +741,10 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "h264_gst_pipeline",
           "hevc_gst_pipeline",
           "id",
-          "joypad_type",
           "opus_gst_pipeline",
           "render_node",
           "runner",
+          "start_audio_server",
           "start_virtual_compositor",
           "support_hdr",
           "title"
@@ -771,6 +765,9 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "client_ip": {
             "type": "string"
           },
+          "client_settings": {
+            "$ref": "#/components/schemas/wolf__config__ClientSettings"
+          },
           "video_height": {
             "type": "integer"
           },
@@ -786,6 +783,7 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "audio_channel_count",
           "client_id",
           "client_ip",
+          "client_settings",
           "video_height",
           "video_refresh_rate",
           "video_width"
@@ -1076,6 +1074,46 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "name",
           "ports",
           "type"
+        ]
+      },
+      "wolf__config__ClientSettings": {
+        "type": "object",
+        "properties": {
+          "controllers_override": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "XBOX",
+                "PS",
+                "NINTENDO",
+                "AUTO"
+              ]
+            }
+          },
+          "h_scroll_acceleration": {
+            "type": "number"
+          },
+          "mouse_acceleration": {
+            "type": "number"
+          },
+          "run_gid": {
+            "type": "integer"
+          },
+          "run_uid": {
+            "type": "integer"
+          },
+          "v_scroll_acceleration": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "controllers_override",
+          "h_scroll_acceleration",
+          "mouse_acceleration",
+          "run_gid",
+          "run_uid",
+          "v_scroll_acceleration"
         ]
       }
     }
