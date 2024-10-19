@@ -178,9 +178,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-mouse-sensitivity/index.html">dev-mouse-sensitivity</a>
-        </li>
-        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
       </ul>
@@ -207,7 +204,6 @@
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
-    <a class="version" href="../../dev-mouse-sensitivity/user/configuration.html">dev-mouse-sensitivity</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
   </div>
 </div>
@@ -553,13 +549,17 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 <h3 id="_override_the_default_joypad_mapping"><a class="anchor" href="#_override_the_default_joypad_mapping"></a>Override the default joypad mapping</h3>
 <div class="paragraph">
 <p>By default, Wolf will try to match the joypad type that Moonlight sends with the correct mapping.
-It is possible to override this behaviour by setting the <code>joypad_mapping</code> property in the <code>apps</code> entry; example:</p>
+It is possible to override this behaviour for each Moonlight paired client, ex:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "Test ball"
-joypad_type = "xbox" # Force the joypad to always be xbox</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[paired_clients]]
+# client_cert = ...
+[paired_clients.settings]
+controllers_override = [
+  "PS", # First controller will be forced to be PS
+  "XBOX" # Second controller will be forced to be XBOX
+]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -580,6 +580,23 @@ joypad_type = "xbox" # Force the joypad to always be xbox</code></pre>
 <p><code>ps</code></p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_input_mouse_overrides"><a class="anchor" href="#_input_mouse_overrides"></a>Input mouse overrides</h3>
+<div class="paragraph">
+<p>You can increase and decrease the mouse acceleration and scroll speed for each paired client, ex:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[paired_clients]]
+# client_cert = ...
+[paired_clients.settings]
+# Values above 1.0 will make it faster, between 0.0 and 1.0 will make it slower
+mouse_acceleration = 1.0
+v_scroll_acceleration = 1.0
+h_scroll_acceleration = 1.0</code></pre>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_app_runner"><a class="anchor" href="#_app_runner"></a>App Runner</h4>
