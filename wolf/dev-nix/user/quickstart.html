@@ -65,9 +65,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="overview.html">Overview</a>
-  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
@@ -80,6 +77,18 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -87,7 +96,13 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/api.html">Wolf API</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -217,8 +232,17 @@
 <li id="_tabs_1_intelamd" class="tab">
 <p>Intel/AMD</p>
 </li>
-<li id="_tabs_1_nvidia" class="tab">
-<p>Nvidia</p>
+<li id="_tabs_1_nvidia_container_toolkit" class="tab">
+<p>Nvidia (Container Toolkit)</p>
+</li>
+<li id="_tabs_1_nvidia_manual" class="tab">
+<p>Nvidia (Manual)</p>
+</li>
+<li id="_tabs_1_wsl2" class="tab">
+<p>WSL2</p>
+</li>
+<li id="_tabs_1_proxmox_lxc" class="tab">
+<p>Proxmox LXC</p>
 </li>
 </ul>
 </div>
@@ -238,8 +262,8 @@
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
     --device /dev/dri/ \
     --device /dev/uinput \
-    -v /dev/shm:/dev/shm:rw \
-    -v /dev/input:/dev/input:rw \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
     -v /run/udev:/run/udev:rw \
     --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
@@ -250,7 +274,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
 services:
   wolf:
     image: ghcr.io/games-on-whales/wolf:stable
@@ -261,32 +285,135 @@ services:
       - /etc/wolf/:/etc/wolf
       - /tmp/sockets:/tmp/sockets:rw
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /dev/shm:/dev/shm:rw
-      - /dev/input:/dev/input:rw
+      - /dev/:/dev/:rw
       - /run/udev:/run/udev:rw
     device_cgroup_rules:
       - 'c 13:* rmw'
     devices:
       - /dev/dri
       - /dev/uinput
+      - /dev/uhid
     network_mode: host
     restart: unless-stopped</code></pre>
 </div>
 </div>
 </div>
-<div id="_tabs_1_nvidia--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia">
+<div id="_tabs_1_nvidia_container_toolkit--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_container_toolkit">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Unfortunately, on Nvidia, things are a little bit more complex:</p>
+<p>Make sure that the version of the Nvidia container toolkit is <code>&gt;= 1.16.0</code> and that your driver version is <code>&gt;= 530.30.02</code> (you can check the driver version with <code>nvidia-smi</code>).</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Your driver version must be <code>&gt;= 530.30.02</code></p>
-</li>
-<li>
-<p><code>--gpus</code> and the Nvidia Docker Toolkit seems to not work (to be investigated)</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo nvidia-container-cli -V
+cli-version: 1.16.0
+lib-version: 1.16.0
+build date: 2024-07-15T13:41+00:00</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Docker CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e NVIDIA_VISIBLE_DEVICES=all \
+    --gpus=all \
+    --device /dev/dri/ \
+    --device /dev/uinput \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
+    -v /run/udev:/run/udev:rw \
+    --device-cgroup-rule "c 13:* rmw" \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker compose:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
+services:
+  wolf:
+    image: ghcr.io/games-on-whales/wolf:stable
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/sockets
+      - HOST_APPS_STATE_FOLDER=/etc/wolf
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /etc/wolf/:/etc/wolf
+      - /tmp/sockets:/tmp/sockets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/:/dev/:rw
+      - /run/udev:/run/udev:rw
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    devices:
+      - /dev/dri
+      - /dev/uinput
+      - /dev/uhid
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    network_mode: host
+    restart: unless-stopped</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and that the module is loaded with the flag <code>modeset=1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">I get <code>N</code> or the file is not present, how do I set the flag?</summary>
+<div class="content">
+<div class="paragraph">
+<p>If using Grub, the easiest way to make the change persistent is to add <code>nvidia-drm.modeset=1</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code> ex:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code>sudo update-grub</code> and <strong>reboot</strong>.</p>
+</div>
+</div>
+</details>
+</div>
+<div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div class="paragraph">
+<p>Unfortunately, on Nvidia, things are a little bit more complex..</p>
+</div>
+<div class="paragraph">
+<p>Make sure that your driver version is <code>&gt;= 530.30.02</code></p>
 </div>
 <div class="paragraph">
 <p>First, let&#8217;s build an additional docker image that will contain the Nvidia driver files:</p>
@@ -372,8 +499,8 @@ Y</code></pre>
     --device /dev/nvidia0 \
     --device /dev/nvidia-modeset \
     --device /dev/uinput \
-    -v /dev/shm:/dev/shm:rw \
-    -v /dev/input:/dev/input:rw \
+    --device /dev/uhid \
+    -v /dev/:/dev/:rw \
     -v /run/udev:/run/udev:rw \
     --device-cgroup-rule "c 13:* rmw" \
     ghcr.io/games-on-whales/wolf:stable</code></pre>
@@ -384,7 +511,7 @@ Y</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3.8"
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: "3"
 services:
   wolf:
     image: ghcr.io/games-on-whales/wolf:stable
@@ -396,13 +523,13 @@ services:
       - /etc/wolf/:/etc/wolf:rw
       - /tmp/sockets:/tmp/sockets:rw
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /dev/shm:/dev/shm:rw
-      - /dev/input:/dev/input:rw
+      - /dev/:/dev/:rw
       - /run/udev:/run/udev:rw
       - nvidia-driver-vol:/usr/nvidia:rw
     devices:
       - /dev/dri
       - /dev/uinput
+      - /dev/uhid
       - /dev/nvidia-uvm
       - /dev/nvidia-uvm-tools
       - /dev/nvidia-caps/nvidia-cap1
@@ -465,6 +592,242 @@ fi</code></pre>
 </div>
 </div>
 </details>
+<details>
+<summary class="title">I am still not able to see all the Nvidia devices</summary>
+<div class="content">
+<div class="paragraph">
+<p>You may need to setup your host to automatically load the NVIDIA GPU Kernel modules at boot time.</p>
+</div>
+<div class="paragraph">
+<p>First, create a new file <code>nvidia.conf</code> in the <code>/etc/modules-load.d/</code> directory and open it with a text editor.</p>
+</div>
+<div class="paragraph">
+<p><code>nano /etc/modules-load.d/nvidia.conf</code></p>
+</div>
+<div class="paragraph">
+<p>paste the following content to the file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">nvidia
+nvidia_uvm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the changes to take effect, update the <code>initramfs</code> file with the following command:
+<code>update-initramfs -u</code></p>
+</div>
+<div class="paragraph">
+<p>Add udev rules to add missing Nvidia devices
+<code>nano /etc/udev/rules.d/70-nvidia.rules</code>
+paste the following content to the file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># create necessary NVIDIA device files in /dev/*
+KERNEL=="nvidia", RUN+="/bin/bash -c '/usr/bin/nvidia-smi -L &amp;&amp; /bin/chmod 0666 /dev/nvidia*'"
+KERNEL=="nvidia_uvm", RUN+="/bin/bash -c '/usr/bin/nvidia-modprobe -c0 -u &amp;&amp; /bin/chmod 0666 /dev/nvidia-uvm*'"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>reboot</code> you host and try running <code>ls -l /dev/nvidia*</code> again.</p>
+</div>
+</div>
+</details>
+</div>
+<div id="_tabs_1_wsl2--panel" class="tabpanel" aria-labelledby="_tabs_1_wsl2">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="EXPERIMENTAL""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Running Wolf in WSL2 hasn&#8217;t been properly tested.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can run Wolf in a very unprivileged setting without <code>uinput/uhid</code>, unfortunately this means that you&#8217;ll be restricted to <strong>only using mouse and keyboard</strong>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For Nvidia users, follow the Nvidia instructions above.
+This should work for AMD/Intel users.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run \
+    --name wolf \
+    --network=host \
+    -e XDG_RUNTIME_DIR=/tmp/sockets \
+    -v /tmp/sockets:/tmp/sockets:rw \
+    -e HOST_APPS_STATE_FOLDER=/etc/wolf \
+    -v /etc/wolf:/etc/wolf:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:rw \
+    --device /dev/dri/ \
+    ghcr.io/games-on-whales/wolf:stable</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_proxmox_lxc--panel" class="tabpanel" aria-labelledby="_tabs_1_proxmox_lxc">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="WARNING"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>At the moment it is only possible to run Wolf inside a privileged LXC.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>First you need to make sure your GPU drivers are installed and loaded on your PVE host.</p>
+</div>
+<div class="paragraph">
+<p>Also make sure to add the virtual devices udev rules to the PVE host as explained in the <a href="#_virtual_devices_support">Virtual devices support</a> section.</p>
+</div>
+<div class="paragraph">
+<p>Now, we need to edit LXC config file to passtrough the GPU.</p>
+</div>
+<details>
+<summary class="title">I don&#8217;t have a LXC yet</summary>
+<div class="content">
+<div class="paragraph">
+<p>The easiest way to create an LXC to run Wolf is to use <a href="https://tteck.github.io/Proxmox/#docker-lxc">tteck&#8217;s PVE docker script</a>, this will create you a LXC with docker already good to go. (Make sure you choose privileged LXC and install docker-compose when prompted)</p>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>Enter the LXC config file: <code>nano /etc/pve/lxc/1XX.conf</code></p>
+</div>
+<div class="paragraph">
+<p>it should look similar to this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">arch: amd64
+cores: 8
+features: nesting=1
+hostname: wolf
+memory: 8192
+net0: name=eth0,bridge=vmbr0,hwaddr=BC:24:11:B7:90:5D,ip=dhcp,type=veth
+onboot: 1
+ostype: debian
+rootfs: local-lvm:vm-118-disk-0,size=128G
+swap: 512
+tags: proxmox-helper-scripts
+lxc.cgroup2.devices.allow: a
+lxc.cap.drop:
+lxc.cgroup2.devices.allow: c 188:* rwm
+lxc.cgroup2.devices.allow: c 189:* rwm
+lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
+lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>remove the following lines from the bottom, they are not needed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">lxc.cgroup2.devices.allow: c 188:* rwm
+lxc.cgroup2.devices.allow: c 189:* rwm
+lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
+lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
+lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>add these lines to the bottom of the file:</p>
+</div>
+<div class="paragraph">
+<p>For Nvidia</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dev0: /dev/uinput
+dev1: /dev/uhid
+dev2: /dev/nvidia0
+dev3: /dev/nvidiactl
+dev4: /dev/nvidia-modeset
+dev5: /dev/nvidia-uvm
+dev6: /dev/nvidia-uvm-tools
+dev7: /dev/nvidia-caps/nvidia-cap1
+dev8: /dev/nvidia-caps/nvidia-cap2
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Intel/AMD</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dev0: /dev/uinput
+dev1: /dev/uhid
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>save the file, exit, and restart your LXC.</p>
+</div>
+<div class="paragraph">
+<p>Your LXC is good to go, complete the installation based on the GPU following the other tabs.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Remarks"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When creating your docker-compose.yml don&#8217;t forget to modify the volume mapping for <code>/run/udev</code> path, as we mounted it on <code>/mnt/udev</code> inside our LXC</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">volumes:
+    - /mnt/udev:/run/udev:rw</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if you have a multi GPU setup, don&#8217;t forget to set the below env variable</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">environment:
+    - WOLF_RENDER_NODE=/dev/dri/renderD12X</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -484,9 +847,9 @@ EXPOSE 47989/tcp
 EXPOSE 47999/udp
 # RTSP
 EXPOSE 48010/tcp
-# Video (up to 10 users)
+# Video (up to 10 users, you can open more ports if needed)
 EXPOSE 48100-48110/udp
-# Audio (up to 10 users)
+# Audio (up to 10 users, you can open more ports if needed)
 EXPOSE 48200-48210/udp</code></pre>
 </div>
 </div>
@@ -553,6 +916,9 @@ crw------- 1 root root 10, 223 Jan 17 09:08 /dev/uinput</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Allows Wolf to acces /dev/uinput
 KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+
+# Allows Wolf to access /dev/uhid
+KERNEL=="uhid", TAG+="uaccess"
 
 # Move virtual keyboard and mouse into a different seat
 SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"

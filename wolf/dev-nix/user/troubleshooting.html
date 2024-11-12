@@ -66,9 +66,6 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="overview.html">Overview</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -80,6 +77,18 @@
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -87,7 +96,13 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/api.html">Wolf API</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -371,6 +386,65 @@ INFO  | Received interrupt signal 6, clean exit</pre>
 <div class="paragraph">
 <p>Do you have multiple GPUs installed (or even just a virtual display in a VM)?<br>
 Checkout the <a href="configuration.html#_multiple_gpu" class="xref page">Multiple GPU configuration page</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_intel_mfx_err_unsupported"><a class="anchor" href="#_intel_mfx_err_unsupported"></a>Intel: MFX_ERR_UNSUPPORTED</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Example log line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>0:01:31.983118812     1 0x7f1d50000b70 ERROR             qsvencoder gstqsvencoder.cpp:1098:gst_qsv_encoder_init_encode_session:&lt;qsvh265enc3&gt; MFXVideoENCODE::Query failed -3 (MFX_ERR_UNSUPPORTED)
+0:01:31.983243805     1 0x7f1d50000b70 WARN            videoencoder gstvideoencoder.c:771:gst_video_encoder_setcaps:&lt;qsvh265enc3&gt; rejected caps video/x-raw(memory:VAMemory), width=(int)1280, height=(int)720, framerate=(fraction)60/1, format=(string)NV12, chroma-site=(string)mpeg2, colorimetry=(string)bt601</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Follow the steps outlined in <a href="https://www.intel.com/content/www/us/en/support/articles/000089952/software/iot-software.html">here</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo apt install --reinstall linux-firmware</code></p>
+</li>
+<li>
+<p>Add <code>i915.enable_guc=2</code>  in <code>/etc/default/grub</code>: <code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.force_probe=* i915.enable_guc=2"</code></p>
+</li>
+<li>
+<p><code>sudo update-initramfs –u</code></p>
+</li>
+<li>
+<p><code>sudo update-grub</code></p>
+</li>
+<li>
+<p>Reboot the system.</p>
+</li>
+<li>
+<p>After reboot, execute the command: <code>dmesg | grep guc</code></p>
+</li>
+<li>
+<p>Verify the logs for guc information.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note: If output doesn&#8217;t contain guc details, then install the latest guc/huc firmware. Copy the <a href="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915">firmware</a> to <code>/lib/firmware/i915/</code>, and reboot the system.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_permission_error_when_using_uhid"><a class="anchor" href="#_permission_error_when_using_uhid"></a>Permission error when using uhid</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Depending on your system configuration the <code>uhid</code> module is only loaded "on demand" (when accessing <code>/dev/uhid</code> the first time).<br>
+This can be easily fixed by adding <code>uhid</code> to <code>/etc/module</code> to load the module during boot:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo 'uhid' | sudo tee /etc/modules-load.d/uhid.conf</code></pre>
+</div>
 </div>
 </div>
 </div>

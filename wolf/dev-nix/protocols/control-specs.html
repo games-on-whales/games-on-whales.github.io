@@ -66,9 +66,6 @@
     <span class="nav-text">User guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/overview.html">Overview</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/quickstart.html">Quickstart</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -80,6 +77,18 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -87,7 +96,13 @@
     <span class="nav-text">Developer guide</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/api.html">Wolf API</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
@@ -221,7 +236,7 @@ In order to decrypt you&#8217;ll have to use the keys that are exchanged during 
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1jD0LwkAQRHt_xZLKFJcoWEg6sbASBLUSi83tGg8ut-fdxQ_E_24EFRu7mXnD27rAUeyZCYzTtiMGMoF1MmfuF2iFOsux9EGSaLF9wqbvWlwKYlX0rGOBJBrUx1BVRUkGm4BtLOtb4oNhSyoeMTAVTG63Hwwp4EUZ57ukjozEIR-8x1qukK35lMG9ih4dTB75L1rMl7CZLb54-gfvvhyqnqiarVz2n2-DHrIV3qwgvVSvPh79qFKSNn8CRGFhYQ==" alt="The format of encrypted packets (bytes)">
+<img src="https://kroki.io/bytefield/svg/eNqFkUFPhDAQhe_7Kyb1AocmQjaGcDMe1oMmJu6NcBhsF0hKy5YSWA3_3bYuLLoaL03b981M32vA-AGN0R2kRUnx2CN8pIdaCCA3yFjC78gUbjaBxSQwjQMttepbKrDgglYcGdcbgKxrUYK_zO0x8GShRggMH82XAFnaoKlcfyUN7ep3DlE85aG98eV-SQulbc8OZC0grXhdVgai7RR-f0Ut295c5geZGzsPXotA9qeWE1vuKGP3a_JNib6RZ7QLV8q1TdgCefQ78g8YxUBe8CQUshmVNgaq1QBRsi52Ebk3QXbOIJ6Wj8h_guSJS_I7ae1dW_eJLcWv_EjmpG2ca2n38Az7-90iJ3_I2aK7bxqptayGfGZLbC-2bSt3jm5XrYxRTfgJmHPEtQ==" alt="The format of encrypted packets (bytes)">
 </div>
 <div class="title">Figure 1. The format of encrypted packets (bytes)</div>
 </div>
@@ -358,7 +373,7 @@ The format of the remaining data depends on the message type.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1zDEOwjAMBdC9p7BgoUPagph6DybEkMamiRTi4iQtCHF3OgACITb__768C0KR_UgILhifkQCdkElupLmBE2P2FOtBOLFhP1-6n7PhkIS9igOZWGlkA-r1oW2rGp3uRZ9i3V0THR15VNFqIawIw_5QrFD0pFwYclKWNJJAc2nWTVcWT-v4AoscciRcwK2Ngw6wvZefapJ4WL51862eJzgKnf-5db39GTwAAVRdgQ==" alt="The payload for a Rumble packet (bytes)">
+<img src="https://kroki.io/bytefield/svg/eNqFkbtugzAUhvc8xZGzwGAJUFRFPEGHDB26IQYTHy6SYxNfFNKKd69xAyVNqi6Wff7v3H5HHGtmrTaQVw1lZ8fgM687IYBsGed7fCFjvNlEHpPANbvQRivXU8EqFLRFxlFvAArTMwkhWPpnFMhKDRBZHOy3AEV-Yrad6itpqek-ENJsLGMfCenhyCulfU0DshOQt9g1rYV0N8b3U3Syd_anf1RMbefGaxHI-7VH4tMnyvr7mjwq4U7yhpp4pTyuCTsgr-FG_gHTDMgbuwrF-IxKbwPV6gLpfp08WTTNBMXNg2xcPqL8DZIDSvKc9Os9WT0ZkjSpgnFLDSedQU5mz72xa_VotYDtomb3qvDz1xrPf-mt_6wH4AuDIMDV" alt="The payload for a Rumble packet (bytes)">
 </div>
 <div class="title">Figure 2. The payload for a Rumble packet (bytes)</div>
 </div>
@@ -373,7 +388,7 @@ The format of the remaining data depends on the message type.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1zLEOgkAQBNCer9hgI8UBMaHhP6yMxXK7wCXHLdk7EGP8dyk00cJuZl4y56Acxa9M4IL1CzGQU7bJrbwvMAktnmM1qySx4veEw96thKTiTZzZxhJJLJjPQ9uWFTkcFKdYdffEvWNPJo6oTCVTuFyzIynejAvzkszISKxQb01T10X2tk42yG1SD4ccHm2cMcDpWXyr5z79M3XD-IMv1qxQxA==" alt="The payload for a Trigger packet (bytes)">
+<img src="https://kroki.io/bytefield/svg/eNqFkb1ugzAQx3ee4uQsMFgClFQRT9ChQ4dsiOGIzYfk2NQYhaTi3Wu7CXXbVF2s8_1_9x0z3qAxeoSibim-TQjvRdMLAWSDjO35E1mSKIotJoFpPNNWq2mgAmsuaMeRcR0BlOOAEryzst_Yk7WaITZ8Np8ClMUJTefyK2no2F85ZPlSJdbjw_1T1ErbnCPIXkDR8b7tDGTbJfneRS-HyXzVj0tX9l44FIEcLgMnNtxRxtoheVRiOskbOiaB8ntM2AJ59hb5B8xyIK94EQrZHZV2DVSrM2T7MNityPUE5W0H-bIeovoJkhcuyWPSjvdg9HTe7dLUL27NcTRawIbAmiUJVcEb85em3SlC8QOZLrQY" alt="The payload for a Trigger packet (bytes)">
 </div>
 <div class="title">Figure 3. The payload for a Trigger packet (bytes)</div>
 </div>
@@ -389,7 +404,7 @@ By default Moonlight disables these events in order to save bandwith.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1zL0OwjAMBOCdp7BgoUP6g9Sl78GEGNzYlEhpHDkpUKG-Ox1AsLDd3SfdMSgn8TcmcMH6iRjIKdvsbrwuMApNnlMVVbJY8WvCYe1WQlbxJkW2qUQSC-bz0HVlRQ4HxTFV_Zz54tiTSVdUppIpnM6bPSnejQtxyubKSKxQP9q2borN23p5wNZm9bDbwrNLEQMcluJXFTP_szzHrzVL8QKGF1Bp" alt="The payload for a Motion packet (bytes)">
+<img src="https://kroki.io/bytefield/svg/eNqFkb9uwyAQxnc_xYksZkAKVlJFfoIOHTpkszycA7EtEXAxVpxUfvcCTVy3TdUFwX2_--4PqZBHdM72kFc1w7cB4T0_tkoBWaEQO_lEJpokqcc0CItnVlszdExhJRVrJAppE4Ci71BDDJb-mUayMiOkTo7uU4AiP6Frgr_RjvXtVQLPppL6SEyPR14Z6z170K2CvJFt3Tjgm4l-76LV3eC-6qdFKHsvvBSB7C-dJD49UM7fl-TBqOGkb2hPF8rvMWED5DneyD8gz4C84kUZFHdU-zUwa87Ad8vksKLQExS3HWTT_BHlT5C8SE0ek368B6Ovx-12zePiZo-DswpWBGYXulQtOvmXFvqcNT7RD-U2s70=" alt="The payload for a Motion packet (bytes)">
 </div>
 <div class="title">Figure 4. The payload for a Motion packet (bytes)</div>
 </div>
@@ -418,7 +433,7 @@ An example of this is when setting the LED color in Steam, the server has to sen
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
-<img src="https://kroki.io/bytefield/svg/eNp1zDELwjAQBeDdX3HookNaLXTp6OIuOInDNXdqIObCJa2K-N_toFIHt_feB28XlJP4nglcsL4jBnLKNruehwUuQp3nVEaVLFb8kPA0dCshq3iTIttUIIkF83lomqIkhyfFSyrbe-ajY08mnVGZCqawP0zmpHg1LsQumzMjscLyVtfLajF5Wys3mNqsHmZTeDQpYoDquRjr9gurX9j8g_UYXobJVQ4=" alt="The payload for a LED packet (bytes)">
+<img src="https://kroki.io/bytefield/svg/eNqFkT1vgzAQhnd-xclZYLAUUFJFjF3aIUNVdUMMR-yAJccmxiikFf-9xk2o06bqYtn3Pvfeh2PG92it6SCvaorHHuEj3wspgSyQsQ1_IGMSRbHDFDCDJ1ob3bdUYsUlbTgybiKAomtRgQ-W7hl7stIDxJYP9kuAIj-gbSZ_rSztxDuHNBvLxEV8uj_yShvn2YESEvKGi7qxkK7G5LYLodreftePi6nstXAoAnk7t5y49Imy7h6SOy37g7qgXRIov8eEFZBnfyP_gGkG5AXPUiO7osqtgRp9gnQTJk8rmnqC4rKDbJw_ovwJki1X5D7pxrsz-nJYr5eZX9zssbNGwoLA7JKE6usspLfC01_CYyh8AkWcuGI=" alt="The payload for a LED packet (bytes)">
 </div>
 <div class="title">Figure 5. The payload for a LED packet (bytes)</div>
 </div>
