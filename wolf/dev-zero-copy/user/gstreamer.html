@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gstreamer :: Games On Whales</title>
+    <link rel="canonical" href="https://games-on-whales.github.io/wolf/stable/user/gstreamer.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+<link rel="stylesheet" href="../../../_/css/site-extra.css">
+  </head>
+  <body class="article">
+<header class="header">
+    <div class="fancy-stripe"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://games-on-whales.github.io">Games On Whales</a>
+                <div class="navbar-item search hide-for-print">
+                    <div id="search-field" class="field">
+                        <input id="search-input" type="text" placeholder="Search the docs">
+                    </div>
+                </div>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Projects</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://games-on-whales.github.io/wolf/stable/">Wolf</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/inputtino">inputtino</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales/gst-wayland-display">gst-wayland-display</a>
+                        <a class="navbar-item" href="https://games-on-whales.github.io/gow/">Games on Whales</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="#">Community</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://discord.gg/kRGUDHNHt2">Discord</a>
+                        <a class="navbar-item" href="https://github.com/games-on-whales">Github</a>
+                        <a class="navbar-item" href="https://opencollective.com/games-on-whales/donate">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="wolf" data-version="dev-zero-copy">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">wolf</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">User guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../apps/index.html">Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/steam.html">Steam</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apps/pegasus.html">Pegasus Frontend Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer guide</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/api.html">Wolf API</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/code-structure.html">Code Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/gstreamer.html">GStreamer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/wayland.html">Headless Wayland</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../dev/fake-udev.html">Hotplug in Docker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Moonlight Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/http-pairing.html">HTTP/S Pairing</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/rtsp.html">RTSP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RTP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-video.html">Video (H.264/HEVC)</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/rtp-opus.html">Audio (Opus)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/control-specs.html">Control (via ENET)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../protocols/input-data.html">Input Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">wolf</span>
+    <span class="version">dev-zero-copy</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <div class="title"><a href="../../../gow/index.html">gow</a></div>
+    </li>
+    <li class="component is-current">
+      <div class="title"><a href="../../stable/index.html">wolf</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../stable/index.html">stable</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">dev-zero-copy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-tracy/index.html">dev-tracy</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-nix/index.html">dev-nix</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-input-api/index.html">dev-input-api</a>
+        </li>
+        <li class="version">
+          <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../stable/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">wolf</a></li>
+    <li>User guide</li>
+    <li><a href="gstreamer.html">Gstreamer</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">dev-zero-copy</button>
+  <div class="version-menu">
+    <a class="version" href="../../stable/user/gstreamer.html">stable</a>
+    <a class="version is-current" href="gstreamer.html">dev-zero-copy</a>
+    <a class="version" href="../../dev-tracy/user/gstreamer.html">dev-tracy</a>
+    <a class="version" href="../../dev-nix/user/gstreamer.html">dev-nix</a>
+    <a class="version" href="../../dev-input-api/user/gstreamer.html">dev-input-api</a>
+    <a class="version" href="../../dev-fake-uinput/user/gstreamer.html">dev-fake-uinput</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/dev-zero-copy/docs/modules/user/pages/gstreamer.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Gstreamer</h1>
+<div class="sect1">
+<h2 id="_cli_interface"><a class="anchor" href="#_cli_interface"></a>CLI interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To list the installed plugins use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-inspect-1.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To analyse some media use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-discoverer-1.0 -v https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To test out pipelines in your system use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gst-launch-1.0 videotestsrc ! autovideosink</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_pipelines"><a class="anchor" href="#_example_pipelines"></a>Example pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See more examples at: <a href="https://github.com/matthew1000/gstreamer-cheat-sheet">matthew1000/gstreamer-cheat-sheet</a></p>
+</div>
+<div class="sect2">
+<h3 id="_stream_your_desktop"><a class="anchor" href="#_stream_your_desktop"></a>Stream your desktop</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Desktop"
+[apps.video]
+source = "avfvideosrc capture-screen-cursor=true capture-screen=true"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This works in OSX, for X11 you can use <a href="https://gstreamer.freedesktop.org/documentation/ximagesrc/index.html?gi-language=c"><code>ximagesrc</code></a> or on Wayland you can try: <a href="https://wiki.archlinux.org/title/GStreamer#PipeWire"><code>pipewiresrc</code></a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_play_some_audio"><a class="anchor" href="#_play_some_audio"></a>Play some audio</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Music"
+# Audio sample downloaded from https://www.bensound.com/free-music-for-videos
+# try also: spacescope style=color-lines
+[apps.video]
+source = """
+filesrc location=/Users/ale/Downloads/elevate.mp3 !
+tee name=t
+! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+t. ! decodebin ! audioconvert ! wavescope style=color-lines
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v elevate.mp3
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true  !
+ audio/mpeg, mpegversion=(int)1, mpegaudioversion=(int)1, layer=(int)3, rate=(int)44100, channels=(int)2 !
+ decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stream_a_remote_video"><a class="anchor" href="#_stream_a_remote_video"></a>Stream a remote video</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "BigBuckBunny (MP4 - remote)"
+[apps.video]
+# taken from https://gist.github.com/jsturgis/3b19447b304616f18657
+source = """
+curlhttpsrc location="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" !
+qtdemux name=demux
+demux.audio_0 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0 ! decodebin
+\
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+ audio/mpeg, mpegversion=(int)4, framed=(boolean)true, stream-format=(string)raw, level=(string)2, base-profile=(string)lc, profile=(string)lc, codec_data=(buffer)1210, rate=(int)44100, channels=(int)2 !
+ decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stream_from_twitch"><a class="anchor" href="#_stream_from_twitch"></a>Stream from Twitch</h3>
+<div class="paragraph">
+<p>Here the trick is to use <code>shmsink</code> and <code>shmsrc</code> in order to share the raw audio between the video and audio pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "Twitch.tv"
+[apps.video]
+# location is the result of
+# youtube-dl --format mp4 --get-url https://www.twitch.tv/videos/560738950
+source = """
+curlhttpsrc location="https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8" !
+hlsdemux !
+tsdemux name=demux
+demux.audio_0_0100 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0_0101 ! queue ! decodebin
+\
+"""
+# Get the audio info using:
+# gst-discoverer-1.0 -v https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+audio/mpeg, framed=(boolean)true, mpegversion=(int)4, level=(string)2, base-profile=(string)lc, profile=(string)lc, rate=(int)44100, channels=(int)2, stream-format=(string)adts !
+decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_picture_in_picture"><a class="anchor" href="#_picture_in_picture"></a>Picture in picture</h3>
+<div class="paragraph">
+<p>The element <a href="https://gstreamer.freedesktop.org/documentation/compositor/index.html?gi-language=c#compositor-page"><code>compositor</code></a> allows video to be mixed (overlayed, put side-by-side, etc).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+title = "PIP: Desktop + Twitch"
+[apps.video]
+# location is the result of
+# youtube-dl --format mp4 --get-url https://www.twitch.tv/videos/560738950
+source = """
+curlhttpsrc location="https://dqrpb9wgowsf5.cloudfront.net/49e35d90a96078583c9c_andrewfoxtv_34248972186_2596839032/chunked/highlight-560738950.m3u8" !
+hlsdemux !
+tsdemux name=demux
+demux.audio_0_0100 ! queue ! shmsink socket-path=/tmp/pipe.sock shm-size=10000000
+demux.video_0_0101 ! queue !
+decodebin !
+videoscale !
+videorate !
+video/x-raw, width=(int)640, height=(int)360, framerate={fps}/1 !
+compositor name=comp sink_0::alpha=1.0 sink_0::zorder=2 sink_0::xpos=1280 sink_1::alpha=1.0 sink_1::zorder=1 !
+avfvideosrc capture-screen-cursor=true capture-screen=true
+\
+"""
+
+video_params = """
+videoscale !
+videoconvert !
+videorate !
+video/x-raw, width={width}, height={height}, framerate={fps}/1, format=I420, chroma-site={color_range}, colorimetry={color_space} !
+comp.
+comp.
+\
+"""
+
+[apps.audio]
+source = """
+shmsrc socket-path=/tmp/pipe.sock do-timestamp=true !
+audio/mpeg, framed=(boolean)true, mpegversion=(int)4, level=(string)2, base-profile=(string)lc, profile=(string)lc, rate=(int)44100, channels=(int)2, stream-format=(string)adts !
+decodebin
+"""</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <div>
+        <a href="https://opencollective.com/games-on-whales/donate" target="_blank">
+            <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=250/>
+        </a>
+    </div>
+    <p>Copyright &#169; ABeltramo and <a href="https://github.com/games-on-whales">GOW</a> contributors.</p>
+    <p>Except where otherwise noted, docs are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International</a> (CC BY-SA 4.0).</p>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script async src="../../../_/js/vendor/tabs.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
