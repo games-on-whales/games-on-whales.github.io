@@ -291,8 +291,11 @@ You can edit any of the images or create a new one.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Finally, update the <code>config.toml</code> file in the Wolf repo to use the new image.
+<p>Finally, update the <code>config.toml</code> file in Wolf to use the new image.
 Just change the <code>image</code> field under <code>[apps.runner]</code> to the newly locally built <code>gow/es-de:custom</code>.</p>
+</li>
+<li>
+<p>Don&#8217;t forget to contribute back by creating a pull request in <a href="https://github.com/games-on-whales/gow">games-on-whales/gow</a>!</p>
 </li>
 </ul>
 </div>
@@ -300,7 +303,7 @@ Just change the <code>image</code> field under <code>[apps.runner]</code> to the
 <summary class="title">I want to edit something in <code>base</code> or <code>base-app</code></summary>
 <div class="content">
 <div class="paragraph">
-<p>Our builds are hierarchical, all images are based on <code>base-app</code> which is based on <code>base</code>.
+<p>Our builds are hierarchical: all images are based on <code>base-app</code> which is based on <code>base</code>.
 You can build them with:</p>
 </div>
 <div class="listingblock">
@@ -320,11 +323,10 @@ Here&#8217;s an example of running Steam inside Docker <strong>on a Wayland host
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">  --rm -it \
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">  docker run --name=steam --rm -it \
   --device=/dev/dri/renderD128 \
   --device=/dev/dri/card0 \
   --ipc=host \
-docker run --name=steam \
   --cap-add=ALL \
   --security-opt seccomp=unconfined \
   -e XDG_RUNTIME_DIR=/tmp \
@@ -345,6 +347,9 @@ docker run --name=steam \
 <div class="paragraph">
 <p>Depending on your host setup, you might need to adjust this command.<br>
 For example, for <strong>Nvidia users</strong> with the container toolkit installed you might need to add <code>--gpus=all</code> instead of <code>--device=/dev/dri/renderD128 --device=/dev/dri/card0</code> and <code>-e NVIDIA_DRIVER_CAPABILITIES=all</code> to the environment variables.</p>
+</div>
+<div class="paragraph">
+<p>In the command above <code>/tmp/SteamGOWData</code> in your host is where the home folder (containing Steam client and settings in this example) will be stored, make sure to adjust that to your liking.<br></p>
 </div>
 </div>
 </div>
