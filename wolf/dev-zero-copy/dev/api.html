@@ -579,6 +579,45 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/wolf__api__StreamSessionCreated"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/input": {
+      "post": {
+        "summary": "Handle input for a stream session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__StreamSessionHandleInputRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
                 }
               }
@@ -607,6 +646,45 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/wolf__api__StreamSessionPauseRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/start": {
+      "post": {
+        "summary": "Start a stream session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__StreamSessionStartRequest"
               }
             }
           },
@@ -940,6 +1018,37 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "stop_stream_when_over"
         ]
       },
+      "wolf__api__StreamSessionCreated": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "session_id",
+          "success"
+        ]
+      },
+      "wolf__api__StreamSessionHandleInputRequest": {
+        "type": "object",
+        "properties": {
+          "input_packet_hex": {
+            "type": "string",
+            "description": "A HEX encoded Moonlight input packet, for the full format see: games-on-whales.github.io/wolf/stable/protocols/input-data.html"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "input_packet_hex",
+          "session_id"
+        ]
+      },
       "wolf__api__StreamSessionListResponse": {
         "type": "object",
         "properties": {
@@ -967,6 +1076,25 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
         },
         "required": [
           "session_id"
+        ]
+      },
+      "wolf__api__StreamSessionStartRequest": {
+        "type": "object",
+        "properties": {
+          "audio_session": {
+            "$ref": "#/components/schemas/wolf__core__events__AudioSession"
+          },
+          "session_id": {
+            "type": "string"
+          },
+          "video_session": {
+            "$ref": "#/components/schemas/wolf__core__events__VideoSession"
+          }
+        },
+        "required": [
+          "audio_session",
+          "session_id",
+          "video_session"
         ]
       },
       "wolf__api__StreamSessionStopRequest": {
@@ -1114,6 +1242,193 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "run_gid",
           "run_uid",
           "v_scroll_acceleration"
+        ]
+      },
+      "wolf__core__audio__AudioMode": {
+        "type": "object",
+        "properties": {
+          "bitrate": {
+            "type": "integer"
+          },
+          "channels": {
+            "type": "integer"
+          },
+          "coupled_streams": {
+            "type": "integer"
+          },
+          "sample_rate": {
+            "type": "integer"
+          },
+          "speakers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "FRONT_LEFT",
+                "FRONT_RIGHT",
+                "FRONT_CENTER",
+                "LOW_FREQUENCY",
+                "BACK_LEFT",
+                "BACK_RIGHT",
+                "SIDE_LEFT",
+                "SIDE_RIGHT",
+                "MAX_SPEAKERS"
+              ]
+            }
+          },
+          "streams": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "bitrate",
+          "channels",
+          "coupled_streams",
+          "sample_rate",
+          "speakers",
+          "streams"
+        ]
+      },
+      "wolf__core__events__AudioSession": {
+        "type": "object",
+        "properties": {
+          "aes_iv": {
+            "type": "string"
+          },
+          "aes_key": {
+            "type": "string"
+          },
+          "audio_mode": {
+            "$ref": "#/components/schemas/wolf__core__audio__AudioMode"
+          },
+          "client_ip": {
+            "type": "string"
+          },
+          "encrypt_audio": {
+            "type": "boolean"
+          },
+          "gst_pipeline": {
+            "type": "string"
+          },
+          "packet_duration": {
+            "type": "integer"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "session_id": {
+            "type": "integer"
+          },
+          "wait_for_ping": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "aes_iv",
+          "aes_key",
+          "audio_mode",
+          "client_ip",
+          "encrypt_audio",
+          "gst_pipeline",
+          "packet_duration",
+          "port",
+          "session_id",
+          "wait_for_ping"
+        ]
+      },
+      "wolf__core__events__VideoSession": {
+        "type": "object",
+        "properties": {
+          "bitrate_kbps": {
+            "type": "integer"
+          },
+          "client_ip": {
+            "type": "string"
+          },
+          "color_range": {
+            "type": "string",
+            "enum": [
+              "JPEG",
+              "MPEG"
+            ]
+          },
+          "color_space": {
+            "type": "string",
+            "enum": [
+              "BT601",
+              "BT709",
+              "BT2020"
+            ]
+          },
+          "display_mode": {
+            "$ref": "#/components/schemas/wolf__core__virtual_display__DisplayMode"
+          },
+          "fec_percentage": {
+            "type": "integer"
+          },
+          "frames_with_invalid_ref_threshold": {
+            "type": "integer"
+          },
+          "gst_pipeline": {
+            "type": "string"
+          },
+          "min_required_fec_packets": {
+            "type": "integer"
+          },
+          "packet_size": {
+            "type": "integer"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "session_id": {
+            "type": "integer"
+          },
+          "slices_per_frame": {
+            "type": "integer"
+          },
+          "timeout_ms": {
+            "type": "integer"
+          },
+          "wait_for_ping": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "bitrate_kbps",
+          "client_ip",
+          "color_range",
+          "color_space",
+          "display_mode",
+          "fec_percentage",
+          "frames_with_invalid_ref_threshold",
+          "gst_pipeline",
+          "min_required_fec_packets",
+          "packet_size",
+          "port",
+          "session_id",
+          "slices_per_frame",
+          "timeout_ms",
+          "wait_for_ping"
+        ]
+      },
+      "wolf__core__virtual_display__DisplayMode": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer"
+          },
+          "refreshRate": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "height",
+          "refreshRate",
+          "width"
         ]
       }
     }
