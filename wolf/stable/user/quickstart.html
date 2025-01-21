@@ -314,6 +314,21 @@ services:
 </td>
 <td class="content">
 <div class="paragraph">
+<p>This <strong>isn&#8217;t recommended at the moment</strong> as it&#8217;s not as stable as the manual method.<br>
+You can follow <a href="https://github.com/games-on-whales/wolf/issues/152">issue #152</a> for updates.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
 <p>Make sure that the version of the Nvidia container toolkit is <code>&gt;= 1.16.0</code> and that your driver version is <code>&gt;= 530.30.02</code> (you can check the driver version with <code>nvidia-smi</code>).</p>
 </div>
 <div class="listingblock">
@@ -416,6 +431,20 @@ Y</code></pre>
 </details>
 </div>
 <div id="_tabs_1_nvidia_manual--panel" class="tabpanel" aria-labelledby="_tabs_1_nvidia_manual">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The downside of this method is that you have to manually re-create the Nvidia driver volume every time you update the drivers.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Unfortunately, on Nvidia, things are a little bit more complex..</p>
 </div>
@@ -718,7 +747,8 @@ This should work for AMD/Intel users.</p>
 <summary class="title">I don&#8217;t have a LXC yet</summary>
 <div class="content">
 <div class="paragraph">
-<p>The easiest way to create an LXC to run Wolf is to use <a href="https://tteck.github.io/Proxmox/#docker-lxc">tteck&#8217;s PVE docker script</a>, this will create you a LXC with docker already good to go. (Make sure you choose privileged LXC and install docker-compose when prompted)</p>
+<p>The easiest way to create an LXC to run Wolf is to use <a href="https://tteck.github.io/Proxmox/#docker-lxc">tteck&#8217;s PVE docker script</a>, this will create you a LXC with docker already good to go.
+(Make sure you choose privileged LXC and install docker-compose when prompted)</p>
 </div>
 </div>
 </details>
