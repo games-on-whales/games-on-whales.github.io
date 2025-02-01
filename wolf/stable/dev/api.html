@@ -178,9 +178,6 @@
           <a href="../../dev-zero-copy/index.html">dev-zero-copy</a>
         </li>
         <li class="version">
-          <a href="../../dev-wolfapi/index.html">dev-wolfapi</a>
-        </li>
-        <li class="version">
           <a href="../../dev-tracy/index.html">dev-tracy</a>
         </li>
         <li class="version">
@@ -212,7 +209,6 @@
   <div class="version-menu">
     <a class="version is-current" href="api.html">stable</a>
     <a class="version" href="../../dev-zero-copy/dev/api.html">dev-zero-copy</a>
-    <a class="version" href="../../dev-wolfapi/dev/api.html">dev-wolfapi</a>
     <a class="version is-missing" href="../../dev-tracy/index.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/dev/api.html">dev-nix</a>
     <a class="version is-missing" href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
@@ -230,7 +226,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Wolf exposes a REST API that allows you to interact with the platform programmatically.<br>
-The API can be accessed only via UNIX sockets, you can control the exact path by setting the <code>WOLF_SOCKET_PATH</code> environment variable. If you want to access the socket from outside the container, you should mount the socket to the host machine, ex: <code>-e WOLF_SOCKET_PATH=/var/run/wolf/wolf.sock</code> and <code>-v /var/run/wolf:/var/run/wolf</code> will allow you to access the socket from the host machine at <code>/var/run/wolf/wolf.sock</code>.</p>
+The API can be accessed only via UNIX sockets, you can control the exact path by setting the <code>WOLF_SOCKET_PATH</code> environment variable.
+If you want to access the socket from outside the container, you should mount the socket to the host machine, ex: <code>-e WOLF_SOCKET_PATH=/var/run/wolf/wolf.sock</code> and <code>-v /var/run/wolf:/var/run/wolf</code> will allow you to access the socket from the host machine at <code>/var/run/wolf/wolf.sock</code>.</p>
 </div>
 <div class="paragraph">
 <p>You can test out the API using the <code>curl</code> command, for example, to get the OpenAPI specification you can run:</p>
@@ -470,6 +467,65 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/clients/settings": {
+      "post": {
+        "summary": "Update client settings",
+        "description": "Update a client's settings including app state folder and client-specific settings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__UpdateClientSettingsRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
                 }
               }
             },
@@ -760,6 +816,45 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           }
         }
       }
+    },
+    "/api/v1/unpair/client": {
+      "post": {
+        "summary": "Unpair a client",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wolf__api__UnpairClientRequest"
+              }
+            }
+          },
+          "description": "",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericSuccessResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wolf__api__GenericErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {
@@ -952,12 +1047,16 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
             "type": "string"
           },
           "client_id": {
-            "type": "integer"
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/wolf__config__ClientSettings"
           }
         },
         "required": [
           "app_state_folder",
-          "client_id"
+          "client_id",
+          "settings"
         ]
       },
       "wolf__api__PairedClientsResponse": {
@@ -978,13 +1077,104 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
           "success"
         ]
       },
+      "wolf__api__PartialClientSettings": {
+        "type": "object",
+        "properties": {
+          "controllers_override": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "XBOX",
+                    "PS",
+                    "NINTENDO",
+                    "AUTO"
+                  ]
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "h_scroll_acceleration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mouse_acceleration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run_gid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run_uid": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "v_scroll_acceleration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": []
+      },
+      "wolf__api__PendingPairClient": {
+        "type": "object",
+        "properties": {
+          "client_ip": {
+            "type": "string",
+            "description": "The IP of the remote Moonlight client"
+          },
+          "pair_secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "client_ip",
+          "pair_secret"
+        ]
+      },
       "wolf__api__PendingPairRequestsResponse": {
         "type": "object",
         "properties": {
           "requests": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/wolf__api__PairRequest"
+              "$ref": "#/components/schemas/wolf__api__PendingPairClient"
             }
           },
           "success": {
@@ -1113,6 +1303,54 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
         },
         "required": [
           "session_id"
+        ]
+      },
+      "wolf__api__UnpairClientRequest": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "description": "The client ID to unpair"
+          }
+        },
+        "required": [
+          "client_id"
+        ]
+      },
+      "wolf__api__UpdateClientSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "app_state_folder": {
+            "description": "New app state folder path (optional)",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "client_id": {
+            "type": "string",
+            "description": "The client ID to identify the client (derived from certificate)"
+          },
+          "settings": {
+            "description": "Client settings to update (only specified fields will be updated)",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/wolf__api__PartialClientSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "app_state_folder",
+          "client_id",
+          "settings"
         ]
       },
       "wolf__config__AppCMD__tagged": {
@@ -1441,6 +1679,17 @@ The API can be accessed only via UNIX sockets, you can control the exact path by
     }
   }
 }
+</script>
+<!-- see: <a href="https://github.com/scalar/scalar/blob/main/documentation/configuration.md" class="bare">https://github.com/scalar/scalar/blob/main/documentation/configuration.md</a> -->
+<script>
+  var configuration = {
+    darkMode: false,
+    forceDarkModeState: 'light',
+    hideDarkModeToggle: true
+  }
+
+  document.getElementById('api-reference').dataset.configuration =
+    JSON.stringify(configuration)
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
 </div>
