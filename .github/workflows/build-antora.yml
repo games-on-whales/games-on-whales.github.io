@@ -27,6 +27,25 @@ jobs:
       - name: Override index page
         run: cp src/index.html build/site/index.html
 
+      # Building wildlife
+      - name: Checkout GOW repo
+        uses: actions/checkout@v4
+        with:
+          repository: games-on-whales/gow
+          path: gow
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.144.2'
+
+      - name: Build wildlife site
+        working-directory: gow
+        run: |
+          chmod +x bin/* 
+          bin/build-website.sh
+          cp -r website/public/* ../build/site/wildlife
+
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

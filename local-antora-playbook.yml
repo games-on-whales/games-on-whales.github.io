@@ -2,9 +2,6 @@ site:
   title: Games On Whales
 content:
   sources:
-    - url: ./workspace/gow
-      branches: HEAD
-      start_path: docs
     - url: ./workspace/wolf
       branches: HEAD
       start_path: docs

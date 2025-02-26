@@ -7,9 +7,6 @@ content:
     - url: git@github.com:games-on-whales/wolf.git
       branches: [ stable, dev* ]
       start_path: docs
-    - url: git@github.com:games-on-whales/gow.git
-      branches: master
-      start_path: docs
 urls:
   html_extension_style: default
   latest_version_segment: stable
