@@ -33,6 +33,7 @@ jobs:
         with:
           repository: games-on-whales/gow
           path: gow
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
