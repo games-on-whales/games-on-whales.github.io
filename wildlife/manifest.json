@@ -1,0 +1,15 @@
+{
+  "name": "Wildlife",
+  "short_name": "Wildlife",
+  "start_url": "/wildlife/",
+  "scope": "/wildlife/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/wildlife/favicon.svg",
+      "sizes": "512x512"
+    }
+  ]
+}
