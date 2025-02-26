@@ -44,7 +44,7 @@ jobs:
         run: |
           chmod +x bin/* 
           bin/build-website.sh
-          cp -r website/public/* ../build/site/wildlife
+          mv website/public/ ../build/site/wildlife/
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
