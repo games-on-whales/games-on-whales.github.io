@@ -1,5 +1,6 @@
 [[apps]]
 title = "EmulationStation"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/es-de/assets/icon.png"
 
 [apps.runner]
 type = "docker"
@@ -22,6 +23,7 @@ base_create_json = """
 """
 [[apps]]
 title = "Firefox"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/firefox/assets/icon.png"
 
 [apps.runner]
 type = "docker"
@@ -44,6 +46,7 @@ base_create_json = """
 """
 [[apps]]
 title = 'Heroic'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/heroic-games-launcher/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -65,6 +68,7 @@ base_create_json = '''{
 }'''
 [[apps]]
 title = 'Kodi'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/kodi/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -87,6 +91,7 @@ base_create_json = """
 """
 [[apps]]
 title = 'Lutris'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/lutris/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -108,6 +113,7 @@ base_create_json = '''{
 }'''
 [[apps]]
 title = 'Pegasus'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/pegasus/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -130,6 +136,7 @@ base_create_json = """
 """
 [[apps]]
 title = 'Prism Launcher'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/prismlauncher/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -152,6 +159,7 @@ base_create_json = """
 """
 [[apps]]
 title = 'Retroarch'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/retroarch/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
@@ -174,6 +182,7 @@ base_create_json = """
 """
 [[apps]]
 title = "Steam"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/steam/assets/icon.png"
 
 [apps.runner]
 type = "docker"
@@ -201,6 +210,7 @@ base_create_json = """
 """
 [[apps]]
 title = 'Desktop (xfce)'
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/xfce/assets/icon.png"
 
 [apps.runner]
 type = 'docker'
