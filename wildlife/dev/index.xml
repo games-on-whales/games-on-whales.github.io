@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Devs on Wildlife</title><link>https://games-on-whales.github.io/wildlife/dev/</link><description>Recent content in Devs on Wildlife</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://games-on-whales.github.io/wildlife/dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Build your own image</title><link>https://games-on-whales.github.io/wildlife/dev/manual-build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://games-on-whales.github.io/wildlife/dev/manual-build/</guid><description>&lt;h1 id="building-your-own-image">
+ Building your own image
+ &lt;a class="anchor" href="#building-your-own-image">#&lt;/a>
+&lt;/h1>
+&lt;p>If you want to build your own app, you can use the following template:&lt;/p>
+&lt;ul>
+&lt;li>Clone the &lt;a href="https://github.com/games-on-whales/gow">GOW repo&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/games-on-whales/gow.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All the published images are in the &lt;code>apps/&lt;/code> directory.
+You can edit any of the images or create a new one.&lt;/p>
+&lt;h2 id="example-edit-an-already-existing-image">
+ Example: edit an already existing image
+ &lt;a class="anchor" href="#example-edit-an-already-existing-image">#&lt;/a>
+&lt;/h2>
+&lt;p>For example, say that you want to add another emulator to &lt;code>ES-DE&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>Edit the &lt;code>apps/es-de/build/Dockerfile&lt;/code> file and add the necessary software.&lt;/li>
+&lt;li>Build the image: open a shell &lt;em>in the root of the GOW repo&lt;/em>, then use Docker to build with the following command:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker build -t gow/es-de:custom --build-arg BASE_APP_IMAGE&lt;span style="color:#f92672">=&lt;/span>ghcr.io/games-on-whales/base-app:edge apps/es-de/build .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will build the image locally with the tag &lt;code>gow/es-de:custom&lt;/code>.&lt;/p></description></item></channel></rss>

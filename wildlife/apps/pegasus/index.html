@@ -15,13 +15,21 @@
     
   
 
-A graphical front-end for browsing and launching games from various sources.
-It focuses on providing a modern and customizable interface for game libraries.
-Demonstration of different themes: youtube video
-Themes Gallery"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://games-on-whales.github.io/wildlife/apps/pegasus/"><meta property="og:site_name" content="Wildlife"><meta property="og:title" content="Wildlife"><meta property="og:description" content="Pegasus Front-end # Moonlight | Wolf A graphical front-end for browsing and launching games from various sources. It focuses on providing a modern and customizable interface for game libraries.
-Demonstration of different themes: youtube video
-Themes Gallery"><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>Pegasus | Wildlife</title>
-<link rel=icon href=/wildlife/favicon.png><link rel=manifest href=/wildlife/manifest.json><link rel=canonical href=https://games-on-whales.github.io/wildlife/apps/pegasus/><link rel=stylesheet href=/wildlife/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://games-on-whales.github.io/wildlife/apps/pegasus/index.xml title=Wildlife><link rel=stylesheet href=/wildlife/css/custom.min.005a8504eef50846db5d6f92bb509a0d1f11e5d5be9044536b5e7e192c7fc663.css integrity="sha256-AFqFBO71CEbbXW+Su1CaDR8R5dW+kERTa15+GSx/xmM=" crossorigin=anonymous></head><body dir=ltr><header class=header><div class=fancy-stripe></div><nav class=navbar><div class=navbar-brand><a class=navbar-item href=/wildlife/>Wildlife</a>
+Pegasus is a powerful and flexible frontend for launching games, similar to EmulationStation. It provides a unified
+interface for interacting with various emulators, eliminating the need to manage multiple emulator interfaces
+separately.
+
+  Getting Started
+  #
+
+
+  ROM Directory Structure
+  #
+
+By default, Pegasus is configured to look for ROMs in the /ROMs directory, with subdirectories for each platform. You
+can either create the ROM directories in the format below or edit Pegasus to use your preferred location."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://games-on-whales.github.io/wildlife/apps/pegasus/"><meta property="og:site_name" content="Wildlife"><meta property="og:title" content="Wildlife"><meta property="og:description" content="Pegasus Front-end # Moonlight | Wolf Pegasus is a powerful and flexible frontend for launching games, similar to EmulationStation. It provides a unified interface for interacting with various emulators, eliminating the need to manage multiple emulator interfaces separately.
+Getting Started # ROM Directory Structure # By default, Pegasus is configured to look for ROMs in the /ROMs directory, with subdirectories for each platform. You can either create the ROM directories in the format below or edit Pegasus to use your preferred location."><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>Pegasus | Wildlife</title>
+<link rel=icon href=/wildlife/favicon.png><link rel=manifest href=/wildlife/manifest.json><link rel=canonical href=https://games-on-whales.github.io/wildlife/apps/pegasus/><link rel=stylesheet href=/wildlife/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://games-on-whales.github.io/wildlife/apps/pegasus/index.xml title=Wildlife><link rel=stylesheet href=/wildlife/css/custom.min.4bbe650dd7ab80d81d5da7863d012bad37aac6dd84a69c59e848542bb199c6a6.css integrity="sha256-S75lDdergNgdXaeGPQErrTeqxt2EppxZ6EhUK7GZxqY=" crossorigin=anonymous></head><body dir=ltr><header class=header><div class=fancy-stripe></div><nav class=navbar><div class=navbar-brand><a class=navbar-item href=/wildlife/>Wildlife</a>
 <button class=navbar-burger data-target=topbar-nav>
 <span></span>
 <span></span>
@@ -31,9 +39,65 @@ Themes Gallery"><meta property="og:locale" content="en_us"><meta property="og:ty
 <a class=navbar-item href=https://games-on-whales.github.io/wildlife/>Wildlife</a></div></div><div class="navbar-item has-dropdown is-hoverable"><a class=navbar-link href=#>Community</a><div class=navbar-dropdown><a class=navbar-item href=https://discord.gg/kRGUDHNHt2>Discord</a>
 <a class=navbar-item href=https://github.com/games-on-whales>Github</a>
 <a class=navbar-item href=https://opencollective.com/games-on-whales/donate>Donate</a></div></div></div></div></nav></header><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><ul><li><span>Apps</span><ul><li><a href=/wildlife/apps/firefox/>Firefox</a><ul></ul></li><li><a href=/wildlife/apps/heroic-games-launcher/>Heroic Games Launcher</a><ul></ul></li><li><a href=/wildlife/apps/kodi/>Kodi</a><ul></ul></li><li><a href=/wildlife/apps/lutris/>Lutris</a><ul></ul></li><li><a href=/wildlife/apps/pegasus/ class=active>Pegasus</a><ul></ul></li><li><a href=/wildlife/apps/prismlauncher/>Prismlauncher</a><ul></ul></li><li><a href=/wildlife/apps/retroarch/>Retroarch</a><ul></ul></li><li><a href=/wildlife/apps/steam/>Steam</a><ul></ul></li><li><a href=/wildlife/apps/xfce/>Xfce</a><ul></ul></li><li><a href=/wildlife/apps/es-de/>ES-DE</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/wildlife/svg/menu.svg class=book-icon alt=Menu></label><h3>Pegasus</h3><label for=toc-control><img src=/wildlife/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><h1 id=pegasus-front-end>Pegasus Front-end
-<a class=anchor href=#pegasus-front-end>#</a></h1><p><div class=osx-window><div class=title-bar><div class=buttons><div class=close-button></div><div class=minimize-button></div><div class=maximize-button></div></div><div class=title>Moonlight | Wolf</div></div><div class=content><img src=assets/screenshot.png alt="Pegasus screenshot"></div></div></p><p>A graphical front-end for browsing and launching games from various sources.
-It focuses on providing a modern and customizable interface for game libraries.</p><p>Demonstration of different themes: <a href="https://www.youtube.com/watch?v=WYAgfutLbVE">youtube video</a></p><p><a href=https://pegasus-frontend.org/tools/themes/>Themes Gallery</a></p></article><article class="markdown book-article"><h2 id=sample-config>Default config</h2><p>This is the default configuration block that will be used in Wolf, you can override it by editing the
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><ul><li><span>Apps</span><ul><li><a href=/wildlife/apps/firefox/>Firefox</a><ul></ul></li><li><a href=/wildlife/apps/heroic-games-launcher/>Heroic Games Launcher</a><ul></ul></li><li><a href=/wildlife/apps/kodi/>Kodi</a><ul></ul></li><li><a href=/wildlife/apps/lutris/>Lutris</a><ul></ul></li><li><a href=/wildlife/apps/pegasus/ class=active>Pegasus</a><ul></ul></li><li><a href=/wildlife/apps/prismlauncher/>Prismlauncher</a><ul></ul></li><li><a href=/wildlife/apps/retroarch/>Retroarch</a><ul></ul></li><li><a href=/wildlife/apps/steam/>Steam</a><ul></ul></li><li><a href=/wildlife/apps/xfce/>Xfce</a><ul></ul></li><li><a href=/wildlife/apps/es-de/>ES-DE</a><ul></ul></li></ul></li><li><span>Devs</span><ul><li><a href=/wildlife/dev/manual-build/>Build your own image</a></li><li><a href=/wildlife/dev/run-local/>Run locally</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/wildlife/svg/menu.svg class=book-icon alt=Menu></label><h3>Pegasus</h3><label for=toc-control><img src=/wildlife/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#getting-started>Getting Started</a><ul><li><a href=#rom-directory-structure>ROM Directory Structure</a></li><li><a href=#setting-up-rom-directories>Setting Up ROM Directories</a></li></ul></li><li><a href=#customization>Customization</a><ul><li><a href=#theming>Theming</a></li></ul></li><li><a href=#troubleshooting-and-additional-resources>Troubleshooting and Additional Resources</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=pegasus-front-end>Pegasus Front-end
+<a class=anchor href=#pegasus-front-end>#</a></h1><p><div class=osx-window><div class=title-bar><div class=buttons><div class=close-button></div><div class=minimize-button></div><div class=maximize-button></div></div><div class=title>Moonlight | Wolf</div></div><div class=content><img src=assets/screenshot.png alt="Pegasus screenshot"></div></div></p><p>Pegasus is a powerful and flexible frontend for launching games, similar to EmulationStation. It provides a unified
+interface for interacting with various emulators, eliminating the need to manage multiple emulator interfaces
+separately.</p><h2 id=getting-started>Getting Started
+<a class=anchor href=#getting-started>#</a></h2><h3 id=rom-directory-structure>ROM Directory Structure
+<a class=anchor href=#rom-directory-structure>#</a></h3><p>By default, Pegasus is configured to look for ROMs in the <code>/ROMs</code> directory, with subdirectories for each platform. You
+can either create the ROM directories in the format below or edit Pegasus to use your preferred location.</p><details><summary>Full ROM Directory Structure</summary><div class=markdown-inner><pre tabindex=0><code>/ROMs/3do
+/ROMs/amiga
+/ROMs/amigacd32
+/ROMs/arcade
+/ROMs/atari2600
+/ROMs/atari5200
+/ROMs/atari7800
+/ROMs/atarijaguar
+/ROMs/atarijaguarcd
+/ROMs/atarilynx
+/ROMs/atarist
+/ROMs/gb
+/ROMs/gba
+/ROMs/gbc
+/ROMs/gc
+/ROMs/genesis
+/ROMs/megacd
+/ROMs/model2
+/ROMs/model3
+/ROMs/n64
+/ROMs/naomi
+/ROMs/neogeo
+/ROMs/nes
+/ROMs/ngp
+/ROMs/ngpc
+/ROMs/ps2
+/ROMs/ps3
+/ROMs/psp
+/ROMs/psx
+/ROMs/saturn
+/ROMs/sega32x
+/ROMs/segacd
+/ROMs/snes
+/ROMs/snes_widescreen
+/ROMs/switch
+/ROMs/virtualboy
+/ROMs/wii
+/ROMs/wiiu
+/ROMs/wonderswan
+/ROMs/wonderswancolor
+/ROMs/xbox
+</code></pre></div></details><h3 id=setting-up-rom-directories>Setting Up ROM Directories
+<a class=anchor href=#setting-up-rom-directories>#</a></h3><p>To make your roms accessible to Pegasus within the container, you need to create a bind mount that maps your host ROM
+folder to the <code>/ROMs</code> directory in the container.
+This is done by editing the <code>config.toml</code> file; ex:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span><span style=color:#a6e22e>mounts</span> = [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;/mnt/PATH_TO_ROMS_IN_YOUR_HOST/:/ROMs/:rw&#34;</span> <span style=color:#75715e># &lt;-- EDIT HERE</span>
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><h2 id=customization>Customization
+<a class=anchor href=#customization>#</a></h2><h3 id=theming>Theming
+<a class=anchor href=#theming>#</a></h3><p>Pegasus supports extensive customization through themes. You can change the look and feel of your frontend to suit your
+preferences.</p><ul><li>For a demonstration of different themes, watch this <a href="https://www.youtube.com/watch?v=WYAgfutLbVE[YouTube">https://www.youtube.com/watch?v=WYAgfutLbVE[YouTube</a> video].</li><li>Browse and download themes from the official <a href=https://pegasus-frontend.org/tools/themes/[Pegasus>https://pegasus-frontend.org/tools/themes/[Pegasus</a> Themes Gallery].</li></ul><p>To install a theme, you need to launch the Pegasus app at least once, then download the theme and place in:</p><p><code>&lt;hostapps_folder>/Pegasus/.config/pegasus-frontend/themes</code></p><p>On the next Pegasus launch, you will be able to select the theme from within the settings.</p><h2 id=troubleshooting-and-additional-resources>Troubleshooting and Additional Resources
+<a class=anchor href=#troubleshooting-and-additional-resources>#</a></h2><p>If you encounter any issues or need more information, consider the following resources:</p><ul><li>Official Pegasus Documentation: <a href=https://pegasus-frontend.org/docs/>https://pegasus-frontend.org/docs/</a></li><li>Pegasus FAQ: <a href=https://pegasus-frontend.org/docs/faq/>https://pegasus-frontend.org/docs/faq/</a></li><li>Community Forums: <a href=https://pegasus-frontend.org/community/>https://pegasus-frontend.org/community/</a></li></ul><p>For specific issues related to this container or its configuration, please refer to the project&rsquo;s issue tracker or
+community support channels.</p></article><article class="markdown book-article"><h2 id=sample-config>Default config</h2><p>This is the default configuration block that will be used in Wolf, you can override it by editing the
 <code>config.toml</code>.</p><details><summary>Click to expand</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[[<span style=color:#a6e22e>apps</span>]]
 </span></span><span style=display:flex><span><span style=color:#a6e22e>title</span> = <span style=color:#e6db74>&#39;Pegasus&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>icon_png_path</span> = <span style=color:#e6db74>&#34;https://games-on-whales.github.io/wildlife/apps/pegasus/assets/icon.png&#34;</span>
@@ -56,4 +120,4 @@ It focuses on providing a modern and customizable interface for game libraries.<
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>  }
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>}
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>\
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span></span></span></code></pre></div></details></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=games-on-whales/gow data-repo-id="MDEwOlJlcG9zaXRvcnkzNzYzMDczODk=" data-category=Q&A data-category-id=MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDIwNzk3 data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=en crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span></span></span></code></pre></div></details></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=games-on-whales/gow data-repo-id="MDEwOlJlcG9zaXRvcnkzNzYzMDczODk=" data-category=Q&A data-category-id=MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDIwNzk3 data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=en crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#getting-started>Getting Started</a><ul><li><a href=#rom-directory-structure>ROM Directory Structure</a></li><li><a href=#setting-up-rom-directories>Setting Up ROM Directories</a></li></ul></li><li><a href=#customization>Customization</a><ul><li><a href=#theming>Theming</a></li></ul></li><li><a href=#troubleshooting-and-additional-resources>Troubleshooting and Additional Resources</a></li></ul></nav></div></aside></main></body></html>
