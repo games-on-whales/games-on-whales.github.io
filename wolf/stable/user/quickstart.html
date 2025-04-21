@@ -184,9 +184,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-moonlight-fixes/index.html">dev-moonlight-fixes</a>
-        </li>
-        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
       </ul>
@@ -214,7 +211,6 @@
     <a class="version" href="../../dev-zero-copy/user/quickstart.html">dev-zero-copy</a>
     <a class="version" href="../../dev-tracy/user/quickstart.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/quickstart.html">dev-nix</a>
-    <a class="version" href="../../dev-moonlight-fixes/user/quickstart.html">dev-moonlight-fixes</a>
     <a class="version" href="../../dev-fake-uinput/user/quickstart.html">dev-fake-uinput</a>
   </div>
 </div>
@@ -888,11 +884,36 @@ EXPOSE 47989/tcp
 EXPOSE 47999/udp
 # RTSP
 EXPOSE 48010/tcp
-# Video (up to 10 users, you can open more ports if needed)
-EXPOSE 48100-48110/udp
-# Audio (up to 10 users, you can open more ports if needed)
-EXPOSE 48200-48210/udp</code></pre>
+# Video
+EXPOSE 48100/udp
+# Audio
+EXPOSE 48200/udp</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>These are the default values, if you want to assign custom ports you can set the env variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WOLF_HTTP_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_HTTPS_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_CONTROL_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_RTSP_SETUP_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_VIDEO_PING_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_AUDIO_PING_PORT</code></p>
+</li>
+</ul>
 </div>
 </div>
 </details>
