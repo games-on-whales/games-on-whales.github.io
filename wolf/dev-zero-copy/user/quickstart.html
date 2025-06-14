@@ -154,6 +154,9 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../faq.html">Frequently Asked Questions</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -881,11 +884,36 @@ EXPOSE 47989/tcp
 EXPOSE 47999/udp
 # RTSP
 EXPOSE 48010/tcp
-# Video (up to 10 users, you can open more ports if needed)
-EXPOSE 48100-48110/udp
-# Audio (up to 10 users, you can open more ports if needed)
-EXPOSE 48200-48210/udp</code></pre>
+# Video
+EXPOSE 48100/udp
+# Audio
+EXPOSE 48200/udp</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>These are the default values, if you want to assign custom ports you can set the env variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WOLF_HTTP_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_HTTPS_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_CONTROL_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_RTSP_SETUP_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_VIDEO_PING_PORT</code></p>
+</li>
+<li>
+<p><code>WOLF_AUDIO_PING_PORT</code></p>
+</li>
+</ul>
 </div>
 </div>
 </details>
