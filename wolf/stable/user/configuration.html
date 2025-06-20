@@ -424,7 +424,8 @@ app_state_folder = "common"               # &lt;-- !!!</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Keeping <code>HOST_APPS_STATE_FOLDER</code> unchanged and only modifying <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> is not sufficient. Because app container mount home directory according to <code>HOST_APPS_STATE_FOLDER</code> (i.e. <code>-v ${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}:/home/retro</code>)</p>
+<p>Keeping <code>HOST_APPS_STATE_FOLDER</code> unchanged and only modifying <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> is not sufficient.
+Because app container mount home directory according to <code>HOST_APPS_STATE_FOLDER</code> (i.e. <code>-v ${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}:/home/retro</code>)</p>
 </div>
 <div class="paragraph">
 <p>Since Wolf keeps the configuration in <code>/etc/wolf/cfg</code>, you need to add an additional mount to ensure that Wolf&#8217;s configuration is persistently stored (i.e., -v <code>/mnt/drive/wolf/cfg:/etc/wolf/cfg:rw</code>).</p>
@@ -528,7 +529,7 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>icon_png_path</strong>: this is the box art that will be displayed in Moonlight (PNG, ideally 200x266 or 628x888 pixels)</td>
+<td><strong>icon_png_path</strong>: this is the box art that will be displayed in Moonlight, see: <a href="#custom_images">Custom icons in Moonlight clients</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -546,6 +547,27 @@ source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </div>
 <div class="paragraph">
 <p>See more examples in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom_images"><a class="anchor" href="#custom_images"></a>Custom icons in Moonlight clients</h3>
+<div class="paragraph">
+<p>The <code>icon_png_path</code> specifies the icon to be shown in Moonlight clients for each app.
+The image must be a PNG, ideally 200x266 or 628x888 pixels.
+You can specify the location for the image in three different ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A URL, ex: <code>"https://games-on-whales.github.io/wildlife/apps/steam/assets/icon.png"</code></p>
+</li>
+<li>
+<p>A path relative to the <code>HOST_APPS_STATE_FOLDER</code>, ex: <code>"icons/icon.png"</code></p>
+</li>
+<li>
+<p>An absolute path, ex: <code>"/mnt/path/to/files/icon.png"</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -657,7 +679,8 @@ base_create_json = """
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>mounts</strong>: Here you can define any additional mount that you want to add to the container. For example, you can add <code>mounts = ["/media/data/games:/games:rw"]</code> if you want to share games files between host and app container.</td>
+<td><strong>mounts</strong>: Here you can define any additional mount that you want to add to the container.
+For example, you can add <code>mounts = ["/media/data/games:/games:rw"]</code> if you want to share games files between host and app container.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -734,7 +757,8 @@ The process will be simplified once we complete implementing a custom UI for Wol
 <td class="content">
 <div class="paragraph">
 <p>Gamescope have some known issues:
-- It may be unstable with some Nvidia driver versions. See <a href="https://github.com/games-on-whales/wolf/issues/60">#60</a>.
+- It may be unstable with some Nvidia driver versions.
+See <a href="https://github.com/games-on-whales/wolf/issues/60">#60</a>.
 - It doesn&#8217;t support multiple windows which may cause issues with multi-window applications like Steam desktop UI.</p>
 </div>
 <div class="paragraph">
@@ -977,7 +1001,8 @@ env = [
 <div class="ulist">
 <ul>
 <li>
-<p>xkb_layout : The first layout code you set will be the default layout. Add other layouts separated by commas.</p>
+<p>xkb_layout : The first layout code you set will be the default layout.
+Add other layouts separated by commas.</p>
 </li>
 <li>
 <p>xkb_numlock "enable" turns on NumLock by default.</p>
@@ -999,7 +1024,8 @@ For each container where you want to use the custom layout, edit the "mounts" va
 </div>
 </div>
 <div class="paragraph">
-<p>This ensures that the config is not overwritten. On the next app restart, the keyboard layout will be set to the default one specified.</p>
+<p>This ensures that the config is not overwritten.
+On the next app restart, the keyboard layout will be set to the default one specified.</p>
 </div>
 </div>
 <div class="sect3">
