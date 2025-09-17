@@ -181,9 +181,6 @@
           <a href="../../dev-nix/index.html">dev-nix</a>
         </li>
         <li class="version">
-          <a href="../../dev-introspection/index.html">dev-introspection</a>
-        </li>
-        <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
       </ul>
@@ -210,7 +207,6 @@
     <a class="version is-current" href="configuration.html">stable</a>
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
-    <a class="version" href="../../dev-introspection/user/configuration.html">dev-introspection</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
   </div>
 </div>
@@ -294,7 +290,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOST_APPS_STATE_FOLDER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/etc/wolf</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The base folder in the host where the running apps will store permanent state</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The base folder in the host where the running apps will store permanent state, if not set Wolf will automatically use the path that is mounted in the docker container</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_RENDER_NODE</p></td>
@@ -348,25 +344,23 @@
 <h2 id="data_setup"><a class="anchor" href="#data_setup"></a>Where apps will store permanent data?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Since Wolf supports multiple streaming sessions at the same time and each session can run a different app, we need to make sure that each app has its own folder where it can store permanent data.<br>
-To achieve this, for each running app, Wolf will create a folder structure like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}</code></pre>
-</div>
+<p>Wolf is designed to support multiple streaming sessions simultaneously, each potentially running a different app.
+To ensure that each app’s data remains persistent and isolated, Wolf automatically creates a dedicated folder structure for every app instance.</p>
 </div>
 <div class="paragraph">
-<p>and then mount that as the home (<code>/home/retro</code>) for the docker container that will run the selected app.<br></p>
+<p>When using the configuration provided in the quickstart guide, this structure is located at <code>/etc/wolf/${app_state_folder}/${app_title}</code> on the host system.
+This folder is then mounted as the home directory (<code>/home/retro</code>) inside the app’s Docker container, using a bind mount like <code>-v /etc/wolf/${app_state_folder}/${app_title}:/home/retro</code>.</p>
 </div>
 <div class="paragraph">
-<p>These 3 variables are defined as follows:</p>
+<p>The magic of Wolf lies in its ability to dynamically resolve the host path, regardless of where <code>/etc/wolf</code> is actually located.<br>
+For example, if you run Wolf mounting <code>/etc/wolf</code> to a custom location on your host such as <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> Wolf will automatically adjust the mount path for each app.
+In this case, the app’s data will be stored in <code>/mnt/drive/wolf/${app_state_folder}/${app_title}</code> on the host, but still appear as <code>/home/retro</code> inside the app container.</p>
+</div>
+<div class="paragraph">
+<p>These two variables are defined as follows:</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p><code>HOST_APPS_STATE_FOLDER</code>: defaults to <code>/etc/wolf</code>, can be changed via ENV</p>
-</li>
 <li>
 <p><code>app_state_folder</code>: defaults to a unique identifier for each client so that every Moonlight session will have its own folder.
 Can be changed in the <code>config.toml</code> file</p>
@@ -407,32 +401,6 @@ app_state_folder = "common"               # &lt;-- !!!</code></pre>
 </div>
 <div class="paragraph">
 <p>This way, when running any app from those two clients, they will share the same home folder by mounting <code>${HOST_APPS_STATE_FOLDER}/common/${app_title}</code> as <code>/home/retro</code> in the docker container.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_change_the_host_apps_state_folder"><a class="anchor" href="#_change_the_host_apps_state_folder"></a>Change the <code>HOST_APPS_STATE_FOLDER</code></h3>
-<div class="paragraph">
-<p>Changing this folder via ENV variable is not enough; Wolf expects to be able to access files under this folder, so you need to make sure that the new folder is created and mounted in the Wolf container.<br></p>
-</div>
-<div class="paragraph">
-<p>For example, if you want to change the <code>HOST_APPS_STATE_FOLDER</code> to <code>/mnt/drive/wolf</code> you need to change the docker run command with:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>-e HOST_APPS_STATE_FOLDER=/mnt/drive/wolf</code></p>
-</li>
-<li>
-<p><code>-v /mnt/drive/wolf:/mnt/drive/wolf:rw</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Keeping <code>HOST_APPS_STATE_FOLDER</code> unchanged and only modifying <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> is not sufficient.
-Because app container mount home directory according to <code>HOST_APPS_STATE_FOLDER</code> (i.e. <code>-v ${HOST_APPS_STATE_FOLDER}/${app_state_folder}/${app_title}:/home/retro</code>)</p>
-</div>
-<div class="paragraph">
-<p>Since Wolf keeps the configuration in <code>/etc/wolf/cfg</code>, you need to add an additional mount to ensure that Wolf&#8217;s configuration is persistently stored (i.e., -v <code>/mnt/drive/wolf/cfg:/etc/wolf/cfg:rw</code>).</p>
 </div>
 </div>
 </div>
@@ -946,14 +914,6 @@ video/x-raw, framerate={fps}/1
 <p>In case you have two GPUs that will use the same encoder pipeline (example: an AMD iGPU and an AMD GPU card) you can override the <code>video_params</code> with the corresponding encoder plugin; see:
 <a href="https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1167">gstreamer/issues/1167</a>.</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_directly_launch_a_steam_game"><a class="anchor" href="#_directly_launch_a_steam_game"></a>Directly launch a Steam game</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This has been moved to the <a href="#steam.adoc" class="xref unresolved">steam.adoc</a> page.</p>
 </div>
 </div>
 </div>
