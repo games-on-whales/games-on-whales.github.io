@@ -377,12 +377,13 @@ services:
       - /dev/dri
       - /dev/uinput
       - /dev/uhid
-    runtime: nvidia
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     network_mode: host
     restart: unless-stopped</code></pre>
 </div>
