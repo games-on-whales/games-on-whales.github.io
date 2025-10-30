@@ -247,6 +247,9 @@
 <li id="_tabs_1_proxmox_lxc" class="tab">
 <p>Proxmox LXC</p>
 </li>
+<li id="_tabs_1_podman_quadlets" class="tab">
+<p>Podman Quadlets</p>
+</li>
 </ul>
 </div>
 <div id="_tabs_1_intelamd--panel" class="tabpanel" aria-labelledby="_tabs_1_intelamd">
@@ -840,6 +843,218 @@ lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
     - WOLF_RENDER_NODE=/dev/dri/renderD12X</code></pre>
 </div>
 </div>
+</div>
+<div id="_tabs_1_podman_quadlets--panel" class="tabpanel" aria-labelledby="_tabs_1_podman_quadlets">
+<div class="paragraph">
+<p>The easiest way to run Wolf is to use a <code>rootful</code> service, this isn&#8217;t a strict requirement; if you give access to the <code>/dev/dri</code> devices, <code>/etc/wolf</code> and install the required udev rules everything should work.</p>
+</div>
+<div class="paragraph">
+<p>Place your <code>wolf.container</code> file (populated with either the Nvidia or Intel/AMD examples below) in <code>/etc/containers/systemd</code>, then run <code>sudo systemctl daemon-reload</code> and <code>sudo systemctl start wolf.service</code> to start Wolf.</p>
+</div>
+<div class="paragraph">
+<p><strong>Nvidia</strong></p>
+</div>
+<div class="paragraph">
+<p>This example is based on Nvidia (Manual), you will need to create the Nvidia volume first before starting the service:</p>
+</div>
+<div class="paragraph">
+<p>1. Create a new image that will contain the Nvidia driver files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | sudo podman build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>2. Mount the image and create the new volume:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check volume exists with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo docker volume ls | grep nvidia-driver
+
+local     nvidia-driver-vol</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>3. This is an additional step for Podman. Start the temporary container you just created. <code>sudo podman ps -a</code> will show a container using a temporary name (e.g. <code>musing_pascal</code>) and your local <code>gow/nvidia-driver</code> image. Only once this container is started will your new volume be populated. Run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo podman start musing_pascal</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can verify the contents of of your <code>nvidia-driver-vol</code> by running <code>sudo podman volume inspect nvidia-driver-vol</code> and then browsing the <code>Mountpoint</code>: <code>sudo la -la /var/lib/containers/storage/volumes/nvidia-driver-vol/_data</code>. You should see a non empty folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">total 12
+drwxr-xr-x. 6 root root   54 Oct 27 22:06 .
+drwx------. 3 root root   19 Oct 28 14:40 ..
+drwxr-xr-x. 2 root root 4096 Oct 27 22:06 bin
+drwxr-xr-x. 5 root root 4096 Oct 28 14:44 lib
+drwxr-xr-x. 4 root root 4096 Oct 27 22:06 lib32
+drwxr-xr-x. 7 root root   77 Oct 27 22:07 share</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>4. Use the example below to create a <code>wolf.container</code> file in <code>/etc/containers/systemd</code>, then run <code>sudo systemctl daemon-reload</code> and <code>sudo systemctl start wolf.service</code> to start.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[Unit]
+Description=Wolf / Games On Whales
+Requires=network-online.target podman.socket
+After=network-online.target podman.socket
+
+[Service]
+TimeoutStartSec=900
+ExecStartPre=-/usr/bin/podman rm --force WolfPulseAudio
+Restart=on-failure
+RestartSec=5
+StartLimitBurst=5
+
+[Container]
+AutoUpdate=registry
+ContainerName=%p
+HostName=%p
+Image=ghcr.io/games-on-whales/wolf:stable
+Network=host
+SecurityLabelDisable=true
+PodmanArgs=--ipc=host --device-cgroup-rule "c 13:* rmw"
+AddDevice=/dev/dri
+AddDevice=/dev/uinput
+AddDevice=/dev/uhid
+AddDevice=/dev/nvidia-uvm
+AddDevice=/dev/nvidia-uvm-tools
+AddDevice=/dev/nvidia-caps/nvidia-cap1
+AddDevice=/dev/nvidia-caps/nvidia-cap2
+AddDevice=/dev/nvidiactl
+AddDevice=/dev/nvidia0
+AddDevice=/dev/nvidia-modeset
+Volume=nvidia-driver-vol:/usr/nvidia
+Volume=/dev/:/dev/:rw
+Volume=/run/udev:/run/udev:rw
+Volume=/etc/wolf/:/etc/wolf:z
+Volume=/run/podman/podman.sock:/var/run/docker.sock:ro
+Environment=WOLF_STOP_CONTAINER_ON_EXIT=TRUE
+Environment=NVIDIA_DRIVER_VOLUME_NAME=nvidia-driver-vol
+Environment=WOLF_RENDER_NODE=/dev/dri/renderD129
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">The service won&#8217;t start due to missing devices (e.g. /dev/nvidia-modeset)</summary>
+<div class="content">
+<div class="paragraph">
+<p>Using uCore (CoreOS), I needed to start <a href="https://docs.nvidia.com/deploy/driver-persistence/index.html#persistence-daemon">Nvidia persistenced</a> to get all the required devices in place:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo systemctl enable --now nvidia-persistenced.service</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One last final check: we have to make sure that the <code>nvidia-drm</code> module has been loaded and that the module is loaded with the flag <code>modeset=1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo cat /sys/module/nvidia_drm/parameters/modeset
+Y</code></pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">Multiple GPUs / finding the device ID for WOLF_RENDER_NODE</summary>
+<div class="content">
+<div class="paragraph">
+<p>If you have a multi GPU setup, you need to set the <code>WOLF_RENDER_NODE</code> environmnet variable to the correct card. You can find a list of attached graphics cards with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -l /sys/class/drm/renderD*/device/driver
+
+lrwxrwxrwx. 1 root root 0 Oct 29 19:44 /sys/class/drm/renderD128/device/driver -&gt; ../../../bus/pci/drivers/i915
+lrwxrwxrwx. 1 root root 0 Oct 29 19:44 /sys/class/drm/renderD129/device/driver -&gt; ../../../../bus/pci/drivers/nvidia</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p><strong>Intel/AMD</strong></p>
+</div>
+<div class="paragraph">
+<p>1. Use the example below to create a <code>wolf.container</code> file in <code>/etc/containers/systemd</code>, then run <code>sudo systemctl daemon-reload</code> and <code>sudo systemctl start wolf.service</code> to start.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[Unit]
+Description=Wolf / Games On Whales
+Requires=network-online.target podman.socket
+After=network-online.target podman.socket
+
+[Service]
+TimeoutStartSec=900
+ExecStartPre=-/usr/bin/podman rm --force WolfPulseAudio
+Restart=on-failure
+RestartSec=5
+StartLimitBurst=5
+
+[Container]
+AutoUpdate=registry
+ContainerName=%p
+HostName=%p
+Image=ghcr.io/games-on-whales/wolf:stable
+Network=host
+SecurityLabelDisable=true
+PodmanArgs=--ipc=host --device-cgroup-rule "c 13:* rmw"
+AddDevice=/dev/dri
+AddDevice=/dev/uinput
+AddDevice=/dev/uhid
+Volume=/dev/:/dev/:rw
+Volume=/run/udev:/run/udev:rw
+Volume=/etc/wolf/:/etc/wolf:z
+Volume=/run/podman/podman.sock:/var/run/docker.sock:ro
+Environment=WOLF_STOP_CONTAINER_ON_EXIT=TRUE
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">Issues with Podman socket or Podman socket missing</summary>
+<div class="content">
+<div class="paragraph">
+<p>Make sure your <a href="https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md">Podman socket</a> service is running with <code>sudo systemctl enable --now podman.socket</code> and verify it has started correctly with <code>sudo systemctl status podman.socket</code>. The output should look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">● podman.socket - Podman API Socket
+     Loaded: loaded (/usr/lib/systemd/system/podman.socket; enabled; preset: disabled)
+     Active: active (listening) since Wed 2025-10-29 19:44:24 CET; 13min ago
+ Invocation: d15ecfcbb2b04de49af1c977925982e9
+   Triggers: ● podman.service
+       Docs: man:podman-system-service(1)
+     Listen: /run/podman/podman.sock (Stream)
+     CGroup: /system.slice/podman.socket</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make a note of where the socket is running (e.g <code>/run/podman/podman.sock</code> in the example above) and update your <code>wolf.container</code> if necessary.</p>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>
