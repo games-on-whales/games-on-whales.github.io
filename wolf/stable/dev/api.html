@@ -365,8 +365,8 @@ If you want to access the socket from outside the container, you should mount th
     },
     "/api/v1/docker/images/inspect": {
       "get": {
-        "summary": "Inspect a Docker image and returns the full JSON response as is from the Docker APIs at /images/{image_name}/json expects image_name as a query parameter.",
-        "description": "",
+        "summary": "Inspect a Docker image",
+        "description": "Inspect a Docker image and returns the full JSON response as is from the Docker APIs at /images/{image_name}/json expects image_name as a query parameter.",
         "responses": {}
       }
     },
@@ -468,8 +468,8 @@ If you want to access the socket from outside the container, you should mount th
     },
     "/api/v1/utils/get-icon": {
       "get": {
-        "summary": "Get the icon for a given app, pass the icon_path as a query parameter ex: /api/v1/utils/get-icon?icon_path=/etc/wolf/icons/steam.png",
-        "description": "",
+        "summary": "Get the icon for a given app",
+        "description": "Get the icon for a given app, pass the icon_path as a query parameter ex: /api/v1/utils/get-icon?icon_path=/etc/wolf/icons/steam.png",
         "responses": {}
       }
     },
@@ -612,8 +612,8 @@ If you want to access the socket from outside the container, you should mount th
     },
     "/api/v1/docker/images/pull": {
       "post": {
-        "summary": "Pull a Docker image, will keep the connection open to send back progress updates. Each progress event will be a single line encoded as JSON.",
-        "description": "",
+        "summary": "Pull a Docker image",
+        "description": "Pull a Docker image, will keep the connection open to send back progress updates. Each progress event will be a single line encoded as JSON.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2270,6 +2270,9 @@ If you want to access the socket from outside the container, you should mount th
           "gst_pipeline": {
             "type": "string"
           },
+          "render_node": {
+            "type": "string"
+          },
           "session_id": {
             "type": "integer"
           },
@@ -2330,6 +2333,7 @@ If you want to access the socket from outside the container, you should mount th
         "required": [
           "display_mode",
           "gst_pipeline",
+          "render_node",
           "session_id",
           "port",
           "timeout_ms",
