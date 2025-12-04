@@ -1171,7 +1171,7 @@ KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="stati
 KERNEL=="uhid", GROUP="input", MODE="0660", TAG+="uaccess"
 
 # Joypads
-KERNEL=="hidraw*", ATTRS{name}=="Sunshine PS5 (virtual) pad", GROUP="input", MODE="0660", ENV{ID_SEAT}="seat9"
+KERNEL=="hidraw*", ATTRS{name}=="Wolf PS5 (virtual) pad", GROUP="input", MODE="0660", ENV{ID_SEAT}="seat9"
 SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", ENV{ID_SEAT}="seat9"
 SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", ENV{ID_SEAT}="seat9"
 SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", ENV{ID_SEAT}="seat9"
