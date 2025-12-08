@@ -72,10 +72,13 @@
     <a class="nav-link" href="../user/configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
+    <a class="nav-link" href="../user/wolf-ui.html">Wolf UI</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/troubleshooting.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/gstreamer.html">Gstreamer</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -100,6 +103,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#dev:lobbies.adoc">dev:lobbies.adoc</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="manual_build.html">Dev environment setup</a>
@@ -345,6 +351,20 @@ Until this time, the compositor will continue to render the last consistent stat
 </div>
 <div class="sect2">
 <h3 id="_gstreamer"><a class="anchor" href="#_gstreamer"></a>Gstreamer</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="OUTDATED"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This section is outdated, we now support outputting DMA buffers in Gstreamer and we&#8217;ve achieved <strong>full support for zero-copy pipelines</strong>!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Our compositor finally composed an image, and we are ready to send this to our Moonlight client, how do we push this to the selected encoder in the Gstreamer pipeline without copying?
 Sad news is, we don&#8217;t (at least currently).</p>
