@@ -72,10 +72,13 @@
     <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
+    <a class="nav-link" href="wolf-ui.html">Wolf UI</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="troubleshooting.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gstreamer.html">Gstreamer</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -100,6 +103,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/how-it-works.html">How does it work?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#dev:lobbies.adoc">dev:lobbies.adoc</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../dev/manual_build.html">Dev environment setup</a>
@@ -183,9 +189,6 @@
         <li class="version">
           <a href="../../dev-fake-uinput/index.html">dev-fake-uinput</a>
         </li>
-        <li class="version">
-          <a href="../../dev-docs/index.html">dev-docs</a>
-        </li>
       </ul>
     </li>
   </ul>
@@ -211,7 +214,6 @@
     <a class="version" href="../../dev-tracy/user/configuration.html">dev-tracy</a>
     <a class="version" href="../../dev-nix/user/configuration.html">dev-nix</a>
     <a class="version" href="../../dev-fake-uinput/user/configuration.html">dev-fake-uinput</a>
-    <a class="version" href="../../dev-docs/user/configuration.html">dev-docs</a>
   </div>
 </div>
 <div class="edit-this-page"><a href="https://github.com/games-on-whales/wolf/edit/stable/docs/modules/user/pages/configuration.adoc">Edit this Page</a></div>
@@ -302,11 +304,6 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The default render node used for virtual desktops; see: <a href="#_multiple_gpu">Multiple GPUs</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_ENCODER_NODE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$WOLF_RENDER_NODE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The default render node used for the Gstreamer pipelines; see: <a href="#_multiple_gpu">Multiple GPUs</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_DOCKER_FAKE_UDEV_PATH</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$HOST_APPS_STATE_FOLDER/fake-udev</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The path on the host for the fake-udev CLI tool</p></td>
@@ -352,13 +349,13 @@
 To ensure that each app’s data remains persistent and isolated, Wolf automatically creates a dedicated folder structure for every app instance.</p>
 </div>
 <div class="paragraph">
-<p>When using the configuration provided in the quickstart guide, this structure is located at <code>/etc/wolf/${app_state_folder}/${app_title}</code> on the host system.
-This folder is then mounted as the home directory (<code>/home/retro</code>) inside the app’s Docker container, using a bind mount like <code>-v /etc/wolf/${app_state_folder}/${app_title}:/home/retro</code>.</p>
+<p>When using the configuration provided in the quickstart guide, this structure is located at <code>/etc/wolf/profile_data/${profile_id}/${app_title}</code> on the host system.
+This folder is then mounted as the home directory (<code>/home/retro</code>) inside the app’s Docker container, using a bind mount like <code>-v /etc/wolf/profile_data/${profile_id}/${app_title}:/home/retro</code>.</p>
 </div>
 <div class="paragraph">
 <p>The magic of Wolf lies in its ability to dynamically resolve the host path, regardless of where <code>/etc/wolf</code> is actually located.<br>
 For example, if you run Wolf mounting <code>/etc/wolf</code> to a custom location on your host such as <code>-v /mnt/drive/wolf:/etc/wolf:rw</code> Wolf will automatically adjust the mount path for each app.
-In this case, the app’s data will be stored in <code>/mnt/drive/wolf/${app_state_folder}/${app_title}</code> on the host, but still appear as <code>/home/retro</code> inside the app container.</p>
+In this case, the app’s data will be stored in <code>/mnt/drive/wolf/profile_data/${profile_id}/${app_title}</code> on the host, but still appear as <code>/home/retro</code> inside the app container.</p>
 </div>
 <div class="paragraph">
 <p>These two variables are defined as follows:</p>
@@ -366,46 +363,12 @@ In this case, the app’s data will be stored in <code>/mnt/drive/wolf/${app_sta
 <div class="ulist">
 <ul>
 <li>
-<p><code>app_state_folder</code>: defaults to a unique identifier for each client so that every Moonlight session will have its own folder.
-Can be changed in the <code>config.toml</code> file</p>
+<p><code>profile_id</code>: a unique identifier for each user profile, see: <a href="#_profiles">Profiles</a></p>
 </li>
 <li>
-<p><code>app_title</code>: the title of the app as defined in the <code>config.toml</code> file</p>
+<p><code>app_title</code>: the title of the app as defined in the <code>config.toml</code> file, see: <a href="#_defining_apps">Defining apps</a></p>
 </li>
 </ul>
-</div>
-<div class="sect2">
-<h3 id="_share_home_folder_with_multiple_clients"><a class="anchor" href="#_share_home_folder_with_multiple_clients"></a>Share home folder with multiple clients</h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This will break isolation, if you want to connect with multiple clients at the same time you should not share the home folder.
-You can follow development of that feature <a href="https://github.com/games-on-whales/wolf/issues/83">here</a></p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>By default, Wolf will create a new home folder for each client, but if you want to share the same home folder with multiple clients, you can set the <code>app_state_folder</code> to the same value for each paired client; example:<br></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[paired_clients]]
-app_state_folder = "common"               # &lt;-- !!!
-
-[[paired_clients]]
-app_state_folder = "common"               # &lt;-- !!!</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This way, when running any app from those two clients, they will share the same home folder by mounting <code>${HOST_APPS_STATE_FOLDER}/common/${app_title}</code> as <code>/home/retro</code> in the docker container.</p>
-</div>
 </div>
 </div>
 </div>
@@ -413,7 +376,7 @@ app_state_folder = "common"               # &lt;-- !!!</code></pre>
 <h2 id="_toml_file"><a class="anchor" href="#_toml_file"></a>TOML file</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The TOML configuration file is read only once at startup (or created if not present) and it&#8217;ll be modified by Wolf only when a new user is successfully paired.</p>
+<p>The TOML configuration file is read only once at startup (or created if not present), and it&#8217;ll be modified by Wolf only when a new user is successfully paired.</p>
 </div>
 <div class="listingblock">
 <div class="title">Default TOML configuration file</div>
@@ -424,7 +387,7 @@ config_version = 2 <i class="conum" data-value="3"></i><b>(3)</b>
 uuid = "0f75f4d1-e28e-410a-b318-c0579f18f8d1" <i class="conum" data-value="4"></i><b>(4)</b>
 
 paired_clients = [] <i class="conum" data-value="5"></i><b>(5)</b>
-apps = [] <i class="conum" data-value="6"></i><b>(6)</b>
+profiles = [] <i class="conum" data-value="6"></i><b>(6)</b>
 gstreamer = {} <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </div>
 </div>
@@ -452,7 +415,7 @@ gstreamer = {} <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><strong>apps</strong>: a list of apps, see: <a href="#_defining_apps">Defining apps</a></td>
+<td><strong>profiles</strong>: a list of <a href="#_profiles">profiles</a>, each contains a list of <a href="#_defining_apps">apps</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
@@ -461,31 +424,179 @@ gstreamer = {} <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_defining_apps"><a class="anchor" href="#_defining_apps"></a>Defining apps</h3>
+<h3 id="_profiles"><a class="anchor" href="#_profiles"></a>Profiles</h3>
 <div class="paragraph">
-<p>Apps defined here will be shown in Moonlight after successfully pairing with Wolf.<br>
-You can re-define parts of the Gstreamer pipeline easily, ex:</p>
+<p>Wolf supports multiple profiles, each with its own set of apps.<br>
+This allows you to define different configurations for different users or use cases.</p>
+</div>
+<div class="paragraph">
+<p>By default, we have a special profile called <code>moonlight-profile-id</code> which defines what will be shown as available apps by Moonlight clients when connecting to Wolf.
+Here&#8217;s the default TOML configuration file which defines two apps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wolf UI: a docker container running the Wolf UI</p>
+</li>
+<li>
+<p>Test ball: a dummy Gstreamer pipeline used to test out if everything is working correctly</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[profiles]]
+id = 'moonlight-profile-id'
+
+    [[profiles.apps]]
+    title = 'Wolf UI'
+    start_virtual_compositor = true
+    icon_png_path = "https://raw.githubusercontent.com/games-on-whales/wolf-ui/refs/heads/main/src/Icons/wolf_ui_icon.png"
+
+        [profiles.apps.runner]
+        type = 'docker'
+        name = 'Wolf-UI'
+        image = 'ghcr.io/games-on-whales/wolf-ui:main'
+        devices = []
+        env = [
+            'GOW_REQUIRED_DEVICES=/dev/input/event* /dev/dri/* /dev/nvidia*',
+            'WOLF_SOCKET_PATH=/var/run/wolf/wolf.sock',
+            'WOLF_UI_AUTOUPDATE=False',
+            'LOGLEVEL=INFO'
+        ]
+        mounts = [
+            '/var/run/wolf/wolf.sock:/var/run/wolf/wolf.sock'
+        ]
+        ports = []
+        base_create_json = '''{
+          "HostConfig": {
+            "IpcMode": "host",
+            "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN", "SYS_ADMIN", "SYS_NICE"],
+            "Privileged": false,
+            "DeviceCgroupRules": ["c 13:* rmw", "c 244:* rmw"]
+          }
+        }'''
+
+
+
+    [[profiles.apps]]
+    title = 'Test ball'
+    icon_png_path = "https://raw.githubusercontent.com/games-on-whales/wolf/refs/heads/stable/docs/images/test_ball_icon.png"
+    start_audio_server = false
+    start_virtual_compositor = false
+
+        [profiles.apps.runner]
+        type = 'process'
+        run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""
+
+        [profiles.apps.audio]
+        source = 'audiotestsrc wave=ticks is-live=true'
+
+        [profiles.apps.video]
+        source = '''videotestsrc pattern=ball flip=true is-live=true !
+                           video/x-raw, framerate={fps}/1'''</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wolf UI is a special app that will be able to show you available profiles and lobbies directly from your Moonlight client.
+By default we create a single profile in our TOML file called <code>user</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml"># An example profile that will be shown in our Wolf UI
+[[profiles]]
+id = "user"
+name = "User"
+
+    [[profiles.apps]]
+    title = "Firefox"
+    icon_png_path = "https://games-on-whales.github.io/wildlife/apps/firefox/assets/icon.png"
+    start_virtual_compositor = true
+
+        [profiles.apps.runner]
+        type = "docker"
+        name = "WolfFirefox"
+        image = "ghcr.io/games-on-whales/firefox:edge"
+        mounts = []
+        env = [
+            "RUN_SWAY=1",
+            "MOZ_ENABLE_WAYLAND=1",
+            "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*",
+        ]
+        devices = []
+        ports = []
+        base_create_json = """
+        {
+          "HostConfig": {
+            "IpcMode": "host",
+            "Privileged": false,
+            "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN"],
+            "DeviceCgroupRules": ["c 13:* rmw", "c 244:* rmw"]
+          }
+        }
+        \
+        """
+# Additional apps for the current profile will be defined here</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additional profiles can be defined in the same way, here are the full options that you have available:</p>
+</div>
+<div id="_profile_example" class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[profiles]]
+id = 'user' <i class="conum" data-value="1"></i><b>(1)</b>
+name = 'Random User' <i class="conum" data-value="2"></i><b>(2)</b>
+icon_png_path = 'http://192.168.1.155:8888/misc/guest.png' <i class="conum" data-value="3"></i><b>(3)</b>
+pin = [ 3, 2, 1, 4 ] <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>id</strong>: a unique string that identifies this profile, used internally by Wolf</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>name</strong>: the name that will be displayed in Wolf UI</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>icon_png_path</strong>: this is the box art that will be displayed in Wolf UI, see: <a href="#custom_images">Custom icons in Moonlight clients</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>pin</strong>: optional, if present Wolf UI will ask for a PIN in order to show this profile app list</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_defining_apps"><a class="anchor" href="#_defining_apps"></a>Defining apps</h3>
+<div class="paragraph">
+<p>Here&#8217;s an example annotated TOML configuration for a single app:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[profiles.apps]]
 title = "Test ball" <i class="conum" data-value="1"></i><b>(1)</b>
 start_virtual_compositor = false <i class="conum" data-value="2"></i><b>(2)</b>
 app_state_folder = "some/folder" <i class="conum" data-value="3"></i><b>(3)</b>
 icon_png_path = "ball.png" <i class="conum" data-value="4"></i><b>(4)</b>
 
-[apps.runner] <i class="conum" data-value="5"></i><b>(5)</b>
+[profiles.apps.runner] <i class="conum" data-value="5"></i><b>(5)</b>
 type = "process"
 run_cmd = "sh -c \"while :; do echo 'running...'; sleep 10; done\""
 
-[apps.video] <i class="conum" data-value="6"></i><b>(6)</b>
+[profiles.apps.video] <i class="conum" data-value="6"></i><b>(6)</b>
 source = """
 videotestsrc pattern=ball flip=true is-live=true !
 video/x-raw, framerate={fps}/1
 \
 """
 
-[apps.audio] <i class="conum" data-value="7"></i><b>(7)</b>
+[profiles.apps.audio] <i class="conum" data-value="7"></i><b>(7)</b>
 source = "audiotestsrc wave=ticks is-live=true"</code></pre>
 </div>
 </div>
@@ -676,40 +787,13 @@ In order to automatically pick up the right encoder at runtime based on the user
 <p>You can read more about gstreamer and custom pipelines in the <a href="gstreamer.html" class="xref page">Gstreamer</a> page.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_co_op_sessions"><a class="anchor" href="#_co_op_sessions"></a>CO-OP sessions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There&#8217;s experimental support for CO-OP sessions, this will allow multiple clients to connect to the same virtual session and play together.<br></p>
-</div>
-<div class="paragraph">
-<p>In order to enable this you&#8217;ll have to add the following app entry in the <code>config.toml</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "CO-OP session"
-# Get the parent session ID from the Wolf logs
-runner = { type = "child_session", parent_session_id = "4135727842959053255" }
-video = { source = "interpipesrc listen-to=4135727842959053255_video is-live=true stream-sync=restart-ts max-bytes=0 max-buffers=3 block=false" }
-audio = { source = "interpipesrc listen-to=4135727842959053255_audio is-live=true stream-sync=restart-ts max-bytes=0 max-buffers=3 block=false" }
-start_virtual_compositor = false
-start_audio_server = false</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In this example, the <code>parent_session_id</code> is the session ID of the parent session that you want to connect to.<br>
-The process will be simplified once we complete implementing a custom UI for Wolf, see: <a href="https://github.com/games-on-whales/wolf/issues/80">games-on-whales/wolf#80</a>.</p>
-</div>
 <div class="sect2">
 <h3 id="_set_window_compositor"><a class="anchor" href="#_set_window_compositor"></a>Set Window compositor</h3>
 <div class="paragraph">
-<p>Wolf support both <a href="https://swaywm.org/">Sway</a> and <a href="https://github.com/ValveSoftware/gamescope">Gamescope</a> compositor.</p>
+<p>Our Docker images support both <a href="https://swaywm.org/">Sway</a> and <a href="https://github.com/ValveSoftware/gamescope">Gamescope</a> compositor.</p>
 </div>
 <div class="paragraph">
-<p>Sway is used by default, but some game may work better with one or the other.</p>
+<p>Sway is used by default, but some games may work better with one or the other.</p>
 </div>
 <div class="paragraph">
 <p>Usage is controlled by environment variables on <code>[apps.runner]</code> configs:</p>
@@ -777,44 +861,8 @@ env = [
 <h2 id="_multiple_gpu"><a class="anchor" href="#_multiple_gpu"></a>Multiple GPUs</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you have multiple GPUs installed in your host, you might want to have better control over which one is used by Wolf and how.<br>
-There are two main separated parts that make use of HW acceleration in Wolf:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>App render node</strong>: this will use HW acceleration in order to create virtual Wayland desktops and run the chosen app (ex: Firefox, Steam, &#8230;&#8203;).
-Use the <code>WOLF_RENDER_NODE</code> (defaults to <code>/dev/dri/renderD128</code>) env variable to control this.</p>
-</li>
-<li>
-<p><strong>Gstreamer video encoding</strong>: this will use HW acceleration in order to efficiently encode the video stream with H.264 or HEVC.
-Use the <code>WOLF_ENCODER_NODE</code> (defaults to <code>WOLF_RENDER_NODE</code>) env variable to control this.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>They can be configured separately, and in theory you could even <strong>use two GPUs at the same time</strong> for different jobs; ex: use the integrated GPU just for the streaming part and use a powerful GPU to play apps/games.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This isn&#8217;t recommended, it might introduce additional latency and it&#8217;s not optimal.
-HW encoding on modern GPUs is very lightweight and it&#8217;s better to use the same GPU for both jobs.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_app_render_node"><a class="anchor" href="#_app_render_node"></a>App render node</h3>
-<div class="paragraph">
-<p>Each application that Wolf will start will have access only to a specific render node even if the host has multiple GPUs connected.<br>
-By default, Wolf will use the env variable <code>WOLF_RENDER_NODE</code> which defaults to <code>/dev/dri/renderD128</code></p>
+<p>When you have multiple GPUs installed in your host, you might want to specify which one to use for Wolf.
+Use the <code>WOLF_RENDER_NODE</code> environment variable (defaults to <code>/dev/dri/renderD128</code>) to control this.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -850,79 +898,26 @@ By default, Wolf will use the env variable <code>WOLF_RENDER_NODE</code> which d
 </table>
 </div>
 <div class="paragraph">
-<p>Wolf supports also overriding the render node in each single app defined in the <code>config.toml</code> config file by setting the <code>render_node</code> property; example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[apps.runner]
-type = "docker"
-name = "WolfSteam"
-image = "ghcr.io/games-on-whales/steam:edge"
-
-# More options here, removed for brevity...
-render_node = "/dev/dri/renderD129"</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_gstreamer_video_encoding"><a class="anchor" href="#_gstreamer_video_encoding"></a>Gstreamer video encoding</h3>
-<div class="paragraph">
-<p>The easy way to control this is to just edit the env variable <code>WOLF_ENCODER_NODE</code> (defaults to match <code>WOLF_RENDER_NODE</code> in order to use the same GPU for both), this will set the default render node used for the Gstreamer pipelines.</p>
-</div>
-<div class="paragraph">
-<p>The streaming video encoding pipeline is fully controlled by the <code>config.toml</code> file; here the order in which entries are listed is important because Wolf will just try each listed plugin; the first one that works is the one that will be used.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="EXAMPLE"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>If you have an Intel iGPU and a Nvidia card in the same host, and you would like to use QuickSync in order to do the encoding, you can either:</p>
+<p>There are two main separated parts that make use of HW acceleration in Wolf:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Delete the <code>nvcodec</code> entries under <code>gstreamer.video.hevc_encoders</code></p>
+<p><strong>App render node</strong>: this will use HW acceleration in order to create virtual Wayland desktops and run the chosen app (ex: Firefox, Steam, &#8230;&#8203;).</p>
 </li>
 <li>
-<p>Cut the <code>qsv</code> entry and paste it above the <code>nvcodec</code> entry</p>
+<p><strong>Gstreamer video encoding</strong>: this will use HW acceleration in order to efficiently encode the video stream with H.264 or HEVC.</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>On top of that, each single <code>apps</code> entry support overriding the default streaming pipeline; for example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[apps]]
-title = "Test ball"
-
-# More options here, removed for brevity...
-
-[apps.video]
-source = """
-videotestsrc pattern=ball flip=true is-live=true !
-video/x-raw, framerate={fps}/1
-\
-"""</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In case you have two GPUs that will use the same encoder pipeline (example: an AMD iGPU and an AMD GPU card) you can override the <code>video_params</code> with the corresponding encoder plugin; see:
-<a href="https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1167">gstreamer/issues/1167</a>.</p>
-</div>
+<p>Since Wolf supports HW accelerated zero-copy pipelines it&#8217;s best to keep both the Wayland rendering and the Gstreamer encoding on the same GPU.
+Support for multi-GPU load balancing is planned for future releases.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"><a class="anchor" href="#_changing_and_switching_keyboard_layouts_in_wolf_apps_containers"></a>Changing and Switching Keyboard Layouts in wolf Apps Containers</h2>
+<h2 id="_keyboard_layout"><a class="anchor" href="#_keyboard_layout"></a>Changing and Switching Keyboard Layouts in wolf Apps Containers</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This guide demonstrates how to change the default keyboard layout and switch between multiple layouts in Docker containers.</p>
