@@ -457,6 +457,27 @@ This can be easily fixed by adding <code>uhid</code> to <code>/etc/module</code>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_recreating_the_nvidia_driver_volume"><a class="anchor" href="#_recreating_the_nvidia_driver_volume"></a>Recreating the Nvidia Driver Volume</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Anytime you update the Nvidia drivers on your host you&#8217;ll have to re-created the driver volume as described in <a href="quickstart.html" class="xref page">the quickstart guide</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a quick script that does that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | docker build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .
+docker create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh
+docker volume ls | grep nvidia-driver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(thanks to G.Reaper)</p>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

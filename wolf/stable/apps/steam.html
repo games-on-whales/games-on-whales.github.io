@@ -302,6 +302,47 @@ You can also press <code>Right Shift</code> + <code>F11</code> to change the pos
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_using_alternative_proton"><a class="anchor" href="#_using_alternative_proton"></a>Using alternative Proton</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From where your <code>/etc/wolf</code> is mounted in your host, add the desired proton files to <code>/etc/wolf/profile_data/${profile_id}/WolfSteam/.steam/debian-installation/compatibilitytools.d/</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In order to add this, you must have already started the user once for said profile_id. Additionally, you may have to create the <code>compatibilitytools.d</code> if no compatibility tools folder exists.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_example_for_protonge"><a class="anchor" href="#_example_for_protonge"></a>Example for ProtonGE</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Download the latest ProtonGE release from <a href="https://github.com/GloriousEggroll/proton-ge-custom/releases" class="bare">https://github.com/GloriousEggroll/proton-ge-custom/releases</a></p>
+</li>
+<li>
+<p>Extract the release tarball into <code>/etc/wolf/profile_data/${profile_id}/WolfSteam/.steam/debian-installation/compatibilitytools.d/</code></p>
+</li>
+<li>
+<p>Restart Steam</p>
+</li>
+<li>
+<p>Select the desired ProtonGE version in the Steam game&#8217;s properties under "Compatibility"'</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
