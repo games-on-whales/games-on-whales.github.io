@@ -343,6 +343,60 @@ You can also press <code>Right Shift</code> + <code>F11</code> to change the pos
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_setting_up_a_shared_library"><a class="anchor" href="#_setting_up_a_shared_library"></a>Setting up a shared library</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_setting_the_mount_point"><a class="anchor" href="#_setting_the_mount_point"></a>Setting the mount point</h3>
+<div class="paragraph">
+<p>The host&#8217;s library will need to mounted to the container.
+This is easily accomplished by using the <code>mounts</code> option in the <code>config.toml</code> file.
+Set <code>mounts = [ '/path/to/steamapps:/home/retro/.steam/debian-installation/steamapps:rw' ]</code> in the Steam block and restart Wolf.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_permissions"><a class="anchor" href="#_permissions"></a>Permissions</h3>
+<div class="paragraph">
+<p>The library needs to be owned by user:group 1000:1000 for the container to access it.
+The library needs all permissions given to it for proper function.</p>
+</div>
+<div class="paragraph">
+<p>When a new user is added, permissions prevent proper initialization of the first run of the container.
+It will fail to load due to <code>/home/retro/.steam/ubuntu12_32/</code> and <code>/home/retro/.steam/ubuntu12_32/steam-runtime</code> not having the proper permissions.
+Once the first run has been attempted, these can be <code>chown</code> 'd to <code>1000:1000</code> and <code>chmod</code> 'd to <code>777</code>.</p>
+</div>
+<div class="paragraph">
+<p>This script performs a quick and easy fix for this. Usage is simple: run the Steam app once as the new user, letting it crash, and then run this script with <code>bash mk_steam_dir.sh userid</code> to correct the issue. Second start of the app with the new user should start with the Updating Steam dialogue. If you changed the default location where Wolf stores its persistent data, you&#8217;ll need to update the BASE variable in the script.</p>
+</div>
+<div class="paragraph">
+<p><code>mk_steam_dir.sh</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+# Assign the base path for your Wolf persistent data:
+BASE=/etc/wolf
+# Check if the first argument is empty
+if [ -z "$1" ]; then
+    echo "Error: You must provide the user's data directory. This is their 'id' entry in the config file."
+    echo "Usage: $0 &lt;user-directory&gt;"
+    exit 1
+fi
+# Check if the user's WolfSteam directory exists
+if [[ ! -d "$BASE/profile-data/$1/WolfSteam" ]]; then
+    echo "Please run Steam once (it will crash) from the user '$1' and then run this script."
+    exit 1
+fi
+# Create required subdirectories
+mkdir -vp "$BASE/profile-data/$1/WolfSteam/.steam/ubuntu12_32/steam-runtime"
+# Set ownership and permissions
+chown -Rv 1000:1000 "$BASE/profile-data/$1/WolfSteam"
+chmod -Rv 777 "$BASE/profile-data/$1/WolfSteam"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
