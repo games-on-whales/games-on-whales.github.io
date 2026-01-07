@@ -4,7 +4,7 @@ source /opt/gow/bash-lib/utils.sh
 
 function shutdown_steam() {
     gow_log "[steamos-dbus-watchdog] Shutting down Steam..."
-    steam -shutdown
+    /usr/games/steam -shutdown
     exit 0
 }
 
