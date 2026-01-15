@@ -725,63 +725,10 @@ This should work for AMD/Intel users.</p>
 <p>Also make sure to add the virtual devices udev rules to the PVE host as explained in the <a href="#_virtual_devices_support">Virtual devices support</a> section.</p>
 </div>
 <div class="paragraph">
-<p>Now, we need to edit LXC config file to passtrough the GPU.</p>
-</div>
-<details>
-<summary class="title">I don&#8217;t have a LXC yet</summary>
-<div class="content">
-<div class="paragraph">
-<p>The easiest way to create an LXC to run Wolf is to use <a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=docker">tteck&#8217;s PVE docker script</a>, this will create you a LXC with docker already good to go.
-(Make sure you choose privileged LXC and install docker-compose when prompted)</p>
-</div>
-</div>
-</details>
-<div class="paragraph">
 <p>Enter the LXC config file: <code>nano /etc/pve/lxc/1XX.conf</code></p>
 </div>
 <div class="paragraph">
-<p>it should look similar to this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">arch: amd64
-cores: 8
-features: nesting=1
-hostname: wolf
-memory: 8192
-net0: name=eth0,bridge=vmbr0,hwaddr=BC:24:11:B7:90:5D,ip=dhcp,type=veth
-onboot: 1
-ostype: debian
-rootfs: local-lvm:vm-118-disk-0,size=128G
-swap: 512
-tags: proxmox-helper-scripts
-lxc.cgroup2.devices.allow: a
-lxc.cap.drop:
-lxc.cgroup2.devices.allow: c 188:* rwm
-lxc.cgroup2.devices.allow: c 189:* rwm
-lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
-lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>remove the following lines from the bottom, they are not needed:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">lxc.cgroup2.devices.allow: c 188:* rwm
-lxc.cgroup2.devices.allow: c 189:* rwm
-lxc.mount.entry: /dev/serial/by-id  dev/serial/by-id  none bind,optional,create=dir
-lxc.mount.entry: /dev/ttyUSB0       dev/ttyUSB0       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyUSB1       dev/ttyUSB1       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyACM0       dev/ttyACM0       none bind,optional,create=file
-lxc.mount.entry: /dev/ttyACM1       dev/ttyACM1       none bind,optional,create=file</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>add these lines to the bottom of the file:</p>
+<p>Add these lines to the bottom of the file:</p>
 </div>
 <div class="paragraph">
 <p>For Nvidia</p>
@@ -797,9 +744,11 @@ dev5: /dev/nvidia-uvm
 dev6: /dev/nvidia-uvm-tools
 dev7: /dev/nvidia-caps/nvidia-cap1
 dev8: /dev/nvidia-caps/nvidia-cap2
+lxc.cgroup2.devices.allow: a
+lxc.cap.drop:
 lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
-lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
-lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir
+lxc.mount.entry: /dev mnt/dev none bind,optional,create=dir</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -809,9 +758,11 @@ lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">dev0: /dev/uinput
 dev1: /dev/uhid
+lxc.cgroup2.devices.allow: a
+lxc.cap.drop:
 lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
-lxc.mount.entry: /dev/input dev/input none bind,optional,create=dir
-lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
+lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir
+lxc.mount.entry: /dev mnt/dev none bind,optional,create=dir</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -828,7 +779,7 @@ lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When creating your docker-compose.yml don&#8217;t forget to modify the volume mapping for <code>/run/udev</code> path, as we mounted it on <code>/mnt/udev</code> inside our LXC</p>
+<p>When creating your docker-compose.yml don&#8217;t forget to modify the volume mappings for <code>/run/udev</code> and <code>/dev</code> path, as we mounted it on <code>/mnt/udev</code> and <code>/mnt/dev</code> inside our LXC</p>
 </div>
 </td>
 </tr>
@@ -837,7 +788,8 @@ lxc.mount.entry: /run/udev mnt/udev none bind,optional,create=dir</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">volumes:
-    - /mnt/udev:/run/udev:rw</code></pre>
+    - /mnt/udev:/run/udev:rw
+    - /mnt/dev:/dev:rw</code></pre>
 </div>
 </div>
 <div class="paragraph">
