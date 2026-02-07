@@ -492,6 +492,200 @@ docker volume ls | grep nvidia-driver</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_regular_stutter_every_5_minutes_on_linux_laptop"><a class="anchor" href="#_regular_stutter_every_5_minutes_on_linux_laptop"></a>Regular stutter every 5 minutes on Linux laptop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is specific to the situation where your moonlight client is a linux laptop running NetworkManager/wpa_supplicant.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s been observed with at least AMD RZ616 (Mediatek MT7921K) and Intel AX210 wireless cards.</p>
+</div>
+<div class="paragraph">
+<p>If you encounter a situation where you have a regular dropout every 5 minutes, this is for you.</p>
+</div>
+<div class="paragraph">
+<p>Its possibly not your network, its NetworkManager/wpa_supplicant running the bgscan every 5 minutes. Purpose of this scan is to verify if you are connected to the strongest AP for your network.</p>
+</div>
+<div class="paragraph">
+<p>By default, it behaves as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"scan background AP&#8217;s for stronger signal every 30 seconds if network strength below -65dB, otherwise scan every 300 seconds"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To verify if you are affected by this, you can run a relatively simple test with <code>iperf3</code>.
+Run the server on the same machine as your <code>wolf</code> server is running with <code>iperf3 -s</code>.
+Run <code>iperf3 -c &lt;your wolf server&gt; -t 690 -u -R -b 80M</code> on your client laptop.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-c &lt;your wolf server&gt;</code> tells iperf3 to connect to the server at ip or hostname in client mode</p>
+</li>
+<li>
+<p><code>-t 690</code> sets the duration of the test to 690 seconds (11.5 minutes)</p>
+</li>
+<li>
+<p><code>-u</code> sets it to UDP mode</p>
+</li>
+<li>
+<p><code>-R</code> ensures that it is testing the data being sent <em>from</em> the server <em>to</em> the client.</p>
+</li>
+<li>
+<p><code>-b 80M</code> limits the bandwidth used to 80 megabits per second. Alter to match the expected maximum bandwidth you are going to have going over your network.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have</p>
+</div>
+<div class="paragraph">
+<p>If the results of the test show up something similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Connecting to host &lt;your wolf server&gt;, port 5201
+Reverse mode, remote host &lt;your wolf server&gt; is sending
+[  5] local &lt;your local client ip&gt; port 53385 connected to &lt;your wolf server&gt; port 5201
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+
+...
+[  5]   2.00-3.00   sec  11.9 MBytes   100 Mbits/sec  0.188 ms  0/8626 (0%)
+[  5]   3.00-4.00   sec  11.9 MBytes   100 Mbits/sec  0.122 ms  0/8637 (0%)
+[  5]   4.00-5.00   sec  11.9 MBytes  99.9 Mbits/sec  0.135 ms  0/8620 (0%)
+[  5]   5.00-6.00   sec  11.9 MBytes  99.9 Mbits/sec  0.183 ms  0/8628 (0%)
+[  5]   6.00-7.00   sec  11.9 MBytes   100 Mbits/sec  0.180 ms  0/8642 (0%)
+[  5]   7.00-8.00   sec  5.70 MBytes  47.8 Mbits/sec  0.143 ms  3676/7805 (47%)
+[  5]   8.00-9.00   sec  5.31 MBytes  44.5 Mbits/sec  0.125 ms  4952/8798 (56%)
+[  5]   9.00-10.00  sec  5.20 MBytes  43.7 Mbits/sec  0.344 ms  5456/9224 (59%)
+[  5]  10.00-11.00  sec  4.49 MBytes  37.7 Mbits/sec  0.150 ms  5459/8712 (63%)
+[  5]  11.00-12.00  sec  4.84 MBytes  40.5 Mbits/sec  0.146 ms  3858/7362 (52%)
+[  5]  12.00-13.00  sec  6.78 MBytes  57.0 Mbits/sec  0.149 ms  4984/9896 (50%)
+[  5]  13.00-14.00  sec  11.9 MBytes   100 Mbits/sec  0.154 ms  0/8645 (0%)
+[  5]  14.00-15.00  sec  11.9 MBytes  99.9 Mbits/sec  0.150 ms  0/8625 (0%)
+[  5]  15.00-16.00  sec  11.9 MBytes   100 Mbits/sec  0.152 ms  0/8640 (0%)
+[  5]  16.00-17.00  sec  11.9 MBytes  99.9 Mbits/sec  0.153 ms  0/8620 (0%)
+[  5]  17.00-18.00  sec  11.9 MBytes   100 Mbits/sec  0.144 ms  0/8638 (0%)
+[  5]  18.00-19.00  sec  11.9 MBytes   100 Mbits/sec  0.171 ms  0/8630 (0%)
+[  5]  19.00-20.00  sec  11.9 MBytes   100 Mbits/sec  0.138 ms  0/8632 (0%)
+...
+# followed by a similar dropout 300 seconds later
+...
+ 254.00-255.00 sec  11.9 MBytes   100 Mbits/sec  0.152 ms  0/8633 (0%)
+[  5] 255.00-256.00 sec  11.9 MBytes   100 Mbits/sec  0.169 ms  0/8635 (0%)
+[  5] 256.00-257.00 sec  11.9 MBytes   100 Mbits/sec  0.140 ms  0/8638 (0%)
+[  5] 257.00-258.00 sec  11.9 MBytes  99.9 Mbits/sec  0.161 ms  0/8624 (0%)
+[  5] 258.00-259.00 sec  11.9 MBytes   100 Mbits/sec  0.191 ms  0/8627 (0%)
+[  5] 259.00-260.00 sec  11.9 MBytes   100 Mbits/sec  0.148 ms  0/8639 (0%)
+[  5] 260.00-261.00 sec  11.9 MBytes  99.8 Mbits/sec  0.198 ms  0/8614 (0%)
+[  5] 261.00-262.00 sec  11.9 MBytes  99.8 Mbits/sec  0.207 ms  0/8616 (0%)
+[  5] 262.00-263.00 sec  11.9 MBytes   100 Mbits/sec  0.261 ms  0/8647 (0%)
+[  5] 263.00-264.00 sec  11.9 MBytes   100 Mbits/sec  0.160 ms  0/8653 (0%)
+[  5] 264.00-265.00 sec  11.9 MBytes   100 Mbits/sec  0.153 ms  0/8635 (0%)
+[  5] 265.00-266.00 sec  11.9 MBytes   100 Mbits/sec  0.162 ms  0/8635 (0%)
+[  5] 266.00-267.00 sec  11.9 MBytes   100 Mbits/sec  0.144 ms  0/8625 (0%)
+[  5] 267.00-268.00 sec  11.9 MBytes   100 Mbits/sec  0.159 ms  0/8643 (0%)
+[  5] 268.00-269.00 sec  11.9 MBytes   100 Mbits/sec  0.159 ms  0/8627 (0%)
+[  5] 269.00-270.00 sec  8.48 MBytes  71.1 Mbits/sec  0.170 ms  2468/8608 (29%)
+[  5] 270.00-271.00 sec  4.69 MBytes  39.3 Mbits/sec  0.119 ms  5235/8629 (61%)
+[  5] 271.00-272.00 sec  4.64 MBytes  38.9 Mbits/sec  0.147 ms  4038/7401 (55%)
+[  5] 272.00-273.00 sec  5.29 MBytes  44.4 Mbits/sec  0.125 ms  5441/9272 (59%)
+[  5] 273.00-274.00 sec  5.30 MBytes  44.5 Mbits/sec  0.120 ms  5368/9205 (58%)
+[  5] 274.00-275.00 sec  5.88 MBytes  49.3 Mbits/sec  0.112 ms  4369/8630 (51%)
+[  5] 275.00-276.00 sec  5.27 MBytes  44.2 Mbits/sec  0.156 ms  4185/8003 (52%)
+[  5] 276.00-277.00 sec  11.3 MBytes  94.7 Mbits/sec  0.127 ms  1146/9310 (12%)
+[  5] 277.00-278.00 sec  11.9 MBytes  99.9 Mbits/sec  0.139 ms  0/8624 (0%)
+[  5] 278.00-279.00 sec  11.9 MBytes   100 Mbits/sec  0.197 ms  0/8643 (0%)
+[  5] 279.00-280.00 sec  11.9 MBytes   100 Mbits/sec  0.162 ms  0/8634 (0%)
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>then read on, as you are affected by this issue.</p>
+</div>
+<div class="paragraph">
+<p>There&#8217;s 2 ways to work around it.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you know you only have a single Wifi Access Point and dont need your laptop to roam between multiple AP&#8217;s, connect to it in <code>BSSID</code> mode. If you are using any of the more modern Linux distros and DE&#8217;s, the NetworkManager frontend will have a dropdown selection for this, and there should only be one entry.</p>
+</li>
+<li>
+<p>If you know you have more than a single AP and that your laptop will need to roam due to the shape of your house/where you use the laptop, you can tweak the <code>bgscan</code> options.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To query the bgscan setting at any point,  <code>busctl get-property --system fi.w1.wpa_supplicant1 /fi/w1/wpa_supplicant1/Interfaces/0/Networks/0 fi.w1.wpa_supplicant1.Network Properties --json=short | jq '.data.bgscan'</code></p>
+</div>
+<div class="paragraph">
+<p>It should show similar to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "type": "s",
+  "data": "\"simple:30:-65:300\""
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you see dropouts more frequent than every 5 minutes, dont worry, its probably still the same thing. I&#8217;ve seen up to every 10 seconds on my laptop with AMD R616 (MEDIATEK Corp. MT7922 802.11ax PCI Express Wireless Network Adapter).</p>
+</div>
+<div class="paragraph">
+<p>If you have different patterns of packet drops, please ensure your wifi is configured correctly and not overloaded.</p>
+</div>
+<div class="paragraph">
+<p>The default <code>bgscan</code> value is going to be <code>simple:30:-65:300</code>, which translates to "scan background AP&#8217;s for stronger signal every 30 seconds if network strength below -65dB, otherwise scan every 300 seconds".</p>
+</div>
+<div class="paragraph">
+<p>Now, in my case, I&#8217;m running 3 AP&#8217;s as i have an oddly shaped, very long house, so I do in fact need roaming configured in my wifi.</p>
+</div>
+<div class="paragraph">
+<p>solution: <a href="https://unix.stackexchange.com/a/799011" class="bare">https://unix.stackexchange.com/a/799011</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+
+set -e
+
+# Run only when an interface is up
+if [[ "$2" != "up" ]]; then
+    exit 0
+fi
+
+# Check that the interface that went up is a wireless one
+if iw dev | grep -wq "$1"; then
+    ALL_NETS="$(busctl tree fi.w1.wpa_supplicant1 | grep -Eo '/fi/w1/wpa_supplicant1/Interfaces/.+/Networks/[[:digit:]]+')"
+
+    for DBUS_PATH_TO_NET in $ALL_NETS; do
+        busctl  call --system \
+                fi.w1.wpa_supplicant1 \
+                "$DBUS_PATH_TO_NET" \
+                org.freedesktop.DBus.Properties Set \
+                ssv \
+                fi.w1.wpa_supplicant1.Network Properties \
+                'a{sv}' 1 \
+                bgscan s "simple:30:-80:86400"
+    done
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save this file to <code>/etc/NetworkManager/dispatcher.d/fix_roaming.sh</code> and make it executable with <code>chmod +x /etc/NetworkManager/dispatcher.d/fix_roaming.sh</code>, run <code>systemctl stop wpa_supplicant.service</code> and wait for your wifi to reconnect.</p>
+</div>
+<div class="paragraph">
+<p>This should reduce the frequency of this issue happening to once every hour, provided you have good signal.</p>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
