@@ -469,7 +469,7 @@ This can be easily fixed by adding <code>uhid</code> to <code>/etc/module</code>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | docker build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .
-docker create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh
+docker volume rm -f nvidia-driver-vol &amp;&amp; docker create --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest sh
 docker volume ls | grep nvidia-driver</code></pre>
 </div>
 </div>

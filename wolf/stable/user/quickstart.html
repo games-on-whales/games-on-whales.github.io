@@ -467,6 +467,9 @@ Y</code></pre>
 <p>It will create a Docker container, populate <code>nvidia-driver-vol</code> with Nvidia driver if it wasn&#8217;t already done and remove the container.</p>
 </div>
 <div class="paragraph">
+<p>If the volume previously existed with older drivers, you may need to remove it before re-creating the volume with newer drivers: <code>docker volume rm nvidia-driver-vol</code>.</p>
+</div>
+<div class="paragraph">
 <p>Check volume exists with:</p>
 </div>
 <div class="listingblock">
