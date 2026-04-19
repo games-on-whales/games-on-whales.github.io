@@ -1,4 +1,28 @@
 [[apps]]
+title = "Emby"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/emby/assets/icon.png"
+
+[apps.runner]
+type = "docker"
+name = "WolfEmby"
+image = "ghcr.io/games-on-whales/emby:edge"
+mounts = []
+env = ["RUN_SWAY=1", "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*"]
+devices = []
+ports = []
+base_create_json = """
+{
+  "HostConfig": {
+    "IpcMode": "host",
+    "Privileged": false,
+    "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN"],
+    "DeviceCgroupRules": ["c 13:* rmw", "c 244:* rmw"]
+  }
+}
+\
+"""
+
+[[apps]]
 title = "EmulationStation"
 icon_png_path = "https://games-on-whales.github.io/wildlife/apps/es-de/assets/icon.png"
 
@@ -143,6 +167,30 @@ base_create_json = """
 \
 """
 [[apps]]
+title = "Plex"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/plex/assets/icon.png"
+
+[apps.runner]
+type = "docker"
+name = "WolfPlex"
+image = "ghcr.io/games-on-whales/plex:edge"
+mounts = []
+env = ["RUN_SWAY=1", "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*"]
+devices = []
+ports = []
+base_create_json = """
+{
+  "HostConfig": {
+    "IpcMode": "host",
+    "Privileged": false,
+    "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN"],
+    "DeviceCgroupRules": ["c 13:* rmw", "c 244:* rmw"]
+  }
+}
+\
+"""
+
+[[apps]]
 title = 'Prism Launcher'
 icon_png_path = "https://games-on-whales.github.io/wildlife/apps/prismlauncher/assets/icon.png"
 
@@ -240,3 +288,27 @@ base_create_json = """
 }
 \
 """
+[[apps]]
+title = "YouTube"
+icon_png_path = "https://games-on-whales.github.io/wildlife/apps/youtube/assets/icon.png"
+
+[apps.runner]
+type = "docker"
+name = "WolfYouTube"
+image = "ghcr.io/games-on-whales/youtube:edge"
+mounts = []
+env = ["RUN_SWAY=1", "GOW_REQUIRED_DEVICES=/dev/input/* /dev/dri/* /dev/nvidia*"]
+devices = []
+ports = []
+base_create_json = """
+{
+  "HostConfig": {
+    "IpcMode": "host",
+    "Privileged": false,
+    "CapAdd": ["NET_RAW", "MKNOD", "NET_ADMIN"],
+    "DeviceCgroupRules": ["c 13:* rmw", "c 244:* rmw"]
+  }
+}
+\
+"""
+
