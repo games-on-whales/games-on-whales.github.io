@@ -17,7 +17,28 @@
 
 An open-source gaming platform for Linux that allows you to install and manage games from various sources,
 including Steam, GOG, and more.
-It simplifies the process of running games on Linux."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://games-on-whales.github.io/wildlife/apps/lutris/"><meta property="og:site_name" content="Wildlife"><meta property="og:title" content="Wildlife"><meta property="og:description" content="Lutris # Moonlight | Wolf An open-source gaming platform for Linux that allows you to install and manage games from various sources, including Steam, GOG, and more. It simplifies the process of running games on Linux."><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>Lutris | Wildlife</title>
+It simplifies the process of running games on Linux.
+
+  Gamepad-UI
+  #
+
+
+  
+    
+      
+      
+      
+    
+    Moonlight | Wolf
+  
+  
+    
+  
+
+By default Wolf&rsquo;s Lutris image uses lutris-gamepad-ui, a gamepad friendly interface with access to Lutris many settings.
+The classic Lutris window can be opened from the Gamepad UI menu. The Gamepad UI can be disabled by setting the environment variable WOLF_LUTRIS_GAMEPAD_UI_ENABLE=0 in the config.toml file."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://games-on-whales.github.io/wildlife/apps/lutris/"><meta property="og:site_name" content="Wildlife"><meta property="og:title" content="Wildlife"><meta property="og:description" content="Lutris # Moonlight | Wolf An open-source gaming platform for Linux that allows you to install and manage games from various sources, including Steam, GOG, and more. It simplifies the process of running games on Linux.
+Gamepad-UI # Moonlight | Wolf By default Wolf’s Lutris image uses lutris-gamepad-ui, a gamepad friendly interface with access to Lutris many settings.
+The classic Lutris window can be opened from the Gamepad UI menu. The Gamepad UI can be disabled by setting the environment variable WOLF_LUTRIS_GAMEPAD_UI_ENABLE=0 in the config.toml file."><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>Lutris | Wildlife</title>
 <link rel=icon href=/wildlife/favicon.png><link rel=manifest href=/wildlife/manifest.json><link rel=canonical href=https://games-on-whales.github.io/wildlife/apps/lutris/><link rel=stylesheet href=/wildlife/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://games-on-whales.github.io/wildlife/apps/lutris/index.xml title=Wildlife><link rel=stylesheet href=/wildlife/css/custom.min.4bbe650dd7ab80d81d5da7863d012bad37aac6dd84a69c59e848542bb199c6a6.css integrity="sha256-S75lDdergNgdXaeGPQErrTeqxt2EppxZ6EhUK7GZxqY=" crossorigin=anonymous></head><body dir=ltr><header class=header><div class=fancy-stripe></div><nav class=navbar><div class=navbar-brand><a class=navbar-item href=/wildlife/>Wildlife</a>
 <button class=navbar-burger data-target=topbar-nav>
 <span></span>
@@ -31,7 +52,8 @@ It simplifies the process of running games on Linux."><meta name=theme-color med
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><ul><li><span>Apps</span><ul><li><a href=/wildlife/apps/emby/>Emby</a><ul></ul></li><li><a href=/wildlife/apps/firefox/>Firefox</a><ul></ul></li><li><a href=/wildlife/apps/heroic-games-launcher/>Heroic Games Launcher</a><ul></ul></li><li><a href=/wildlife/apps/kodi/>Kodi</a><ul></ul></li><li><a href=/wildlife/apps/lutris/ class=active>Lutris</a><ul></ul></li><li><a href=/wildlife/apps/pegasus/>Pegasus</a><ul></ul></li><li><a href=/wildlife/apps/plex/>Plex</a><ul></ul></li><li><a href=/wildlife/apps/prismlauncher/>Prismlauncher</a><ul></ul></li><li><a href=/wildlife/apps/retroarch/>Retroarch</a><ul></ul></li><li><a href=/wildlife/apps/steam/>Steam</a><ul></ul></li><li><a href=/wildlife/apps/xfce/>Xfce</a><ul></ul></li><li><a href=/wildlife/apps/youtube/>Youtube</a><ul></ul></li><li><a href=/wildlife/apps/es-de/>ES-DE</a><ul></ul></li></ul></li><li><span>Devs</span><ul><li><a href=/wildlife/dev/manual-build/>Build your own image</a></li><li><a href=/wildlife/dev/run-local/>Run locally</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/wildlife/svg/menu.svg class=book-icon alt=Menu></label><h3>Lutris</h3><label for=toc-control><img src=/wildlife/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><h1 id=lutris>Lutris
 <a class=anchor href=#lutris>#</a></h1><p><div class=osx-window><div class=title-bar><div class=buttons><div class=close-button></div><div class=minimize-button></div><div class=maximize-button></div></div><div class=title>Moonlight | Wolf</div></div><div class=content><img src=assets/screenshot.png alt="Lutris screenshot"></div></div></p><p>An open-source gaming platform for Linux that allows you to install and manage games from various sources,
 including Steam, GOG, and more.
-It simplifies the process of running games on Linux.</p></article><article class="markdown book-article"><h2 id=sample-config>Default config</h2><p>This is the default configuration block that will be used in Wolf, you can override it by editing the
+It simplifies the process of running games on Linux.</p><h1 id=gamepad-ui>Gamepad-UI
+<a class=anchor href=#gamepad-ui>#</a></h1><p><div class=osx-window><div class=title-bar><div class=buttons><div class=close-button></div><div class=minimize-button></div><div class=maximize-button></div></div><div class=title>Moonlight | Wolf</div></div><div class=content><img src=assets/gamepadui.png alt=lutris-gamepad-ui></div></div></p><p>By default Wolf&rsquo;s Lutris image uses <a href=https://github.com/andrew-ld/lutris-gamepad-ui>lutris-gamepad-ui</a>, a gamepad friendly interface with access to Lutris many settings.</p><p>The classic Lutris window can be opened from the Gamepad UI menu. The Gamepad UI can be disabled by setting the environment variable <code>WOLF_LUTRIS_GAMEPAD_UI_ENABLE=0</code> in the <code>config.toml</code> file.</p></article><article class="markdown book-article"><h2 id=sample-config>Default config</h2><p>This is the default configuration block that will be used in Wolf, you can override it by editing the
 <code>config.toml</code>.</p><details><summary>Click to expand</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[[<span style=color:#a6e22e>apps</span>]]
 </span></span><span style=display:flex><span><span style=color:#a6e22e>title</span> = <span style=color:#e6db74>&#34;Lutris&#34;</span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>icon_png_path</span> = <span style=color:#e6db74>&#34;https://games-on-whales.github.io/wildlife/apps/lutris/assets/icon.png&#34;</span>
@@ -43,7 +65,7 @@ It simplifies the process of running games on Linux.</p></article><article class
 </span></span><span style=display:flex><span><span style=color:#a6e22e>image</span> = <span style=color:#e6db74>&#34;ghcr.io/games-on-whales/lutris:edge&#34;</span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>mounts</span> = [<span style=color:#e6db74>&#34;lutris:/var/lutris/:rw&#34;</span>]
 </span></span><span style=display:flex><span><span style=color:#a6e22e>env</span> = [
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;RUN_SWAY=1&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;WOLF_LUTRIS_GAMEPAD_UI_ENABLE=1&#39;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;GOW_REQUIRED_DEVICES=/dev/input/event* /dev/dri/* /dev/nvidia* /var/lutris/&#34;</span>,
 </span></span><span style=display:flex><span>]
 </span></span><span style=display:flex><span><span style=color:#a6e22e>devices</span> = []
