@@ -23,9 +23,17 @@ set -e
 echo "**** Installing pegasus ****"
 
 cd /tmp
-curl -s https://api.github.com/repos/mmatyas/pegasus-frontend/releases/tags/continuous | \
-jq -r '.assets[] | select(.name | contains("x11-static.zip")) | .browser_download_url' | head -1 | \
-xargs curl -fsSL -o pegasus.zip
+# Capture, validate, then download; otherwise a transient API blip lets
+# `xargs curl -o pegasus.zip` run with no URL and overwrite pegasus.zip
+# with curl's help text, then `unzip` fails opaquely later.
+release_json=$(curl -fsSL --retry 5 --retry-all-errors --retry-delay 2 --retry-max-time 60 \
+    https://api.github.com/repos/mmatyas/pegasus-frontend/releases/tags/continuous)
+download_url=$(echo "$release_json" | jq -r '.assets[] | select(.name | contains("x11-static.zip")) | .browser_download_url' | head -n 1)
+if [ -z "$download_url" ] || [ "$download_url" = "null" ]; then
+    echo "pegasus: no x11-static.zip asset in continuous release" >&2
+    exit 1
+fi
+curl -fsSL --retry 5 --retry-all-errors --retry-delay 2 --retry-max-time 120 -o pegasus.zip "$download_url"
 
 dnf install -y unzip
 unzip pegasus.zip -d /tmp/pegasus

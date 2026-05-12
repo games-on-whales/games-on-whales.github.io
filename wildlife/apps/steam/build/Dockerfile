@@ -71,8 +71,12 @@ RUN ln -sf "$HOME" /home/deck
 # and fresh-user logins non-deterministically. Pinning + baking removes
 # the runtime API dependency. Bump DECKY_LOADER_VERSION to update.
 ARG DECKY_LOADER_VERSION=v3.2.3
+# --retry-all-errors covers HTTP 4xx/5xx (curl --retry alone only retries
+# transport-layer errors). The release-asset CDN occasionally returns 4xx
+# briefly; without this flag, curl exits 22 on the first hit and fails the
+# build. --retry-max-time bounds the overall wait.
 RUN mkdir -p /opt/decky && \
-    curl -fsSL --retry 3 --retry-delay 2 \
+    curl -fsSL --retry 5 --retry-all-errors --retry-delay 2 --retry-max-time 60 \
       -o /opt/decky/PluginLoader \
       "https://github.com/SteamDeckHomebrew/decky-loader/releases/download/${DECKY_LOADER_VERSION}/PluginLoader" && \
     chmod 755 /opt/decky/PluginLoader
