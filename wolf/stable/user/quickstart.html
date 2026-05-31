@@ -1071,6 +1071,37 @@ EXPOSE 48200/udp</code></pre>
 </div>
 </div>
 </details>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Apps run as UID/GID <code>1000:1000</code> by default. Newly paired clients inherit this,
+and you can change it per client later from <a href="wolf-ui.html" class="xref page">Wolf UI</a>. If your host
+uses a different convention (for example Unraid, where <code>nobody</code> is <code>99:100</code>),
+set the defaults for every new client with the environment variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WOLF_DEFAULT_RUN_UID</code></p>
+</li>
+<li>
+<p><code>WOLF_DEFAULT_RUN_GID</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These only affect the defaults applied to <strong>new</strong> clients; existing clients keep
+their saved values.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
