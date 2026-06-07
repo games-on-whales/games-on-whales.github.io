@@ -277,9 +277,14 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The full path where PulseAudio and video sockets will reside, this path is expected to be present in the host and mounted in the Wolf container</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PULSE_SERVER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(unset)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PulseAudio server Wolf streams audio from. Left unset, Wolf starts an embedded PulseAudio server inside its own container and uses that. Set it (e.g. to a host socket path) to stream from an external PulseAudio/PipeWire instead.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_PULSE_IMAGE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ghcr.io/games-on-whales/pulseaudio:master</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the PulseAudio image to be started (when no connection is available)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fallback only: the PulseAudio image Wolf spins up as a sidecar container if neither the embedded server nor <code>PULSE_SERVER</code> is reachable</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WOLF_STOP_CONTAINER_ON_EXIT</p></td>
