@@ -716,6 +716,45 @@ controllers_override = [
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_auto_detection_unknown_clients_with_motion_get_a_dualsense"><a class="anchor" href="#_auto_detection_unknown_clients_with_motion_get_a_dualsense"></a>Auto-detection: UNKNOWN clients with motion get a DualSense</h4>
+<div class="paragraph">
+<p>Moonlight Android downgrades the reported controller type to <code>UNKNOWN</code> whenever the phone has sensors and the underlying pad isn&#8217;t already a DualSense (see <a href="https://github.com/moonlight-stream/moonlight-android/blob/master/app/src/main/java/com/limelight/binding/input/ControllerHandler.java"><code>ControllerHandler.java</code></a>) — the capability bits still advertise <code>GYRO</code> and <code>ACCELEROMETER</code>. Wolf&#8217;s auto-detection treats this as the client signalling "I have motion data to give" and creates a PlayStation DualSense pad so the motion-request blocks actually fire and the gyro/accel data gets forwarded. Without this the type would fall through to Xbox and the motion would be silently dropped.</p>
+</div>
+<div class="paragraph">
+<p>Auto-detection only kicks in when there&#8217;s no per-slot <code>controllers_override</code> and no per-client <code>motion_controller_override</code> (below). Both of those are explicit operator choices and win.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_per_client_motion_controller_override"><a class="anchor" href="#_per_client_motion_controller_override"></a>Per-client <code>motion_controller_override</code></h4>
+<div class="paragraph">
+<p>Sibling of <code>controllers_override</code>: same shape of "operator wants type X" but gated on the client actually having motion to forward. When <code>controllers_override[slot]</code> is unset, the client advertises <code>GYRO</code> / <code>ACCELEROMETER</code>, AND <code>motion_controller_override</code> is set to anything other than <code>auto</code>, Wolf creates that pad type instead of the auto-detected one. Useful to point motion-capable clients at a non-default device — for example forcing a Switch Pro pad (once the corresponding motion routing in <code>create_new_joypad</code> lands).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[[paired_clients]]
+# client_cert = ...
+[paired_clients.settings]
+motion_controller_override = "PS" # motion-capable clients get a DualSense</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Available values are the same as <code>controllers_override</code> (<code>auto</code> (default) / <code>xbox</code> / <code>nintendo</code> / <code>ps</code>); <code>auto</code> defers to the auto-detection above.</p>
+</div>
+<div class="paragraph">
+<p>Precedence: per-slot <code>controllers_override</code> &gt; per-client <code>motion_controller_override</code> &gt; auto-detection.</p>
+</div>
+<div class="paragraph">
+<p>It is also exposed over the API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl --unix-socket /var/run/wolf/wolf.sock \
+     -X PATCH http://localhost/api/v1/clients/&lt;client_id&gt;/settings \
+     -d '{"settings": {"motion_controller_override": "PS"}}'</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_input_mouse_overrides"><a class="anchor" href="#_input_mouse_overrides"></a>Input mouse overrides</h3>
