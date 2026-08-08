@@ -461,6 +461,66 @@ This can be easily fixed by adding <code>uhid</code> to <code>/etc/module</code>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_controller_input_also_controls_the_host_desktop"><a class="anchor" href="#_controller_input_also_controls_the_host_desktop"></a>Controller input also controls the host desktop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If your controller works inside the streamed game <strong>but also</strong> moves the host&#8217;s
+mouse pointer / presses buttons on the host desktop (for example a DualSense
+touchpad moving the host cursor), the virtual devices Wolf created are not
+isolated from your logged-in host session.</p>
+</div>
+<div class="paragraph">
+<p>This is almost always because the udev rules from the
+<a href="quickstart.html#_virtual_devices_support" class="xref page">Virtual devices support</a>
+section are missing, out of date, or don&#8217;t match your controller. Wolf&#8217;s
+virtual pads appear as real devices in the <strong>host</strong> kernel, and without the rules
+<code>systemd-logind</code> grants your desktop user access to them (<code>uaccess</code>).</p>
+</div>
+<div class="paragraph">
+<p>To confirm which devices are leaking, run the input diagnostic on the host while
+a client + controller are connected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo ./scripts/wolf-input-diag.sh host</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It lists every <code>Wolf …</code> virtual device on the host and flags any that a non-root
+user can read, plus any device name not covered by your rules file. Any line
+marked <code>LEAK</code> is reachable by the host desktop.</p>
+</div>
+<div class="paragraph">
+<p>To fix it, (re)install the rules from the
+<a href="quickstart.html#_virtual_devices_support" class="xref page">Virtual devices support</a>
+section, then reload them and re-plug the controller:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo udevadm control --reload-rules &amp;&amp; sudo udevadm trigger</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The bundled rules match every Wolf device by the <code>Wolf <strong>virtual</strong></code> name glob, so
+they keep working even if a controller&#8217;s exact product name changes. If you
+maintain your own rules, prefer the glob over hard-coded names — an out-of-date
+name (e.g. <code>Wolf PS5 (virtual) pad</code> after it was renamed to
+<code>Wolf DualSense (virtual) pad</code>) silently stops isolating that device.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_recreating_the_nvidia_driver_volume"><a class="anchor" href="#_recreating_the_nvidia_driver_volume"></a>Recreating the Nvidia Driver Volume</h2>
 <div class="sectionbody">
 <div class="paragraph">
